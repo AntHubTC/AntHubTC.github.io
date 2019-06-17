@@ -1,12 +1,9 @@
-![logo](img/doc-logo.svg)
+![logo](img/docs.png)
 
-# 文档的组织方式
+# 第三方文档/工具的收集库
 
-> 先进的文档组织技术
+> 我常用到的文档库收集
 
-* 采用docsify来组织文档。
-* 采用gitbook来进行组织文档[https://fallengodcoder.github.io](https://fallengodcoder.github.io)
-* 文档的发布采用github Pages发布到
+[GitHub](https://github.com/FallenGodCoder)
+[Get Started](#frontUtil)
 
-[GitHub](https://github.com/FallenGodCoder/FallenGodCoder.github.io/)
-[Get Started](#quick-start)
