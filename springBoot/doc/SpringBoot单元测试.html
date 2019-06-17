@@ -1,0 +1,599 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>SpringBoot单元测试 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="SpringBoot热部署.html" />
+    
+    
+    <link rel="prev" href="SpringBoot异常处理方式.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="文档笔记组织方式.html">
+            
+                <a href="文档笔记组织方式.html">
+            
+                    
+                    文档笔记组织方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="SpringBoot Hello.html">
+            
+                <a href="SpringBoot Hello.html">
+            
+                    
+                    SpringBootHello
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="SpringBoot整合Servlet.html">
+            
+                <a href="SpringBoot整合Servlet.html">
+            
+                    
+                    SpringBoot整合Servlet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="SpringBoot整合Filter.html">
+            
+                <a href="SpringBoot整合Filter.html">
+            
+                    
+                    SpringBoot整合Filter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="SpringBoot整合Listener.html">
+            
+                <a href="SpringBoot整合Listener.html">
+            
+                    
+                    SpringBoot整合Listener
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Spring Boot拦截器.html">
+            
+                <a href="Spring Boot拦截器.html">
+            
+                    
+                    SpringBoot整合拦截器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="SpringBoot 静态资源访问.html">
+            
+                <a href="SpringBoot 静态资源访问.html">
+            
+                    
+                    SpringBoot静态资源访问
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="SpringBoot上传文件.html">
+            
+                <a href="SpringBoot上传文件.html">
+            
+                    
+                    SpringBoot上传文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="SpringBoot视图层技术.html">
+            
+                <a href="SpringBoot视图层技术.html">
+            
+                    
+                    SpringBoot视图层技术
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="SpringBooth整合JSP.html">
+            
+                <a href="SpringBooth整合JSP.html">
+            
+                    
+                    SpringBoot视图层技术---整合JSP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="SpringBoot整合FreeMarker.html">
+            
+                <a href="SpringBoot整合FreeMarker.html">
+            
+                    
+                    SpringBoot视图层技术---整合FreeMarker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="SpringBoot整合thymeleaf.html">
+            
+                <a href="SpringBoot整合thymeleaf.html">
+            
+                    
+                    SpringBoot视图层技术---整合thymeleaf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="SpringBoot自定义属性配置.html">
+            
+                <a href="SpringBoot自定义属性配置.html">
+            
+                    
+                    SpringBoot自定义属性配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="SpringBoot整合内存数据库H2.html">
+            
+                <a href="SpringBoot整合内存数据库H2.html">
+            
+                    
+                    SpringBoot整合内存数据库H2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="SpringBoot+JPA+H2.html">
+            
+                <a href="SpringBoot+JPA+H2.html">
+            
+                    
+                    SpringBoot+JPA+H2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="JPA核心接口学习.html">
+            
+                <a href="JPA核心接口学习.html">
+            
+                    
+                    JPA核心接口学习.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="JPA关系映射操作.html">
+            
+                <a href="JPA关系映射操作.html">
+            
+                    
+                    JPA关系映射操作.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="SpringBoot使用Druid.html">
+            
+                <a href="SpringBoot使用Druid.html">
+            
+                    
+                    SpringBoot使用Druid
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="SpringBoot做数据验证.html">
+            
+                <a href="SpringBoot做数据验证.html">
+            
+                    
+                    SpringBoot做数据验证
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="SpringBoot异常处理方式.html">
+            
+                <a href="SpringBoot异常处理方式.html">
+            
+                    
+                    SpringBoot异常处理方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.22" data-path="SpringBoot单元测试.html">
+            
+                <a href="SpringBoot单元测试.html">
+            
+                    
+                    SpringBoot单元测试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="SpringBoot热部署.html">
+            
+                <a href="SpringBoot热部署.html">
+            
+                    
+                    SpringBoot热部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="SpringBoot整合Ehcache.html">
+            
+                <a href="SpringBoot整合Ehcache.html">
+            
+                    
+                    SpringBoot整合Ehcache
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="SpringBoot整合redis.html">
+            
+                <a href="SpringBoot整合redis.html">
+            
+                    
+                    SpringBoot整合redis.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="SpringBoot整合Quartz框架.html">
+            
+                <a href="SpringBoot整合Quartz框架.html">
+            
+                    
+                    SpringBoot整合Quartz框架.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >SpringBoot单元测试</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="springboot&#x5355;&#x5143;&#x6D4B;&#x8BD5;">SpringBoot&#x5355;&#x5143;&#x6D4B;&#x8BD5;</h1>
+<p>&#x6E90;&#x4EE3;&#x7801;&#x9879;&#x76EE;&#x53C2;&#x8003;&#xFF1A;0022-spring-boot-unitTest</p>
+<h2 id="maven&#x4F9D;&#x8D56;&#xFF1A;">Maven&#x4F9D;&#x8D56;&#xFF1A;</h2>
+<pre><code class="lang-xml"><span class="hljs-comment">&lt;!-- SpringBoot&#x7684;&#x542F;&#x52A8;&#x5668; --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.0.1.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+<span class="hljs-comment">&lt;!--
+    SpringBoot test&#x7684;&#x542F;&#x52A8;&#x5668;
+--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<h2 id="&#x5206;&#x6790;spring-boot-starter-test&#xFF1A;">&#x5206;&#x6790;spring-boot-starter-test&#xFF1A;</h2>
+<p>&#x200B;    &#x7B2C;&#x4E00;&#x5C42;&#x4F9D;&#x8D56;&#x7684;&#x5305;&#x6709;&#xFF1A;
+&#x200B;            xmlunit-core&#x3001;json-path&#x3001;jsonassert&#x3001;mockit-core&#x3001;spring-boot-test&#x3001;spring-boot-test-autoconfigure&#x3001;hamcrest-core&#x3001;hamcrest-library&#x3001;assertj-core&#x3001;junit&#x7B49;&#x3002;
+&#x200B;        &#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x5B66;springBoot&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x4ECE;&#x4EE5;&#x4E0B;&#x4E0B;&#x624B;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#x6709;&#xFF1A;
+&#x200B;            spring-boot-test &#x662F;SpringBoot&#x5B98;&#x65B9;&#x63D0;&#x4F9B;&#x7684;&#x6D4B;&#x8BD5;&#x5305;
+&#x200B;            XMLUnit &#x4E00;&#x79CD;&#x7528;&#x4E8E;&#x6D4B;&#x8BD5; XML &#x6587;&#x6863;&#x7684; JUnit &#x6269;&#x5C55;&#x6846;&#x67B6;
+&#x200B;                &#x6269;&#x5C55;&#x9605;&#x8BFB;&#xFF1A;<a href="https://www.ibm.com/developerworks/cn/java/j-cq121906.html" target="_blank">https://www.ibm.com/developerworks/cn/java/j-cq121906.html</a> IBM&#x4E0A;&#x4E00;&#x4E2A;&#x5173;&#x4E8E;XMLUnit&#x4F7F;&#x7528;&#x6587;&#x6863;&#x3002;
+&#x200B;            JsonPath &#x4E00;&#x79CD;&#x7C7B;&#x4F3C;&#x4F7F;&#x7528;&#x8DEF;&#x5F84;&#x68C0;&#x7D22;&#x6216;&#x8BBE;&#x7F6E;Json&#x7684;&#x5DE5;&#x5177;(&#x7C7B;&#x4F3C;&#x5BF9;&#x4E8E;xml&#x7684;xpath)&#x3002;
+&#x200B;            JSONassert &#x7528;&#x66F4;&#x5C11;&#x7684;&#x4EE3;&#x7801;&#x7F16;&#x5199;JSON&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x3002;&#x975E;&#x5E38;&#x9002;&#x5408;&#x6D4B;&#x8BD5;REST&#x63A5;&#x53E3;&#x3002;
+&#x200B;                &#x4F7F;&#x7528;&#xFF1A;JSONAssert.assertEquals(expectedJSONString, actualJSON, strictMode);
+&#x200B;                &#x6269;&#x5C55;&#x9605;&#x8BFB;&#xFF1A;<a href="https://github.com/skyscreamer/JSONassert" target="_blank">https://github.com/skyscreamer/JSONassert</a> &#x5F00;&#x6E90;&#x9879;&#x76EE;
+&#x200B;            Mockit &#x4E00;&#x4E2D;mock&#x6A21;&#x62DF;&#x6846;&#x67B6;&#xFF08;&#x6BD4;&#x8F83;&#x4E0D;&#x9519;&#xFF09;&#x3002;
+&#x200B;                &#x6269;&#x5C55;&#x9605;&#x8BFB;&#xFF1A;
+&#x200B;                    <a href="https://github.com/mockito/mockito/wiki" target="_blank">https://github.com/mockito/mockito/wiki</a>
+&#x200B;                    <a href="https://www.jianshu.com/p/eae0187900f8" target="_blank">https://www.jianshu.com/p/eae0187900f8</a>
+&#x200B;            Hamcrest &#x5339;&#x914D;&#x5668;&#x6846;&#x67B6;
+&#x200B;                &#x6269;&#x5C55;&#x9605;&#x8BFB;&#xFF1A; <a href="http://hamcrest.org/JavaHamcrest/" target="_blank">http://hamcrest.org/JavaHamcrest/</a>
+&#x200B;            AssertJ &#x65AD;&#x8A00;&#x6846;&#x67B6;(&#x65AD;&#x8A00;&#x795E;&#x5668;)
+&#x200B;                &#x6269;&#x5C55;&#x9605;&#x8BFB;&#xFF1A;
+&#x200B;                    <a href="https://blog.csdn.net/neven7/article/details/51448559" target="_blank">https://blog.csdn.net/neven7/article/details/51448559</a>
+&#x200B;            junit &#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x6846;&#x67B6;
+&#x200B;                &#x6269;&#x5C55;&#x9605;&#x8BFB;&#xFF1A;
+&#x200B;                    <a href="https://github.com/junit-team/junit4" target="_blank">https://github.com/junit-team/junit4</a>
+&#x200B;                    <a href="https://github.com/junit-team/junit5" target="_blank">https://github.com/junit-team/junit5</a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="SpringBoot异常处理方式.html" class="navigation navigation-prev " aria-label="Previous page: SpringBoot异常处理方式">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="SpringBoot热部署.html" class="navigation navigation-next " aria-label="Next page: SpringBoot热部署">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"SpringBoot单元测试","level":"1.22","depth":1,"next":{"title":"SpringBoot热部署","level":"1.23","depth":1,"path":"doc/SpringBoot热部署.md","ref":"doc/SpringBoot热部署.md","articles":[]},"previous":{"title":"SpringBoot异常处理方式","level":"1.21","depth":1,"path":"doc/SpringBoot异常处理方式.md","ref":"doc/SpringBoot异常处理方式.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/SpringBoot单元测试.md","mtime":"2019-04-09T18:28:04.678Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-29T14:48:09.497Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

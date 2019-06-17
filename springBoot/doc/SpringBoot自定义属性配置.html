@@ -1,0 +1,649 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>SpringBoot自定义属性配置 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="SpringBoot整合内存数据库H2.html" />
+    
+    
+    <link rel="prev" href="SpringBoot整合thymeleaf.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="文档笔记组织方式.html">
+            
+                <a href="文档笔记组织方式.html">
+            
+                    
+                    文档笔记组织方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="SpringBoot Hello.html">
+            
+                <a href="SpringBoot Hello.html">
+            
+                    
+                    SpringBootHello
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="SpringBoot整合Servlet.html">
+            
+                <a href="SpringBoot整合Servlet.html">
+            
+                    
+                    SpringBoot整合Servlet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="SpringBoot整合Filter.html">
+            
+                <a href="SpringBoot整合Filter.html">
+            
+                    
+                    SpringBoot整合Filter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="SpringBoot整合Listener.html">
+            
+                <a href="SpringBoot整合Listener.html">
+            
+                    
+                    SpringBoot整合Listener
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Spring Boot拦截器.html">
+            
+                <a href="Spring Boot拦截器.html">
+            
+                    
+                    SpringBoot整合拦截器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="SpringBoot 静态资源访问.html">
+            
+                <a href="SpringBoot 静态资源访问.html">
+            
+                    
+                    SpringBoot静态资源访问
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="SpringBoot上传文件.html">
+            
+                <a href="SpringBoot上传文件.html">
+            
+                    
+                    SpringBoot上传文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="SpringBoot视图层技术.html">
+            
+                <a href="SpringBoot视图层技术.html">
+            
+                    
+                    SpringBoot视图层技术
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="SpringBooth整合JSP.html">
+            
+                <a href="SpringBooth整合JSP.html">
+            
+                    
+                    SpringBoot视图层技术---整合JSP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="SpringBoot整合FreeMarker.html">
+            
+                <a href="SpringBoot整合FreeMarker.html">
+            
+                    
+                    SpringBoot视图层技术---整合FreeMarker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="SpringBoot整合thymeleaf.html">
+            
+                <a href="SpringBoot整合thymeleaf.html">
+            
+                    
+                    SpringBoot视图层技术---整合thymeleaf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.14" data-path="SpringBoot自定义属性配置.html">
+            
+                <a href="SpringBoot自定义属性配置.html">
+            
+                    
+                    SpringBoot自定义属性配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="SpringBoot整合内存数据库H2.html">
+            
+                <a href="SpringBoot整合内存数据库H2.html">
+            
+                    
+                    SpringBoot整合内存数据库H2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="SpringBoot+JPA+H2.html">
+            
+                <a href="SpringBoot+JPA+H2.html">
+            
+                    
+                    SpringBoot+JPA+H2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="JPA核心接口学习.html">
+            
+                <a href="JPA核心接口学习.html">
+            
+                    
+                    JPA核心接口学习.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="JPA关系映射操作.html">
+            
+                <a href="JPA关系映射操作.html">
+            
+                    
+                    JPA关系映射操作.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="SpringBoot使用Druid.html">
+            
+                <a href="SpringBoot使用Druid.html">
+            
+                    
+                    SpringBoot使用Druid
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="SpringBoot做数据验证.html">
+            
+                <a href="SpringBoot做数据验证.html">
+            
+                    
+                    SpringBoot做数据验证
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="SpringBoot异常处理方式.html">
+            
+                <a href="SpringBoot异常处理方式.html">
+            
+                    
+                    SpringBoot异常处理方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="SpringBoot单元测试.html">
+            
+                <a href="SpringBoot单元测试.html">
+            
+                    
+                    SpringBoot单元测试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="SpringBoot热部署.html">
+            
+                <a href="SpringBoot热部署.html">
+            
+                    
+                    SpringBoot热部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="SpringBoot整合Ehcache.html">
+            
+                <a href="SpringBoot整合Ehcache.html">
+            
+                    
+                    SpringBoot整合Ehcache
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="SpringBoot整合redis.html">
+            
+                <a href="SpringBoot整合redis.html">
+            
+                    
+                    SpringBoot整合redis.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="SpringBoot整合Quartz框架.html">
+            
+                <a href="SpringBoot整合Quartz框架.html">
+            
+                    
+                    SpringBoot整合Quartz框架.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >SpringBoot自定义属性配置</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="springboot&#x81EA;&#x5B9A;&#x4E49;&#x5C5E;&#x6027;&#x914D;&#x7F6E;">SpringBoot&#x81EA;&#x5B9A;&#x4E49;&#x5C5E;&#x6027;&#x914D;&#x7F6E;</h1>
+<p>&#x6E90;&#x4EE3;&#x7801;&#x9879;&#x76EE;&#x53C2;&#x8003;&#xFF1A;0027-spring-boot-configuration</p>
+<p>&#x200B;    &#x6211;&#x4EEC;&#x90FD;&#x77E5;&#x9053;SpringBoot&#x4E2D;&#x5927;&#x591A;&#x6570;&#x7684;&#x914D;&#x7F6E;&#x90FD;&#x662F;&#x5728;application.yml(application.properites)&#x4E2D;&#x5B8C;&#x6210;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x5E94;&#x7528;&#x4E2D;&#x8981;&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x914D;&#x7F6E;&#x8BE5;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5462;&#xFF1F;</p>
+<h2 id="applicationyml">application.yml</h2>
+<pre><code class="lang-yml"><span class="hljs-attr">test:</span>
+<span class="hljs-attr">  username:</span> tangcheng
+<span class="hljs-attr">  password:</span> <span class="hljs-number">123456</span>
+<span class="hljs-attr">  config:</span>
+<span class="hljs-attr">    host:</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>
+<span class="hljs-attr">    port:</span> <span class="hljs-number">1231</span>
+<span class="hljs-attr">    rIp:</span> <span class="hljs-number">12</span>,<span class="hljs-number">34</span>,<span class="hljs-number">65</span>
+</code></pre>
+<h2 id="&#x6CE8;&#x89E3;value">&#x6CE8;&#x89E3;@Value</h2>
+<p>&#x200B;    &#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;@Value&#x6765;&#x5F15;&#x7528;application&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x914D;&#x7F6E;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConfigTest</span> </span>{
+
+    <span class="hljs-meta">@Value</span>(<span class="hljs-string">&quot;${test.config.host}&quot;</span>)
+    <span class="hljs-keyword">private</span> String host;
+
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test4</span><span class="hljs-params">()</span> </span>{
+        System.out.println(host);
+    }
+}
+</code></pre>
+<h2 id="&#x6CE8;&#x89E3;configurationproperties">&#x6CE8;&#x89E3;@ConfigurationProperties</h2>
+<h3 id="&#x4F5C;&#x7528;&#x4E8E;&#x914D;&#x7F6E;&#x7C7B;">&#x4F5C;&#x7528;&#x4E8E;&#x914D;&#x7F6E;&#x7C7B;</h3>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.tc.config;
+
+<span class="hljs-keyword">import</span> org.springframework.boot.context.properties.ConfigurationProperties;
+<span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;
+<span class="hljs-keyword">import</span> org.springframework.stereotype.Component;
+
+<span class="hljs-keyword">import</span> java.util.Arrays;
+
+<span class="hljs-comment">/**
+ *      &#x5982;&#x679C;&#x6CA1;&#x6709;&#x4F7F;&#x7528;EnableConfigurationProperties&#x8FD9;&#x4E2A;&#x6CE8;&#x89E3;&#x6765;&#x542F;&#x7528;&#x8FD9;&#x4E2A;&#x6CE8;&#x89E3;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x4F7F;&#x7528;<span class="hljs-doctag">@Configuration</span>
+ * &#x5C06;&#x914D;&#x7F6E;&#x7C7B;&#x8BA9;spring&#x7BA1;&#x7406;&#x8D77;&#x6765;&#x3002;
+ */</span>
+<span class="hljs-meta">@Configuration</span>
+<span class="hljs-meta">@ConfigurationProperties</span>(
+        prefix = <span class="hljs-string">&quot;test.config&quot;</span>
+)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestConfig1</span> </span>{
+    <span class="hljs-keyword">private</span> String host;
+    <span class="hljs-keyword">private</span> String port;
+    <span class="hljs-keyword">private</span> String[] rIp;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getHost</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> host;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setHost</span><span class="hljs-params">(String host)</span> </span>{
+        <span class="hljs-keyword">this</span>.host = host;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getPort</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> port;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setPort</span><span class="hljs-params">(String port)</span> </span>{
+        <span class="hljs-keyword">this</span>.port = port;
+    }
+
+    <span class="hljs-keyword">public</span> String[] getrIp() {
+        <span class="hljs-keyword">return</span> rIp;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setrIp</span><span class="hljs-params">(String[] rIp)</span> </span>{
+        <span class="hljs-keyword">this</span>.rIp = rIp;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;TestConfig{&quot;</span> +
+                <span class="hljs-string">&quot;host=&apos;&quot;</span> + host + <span class="hljs-string">&apos;\&apos;&apos;</span> +
+                <span class="hljs-string">&quot;, port=&apos;&quot;</span> + port + <span class="hljs-string">&apos;\&apos;&apos;</span> +
+                <span class="hljs-string">&quot;, rIp=&quot;</span> + Arrays.toString(rIp) +
+                <span class="hljs-string">&apos;}&apos;</span>;
+    }
+}
+</code></pre>
+<h3 id="&#x4F5C;&#x7528;&#x4E8E;&#x65B9;&#x6CD5;">&#x4F5C;&#x7528;&#x4E8E;&#x65B9;&#x6CD5;</h3>
+<p>&#x200B;    &#x8FD9;&#x79CD;&#x662F;&#x65B9;&#x6CD5;&#x503C;&#x8FD4;&#x56DE;&#x540E;SpringBoot&#x624D;&#x6CE8;&#x5165;&#x7684;&#x53C2;&#x6570;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5982;&#x679C;&#x60F3;&#x5728;&#x65B9;&#x6CD5;&#x5185;&#x5BB9;&#x586B;&#x5145;&#x4E86;&#x6709;&#x4E9B;&#x503C;&#xFF0C;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x540E;&#x6709;&#x53EF;&#x80FD;&#x88AB;&#x8986;&#x76D6;&#x7684;&#x3002;</p>
+<pre><code class="lang-java">    <span class="hljs-comment">// &#x901A;&#x8FC7;&#x65B9;&#x6CD5;&#x6765;&#x6CE8;&#x5165;&#x53C2;&#x6570;   TestConfig2&#x662F;&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x7684;java bean&#x7C7B;</span>
+    <span class="hljs-meta">@Bean</span>
+    <span class="hljs-meta">@ConfigurationProperties</span>(prefix = <span class="hljs-string">&quot;test.config&quot;</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> TestConfig2 <span class="hljs-title">testConfig2</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> TestConfig2();
+    }
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="SpringBoot整合thymeleaf.html" class="navigation navigation-prev " aria-label="Previous page: SpringBoot视图层技术---整合thymeleaf">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="SpringBoot整合内存数据库H2.html" class="navigation navigation-next " aria-label="Next page: SpringBoot整合内存数据库H2">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"SpringBoot自定义属性配置","level":"1.14","depth":1,"next":{"title":"SpringBoot整合内存数据库H2","level":"1.15","depth":1,"path":"doc/SpringBoot整合内存数据库H2.md","ref":"doc/SpringBoot整合内存数据库H2.md","articles":[]},"previous":{"title":"SpringBoot视图层技术---整合thymeleaf","level":"1.13","depth":1,"path":"doc/SpringBoot整合thymeleaf.md","ref":"doc/SpringBoot整合thymeleaf.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/SpringBoot自定义属性配置.md","mtime":"2019-04-28T10:20:22.455Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-29T14:48:09.497Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
