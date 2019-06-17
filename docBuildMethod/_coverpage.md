@@ -8,5 +8,5 @@
 * 采用gitbook来进行组织文档[https://fallengodcoder.github.io](https://fallengodcoder.github.io)
 * 文档的发布采用github Pages发布到
 
-[GitHub](https://github.com/FallenGodCoder/FallenGodCoder.github.io/)
+[GitHub](https://github.com/FallenGodCoder/)
 [Get Started](#quick-start)
