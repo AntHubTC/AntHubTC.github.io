@@ -22,6 +22,20 @@
 
 
 
+## D3JS
+
+[D3JS官方文档](https://github.com/d3/d3/wiki)
+
+
+
+## jsPlumb连线库
+
+[jsPlumb社区版文档](https://bitqiang.gitbooks.io/jsplumb/)
+
+[jsPlumb官方文档](https://jsplumbtoolkit.com//)
+
+
+
 ## 模块打包器
 
 [webpack文档](https://www.webpackjs.com/)
