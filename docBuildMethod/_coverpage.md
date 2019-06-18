@@ -9,4 +9,5 @@
 * 文档的发布采用github Pages发布到
 
 [GitHub](https://github.com/FallenGodCoder/)
-[Get Started](#quick-start)
+[Get Started](/gitbook)
+
