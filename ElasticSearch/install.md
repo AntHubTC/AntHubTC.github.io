@@ -92,7 +92,9 @@ Caused by: java.lang.RuntimeException: can not run elasticsearch as root
 }
 ```
 
-## 实现远程访问
+​	上面返回信息中，请求9200端口，Elastic 返回一个 JSON 对象，包含当前节点、集群、版本等信息。
+
+## 实现ES远程访问
 
 ```shell
 [root@localhost elasticsearch-7.1.1]# cd config/
@@ -109,11 +111,15 @@ network.host: 0.0.0.0
 cluster.initial_master_nodes: ["node-1"] 这里一定要这样设置，我就是这里没有这样设置出问题的，弄了好久
 
 # 在最后加上这两句，要不然，外面浏览器就访问不了哈
+# 是否支持跨域
 http.cors.enabled: true
+# *表示支持所有域名
 http.cors.allow-origin: "*"
 
 :wq
 ```
+
+​	默认情况下，Elastic 只允许本机访问，如果需要远程访问，可以修改 Elastic 安装目录的`config/elasticsearch.yml`文件，去掉`network.host`的注释，将它的值改成`0.0.0.0`，然后重新启动 Elastic。上面代码中，设成`0.0.0.0`让任何人都可以访问。线上服务不要这样设置，要设成具体的 IP。
 
 ## 可能会遇到的问题
 
@@ -121,7 +127,7 @@ http.cors.allow-origin: "*"
 
 解决：
 
-```
+```bash
 >su root
 >vi /etc/security/limits.conf
 * soft nofile 65536
@@ -160,3 +166,163 @@ systemctl stop firewalld.service
 经过上诉问题的解决后，如果没有问题了就可以使用浏览器访问： http://192.168.56.21:9200/
 
 ![1560496179108](./img/1560496179108.png)
+
+**问题：**如果遇到java虚拟机内存报错这种情况
+
+​	在elasticSearch的conf目录下面有一个jvm.properites文件，可以配置java虚拟机运行的一些参数。
+
+### 防火墙打开端口（防火墙未停止使用）
+
+默认对外访问端口：
+
+ElasticSearch    9100
+
+ElasticSearch-Head  9200
+
+kibana      5601
+
+```bash
+firewall-cmd --zone=public --add-port=9100/tcp --permanent
+firewall-cmd --zone=public --add-port=9200/tcp --permanent
+firewall-cmd --zone=public --add-port=5601/tcp --permanent
+firewall-cmd --reload
+```
+
+## 安装Head插件
+
+​	由于head插件本质上还是一个nodejs的工程，因此需要安装node，使用npm来安装依赖的包。
+
+### 安装nodeJS
+
+```bash
+cd /opt
+wget https://npm.taobao.org/mirrors/node/v10.16.0/node-v10.16.0-linux-x64.tar.xz
+xz -d node-v10.16.0-linux-x64.tar.xz
+tar -xvf node-v10.16.0-linux-x64.tar 
+chown -R esuser:esgroup node-v10.16.0-linux-x64
+cd
+vi .bashrc 
+# node环境配置
+export NODE_HOME=/opt/node-v10.16.0-linux-x64
+export PATH=$PATH:$NODE_HOME/bin
+:wq
+source .bashrc
+node -v
+npm -v
+```
+
+### 安装git
+
+如果未安装git，则先安装git工具。
+
+> 如果是虚拟机中其实不一定一定要git，可以到github将仓库下载下来丢到虚拟机中去也可以。
+
+```bash
+ yum install -y git
+ git -version
+```
+
+### 安装Head插件
+
+​	elasticsearch-head是一个elasticsearch的集群管理、数据可视化、增删查改、查询语句可视化的工具，它是完全由html5编写的独立网页程序。elasticsearch5.0之后，elasticsearch-head不做为插件放在其plugins目录下了，所以可以单独部署一台服务器，没必要和elasticsearch部署在同一台机器，这就需要在下面的文章中配置对应的跨域访问。
+
+```
+git clone https://github.com/mobz/elasticsearch-head.git
+cd elasticsearch-head
+npm install
+```
+
+报错问题1：
+
+```
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! phantomjs-prebuilt@2.1.16 install: `node install.js`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the phantomjs-prebuilt@2.1.16 install script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+```
+
+解决方法：
+
+```bash
+ npm install phantomjs-prebuilt@2.1.16 --ignore-scripts
+ 然后再次执行npm install安装完其它未安装的包。
+```
+
+### Head插件配置
+
+修改elasticsearch-head下的Gruntfile.js，connect配置节点：
+
+```
+{
+    connect: {
+        server: {
+            options: {
+            	hostname: '*',
+                port: 9100,
+                base: '.',
+                keepalive: true
+            }
+        }
+    }
+}
+```
+
+修改head连接地址
+
+```
+ vi _site/app.js
+this.base_uri = this.config.base_uri || this.prefs.get("app-base_uri") || "http://<这里写你的IP>:9200";
+```
+
+
+
+## 运行Head插件
+
+```
+nohup grunt server &     # 如果使用npm install -g grunt就可以直接全局使用
+否则：
+ ./node_modules/grunt/bin/grunt  -version
+ nohup  ./node_modules/grunt/bin/grunt server &
+```
+
+### 浏览器访问Head插件的网页
+
+```
+http://192.168.56.21:9100/
+```
+
+![ElasticSearch_head_web](./img/ElasticSearch_head_web.png)
+
+## 关闭Head插件
+
+```bash
+netstat -apn | grep 9100
+或者
+ps -ef | grep grunt 去找进程
+找到进程后使用
+kill -9 进程号
+```
+
+## 安装kibana
+
+​	Kiana是一个针对 Elasticsearch的开源分析及可视化平台,使用 Kiana可以查询、查看井与存储在ES素引的数据进行交互操作,使用 Kiana能执行高级的据分析,井能以图表、表格和地图的形式查看数据。
+
+​	从官网下载好kibana的安装包
+
+```bash
+tar -zxvf kibana-7.1.1-linux-x86_64.tar.gz 
+vi kibana-7.1.1-linux-x86_64/config/kibana.yml
+```
+
+![kibana_base_config](./img/kibana_base_config.png)
+
+ 将上图中的server.host修改成kibana所在服务器的ip地址。elasticsearch.host修改成elasticSearch所在服务器的ip地址。
+
+## 启动kibana
+
+![1560863108649](./img/1560863108649.png)
+
+![1560863168965](./img/1560863168965.png)
