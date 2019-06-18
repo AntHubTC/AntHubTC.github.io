@@ -5,5 +5,5 @@
 > 我常用到的文档库收集
 
 [GitHub](https://github.com/FallenGodCoder)
-[Get Started](#frontUtil)
+[Get Started](#extjs)
 
