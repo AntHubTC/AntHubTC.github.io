@@ -92,7 +92,7 @@ Caused by: java.lang.RuntimeException: can not run elasticsearch as root
 }
 ```
 
-## 实现远程访问：
+## 实现远程访问
 
 ```shell
 [root@localhost elasticsearch-7.1.1]# cd config/
@@ -115,7 +115,7 @@ http.cors.allow-origin: "*"
 :wq
 ```
 
-#### 使用远程访问后可能会出现一些问题：
+## 可能会遇到的问题
 
 **问题**： max file descriptors [4096] for elasticsearch process is too low, increase to at least [65536]
 
