@@ -121,7 +121,7 @@ http.cors.allow-origin: "*"
 
 ​	默认情况下，Elastic 只允许本机访问，如果需要远程访问，可以修改 Elastic 安装目录的`config/elasticsearch.yml`文件，去掉`network.host`的注释，将它的值改成`0.0.0.0`，然后重新启动 Elastic。上面代码中，设成`0.0.0.0`让任何人都可以访问。线上服务不要这样设置，要设成具体的 IP。
 
-## 可能会遇到的问题
+### 可能会遇到的问题
 
 **问题**： max file descriptors [4096] for elasticsearch process is too low, increase to at least [65536]
 
@@ -279,7 +279,7 @@ this.base_uri = this.config.base_uri || this.prefs.get("app-base_uri") || "http:
 
 
 
-## 运行Head插件
+### 运行Head插件
 
 ```
 nohup grunt server &     # 如果使用npm install -g grunt就可以直接全局使用
@@ -296,7 +296,7 @@ http://192.168.56.21:9100/
 
 ![ElasticSearch_head_web](./img/ElasticSearch_head_web.png)
 
-## 关闭Head插件
+### 关闭Head插件
 
 ```bash
 netstat -apn | grep 9100
@@ -321,8 +321,62 @@ vi kibana-7.1.1-linux-x86_64/config/kibana.yml
 
  将上图中的server.host修改成kibana所在服务器的ip地址。elasticsearch.host修改成elasticSearch所在服务器的ip地址。
 
-## 启动kibana
+### 启动kibana
+
+```
+nohup sh kibana >run.log 2>&1 &
+```
 
 ![1560863108649](./img/1560863108649.png)
 
 ![1560863168965](./img/1560863168965.png)
+
+
+
+![1560938368311](./img/1560938368311.png)
+
+
+
+## 安装中文分词器ik
+
+elasticsearch-analysis-ik 
+
+​	在[gitHub](https://github.com/medcl/elasticsearch-analysis-ik)直接下载elasticsearch对应版本的elasticsearch-analysis-ik源码来使用maven构建得到发布的包，也可以使用给上面已经打好包的release包（这种方便一点）。
+
+```
+-rwxr-x---. 1 esuser esgroup   4504541 6月  19 11:28 elasticsearch-analysis-ik-7.1.1.zip
+```
+
+安装：
+
+```bash
+mkdir elasticsearch-7.1.1/plugins/ik
+cp elasticsearch-analysis-ik-7.1.1.zip elasticsearch-7.1.1/plugins/ik/
+cd elasticsearch-7.1.1/plugins/ik/
+unzip elasticsearch-analysis-ik-7.1.1.zip
+rm -f elasticsearch-analysis-ik-7.1.1.zip
+ll
+```
+
+```
+-rw-r--r--. 1 esuser esgroup 263965 5月   6 2018 commons-codec-1.9.jar
+-rw-r--r--. 1 esuser esgroup  61829 5月   6 2018 commons-logging-1.2.jar
+drwxr-xr-x. 2 esuser esgroup   4096 6月   5 22:49 config   配置文件目录
+-rw-r--r--. 1 esuser esgroup  54633 6月   5 22:49 elasticsearch-analysis-ik-7.1.1.jar
+-rw-r--r--. 1 esuser esgroup 736658 5月   6 2018 httpclient-4.5.2.jar
+-rw-r--r--. 1 esuser esgroup 326724 5月   6 2018 httpcore-4.4.4.jar
+-rw-r--r--. 1 esuser esgroup   1805 6月   5 22:50 plugin-descriptor.properties
+-rw-r--r--. 1 esuser esgroup    125 6月   5 22:50 plugin-security.policy
+```
+
+重新启动elasticsearch，能看到已经安装了ik分词器的一些信息：
+
+```
+.....
+[2019-06-19T11:55:08,352][INFO ][o.e.p.PluginsService     ] [node-1] loaded plugin [analysis-ik]
+.....
+[2019-06-19T11:55:19,637][INFO ][o.w.a.d.Monitor          ] [node-1] try load config from /opt/elasticsearch-7.1.1/config/analysis-ik/IKAnalyzer.cfg.xml
+[2019-06-19T11:55:19,639][INFO ][o.w.a.d.Monitor          ] [node-1] try load config from /opt/elasticsearch-7.1.1/plugins/ik/config/IKAnalyzer.cfg.xml
+.....
+```
+

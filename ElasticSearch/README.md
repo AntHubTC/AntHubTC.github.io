@@ -1,5 +1,7 @@
 # ElasticSearch基础概念
 
+​	学习使用的是elasticsearch-7.1.1版本
+
 ## ElasticSearch概述
 
 ​	[全文搜索](https://baike.baidu.com/item/%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E)属于最常见的需求，开源的 [Elasticsearch](https://www.elastic.co/) （以下简称 Elastic）是目前全文搜索引擎的首选，它提供了一个分布式多用户能力的全文搜索引擎。它可以快速地储存、搜索和分析海量数据。维基百科、Stack Overflow、Github 都采用它。
