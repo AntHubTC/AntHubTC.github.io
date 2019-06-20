@@ -323,6 +323,8 @@ vi kibana-7.1.1-linux-x86_64/config/kibana.yml
 
 ### 启动kibana
 
+​	不同版本的kibana界面有些区别，新版本提供了更多的功能和更高的稳定性。
+
 ```
 nohup sh kibana >run.log 2>&1 &
 ```
