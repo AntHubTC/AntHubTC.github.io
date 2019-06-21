@@ -3,5 +3,7 @@
 * [基础使用](started)
 * [Mapping](mapping)
 * [基础查询](baseQuery)
+* [Filter查询](FilterQuery)
+* [聚合查询](AggregateQuery)
 * [参考文档](thirdDoc)
 

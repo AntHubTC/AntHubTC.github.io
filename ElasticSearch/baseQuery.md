@@ -574,7 +574,3 @@ GET /lib3/_search
   }
 }
 ```
-
-# Filter查询
-
-filter是不计算相关性的，同时可以cache。 因此， filter速度要快于query查询
