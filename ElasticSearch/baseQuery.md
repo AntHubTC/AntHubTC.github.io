@@ -276,3 +276,110 @@ GET /lib3/_search
 ```
 
 **控制返回字段**
+
+```bash
+# 控制返回文档中只包含name
+GET /lib3/_search
+{
+  "_source": "name", 
+  "query": {
+    "match_all": {}
+  }
+}
+GET /lib3/_search
+{
+  "_source": ["name", "age"], 
+  "query": {
+    "match_all": {}
+  }
+}
+# 包含includes和排除excludes，两者一般只同时出现一个
+GET /lib3/_search
+{
+  "_source": {
+    "includes": "na*",
+    "excludes": [ "address", "interests"]
+  }, 
+  "query": {
+    "match_all": {}
+  }
+}
+```
+
+**order排序**
+
+​	asc升序   desc降序
+
+```bash
+GET /lib3/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "sort": [
+    {
+      "age": {
+        "order": "asc"
+      }
+    }
+  ]
+}
+```
+
+**前缀匹配查询**
+
+```bash
+# 前缀匹配
+GET /lib3/_search
+{
+  "query": {
+    "match_phrase_prefix": {
+      "name": "zhao"
+    }
+  }
+}
+```
+
+**范围查询**
+
+range:实现范围查询
+
+参数： from, to, include_lower, include_upper, boost
+
+include_lower: 是否包含范围的左边界， 默认是true
+
+include_upper: 是否包含范围的右边界，默认是true
+
+```bash
+GET /lib3/_search
+{
+    "query": {
+      "range": {
+        "age": {
+          "from": 10,
+          "to": 20,
+          "include_lower": true,
+          "include_upper": true
+        }
+      }
+    }
+}
+# 这个是Kibana提示的语法，估计上面的方式官方不推荐
+GET /lib3/_search
+{
+    "query": {
+      "range": {
+        "age": {
+          "gte": 10,
+          "lte": 20
+        }
+      }
+    }
+}
+```
+
+### wildcard查询
+
+允许使用通配符*和?来进行查询
+
+*
