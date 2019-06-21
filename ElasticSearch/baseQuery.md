@@ -2,6 +2,8 @@
 
 ## 准备数据
 
+**英文测试数据：**
+
 ```bash
 PUT /lib3
 {
@@ -62,7 +64,90 @@ PUT /lib3/_doc/5
 }
 ```
 
+**中文测试数据：**
 
+```bash
+PUT /lib4
+{
+  "settings": {
+    "number_of_shards": 3,
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text",
+        "analyzer": "ik_max_word"
+      },
+      "address": {
+        "type": "text",
+        "analyzer": "ik_max_word"
+      },
+      "age": {
+        "type": "integer"
+      },
+      "interests": {
+        "type": "text",
+        "analyzer": "ik_max_word"
+      },
+      "birthday": {
+        "type": "date"
+      }
+    }
+  }
+}
+
+PUT /lib4/_doc/1
+{
+  "name": "赵六",
+  "address": "黑龙江省铁岭",
+  "age": 50,
+  "birthday": "1970-12-12",
+  "interests": "喜欢喝酒， 锻炼，说相声"
+}
+
+PUT /lib4/_doc/2
+{
+  "name": "赵明",
+  "address": "黑龙江省铁岭",
+  "age": 50,
+  "birthday": "1970-12-12",
+  "interests": "喜欢喝酒， 锻炼，唱歌"
+}
+
+PUT /lib4/_doc/3
+{
+  "name": "lisi",
+  "address": "北京海淀区清河",
+  "age": 23,
+  "birthday": "1998-10-12",
+  "interests": "喜欢喝酒， 锻炼，唱歌"
+}
+
+PUT /lib4/_doc/4
+{
+  "name": "王五",
+  "address": "北京海淀区清河",
+  "age": 26,
+  "birthday": "1995-10-12",
+  "interests": "喜欢编程， 听音乐，旅游"
+}
+
+PUT /lib4/_doc/5
+{
+  "name": "张三",
+  "address": "北京海淀区清河",
+  "age": 29,
+  "birthday": "1988-10-12",
+  "interests": "喜欢摄影，听音乐，跳舞"
+}
+```
+
+ik带有两个分词器：
+
+​	ik_max_word: 会将文本做最细粒度的拆分；尽可能多的拆分出词语
+
+​	ik_smart：会做最粗粒度拆分；已被分出的词语将不会再次被其它词语占有
 
 ## 简单查询
 
@@ -197,6 +282,15 @@ GET /lib3/_search
     }
   }
 }
+
+GET /lib4/_search
+{
+  "query": {
+    "terms": {
+      "interests": ["喝酒", "唱歌"]
+    }
+  }
+}
 ```
 
 ## match查询
@@ -218,6 +312,14 @@ GET /lib3/_search
   "query": {
     "match": {
       "name": "zhaoliu zhaoming"
+    }
+  }
+}
+GET /lib4/_search
+{
+  "query": {
+    "match": {
+      "name": "赵六 张三"
     }
   }
 }
@@ -261,7 +363,7 @@ GET /lib3/_search
 
 ## match_phrase:短语匹配查询
 
-ElasticSearch引擎首先分析（analyze）查询字符串，从分析后的文本中构建短语查询，这意味着必须匹配短语中的所有分词，并且保证各个分词的相对位置不变。
+​	ElasticSearch引擎首先分析（analyze）查询字符串，从分析后的文本中构建短语查询，这意味着必须匹配短语中的所有分词，并且保证各个分词的相对位置不变。
 
 ```bash
 # 短语查询， 单词顺序都必须一样
@@ -378,7 +480,7 @@ GET /lib3/_search
 }
 ```
 
-wildcard查询
+## wildcard查询
 
 允许使用通配符*和?来进行查询
 
@@ -411,6 +513,8 @@ GET /lib3/_search
 
 ## fuzzy实现模糊查询
 
+​	ES中进行形似度匹配的一种查询，查询结果中对结果有一个_score匹配度分数。
+
 value：查询的关键字
 
 boost：查询的权值，默认值是1.0
@@ -419,3 +523,58 @@ min_similarity：设置匹配的最小相似度，默认值为0.5，对于字符
 
 prefix_length：指明区分词项可以扩展的数目，默认值可以无限大。
 
+```bash
+# 结果中有匹配度分数
+GET /lib3/_search
+{
+  "query": {
+    "fuzzy": {
+      "name": "zhaoluu"
+    }
+  }
+}
+GET /lib3/_search
+{
+  "query": {
+    "fuzzy": {
+      "name": "zhoolu"
+    }
+  }
+}
+GET /lib3/_search
+{
+  "query": {
+    "fuzzy": {
+      "interests": {
+        "value": "chagge"
+      }
+    }
+  }
+}
+```
+
+# 高亮显示
+
+结果使用html的em标签包括。
+
+```bash
+GET /lib3/_search
+{
+  "query": {
+    "fuzzy": {
+      "interests": {
+        "value": "chagge"
+      }
+    }
+  },
+   "highlight": {
+    "fields": {
+      "interests": {}
+    }
+  }
+}
+```
+
+# Filter查询
+
+filter是不计算相关性的，同时可以cache。 因此， filter速度要快于query查询
