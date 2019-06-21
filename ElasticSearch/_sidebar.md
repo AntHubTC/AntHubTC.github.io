@@ -5,5 +5,6 @@
 * [基础查询](baseQuery)
 * [Filter查询](FilterQuery)
 * [聚合查询](AggregateQuery)
+* [进阶原理](AdvancedPrinciple)
 * [参考文档](thirdDoc)
 
