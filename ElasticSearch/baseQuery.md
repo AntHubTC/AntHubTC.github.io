@@ -231,7 +231,7 @@ GET /lib3/_search
 }
 ```
 
-**match_all**:查询所有文档
+match_all:查询所有文档
 
 ```bash
 # 查询所有文档
@@ -244,7 +244,7 @@ GET /lib3/_search
 }
 ```
 
-**multi_match**:  可以指定多个字段
+## multi_match:  可以指定多个字段
 
 ```bash
 # 从字段interests和name中查询含有changge的文档
@@ -259,7 +259,7 @@ GET /lib3/_search
 }
 ```
 
-**match_phrase**:短语匹配查询
+## match_phrase:短语匹配查询
 
 ElasticSearch引擎首先分析（analyze）查询字符串，从分析后的文本中构建短语查询，这意味着必须匹配短语中的所有分词，并且保证各个分词的相对位置不变。
 
@@ -275,7 +275,7 @@ GET /lib3/_search
 }
 ```
 
-**控制返回字段**
+## 控制返回字段
 
 ```bash
 # 控制返回文档中只包含name
@@ -306,7 +306,7 @@ GET /lib3/_search
 }
 ```
 
-**order排序**
+order排序
 
 ​	asc升序   desc降序
 
@@ -326,7 +326,7 @@ GET /lib3/_search
 }
 ```
 
-**前缀匹配查询**
+## 前缀匹配查询
 
 ```bash
 # 前缀匹配
@@ -340,7 +340,7 @@ GET /lib3/_search
 }
 ```
 
-**范围查询**
+## 范围查询
 
 range:实现范围查询
 
@@ -378,8 +378,44 @@ GET /lib3/_search
 }
 ```
 
-### wildcard查询
+wildcard查询
 
 允许使用通配符*和?来进行查询
 
-*
+&#42;代表0个或多个字符
+
+?代表任意一个字符
+
+```bash
+GET /lib3/_search
+{
+  "query": {
+    "wildcard": {
+      "name": {
+        "value": "zhao*"
+      }
+    }
+  }
+}
+GET /lib3/_search
+{
+  "query": {
+    "wildcard": {
+      "name": {
+        "value": "li?i"
+      }
+    }
+  }
+}
+```
+
+## fuzzy实现模糊查询
+
+value：查询的关键字
+
+boost：查询的权值，默认值是1.0
+
+min_similarity：设置匹配的最小相似度，默认值为0.5，对于字符串，取值0-1(包括0和1 )；对于数值，取值可能大于1；对于日期型取值为1d，1m等，1d就代表1天。
+
+prefix_length：指明区分词项可以扩展的数目，默认值可以无限大。
+
