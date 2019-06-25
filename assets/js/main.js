@@ -111,6 +111,11 @@
         });
         /* smoth scroll*/
         $('#main-menu li a').on('click', function(event) {
+            var ignore = $(this).data('ignore')
+            if (ignore) {
+                // 忽略处理项
+                return ture;
+            }
             event.preventDefault();
             var anchor = $(this).attr('href');
             var top = $(anchor).offset().top;
