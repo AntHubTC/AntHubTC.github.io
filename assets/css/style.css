@@ -1,21 +1,5 @@
 @charset "UTF-8";
-/*==============================
-** Main Scss
-==============================*/
-/*====================
-** Variable Scss
-====================*/
-/*basic color*/
-/*section background color*/
-/*border color*/
-/*heading color*/
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900|Open+Sans:400,600,700");
-/*====================
-** Mixins Scss
-====================*/
-/*====================
-** Global Scss
-====================*/
+
 .slicknav_menu {
   display: none; }
 
@@ -435,7 +419,7 @@ a {
 
 .header-bg {
   background-image: url(../img/header-bg-1.jpg);
-  background-position: center;
+  background-position: right;
   background-size: cover; }
 
 .scroll-down {
