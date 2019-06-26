@@ -232,3 +232,87 @@ GET /tc_id/_mapping
 "similarity": "BM25" // 默认是TF/IDF算法，指定一个字段评分策略，仅仅对字符串型和分词类型有效；
 
 "term&#95;vector": "no" // 默认不存储向量信息， 支持参数yes (term存储)， with&#95;positions (term+位置)，with&#95;offsets(term+偏移量)，with&#95;positions&#95;offsets(term+位置+偏移量)对快速高亮fast vector highlighter能提升性能，但开启又会加大索引体积，不适合大数据量使用
+
+## dynamic mapping策略
+
+dynamic：
+
+1. true：遇到陌生字段就dynamic mapping
+2. false：遇到陌生字段就忽略
+3. strict：遇到陌生字段就报错
+
+date_detection: 默认会按照一定格式识别date，比如yyyy-MM-dd
+
+​	可以手动关闭某特type的date_detection:true/false
+
+定制dynamic mapping template(type)：
+
+```bash
+# 模板
+PUT /my_index
+{
+  "mappings": {
+    "my_type": {
+      "dynamic_templates": [{
+        "en": {
+          "match": "*_en",
+          "match_mapping_type":"string",
+          "mapping": {
+            "type": "text",
+            "analyzer": "english"
+          }
+        }
+      }]
+    }
+  }
+}
+```
+
+
+
+## 重建索引
+
+​	一个field的设置是不能修改的,如果要修改一个field,那么应该重新按照新的 mapping,建立一个 index,然后将数据批量查询出来,重新用 bulk apl.写入到indext中。
+
+​	批量查询的时候,建议来用 scroll api,并且采用多线程并发的方式来 reindex数据,每次 scroll就查询指定日期的一段数据,交给一个线程即可。
+
+PUT /index1/ type1/4 (" content : " 1990-12-12}
+
+GET /index1/type1/search
+
+GET /index1 type1/mapping
+
+#报错 PUT /index1/type1/4 ( "content ": "I am very happy "}
+
+#创建一个新的索引,把 index1索引中的数据查询出来导入到新的索引中   #但是应用程序使用的是之前的素引,为了不用重启应用程序,给 index1这个索引起个#别名
+
+PUT /index1/_alias/index2
+
+#创建新的索引，把content的类型改为字符串
+
+PUT /newindex {"mappings": {"typ1": {"properties": {"content": {"type": "text"}}}}}
+
+#使用scroll批量查询
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

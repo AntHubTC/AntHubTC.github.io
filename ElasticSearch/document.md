@@ -161,7 +161,7 @@ POST /lib3/_update/4>retry_on_conflict=3&version=5
 
 **第三步**：处理请求的节点把结果返回给协调节点，协调节点再返回给应用程序
 
-**特殊情况**：请求的文档还在建立素引的过程中, primary shard上存在,但 replica shard上不存在,但是请求被转发到了 replica shard上,这时就会提示找不到文档。
+**特殊情况**：请求的文档还在建立索引的过程中, primary shard上存在,但 replica shard上不存在,但是请求被转发到了 replica shard上,这时就会提示找不到文档。
 
 
 
@@ -219,3 +219,265 @@ time_out: 是否超时，通过设置的超时时间判定。
 ```bash
 GET /lib3/_search?timeout=10ms
 ```
+
+
+
+## 分页查询中的deep paging问题
+
+```bash
+GET /lib3/_search?from=0&size=2
+
+GET　/lib3/_search
+{
+  "from": 0,
+  "size": 2,
+  "query": {
+    "terms": {
+      "interests": [
+        "hejiu",
+        "changge"
+      ]
+    }
+  }
+}
+```
+
+​	deep paging直询的很深,比如一个索引有三个 primary shard,分别存储了6000条数据,我们要得到第100页的数据(每页10条),类似这种情况就叫deep paging。
+
+**如何得到第100页的10条数据？**
+
+​	错误做法：在每个 shard中搜索990到999这10条数据,然后用这30条数据排序,排序之后取10条数据就是要搜索的数据,这种做法是错的,因为3个 shard中的数据的_score分数不ー样,可能这某一个 shard中第一条数据的__score分数比另ー个 shard中第1000条都要高,所以在每个 shard中搜索990到999这10条数据然后排序的做法是不正确的。
+
+​	正确的做法：每个 shard把0到999条数据全部搜索出来(按排序顺序),然后全部返回给 coordinate node协调节点,由 coordinate node按 score分数排序后,取出第100页的10条数据,然后返回给客户端。
+
+![1561534833239](./img/1561534833239.png)
+
+**deep paging性能问题**：
+
+1. 耗费网络带宽,因为搜索过深的话,各 shard要把数传送给 coordinate node,这个过程是有大量数据传递的,消耗网络。
+2. 消耗内存,各 shard要把数指传送给 coordinate node,这个传递回来的数据,是被 coordinate nodet保存在内存中的,这样会大量消耗内存。
+3. 消耗 cpu， coordinate node协调节点要把传回来的数据进行排序,这个排序过程很消耗cpu。
+
+鉴于 deep paging的性能问题,所以应尽量减少使用。
+
+## query string查询及copy_to解析
+
+```bash
+# 在所有文档中去找(这种方式性能比较低)
+GET /lib3/_search?q=changge,zhangsan
+```
+
+如何解决这个问题？使用copy_to。
+
+```bash
+PUT /myIndex/article/_mapping
+{
+  "properties": {
+    "post_date": {
+      "type": "date"
+    },
+    "title": {
+      "type": "text",
+      "copy_to": "fullcontent" ＃ 将title的值拷贝到fullcontent字段中去。
+    },
+    "content": {
+      "type": "text",
+      "copy_to": "fullcontent"
+    },
+    "author_id": {
+      "type": "integer"
+    }
+  }
+}
+```
+
+copy_to字段是把其它字段中的值，以空格为分隔符组成一个大字符串，然后被分析和索引，但是不存储，也就是说它能被查询，但不能被取回显示。
+
+注意：copy_to指向的字段类型要为：text
+
+```bash
+# 使用copy_to形成的字段中查询
+GET /lib3/_search?q=fullcontent:changge,zhangsan
+```
+
+当没有指定field时，就会从copy_to字段中查询GET /lib3/user/_search?q=changge
+
+## 字符串排序问题
+
+```bash
+GET /lib3/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "sort": [
+    {
+      "interests": {
+        "order": "desc"
+      }
+    }
+  ]
+}
+```
+
+错误：Fielddata is disabled on text fields by default. Set fielddata=true on [interests] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.
+
+对一个字符串类型的字段进行排序通常不准确,因为已经被分词成多个词条了
+
+解决方式:对字段索引两次,一次索引分词（用于搜索），一次索引不分词(用于排序)。
+
+```bash
+DELETE lib3
+PUT /lib3
+{
+  "settings": {
+    "number_of_shards": 3,
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "properties": {
+        "name": {"type": "text"},
+        "address": {"type": "text"},
+        "age": {"type": "integer"},
+        "interests": {
+        	"type": "text",  # 索引分词,用于搜索
+        	"fields": {
+        		"type": "keyword" # 索引不分词,用于排序
+        	},
+        	"fielddata": true
+        },
+        "birthday": {"type": "date"}
+      }
+  }
+}
+# ... 加入其它数据
+# 会发现还是按照分词的方式进行排序
+GET /lib3/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "sort": [
+    {
+      "interests": {
+        "order": "desc"
+      }
+    }
+  ]
+}
+# 解决, 使用raw表示用原始值
+GET /lib3/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "sort": [
+    {
+      "interests.raw": {
+        "order": "desc"
+      }
+    }
+  ]
+}
+```
+
+## 如何计算相关度分数
+
+使用的是TF/IDF算法（Term Frequency&Inverse Document Frequency）
+
+1. Term Frequency： 我们查询的文本中的词条在document中出现的次数，出现次数越多，相关度越高。
+
+   搜索内容：hello world
+
+   Hello， I love china.
+
+   Hello world, how are you!
+
+2. Inverse Document Frequency：我们查询的文本中的词条在索引的所有文档中出现了多少次，出现的次数越多，相关度越低。
+
+   搜索内容：hello world
+
+   hello, what are you doning?
+
+   I like the world.
+
+   hello 在索引的所有文档中出现了500次，world出现了100次。
+
+3. Field-length（字段长度归约） norm:field越长，相关度越低。
+
+   搜索内容：hello world
+
+   {"title": "hello, what's your name?", "content": "owieurowieuolsdjflk"}
+
+   {"title": "hi, good morning", "content": "lkjkljkj......world"}
+
+查看分数是如何计算的：
+
+```bash
+	GET /lib3/_search?explain=true
+	{
+	  "query": {
+	    "match": {
+	      "interests": "duanlian,changge"
+	    }
+	  }
+	}
+```
+
+结果中_explanation的内容就是计算的过程。
+
+查看一个文档能否匹配上某个查询：
+
+```bash
+	GET /lib3/_explain/2
+	{
+	  "query": {
+	    "match": {
+	      "interests": "duanlian,changge"
+	    }
+	  }
+	}
+```
+
+## Doc values解析
+
+DocValues其实是Lucene在构建倒排索引时，会额外建立一个有序的正排索引（基于document => field value的映射列表）
+
+{"birthday": "1985-11-11", age: 23}
+
+{"birthday": "1985-11-11", age: 29}
+
+document&nbsp;&nbsp;&nbsp;age &nbsp;&nbsp;&nbsp;&nbsp;birthday
+
+doc1&nbsp;&nbsp;&nbsp;&nbsp;23&nbsp;&nbsp;&nbsp;&nbsp;1985-11-11
+
+doc1&nbsp;&nbsp;&nbsp;&nbsp;29&nbsp;&nbsp;&nbsp;&nbsp;1985-11-11
+
+存储在磁盘上，节约内存。
+
+对于排序，分组和一些聚合操作能够大大提升性能。
+
+> **注意**：默认对不分词的字段是开启的，对分词字段无效（需要把fielddata设置为true）
+
+```bash
+PUT /lib3
+{
+  "settings": {
+    "number_of_shards": 3,
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "properties": {
+        "name": {"type": "text"},
+        "address": {"type": "text"},
+        "age": {"type": "integer", "doc_values": false}, # 这个字段就不能进行分组聚合排序了
+        "interests": {"type": "text"},
+        "birthday": {"type": "date"}
+      }
+  }
+}
+```
+
+
+
+

@@ -149,7 +149,7 @@ ik带有两个分词器：
 
 ​	ik_smart：会做最粗粒度拆分；已被分出的词语将不会再次被其它词语占有
 
-## 简单查询
+## query string简单查询
 
 ```bash
 # 搜索名字是lisi的文档
@@ -552,6 +552,34 @@ GET /lib3/_search
   }
 }
 ```
+
+## 基于scroll技术滚动搜索大量数据
+
+​	如果一次性要查出来比如10万条数据，那么性能会很差，此时一般会采取用scroll滚动查询，一批一批的查，直到所有数据都查询完为止。
+
+1. scroll搜索会在第一次搜索的时候，保存一个当时的视图快照，之后只会基于该旧的视图快照提供的数据搜索，如果这个期间数据变更，是不会让用户看到的。
+2. 采用基于_doc（不使用__score）进行排序的方式，性能较高。
+3. 每次发送scroll请求，我们还需要指定一个scroll参数，指定一个时间窗口内完成就可以了
+
+```bash
+# 快照，查询返回数据，可以获取到scroll_id
+GET /lib3/_search?scroll=1m     #这个1m是时间窗口，表示查询在1分钟内完成。
+{
+  "query": {
+    "match_all": {}
+  },
+  "sort": ["_doc"],
+  "size": 2
+}
+# 上面发挥的scroll_id传入下面查询
+GET /_search/scroll
+{
+  "scroll": "1m",
+  "scroll_id": "DnF1ZXJ5VGhlbkZldGNoAwAAAAAAAJJLFllTN3JiUnJWUUR1UngzRWlnSlVOc0EAAAAAAACSTBZZUzdyYlJyVlFEdVJ4M0VpZ0pVTnNBAAAAAAAAkk0WWVM3cmJSclZRRHVSeDNFaWdKVU5zQQ=="
+}
+```
+
+
 
 # 高亮显示
 
