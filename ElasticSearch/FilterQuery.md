@@ -175,3 +175,17 @@ GET /lib6/_search
 }
 ```
 
+## 多index，多type查询
+
+```bash
+GET _search  查询所有
+GET /lib3/_search
+GET /lib3,lib4/_search
+GET /*3,*4/_search
+GET /lib3/user/_search    区分老版本
+GET /lib3/user,items/_search 
+GET /lib3,lib4/user,items/_search
+GET /_all/_search 查询所有
+GET /_all/user,items/_search
+```
+

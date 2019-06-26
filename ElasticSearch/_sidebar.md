@@ -6,5 +6,7 @@
 * [Filter查询](FilterQuery)
 * [聚合查询](AggregateQuery)
 * [进阶原理](AdvancedPrinciple)
+* [文档核心元数据](document)
+* [脚本支持](scriptSupport)
 * [参考文档](thirdDoc)
 
