@@ -284,35 +284,52 @@ GET /index1 type1/mapping
 
 #报错 PUT /index1/type1/4 ( "content ": "I am very happy "}
 
-#创建一个新的索引,把 index1索引中的数据查询出来导入到新的索引中   #但是应用程序使用的是之前的素引,为了不用重启应用程序,给 index1这个索引起个#别名
+#字段类型一旦确定就不能修改了，要想修改字段的类型，只能是新建一个新的索引，新的索引的字段类型为string，把旧的索引中的数据再导入到新的索引中。
+
+#但是， 如果新建一个索引，那么在应用程序中使用的是原有的索引，那么就会导致需要重新启动应用程序，为了不用重启应用，我们使用别名的方式。
 
 PUT /index1/_alias/index2
 
 #创建新的索引，把content的类型改为字符串
 
-PUT /newindex {"mappings": {"typ1": {"properties": {"content": {"type": "text"}}}}}
+PUT /newindex {"mappings": {"type1": {"properties": {"content": {"type": "text"}}}}}
 
-#使用scroll批量查询
+#把旧的索引中的数据再导入到新的索引中，有可能旧的索引中的数据量非常大。
 
+#使用scroll方式批量查询数据
 
+GET /index1/type1/_search?scroll=1m
 
+{
 
+​	"query": {"match_all":{}},
 
+​	"sort": ['_doc'],
 
+​	"size": 2
 
+}
 
+#然后使用bulk再批量添加到新的索引中。
 
+POST /_bulk
 
+{"index":{"_index":"newindex","_type":"type1", "_id": 1}}
 
+{"content": "2019-08-09"}
 
+#将新的索引和别名进行关联
 
+POST /_aliases
 
+{
 
+​	"actions": [
 
+​		{"remove": {"index": "index1",  "alias": "index2"}},
 
+​		{"add": {"index": "newindex",  "alias": "index2"}}
 
+​	]
 
-
-
-
-
+}
