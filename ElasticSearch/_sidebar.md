@@ -8,6 +8,7 @@
 * [进阶原理](AdvancedPrinciple)
 * [文档核心元数据](document)
 * [脚本支持](scriptSupport)
-* [JAVA文档API](documentAPI_JAVA.md)
+* [JAVA—文档API](documentAPI_JAVA.md)
+* [JAVA—多文档API](multiDocumentAPI_JAVA.md)
 * [参考文档](thirdDoc)
 
