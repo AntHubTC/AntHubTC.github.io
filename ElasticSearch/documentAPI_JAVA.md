@@ -714,8 +714,17 @@ import java.util.Map;
 public class TermVectorAPIDemo extends ElasticSearchBaseTest{
     @Test
     public void test1() {
-        TermVectorsRequest request = new TermVectorsRequest("authors", "1");
-        request.setFields("user");
+        /*
+        POST /posts/_doc/2
+        {
+          "user": "keven jim",
+          "postDate": "2018-07-21",
+          "message": "Elasticsearch Elasticsearch Elasticsearch out out trying test"
+        }
+         */
+        TermVectorsRequest request = new TermVectorsRequest("posts", "2");
+        // 要查看的哪个域
+        request.setFields("message");
         // 也可以为文档中不存在的生成
 //        try {
 //            XContentBuilder docBuilder = XContentFactory.jsonBuilder();
@@ -730,15 +739,15 @@ public class TermVectorAPIDemo extends ElasticSearchBaseTest{
 
         // ===========可选参数
         // 省略文档计数、文档频率总和、总单词频率总和。
-        request.setFieldStatistics(false);
+//        request.setFieldStatistics(false);
         // 显示总单词频率和文档频率。
         request.setTermStatistics(true);
         // 省略输出位置
-        request.setPositions(false);
+//        request.setPositions(false);
         // 省略输出偏移
-        request.setOffsets(false);
+//        request.setOffsets(false);
         // 省略输出payloads
-        request.setPayloads(false);
+//        request.setPayloads(false);
 
         Map<String, Integer> filterSettings = new HashMap<>();
         filterSettings.put("max_num_terms", 3); // 最大单词个数
@@ -750,17 +759,17 @@ public class TermVectorAPIDemo extends ElasticSearchBaseTest{
         filterSettings.put("max_word_length", 10); // 最大文档长度
 
         // 单词根据tf-idf算法算出来的分数，过滤返回
-        request.setFilterSettings(filterSettings);
+//        request.setFilterSettings(filterSettings);
 
-        // 指定不同于字段的分析器
-        Map<String, String> perFieldAnalyzer = new HashMap<>();
-        perFieldAnalyzer.put("user", "keyword");
-        request.setPerFieldAnalyzer(perFieldAnalyzer);
+        // 指定不同的字段的分析器
+//        Map<String, String> perFieldAnalyzer = new HashMap<>();
+//        perFieldAnalyzer.put("user", "keyword");
+//        request.setPerFieldAnalyzer(perFieldAnalyzer);
 
         // 实时
-        request.setRealtime(false);
+//        request.setRealtime(false);
         // 路由值参数
-        request.setRouting("routing");
+//        request.setRouting("routing");
 
         // 同步执行
         try {
@@ -771,6 +780,7 @@ public class TermVectorAPIDemo extends ElasticSearchBaseTest{
             String id = response.getId();
             boolean found = response.getFound();
 
+            // 要弄清下面的结构最好debug去看
             for (TermVectorsResponse.TermVector tv : response.getTermVectorsList()) {
                 String fieldname = tv.getFieldName(); // 当前field的name
                 int docCount = tv.getFieldStatistics().getDocCount(); // 获取文档的总数量
