@@ -10,5 +10,6 @@
 * [脚本支持](scriptSupport)
 * [JAVA—文档API](documentAPI_JAVA.md)
 * [JAVA—多文档API](multiDocumentAPI_JAVA.md)
+* [JAVA—查询API](searchAPI_JAVA.md)
 * [参考文档](thirdDoc)
 
