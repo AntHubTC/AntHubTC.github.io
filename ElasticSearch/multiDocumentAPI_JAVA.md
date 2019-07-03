@@ -203,9 +203,114 @@ public class BulkAPIDemo extends ElasticSearchBaseTest {
 
 [官方文档](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/7.2/java-rest-high-document-multi-get.html)
 
+```java
+package com.tc.test.multiDocument;
+
+import com.tc.test.base.ElasticSearchBaseTest;
+import org.elasticsearch.ElasticsearchException;
+import org.elasticsearch.action.ActionListener;
+import org.elasticsearch.action.get.GetResponse;
+import org.elasticsearch.action.get.MultiGetItemResponse;
+import org.elasticsearch.action.get.MultiGetRequest;
+import org.elasticsearch.action.get.MultiGetResponse;
+import org.elasticsearch.client.RequestOptions;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+import java.io.IOException;
+import java.util.Map;
+
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+
+@RunWith(JUnit4.class)
+public class MultiGetAPIDemo extends ElasticSearchBaseTest {
+    @Test
+    public void test1() {
+        MultiGetRequest request = new MultiGetRequest();
+        request.add(new MultiGetRequest.Item("posts","1"));
+        request.add(new MultiGetRequest.Item("posts", "5"));
+
+        MultiGetRequest.Item multiGetRequstItem = new MultiGetRequest.Item("posts", "5");
+        // Item 可选参数 start
+// 禁用检索源 （就是结果中没有source, 默认结果中是含有source中）
+//            multiGetRequstItem.fetchSourceContext(FetchSourceContext.DO_NOT_FETCH_SOURCE);
+
+        // 指定结果中含有某些域, 不包含哪些域
+//            String[] includes = new String[] {"message", "*Date"};
+//            String[] excludes = Strings.EMPTY_ARRAY;
+//            FetchSourceContext fetchSourceContext =
+//                    new FetchSourceContext(true, includes, excludes);
+//            multiGetRequstItem.fetchSourceContext(fetchSourceContext);
+
+        // 为特定存储字段配置检索（要求在映射中单独存储字段）
+//        multiGetRequstItem.storedFields("foo");
+        // Item 可选参数 end
+        // 偏好值
+//        request.preference("some_preference");
+        // 实时
+//        request.realtime(false);
+        // 在检索文档之前执行刷新（默认为false）
+//        request.refresh(true);
+
+        // 同步执行请求
+        try {
+            MultiGetResponse response = client.mget(request, RequestOptions.DEFAULT);
+            System.out.println(response);
+
+            MultiGetItemResponse firstItem = response.getResponses()[0];
+            assertNull(firstItem.getFailure());
+            GetResponse firstGet = firstItem.getResponse();
+            String index = firstItem.getIndex();
+            String id = firstItem.getId();
+            if (firstGet.isExists()) {
+                long version = firstGet.getVersion();
+                String sourceAsString = firstGet.getSourceAsString();
+                Map<String, Object> sourceAsMap = firstGet.getSourceAsMap();
+                byte[] sourceAsBytes = firstGet.getSourceAsBytes();
+            } else {
+
+            }
+
+            Exception e = firstItem.getFailure().getFailure();
+            ElasticsearchException ee = (ElasticsearchException) e;
+            // TODO status is broken! fix in a followup
+            // assertEquals(RestStatus.CONFLICT, ee.status());
+            assertThat(e.getMessage(),
+                    containsString("version conflict, current version [1] is "
+                            + "different than the one provided [1000]"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 异步执行
+//        client.mgetAsync(request, RequestOptions.DEFAULT, new ActionListener<MultiGetResponse>() {
+//            @Override
+//            public void onResponse(MultiGetResponse multiGetItemResponses) {
+//                System.out.println(multiGetItemResponses);
+//            }
+//            @Override
+//            public void onFailure(Exception e) {
+//                e.printStackTrace();
+//            }
+//        });
+        // 让主线程等待一会儿，让异步操作有足够的时间执行完毕
+//        waitForTime(50000L);
+    }
+}
+```
+
+
+
 ## Reindex API
 
 [官方文档](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/7.2/java-rest-high-document-reindex.html)
+
+ReindexRequest能够将文档从一个或多个索引中拷贝到目标索引中。
+
+它需要一个现有的源索引和一个可能存在也可能不存在的目标索引请求。reindex不尝试设置目标索引。它不会复制源索引的设置。您应该在运行重新索引操作之前设置目标索引，包括设置映射、碎片计数、副本等。
 
 ## Update By Query API
 
