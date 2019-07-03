@@ -312,18 +312,386 @@ ReindexRequest能够将文档从一个或多个索引中拷贝到目标索引中
 
 它需要一个现有的源索引和一个可能存在也可能不存在的目标索引请求。reindex不尝试设置目标索引。它不会复制源索引的设置。您应该在运行重新索引操作之前设置目标索引，包括设置映射、碎片计数、副本等。
 
+```java
+package com.tc.test.multiDocument;
+
+import com.tc.test.base.ElasticSearchBaseTest;
+import org.elasticsearch.action.ActionListener;
+import org.elasticsearch.action.bulk.BulkItemResponse;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.tasks.TaskSubmissionResponse;
+import org.elasticsearch.common.bytes.BytesArray;
+import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.index.VersionType;
+import org.elasticsearch.index.query.MatchAllQueryBuilder;
+import org.elasticsearch.index.query.TermQueryBuilder;
+import org.elasticsearch.index.reindex.BulkByScrollResponse;
+import org.elasticsearch.index.reindex.ReindexRequest;
+import org.elasticsearch.index.reindex.RemoteInfo;
+import org.elasticsearch.index.reindex.ScrollableHitSource;
+import org.elasticsearch.script.Script;
+import org.elasticsearch.script.ScriptType;
+import org.elasticsearch.search.sort.SortOrder;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+@RunWith(JUnit4.class)
+public class ReindexAPIDemo extends ElasticSearchBaseTest {
+    @Test
+    public void test1() {
+        ReindexRequest request = new ReindexRequest();
+        // 设置源索引
+        request.setSourceIndices("source1", "source2");
+        // 设置目标索引
+        request.setDestIndex("dest");
+        // 设置目标版本类型
+//        request.setDestVersionType(VersionType.EXTERNAL);
+        //将optype设置为create将导致_reindex仅在目标索引中创建缺少的文档。所有现有文档都将导致版本冲突。默认optype是index。
+//        request.setDestOpType("create");
+        // 默认情况下，版本冲突会中止重新索引进程，但您可以用以下方法计算它们：
+//        request.setConflicts("proced"); // proced 设置版本冲突时继续
+        // 可以通过查询限制一下文档
+//        request.setSourceQuery(new TermQueryBuilder("user", "kimchy"));
+        // 也可以通过设置大小来限制已处理文档的数量。
+//        request.setSize(10);
+        // 默认情况下，reindex使用1000个批次。可以使用sourceBatchSize更改批大小。
+//        request.setSourceBatchSize(100);
+        // Reindex还可以通过指定管道来使用摄取功能。
+//        request.setDestPipeline("my_pipeline");
+        // 如果您需要源索引中的一组特定文档，则需要使用sort。如果可能的话，最好选择更具选择性的查询，而不是进行大小和排序。
+//        request.addSortField("field1", SortOrder.DESC);
+//        request.addSortField("field2", SortOrder.ASC);
+        // 支持脚本来修改文档
+//        request.setScript(
+//                new Script(
+//                        ScriptType.INLINE, "painless",
+//                        "if (ctx._source.user == 'kimchy') {ctx._source.likes++;}",
+//                        Collections.emptyMap()));
+
+        /*
+        ReindexRequest支持从远程ElasticSearch集群重新索引。使用远程群集时，应在RemoteInfo对象内指定查询，而不是使用SetSourceQuery。如果同时设置了远程信息和源查询，则会在请求期间导致验证错误。原因是远程ElasticSearch可能无法理解现代查询生成器生成的查询。远程集群支持一直工作到ElasticSearch 0.90，此后查询语言发生了变化。当访问旧版本时，用JSON手工编写查询更安全。
+         */
+//        request.setRemoteInfo(
+//                new RemoteInfo(
+//                        "http", remoteHost, remotePort, null,
+//                        new BytesArray(new MatchAllQueryBuilder().toString()),
+//                        user, password, Collections.emptyMap(),
+//                        new TimeValue(100, TimeUnit.MILLISECONDS),
+//                        new TimeValue(100, TimeUnit.SECONDS)
+//                )
+//        );
+
+        // 同步执行
+        try {
+            BulkByScrollResponse bulkResponse =
+                    client.reindex(request, RequestOptions.DEFAULT);
+
+            TimeValue timeTaken = bulkResponse.getTook(); // 总耗时
+            boolean timedOut = bulkResponse.isTimedOut(); // 检测请求超时
+            long totalDocs = bulkResponse.getTotal();// 总文档处理数量
+            long updatedDocs = bulkResponse.getUpdated(); // 更新的文档数量
+            long createdDocs = bulkResponse.getCreated(); // 创建的文档数量
+            long deletedDocs = bulkResponse.getDeleted(); // 删除的文档数量
+            long batches = bulkResponse.getBatches(); // 已执行的批数
+            long noops = bulkResponse.getNoops(); // 跳过的文档数量
+            long versionConflicts = bulkResponse.getVersionConflicts(); // 文档版本冲突的数量
+            long bulkRetries = bulkResponse.getBulkRetries(); // 请求必须重试批量索引操作的次数
+            long searchRetries = bulkResponse.getSearchRetries(); // 请求必须重试搜索操作的次数
+            TimeValue throttledMillis = bulkResponse.getStatus().getThrottled();//  此请求自身已阻塞的总时间，不包括当前处于休眠状态的限制时间
+            TimeValue throttledUntilMillis = // 任何当前节气门休眠的剩余延迟或0（如果不休眠）
+                    bulkResponse.getStatus().getThrottledUntil();
+            List<ScrollableHitSource.SearchFailure> searchFailures = // 搜索阶段失败
+                    bulkResponse.getSearchFailures();
+            List<BulkItemResponse.Failure> bulkFailures = // 批量索引操作期间失败
+                    bulkResponse.getBulkFailures();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 异步执行
+//        client.reindexAsync(request, RequestOptions.DEFAULT, new ActionListener<BulkByScrollResponse>() {
+//            @Override
+//            public void onResponse(BulkByScrollResponse bulkByScrollResponse) {
+//                System.out.println(bulkByScrollResponse);
+//            }
+//
+//            @Override
+//            public void onFailure(Exception e) {
+//                e.printStackTrace();
+//            }
+//        });
+
+//        try {
+//            TaskSubmissionResponse taskSubmissionResponse = client.submitReindexTask(request, RequestOptions.DEFAULT);
+//            String taskId = taskSubmissionResponse.getTask();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+    }
+}
+```
+
+
+
 ## Update By Query API
 
 [官方文档](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/7.2/java-rest-high-document-update-by-query.html)
+
+```java
+package com.tc.test.multiDocument;
+
+import com.tc.test.base.ElasticSearchBaseTest;
+import org.elasticsearch.action.ActionListener;
+import org.elasticsearch.action.bulk.BulkItemResponse;
+import org.elasticsearch.action.support.IndicesOptions;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.index.query.TermQueryBuilder;
+import org.elasticsearch.index.reindex.BulkByScrollResponse;
+import org.elasticsearch.index.reindex.ScrollableHitSource;
+import org.elasticsearch.index.reindex.UpdateByQueryRequest;
+import org.elasticsearch.script.Script;
+import org.elasticsearch.script.ScriptType;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+
+@RunWith(JUnit4.class)
+public class UpdateByQueryAPIDemo extends ElasticSearchBaseTest {
+    @Test
+    public void test1() {
+        UpdateByQueryRequest request = // 参数指定索引
+                new UpdateByQueryRequest("source1", "source2");
+        // 默认情况下，版本冲突将中止UpdateByQueryRequest进程，但您可以使用以下方法来替代它：
+        //        request.setConflicts("proceed");
+        // 你可以添加一个查询限制文档
+//        request.setQuery(new TermQueryBuilder("user", "kimchy")); // user这个field查询kimchy
+        // 也可以通过设置大小来限制已处理文档的数量。
+//        request.setSize(10);
+        // 设置批次数量
+//        request.setBatchSize(100);
+//        request.setPipeline("my_pipeline");
+        // 脚本
+        request.setScript(
+                new Script(
+                        ScriptType.INLINE, "painless",
+                        "if (ctx._source.user == 'kimchy') {ctx._source.likes++;}",
+                        Collections.emptyMap()));
+        // 可以使用带设置块的切片滚动来并行化：
+//        request.setSlices(2);
+        // 使用滚动参数控制“搜索上下文”保持活动的时间。
+//        request.setScroll(TimeValue.timeValueMinutes(10));
+        // 设置routing
+//        request.setRouting("=cat");
+
+//        request.setTimeout(TimeValue.timeValueMinutes(2));
+//        request.setRefresh(true);
+//        request.setIndicesOptions(IndicesOptions.LENIENT_EXPAND_OPEN);
+
+        try {
+            BulkByScrollResponse bulkResponse =
+                    client.updateByQuery(request, RequestOptions.DEFAULT);
+
+            TimeValue timeTaken = bulkResponse.getTook();
+            boolean timedOut = bulkResponse.isTimedOut();
+            long totalDocs = bulkResponse.getTotal();
+            long updatedDocs = bulkResponse.getUpdated();
+            long deletedDocs = bulkResponse.getDeleted();
+            long batches = bulkResponse.getBatches();
+            long noops = bulkResponse.getNoops();
+            long versionConflicts = bulkResponse.getVersionConflicts();
+            long bulkRetries = bulkResponse.getBulkRetries();
+            long searchRetries = bulkResponse.getSearchRetries();
+            TimeValue throttledMillis = bulkResponse.getStatus().getThrottled();
+            TimeValue throttledUntilMillis =
+                    bulkResponse.getStatus().getThrottledUntil();
+            List<ScrollableHitSource.SearchFailure> searchFailures =
+                    bulkResponse.getSearchFailures();
+            List<BulkItemResponse.Failure> bulkFailures =
+                    bulkResponse.getBulkFailures();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+//        client.updateByQueryAsync(request, RequestOptions.DEFAULT, new ActionListener<BulkByScrollResponse>() {
+//            @Override
+//            public void onResponse(BulkByScrollResponse bulkByScrollResponse) {
+//                System.out.println(bulkByScrollResponse);
+//            }
+//
+//            @Override
+//            public void onFailure(Exception e) {
+//                e.printStackTrace();
+//            }
+//        });
+//        waitForTime(50000L);
+    }
+}
+```
+
+
 
 ## Delete By Query API
 
 [官方文档](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/7.2/java-rest-high-document-delete-by-query.html)
 
+```java
+package com.tc.test.multiDocument;
+
+import com.tc.test.base.ElasticSearchBaseTest;
+import org.elasticsearch.action.ActionListener;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.index.reindex.BulkByScrollResponse;
+import org.elasticsearch.index.reindex.DeleteByQueryRequest;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+import java.io.IOException;
+
+@RunWith(JUnit4.class)
+public class DeleteByQueryAPIDemo extends ElasticSearchBaseTest {
+    @Test
+    public void test1() {
+        DeleteByQueryRequest request =
+                new DeleteByQueryRequest("source1", "source2");
+
+        // 默认情况下，版本冲突将中止UpdateByQueryRequest进程，但您可以使用以下方法来替代它：
+        //        request.setConflicts("proceed");
+        // 你可以添加一个查询限制文档
+//        request.setQuery(new TermQueryBuilder("user", "kimchy")); // user这个field查询kimchy
+        // 也可以通过设置大小来限制已处理文档的数量。
+//        request.setSize(10);
+        // 设置批次数量
+//        request.setBatchSize(100);
+//        request.setPipeline("my_pipeline");
+
+        // 可以使用带设置块的切片滚动来并行化：
+//        request.setSlices(2);
+        // 使用滚动参数控制“搜索上下文”保持活动的时间。
+//        request.setScroll(TimeValue.timeValueMinutes(10));
+        // 设置routing
+//        request.setRouting("=cat");
+
+//        request.setTimeout(TimeValue.timeValueMinutes(2));
+//        request.setRefresh(true);
+//        request.setIndicesOptions(IndicesOptions.LENIENT_EXPAND_OPEN);
+
+        // 同步执行
+        try {
+            BulkByScrollResponse bulkResponse =
+                    client.deleteByQuery(request, RequestOptions.DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 异步执行
+//        client.deleteByQueryAsync(request, RequestOptions.DEFAULT, new ActionListener<BulkByScrollResponse>() {
+//            @Override
+//            public void onResponse(BulkByScrollResponse bulkByScrollResponse) {
+//                System.out.println(bulkByScrollResponse);
+//            }
+//            @Override
+//            public void onFailure(Exception e) {
+//                e.printStackTrace();
+//            }
+//        });
+//        waitForTime(5000L);
+    }
+}
+```
+
+
+
 ## Rethrottle API
 
 [官方文档](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/7.2/java-rest-high-document-rethrottle.html)
 
+
+
 ## Multi Term Vectors API
 
 [官方文档](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/7.2/java-rest-high-document-multi-term-vectors.html)
+
+```java
+package com.tc.test.multiDocument;
+
+import com.tc.test.base.ElasticSearchBaseTest;
+import org.elasticsearch.action.ActionListener;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.core.MultiTermVectorsRequest;
+import org.elasticsearch.client.core.MultiTermVectorsResponse;
+import org.elasticsearch.client.core.TermVectorsRequest;
+import org.elasticsearch.client.core.TermVectorsResponse;
+import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.common.xcontent.XContentFactory;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+import java.io.IOException;
+import java.util.List;
+
+@RunWith(JUnit4.class)
+public class MultiTermVectorsAPIDemo extends ElasticSearchBaseTest {
+    @Test
+    public void test1() throws IOException {
+        MultiTermVectorsRequest request = new MultiTermVectorsRequest();
+        TermVectorsRequest tvrequest1 =
+                new TermVectorsRequest("authors", "1");
+        tvrequest1.setFields("user");
+        request.add(tvrequest1);
+
+        XContentBuilder docBuilder = XContentFactory.jsonBuilder();
+        docBuilder.startObject().field("user", "guest-user").endObject();
+        TermVectorsRequest tvrequest2 =
+                new TermVectorsRequest("authors", docBuilder);
+        request.add(tvrequest2);
+
+//        TermVectorsRequest tvrequestTemplate =
+//                new TermVectorsRequest("authors", "fake_id");
+//        tvrequestTemplate.setFields("user");
+//        String[] ids = {"1", "2"};
+//        MultiTermVectorsRequest mtvr =
+//                new MultiTermVectorsRequest(ids, tvrequestTemplate);
+
+        // 同步执行
+        MultiTermVectorsResponse response =
+                client.mtermvectors(request, RequestOptions.DEFAULT);
+
+        // 解析响应
+        List<TermVectorsResponse> tvresponseList =
+                response.getTermVectorsResponses();
+        if (tvresponseList != null) {
+            for (TermVectorsResponse tvresponse : tvresponseList) {
+            }
+        }
+
+
+        // 异步执行
+//        client.mtermvectorsAsync( request, RequestOptions.DEFAULT, new ActionListener<MultiTermVectorsResponse>() {
+//                    @Override
+//                    public void onResponse(MultiTermVectorsResponse multiTermVectorsResponse) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Exception e) {
+//
+//                    }
+//                });
+//        waitForTime(5000L);
+    }
+}
+```
+
