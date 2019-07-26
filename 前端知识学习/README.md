@@ -14,7 +14,7 @@ https://www.jianshu.com/u/4312c933b9db
 
 
 
-### HTML+CSS
+## HTML+CSS
 
 [00HTML基础--基本概念](https://www.jianshu.com/p/f6da3875834b)
 
@@ -52,8 +52,7 @@ https://www.jianshu.com/u/4312c933b9db
 
 [17-CSS基础-定位](https://www.jianshu.com/p/454a0eaa39ef)
 
-
-### JavaScript
+JavaScript
 
 [00-JavaScript基础-基本概念](https://www.jianshu.com/p/230093183f47)
 
@@ -82,7 +81,7 @@ https://www.jianshu.com/u/4312c933b9db
 [12-JavaScript基础-for循环](https://www.jianshu.com/p/9ec7df378128)
 
 
-### JavaScript程序设计
+## JavaScript程序设计
 
 [01-JavaScript开篇-指趣学院](https://www.jianshu.com/p/10a31155f50c)
 
@@ -103,7 +102,7 @@ https://www.jianshu.com/u/4312c933b9db
 [09-JavaScript面向对象](https://www.jianshu.com/p/163d7b3305bf)
 
 
-### JQuery
+## JQuery
 
 [从零玩转jQuery-初识jQuery](https://www.jianshu.com/p/73c48795060b)
 
@@ -124,7 +123,7 @@ https://www.jianshu.com/u/4312c933b9db
 [从零玩转jQuery-文档处理](https://www.jianshu.com/p/5e1966b8129e)
 
 
-### 相关扩展
+## 相关扩展
 
 [极客江南前端案例斗鱼教学视频](https://v.douyu.com/author/Y578O4emQAEM)
 
