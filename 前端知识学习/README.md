@@ -1,4 +1,16 @@
-	由于科蓝软对员工进行前端的统一学习，要求要进行考试，虽然之前已经对前端已经非常了解，但是借此机会再次学习记录下整个过程。
+由于相关规范是w3c发布的，所以可以到w3cschool查看相关标签规范在各个规范的支持情况。
+
+[w3cschool HTML](http://www.w3school.com.cn/html/index.asp)
+
+[w3cschool HTML5](http://www.w3school.com.cn/html5/html_5_video_dom.asp)
+
+
+
+提示：由于XTHML语法太过严格，对以前的标准支持特别的差，是淘汰的技术，不要学习。
+
+
+
+​	由于科蓝软对员工进行前端的统一学习，要求要进行考试，虽然之前已经对前端已经非常了解，但是借此机会再次学习记录下整个过程。
 
 
 
@@ -130,3 +142,4 @@ JavaScript
 [指趣学院-李江南所有课程](https://study.163.com/provider/1026367774/course.htm)
 
 [李江南的课程简书笔记](https://www.jianshu.com/u/4312c933b9db)
+
