@@ -2,7 +2,7 @@
 
 ​	无规矩不成方圆，有效可用的规范可以理清我们的思路，提高生产效率。
 
-## 文件和代码模块规范
+## 模板文件和模板代码规范
 
 ​	功能路径：File | Settings | Editor | File and Code Templates
 
