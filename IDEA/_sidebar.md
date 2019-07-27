@@ -6,5 +6,7 @@
 
 * [我的IDEA规范](UsageSpecification)
 
+* [IDEA快捷键](IDEAShortCut)
+
   
 
