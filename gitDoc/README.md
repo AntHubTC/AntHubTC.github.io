@@ -1,5 +1,9 @@
 # Git学习
 
+参考文档：
+
+​	[Git命令行基础操作](https://www.cnblogs.com/tocy/p/git-command-line-manual.html)
+
 ## Git历史
 
 ​	同生活中的许多伟大事件一样,Git诞生于ー个极富纷争大举创新的年代。 Linux内核开源项目有着为数众广的参与者。绝大多数的工m内核维护工作都花在了提交补丁和保存归档的繁琐事务上(1991-2002年间)。到2002年,整个项目组开始启用分布式版本控制系统 Bitkeeper来管理和维护代码。
@@ -175,7 +179,10 @@ git commit -m '修改日志信息'
 #### 使用gitBash
 
 ```bash
-git log
+git log 
+git log --stat      # 仅显示摘要选项
+git log --pretty=oneline        # 定制记录格式
+git log --graph     # 图像化分支和版本更新
 ```
 
 #### 使用gitGUI
@@ -194,11 +201,23 @@ git log
 
 #### 使用gitBash
 
+文件系统中直接删除后，使用：
+
 ```bash
 # 查看删除的文件
 git status
 # 添加文件
 git add hello2.txt
+# 提交
+git commit -m '提交删除的文件'
+```
+
+也可以使用：
+
+```bash
+git rm hello.txt
+# 查看状态
+git status
 # 提交
 git commit -m '提交删除的文件'
 ```
@@ -221,6 +240,32 @@ git commit -m '提交删除的文件'
 
 
 
+### 添加到忽略列表
+
+#### 使用gitBash
+
+
+
+#### 使用gitGUI
+
+
+
+#### 使用TortoiseGit
+
+![1565610124805](.\img\1565610124805.png)
+
+![1565610265840](.\img\1565610265840.png)
+
+这个时候会生成一个.gitignore文件，内容是(参见【[忽略文件语法](https://www.cnblogs.com/songyinan/p/10969775.html)】)：
+
+![1565610679325](.\img\1565610679325.png)
+
+忽略之后的文件或文件夹，在提交的时候就不会再显示了。
+
+
+
+
+
 
 
 使用gitBash
@@ -228,3 +273,43 @@ git commit -m '提交删除的文件'
 使用gitGUI
 
 使用TortoiseGit
+
+
+
+## 忽略文件语法
+
+空行或是以 # 开头的行即注释行将被忽略。
+
+可以在前面添加正斜杠 / 忽略当前路径文件，但不包括子目录的同名文件。
+
+可以在后面添加正斜杠 / 来忽略文件夹。
+
+可以使用 ! 来否定忽略，即比如在前面用了 *.apk ，然后使用 !a.apk ，则这个a.apk不会被忽略。
+
+\* 用来匹配零个或多个字符，如 *.[oa] 忽略所有以".o"或".a"结尾， *~ 忽略所有以 ~ 结尾的文件（这种文件通常被许多编辑器标记为临时文件）； [] 用来匹配括号内的任一字符，如 [abc] ，也可以在括号内加连接符，如 [0-9] 匹配0至9的数； ? 用来匹配单个字符。
+
+看了这么多，还是应该来个栗子：
+
+\# 忽略 .a 文件
+
+*.a
+
+\# 但否定忽略 lib.a, 尽管已经在前面忽略了 .a 文件
+
+!lib.a
+
+\# 仅在当前目录下忽略 TODO 文件， 但不包括子目录下的 subdir/TODO
+
+/TODO
+
+\# 忽略 build/ 文件夹下的所有文件
+
+build/
+
+\# 忽略 doc/notes.txt, 不包括 doc/server/arch.txt
+
+doc/*.txt
+
+\# 忽略所有的 .pdf 文件 在 doc/ directory 下的
+
+doc/**/*.pdf
