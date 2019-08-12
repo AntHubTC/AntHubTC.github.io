@@ -244,11 +244,11 @@ git commit -m '提交删除的文件'
 
 #### 使用gitBash
 
-
+​	直接新建一个.gitignore文件配置忽略规则
 
 #### 使用gitGUI
 
-
+​	直接新建一个.gitignore文件配置忽略规则
 
 #### 使用TortoiseGit
 
