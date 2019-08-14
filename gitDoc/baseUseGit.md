@@ -2,7 +2,7 @@
 
 ## 创建版本库
 
-	创建版本库后，在目录中会多一个.git的隐藏文件目录，这个目录就是本地仓库，包含这个文件夹的这个目录就被称为工作空间。
+​	创建版本库后，在目录中会多一个.git的隐藏文件目录，这个目录就是本地仓库，包含这个文件夹的这个目录就被称为工作空间。
 
 ### 使用gitBash
 
@@ -12,21 +12,21 @@ git init
 
 ### 使用gitGUI
 
-![1565602891715](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565602891715.png)
+![1565602891715](.\img\1565602891715.png)
 
 ### 使用TortoiseGit
 
-	右键菜单中，选取“git 在这里创建版本库(Y)...”。
+​	右键菜单中，选取“git 在这里创建版本库(Y)...”。
 
-![1565602981518](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565602981518.png)
+![1565602981518](.\img\1565602981518.png)
 
 ## 向本地仓库添加文件
 
-	Git的版本库里存了很多东西，其中最重要的就是称为stage（或叫index）的暂存区，还有Git为我们自动创建的第一个分支master，以及指向master的第一个指针叫HEAD。
+​	Git的版本库里存了很多东西，其中最重要的就是称为stage（或叫index）的暂存区，还有Git为我们自动创建的第一个分支master，以及指向master的第一个指针叫HEAD。
 
-![1565604318975](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565604318975-1565780091455.png)
+![1565604318975](.\img\1565604318975.png)
 
-	下面是将文件添加到暂存区。
+​	下面是将文件添加到暂存区。
 
 ### 使用gitBash
 
@@ -38,15 +38,15 @@ git add hello.txt
 
 Commit -> Stage to Commit， 快捷键Ctrl + T。
 
-![1565603616371](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565603616371.png)
+![1565603616371](.\img\1565603616371.png)
 
 ### 使用TortoiseGit
 
-![1565603408437](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565603408437.png)
+![1565603408437](.\img\1565603408437.png)
 
 添加完毕后，TortoiseGit提供了文件图片标注：
 
-![1565603511374](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565603511374.png)
+![1565603511374](.\img\1565603511374.png)
 
 ## 向本地仓库提交文件
 
@@ -58,13 +58,13 @@ git commit -m '这是日志信息'
 
 ### 使用gitGUI
 
-![1565604682082](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565604682082.png)
+![1565604682082](.\img\1565604682082.png)
 
 ### 使用TortoiseGit
 
 右击工作区，“Git 提交(C) -> master”。
 
-![1565604830536](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565604830536.png)
+![1565604830536](.\img\1565604830536.png)
 
 在工作区空白处右击，选择“TortoiseGit” -> "版本库浏览器"，可以看到提交到本地库中的文件相关信息。
 
@@ -83,13 +83,13 @@ git commit -m '修改日志信息'
 
 ### 使用gitGUI
 
-	先将文件添加到暂存区ctrl+t，然后提交文件。
+​	先将文件添加到暂存区ctrl+t，然后提交文件。
 
 ### 使用TortoiseGit
 
-	这个工具直接将为我们省去了一个添加了暂存区的步骤（工具做了，不需要人去做）。
+​	这个工具直接将为我们省去了一个添加了暂存区的步骤（工具做了，不需要人去做）。
 
-![1565605660053](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565605660053.png)
+![1565605660053](.\img\1565605660053.png)
 
 ## 查看仓库日志
 
@@ -104,15 +104,15 @@ git log --graph     # 图像化分支和版本更新
 
 ### 使用gitGUI
 
-	打开git GUI窗口，点击菜单“Repository” -> "Visualize master's History"。
+​	打开git GUI窗口，点击菜单“Repository” -> "Visualize master's History"。
 
-![1565606080800](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565606080800.png)
+![1565606080800](.\img\1565606080800.png)
 
 ### 使用TortoiseGit
 
-	git菜单中，点击“显示日志”。
+​	git菜单中，点击“显示日志”。
 
-![1565605905471](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565605905471.png)
+![1565605905471](.\img\1565605905471.png)
 
 ## 删除并提交到本地仓库
 
@@ -141,19 +141,19 @@ git commit -m '提交删除的文件'
 
 ### 使用gitGUI
 
-	在gitGUI中可以看到删除的文件，使用ctrl+t将该文件添加到暂存区stage中，然后输入日志commit。
+​	在gitGUI中可以看到删除的文件，使用ctrl+t将该文件添加到暂存区stage中，然后输入日志commit。
 
 ### 使用TortoiseGit
 
-	右击工作区，点击“Git 提交(C) -> 'master'”。
+​	右击工作区，点击“Git 提交(C) -> 'master'”。
 
-![1565608940483](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565608940483.png)	
+![1565608940483](.\img\1565608940483.png)
 
 也可以直接使用文件右键菜单中TortoiseGit提供的删除功能：
 
-![1565609250805](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565609250805.png)
+![1565609250805](.\img\1565609250805.png)
 
-	"**删除并保留本地副本**"是给文件添加删除标记，用于那种只需要本地游，版本库中不需要有的清空，如开发工具为我们生成的一些文件或者其它一些情况。
+​	"**删除并保留本地副本**"是给文件添加删除标记，用于那种只需要本地游，版本库中不需要有的清空，如开发工具为我们生成的一些文件或者其它一些情况。
 
 
 
@@ -161,21 +161,21 @@ git commit -m '提交删除的文件'
 
 ### 使用gitBash
 
-	直接新建一个.gitignore文件配置忽略规则
+​	直接新建一个.gitignore文件配置忽略规则
 
 ### 使用gitGUI
 
-	直接新建一个.gitignore文件配置忽略规则
+​	直接新建一个.gitignore文件配置忽略规则
 
 ### 使用TortoiseGit
 
-![1565610124805](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565610124805.png)
+![1565610124805](.\img\1565610124805.png)
 
-![1565610265840](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565610265840.png)
+![1565610265840](.\img\1565610265840.png)
 
 这个时候会生成一个.gitignore文件，内容是(参见【[忽略文件语法](https://www.cnblogs.com/songyinan/p/10969775.html)】)：
 
-![1565610679325](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565610679325.png)
+![1565610679325](.\img\1565610679325.png)
 
 忽略之后的文件或文件夹，在提交的时候就不会再显示了。
 
@@ -185,9 +185,8 @@ git commit -m '提交删除的文件'
 
 ### 什么是SSH
 
-	ssh（Secure Shell 安全外壳协议），由 IETF 的网络小组（Network Working Group）所制定；SSH 为建立在应用层基础上的安全协议。SSH 是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题。SSH最初是UNIX系统上的一个程序，后来又迅速扩展到其他操作平台。SSH在正确使用时可弥补网络中的漏洞。SSH客户端适用于多种平台。
-	
-	ssh提供了两种级别的安全验证：第一种级别（基于口令的安全验证），知道用户名和密码就可以登录到远程主机。第二种级别（基于密钥的安全验证），必须为自己创建一对密钥，私钥放自己机器上，公钥放要访问的服务器上。
+​	ssh（Secure Shell 安全外壳协议），由 IETF 的网络小组（Network Working Group）所制定；SSH 为建立在应用层基础上的安全协议。SSH 是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题。SSH最初是UNIX系统上的一个程序，后来又迅速扩展到其他操作平台。SSH在正确使用时可弥补网络中的漏洞。SSH客户端适用于多种平台。
+​	ssh提供了两种级别的安全验证：第一种级别（基于口令的安全验证），知道用户名和密码就可以登录到远程主机。第二种级别（基于密钥的安全验证），必须为自己创建一对密钥，私钥放自己机器上，公钥放要访问的服务器上。
 
 ### 创建密钥对
 
@@ -214,7 +213,7 @@ b、登录你的github账号，从又上角的设置（ Account Settings ）进�
 
 c、点击 Add SSH key 按钮添加一个 SSH key 。把你复制的 SSH key 代码粘贴到 key 所对应的输入框中，记得 SSH key 代码的前后不要留有空格或者回车。当然，上面的 Title 所对应的输入框你也可以输入一个该 SSH key 显示在 github 上的一个别名。默认的会使用你的邮件名称。
 
-![1565694092963](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565694092963.png)
+![1565694092963](.\img\1565694092963.png)
 
 ### 测试SSH Key
 
@@ -239,43 +238,43 @@ git push -u origin master
 
 在Git GUI中， "remote" =》 "add..."，添加远程仓库别名。
 
-![1565694822982](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565694822982.png)
+![1565694822982](.\img\1565694822982.png)
 
 "remote" =》 “Push...” 将选中的分支推送到目标仓库。
 
-![1565694878987](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565694878987.png)
+![1565694878987](.\img\1565694878987.png)
 
 #### 使用TortoiseGit
 
  在工作目录中右击选择“Git 同步”。
 
-![1565695233761](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565695233761.png)
+![1565695233761](.\img\1565695233761.png)
 
-	点击“管理”，添加远程地址别名。 其中，Putty密钥这里，如果是使用Putty，那么久呀哦使用Putty密钥，这里我们使用的是ssh，所以这里要选择ssh的私钥（告诉ssh使用这个私钥加密数据）。
+​	点击“管理”，添加远程地址别名。 其中，Putty密钥这里，如果是使用Putty，那么久呀哦使用Putty密钥，这里我们使用的是ssh，所以这里要选择ssh的私钥（告诉ssh使用这个私钥加密数据）。
 
-![1565695404069](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565695404069.png)
+![1565695404069](.\img\1565695404069.png)
 
 关闭上面对话框，点击“推送”按钮，然后选择“是”，就可以了。
 
-![1565695662932](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565695662932.png)
+![1565695662932](.\img\1565695662932.png)
 
 成功效果图： 这个时候去远程仓库也可以看到已经将内容推送到了远程仓库了，包括在本地仓库提交的日志信息，在远程仓库也是可以看到的。
 
-![1565695856497](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565695856497.png)
+![1565695856497](.\img\1565695856497.png)
 
 ### https本地仓库推送远程仓库
 
 #### 使用TortoiseGit
 
-	https和ssh操作流程大致差不多，唯一不同的是在添加地址别名的时候，URL写https的地址，不用配置密钥，然后在推送的时候会弹出框让你输入用户名和密码（基于口令方式）。
+​	https和ssh操作流程大致差不多，唯一不同的是在添加地址别名的时候，URL写https的地址，不用配置密钥，然后在推送的时候会弹出框让你输入用户名和密码（基于口令方式）。
 
 
 
 ## 克隆仓库到本地
 
-	什么是克隆仓库，相当于将远程仓库复制一份到本地。
-	
-	克隆方式可以使用ssh或者https方式，两者的操作是一样的，因为使用的public的仓库，任何人都可以讲远程仓库克隆到本地（因为开源文化）。
+​	什么是克隆仓库，相当于将远程仓库复制一份到本地。
+
+​	克隆方式可以使用ssh或者https方式，两者的操作是一样的，因为使用的public的仓库，任何人都可以讲远程仓库克隆到本地（因为开源文化）。
 
 ### 使用gitBash
 
@@ -285,25 +284,25 @@ git clone git@github.com:FallenGodCoder/learnGit.git
 
 ### 使用gitGUI
 
-![1565696833414](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565696833414.png)
+![1565696833414](.\img\1565696833414.png)
 
-![1565696904885](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565696904885.png)
+![1565696904885](.\img\1565696904885.png)
 
 ### 使用TortoiseGit
 
 	在目标文件夹中右击，选择“Git 克隆”。(窗口中的URL栏，如果在打开对话框中已经有这个信息，会自动在这一栏填入。)
 
-![1565696984248](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565696984248.png)
+![1565696984248](.\img\1565696984248.png)
 
 
 
 ## 解决文件冲突
 
-	远程仓库和本地的同一个文件，如果远程仓库发生改变，本地也发生了改变的情况下，如果进行“拉取pull”操作，这个时候文件会出现冲突，如果发生变化的位置两端相隔较远，git会自动帮我们合并解决这个冲突，但是如果两者位置较近，这个时候就会形成冲突文件，只能让我们手动去处理这个冲突了。
+​	远程仓库和本地的同一个文件，如果远程仓库发生改变，本地也发生了改变的情况下，如果进行“拉取pull”操作，这个时候文件会出现冲突，如果发生变化的位置两端相隔较远，git会自动帮我们合并解决这个冲突，但是如果两者位置较近，这个时候就会形成冲突文件，只能让我们手动去处理这个冲突了。
 
-![1565698561553](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565698561553.png)
+![1565698561553](.\img\1565698561553.png)
 
-![1565698603992](E:\2_STUDY\GitHubRepositories\00myGitHubRepository\FallenGodCoder.github.io\gitDoc\img\.%5Cimg%5C1565698603992.png)
+![1565698603992](.\img\1565698603992.png)
 
 > 	如果本地文件的版本不是远端的文件的最新版本，这个时候提交git就会报错，这个时候就需要进行拉取pull操作。
 
