@@ -57,6 +57,8 @@ git checkout -- 文件名称
 
 ```bash
 git commit -m '这里是提交的注释'
+# 添加到暂存区和提交合二为一  (注意：工程的第一个文件不能这么用)
+git commit -am '这是提交的注释'
 ```
 
 ## 删除已提交文件
@@ -105,6 +107,7 @@ git log --stat      # 仅显示摘要选项
 git log --pretty=oneline        # 定制记录格式
 git log --pretty=format:"%h - %an , %ar : %s"
 git log --graph     # 图像化分支和版本更新
+git log --graph --pretty=oneline --abbrev-commit
 ```
 
 ## 创建密钥对
@@ -160,6 +163,87 @@ vi .gitignore
 ```
 
 > 空目录：默认git就是忽略的
+
+## 分支
+
+```bash
+# 查看分支
+git branch
+# 创建分支
+git branch 新分支名称
+# 切换分支
+git checkout 分支名
+# 删除分支(不能删除当前分支)
+#   细节： 如果在分支A中进行了写操作，但此操作局限在工作区中进行（没有add和commit）。在master中能够看到该操作。 否则如果进行了commit操作，则master无法观察到此文件。
+git branch -d 分支名 # 分支未合并情况下，会提示你分支有未合并内容，不能删除
+# 未合并，强行删除分支 大写D
+git branch -D 分支名
+# 创建新分支并切换
+git checkout -b 分支名
+# 分支合并  下面这样使用默认是fast forward，1.两个分支fast forward归于一点commit 2.没有分支信息（丢失分支信息）
+git merge new_branch # 将new_branch合并到到当前分支
+# 禁止fast fast forward。 1.两个分支不会归于一点commit（主动合并的分支会前进一步） 2.分支信息完整（不会丢失分支信息）
+git merge --no-ff new_branch
+# 查看各个分支最近一次提交
+git branch -v
+# 分支重命名
+git branch -m master master2
+```
+
+合并的时候使用fast forward和不使用fast forward对比（主要是否有分支信息）。
+
+![1565940655583](.\img\1565940655583.png)
+
+## 解决文件冲突
+
+```bash
+# 如果文件有冲突, 先将文件内容改为正确的内容
+# 解决冲突
+git add xxxx  # 这里没有暂存区的概念，只是告知git，冲突已解决
+git commit -m "xxxx"
+```
+
+## 版本穿梭
+
+**版本回退**
+
+```bash
+git reset --hard HEAD^  # ^表示回退一次  ^^表示回退两次 以此类推
+git reset --hard HEAD~n # 回退n此
+git reset --har commit的sha1值 # 通过sha1值回退到某一个commit
+```
+
+**版本前进**
+
+```bash
+git reflog # 查看记录，记录了所有的操作
+git reset --har commit的sha1只  #前进到任意一次  可以帮助我们实现“后悔药”，需要借助良好的日志习惯
+```
+
+## 游离状态
+
+```bash
+# 穿梭到过去  git checkout新用法
+git checkout  过去提交sha1值
+# git checkout 还可以用来切换分支
+git checkout mybranch
+git checkout master
+```
+
+版本穿梭到过去，这个时候就进入了游离的状态。这个时候你可以做的操作：
+
+1. 修改后、必须提交
+
+   修改后的文件只会存在于过去，不会影响到未来，这个时候就只有创建新分支，将改变在新分支中体现，然后如果要在未来体现，只有将这个新分支再次合并到现在最新的版本中去。
+
+2. 创建分支的好时机
+
+   ```
+   # 创建分支方法
+   git branch mybarnchName 在过去提交的记录sha1值
+   ```
+
+   
 
 ## git命令帮助
 
