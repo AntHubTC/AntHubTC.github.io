@@ -97,8 +97,10 @@ git commit -m '修改日志信息'
 
 ```bash
 git log 
+git log -最近的次数    # 显示最近几次提交的日志信息
 git log --stat      # 仅显示摘要选项
 git log --pretty=oneline        # 定制记录格式
+git log --pretty=format:"%h - %an , %ar : %s"
 git log --graph     # 图像化分支和版本更新
 ```
 
