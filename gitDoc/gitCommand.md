@@ -238,12 +238,90 @@ git checkout master
 
 2. 创建分支的好时机
 
-   ```
+   ```bash
    # 创建分支方法
    git branch mybarnchName 在过去提交的记录sha1值
    ```
 
-   
+
+## stash保存现场
+
+​	git**建议**在一个完整的功能或子功能没有开发完毕前，不要commit。另外git规定必须在没commit之前，不能checkout切换分支，如果没有将一个功能开发完毕就要切换分支，这个时候建议： 1.保存现场（临时保存不提交，stash） 2.切换分支
+
+​	如果不同的分支，在同一个commit阶段(意思是两个分支最新相同)，在commit之前，可以checkout切换分支。
+
+```bash
+# 保存现场
+git stash
+# 再切换分支
+git checkout branch_name
+# 切回分支
+git checkout master
+# 查看保存的现场列表
+git stash list
+# 恢复现场
+git stash pop # pop 将原来保存的现场删除，用于还原现场
+git stash apply # apply 还原现场，不删除保存的现场
+# 删除指定某个现场
+git stash pop stash@{0} # stash@{0} 是现场列表最前面那个唯一标识
+git stash apply stash@{0} # stash@{0} 是现场列表最前面那个唯一标识
+# 手工删除现场
+git stash drop stash@{0} # stash@{0} 是现场列表最前面那个唯一标识
+```
+
+## git标签
+
+适用于整个项目，和具体分支没有关系。
+
+```bash
+# 打标签 git tag xxxx
+git tag V1.0
+# 打标签方式二
+git tag -a v2.0 -m "relase tag" # -m 后面跟的注释
+# 查看打的标签
+git tag
+# 删除标签
+git tag -d 标签名
+# 精确查询
+git tag -l "V1.0"
+# 模糊查询
+git tag -l "V1*"
+```
+
+## blame责任
+
+```bash
+git blame a.txt # 查看a.txt的所有提交commit sha1值，以及每一行的作者。
+```
+
+## 差异性diff
+
+diff命令本身不是git的命令，是linux的命令。git bash的MINGW本身支持linux命令。
+
+```bash
+diff a.txt b.txt # 文件内容差异性比较
+diff -u a.txt b.txt # 内容比较  结果更详细
+```
+
+diff命令比较的是文件本身
+
+git diff命令比较的是区里面的文件
+
+```bash
+# ###########暂存区和工作区#############
+git diff # 暂存区和工作区的差异
+
+# ###########对象区和工作区#############
+git diff 提交的sha1值 # 对象区和工作区的差异
+# 最新对象区和工作区的差异
+git diff head  # 可以使用最新的sha1值，也可以使用head，因为head就是指向最新的。
+
+# ###########对象区和暂存区#############
+git diff --cached 提交的sha1值
+git diff --cached HEAD  # 比较最新的
+```
+
+
 
 ## git命令帮助
 
