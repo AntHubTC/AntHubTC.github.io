@@ -144,6 +144,22 @@ git commit --amend -m '修正注释'
 
 ```
 
+## 将本地仓库推送远程
+
+```bash
+# origin只是远程仓库的一个代号/标识
+git remote add origin git@github.com:FallenGodCoder/learnGit.git
+git push -u origin master
+```
+
+## 拉取远程仓库内容
+
+pull = fetch + merge
+
+```bash
+git pull
+```
+
 ## git忽略文件
 
 ```bash
