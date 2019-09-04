@@ -63,7 +63,7 @@
         </div>
         <transition-group name="flip-list" tag="div" class="doc-container">
             <template v-for="doc in qdocs">
-                <a class="doc-item" :key="doc.title" :href="doc.href">{{doc.title}}</a>
+                <a class="doc-item" v-if="!doc.show" :key="doc.title" :href="doc.href">{{doc.title}}</a>
             </template>
         </transition-group>
     </div>
@@ -135,9 +135,13 @@
                 	href: '../resume/resume.html'
                 },
                 {
+                	title: 'Docker',
+                	href: '../Docker'
+                },
+                {
                     title: '找工作的一些经历',
                     href: '../Interview',
-                    hidden: false // 后面可将一些文档隐藏起来
+                    hidden: true // 后面可将一些文档隐藏起来
                 }
             ]
             },
