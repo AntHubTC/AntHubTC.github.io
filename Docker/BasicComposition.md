@@ -33,3 +33,41 @@
 ## Docker Registry 仓库
 
 ​	Docker使用仓库来保存用户构建的镜像，仓库分为公有和私有两种。Docker公司提供了一个公有的仓库名叫Docker Hub，我们可以在该网站注册账号，分享并保存自己的镜像，目前docker hub上已经有了非常丰富的镜像，我们可以在上查找我们可以使用的镜像，为我们节省更多构建镜像的时间。当然，我们可以建设自己私有的仓库。
+
+
+
+## Docker相关技术简介
+
+​	Docker依赖Linux内核中的一些特性，Namespaces命名空间和Control groups（cgroups）控制组。
+
+### Namespaces命名空间
+
+​	有点像编程语言的命名空间， 进行封装-->代码隔离
+
+​	在操作系统，系统资源的隔离，进程、网络、文件系统...
+
+- PID (Process ID)  进程隔离
+- NET(Network)  管理网络接口
+- IPC(InterProcess Communication) 管理跨进程通信的访问
+- MNT(Mount) 管理挂载点
+- UTS(Unix Timesharing System) 隔离内核和版本标识
+
+
+
+### Control groups 控制组
+
+​	用来分配资源；来源于google，Linux kernel 2.6.24@2007
+
+- 资源限制
+- 优先级设定
+- 资源计量
+- 资源控制
+
+
+
+### Docker容器的能力
+
+- 文件系统隔离：每个容器都有自己的root文件系统
+- 进程隔离：每个容器都运行在自己的进程环境中
+- 网络隔离：容器间的虚拟网络接口I和IP地址都是分开的
+- 资源隔离和分组：使用cgroups将CPU和内存之类的资源独立分配给每个Docker容器
