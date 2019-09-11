@@ -1,6 +1,6 @@
 # Ubuntu安装Docker
 
-​	在官网中对于docker的安装描述的很详细，今后安装的时候最好更多参考[官网安装教程](https://docs.docker.com/install/linux/docker-ce/ubuntu/)，有各种操作系统的安装方法。
+​	**在官网中对于docker的安装描述的很详细**，今后安装的时候最好更多参考[官网安装教程](https://docs.docker.com/install/linux/docker-ce/ubuntu/)，有各种操作系统的各种安装方法。
 
 ​	官网有提到，使用Ubuntu维护的版本是相对较老一点的，所以要最新的还是最好用官网的资源进行安装。
 
