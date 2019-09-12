@@ -22,7 +22,7 @@ docker images --no-trunc=true
 docker images -a -q --no-trunc=true
 ```
 
-## 查看镜像/容器
+### 查看镜像/容器
 
 ```bash
 docker inspect [OPTIONS] CONTAINER|IMAGE[CONTAINER|IMAGE……]
@@ -86,16 +86,16 @@ docker push NAME[:TAG]
 > 1. docker不会将整个镜像传到docker hub上，只会传送修改的部分到docker hub上。
 > 2. 默认传到docker hub上的镜像是公有的，可以在网站上将镜像变成私有镜像，如果有更多的镜像需要改为私有镜像，可以使用docker hub提供的付费服务。
 
-### 构建镜像
+## 构建镜像
 
-#### 构建镜像的好处
+### 构建镜像的好处
 
 - 保存对容器的修改，并再次使用
 - 自定义镜像的能力
 
 - 以软件的形式打包并分发服务及其运行环境
 
-#### 使用commit构建镜像
+### 使用commit构建镜像
 
 ```bash
 docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
@@ -117,7 +117,7 @@ docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
     # curl http://127.0.0.1:32770
 ```
 
-#### 使用dockerfile构建镜像
+### 使用dockerfile构建镜像
 
 dockerfile文件就是包含一系列命令的文本文件。
 
@@ -153,5 +153,103 @@ docker build [OPTIONS] PATH | URL | -
     # docker ps
     # curl http://127.0.0.1:32770
     ***************************************
+```
+
+## Docker的C/S模式
+
+![命令方式操作](.\img\20190801111028168.png)
+
+Remote API
+
+RESTful风格的API
+STDIN、STDOUT、STDERR
+
+![RESTful风格的API](.\img\2019080111200989.png)
+
+连接方式
+
+unix:///var/run/docker.sock
+tcp://host:port
+fd://socketfd
+
+![unix,tcp,fd方式交互](.\img\20190801111918280.png)
+
+```bash
+# ps -ef | grep docker
+# docker version
+# nc -U /var/run/docker.sock
+GET /info HTTP/1.1
+```
+
+## Docker守护进程的配置和操作
+
+### 查看守护进程
+
+```bash
+ps -ef | grep docker
+status docker 
+```
+
+### 使用service命令管理
+
+```bash
+service docker start|stop|restart
+```
+
+### Docker的启动选项
+
+```bash
+docker -d [OPTIONS]
+    -d 表示以守护进程形式运行
+
+    运行相关：
+    -D  --debug=false
+    -e  --exec-drive="native"
+    -g  --graph="/var/lib/docker"
+    --icc=true
+    -l  --log-level="info"
+    --label=[]
+    =p  --pidfile="/var/run/docker.pid"
+
+    Docker服务器连接相关：
+    -G,--group="docker"
+    -H,--host=[]
+    --tls=false
+    --tlscacert="/home/sven/.docker/ca.pem"
+    --tlscert="/home/sven/.docker/cert.pem"
+    --tlskey="/home/sven/.docker/key.pem"
+    --tlsverify=false
+
+    RemoteAPI相关：
+    --api-enable-cors=false
+
+    存储相关：
+    -s,--storage-drive=""
+    --selinux-enabled=false
+    --storage-opt=[]
+
+    Registry相关：
+    --insecure-registry=[]
+    --registry-mirror=[]
+
+    网络设置相关：
+    -b,--bridge=""
+    --bip=""
+    --fixed-cidr=""
+    --fixed-cidr-v6=""
+    --dns=[]
+    --dns-search=[]
+    --ip=0.0.0.0
+    --ip-forward=true
+    --ip-masq=true
+    --iptables=true
+    --ipv6=false
+    --mtu=0
+```
+
+docker启动配置文件：/etc/default/docker
+
+```bash
+DOCKER_OPTS = "……"
 ```
 
