@@ -46,7 +46,7 @@ sudo apt-get remove docker docker-engine docker.io containerd runc
 # 查看软件包依赖
 sudo dpkg --info 软件包名.deb | grep Depends
 # 可以提前安装好需要的软件包
-# 直接按照docker
+# 直接安装docker
 sudo dpkg -i 软件包名.deb
 # 如果因为差包没有安装成功，尝试下面命令
 sudo apt-get -f

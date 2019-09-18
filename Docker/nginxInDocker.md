@@ -11,7 +11,7 @@ containerPort   只指定容器的端口, 宿主机的端口是随机映射的
 	docker run -p 80 -i -t ubuntu /bin/bash
 hostPort:containerPort 同时制定容器端口和宿主机的端口
 	docker run -p 8080:80 -i -t ubuntu /bin/bash
-ip:containerPort   指定ip和宿主机的端口
+ip:containerPort   指定宿主机ip和容器的端口
 	docker run -p 0.0.0.0:80 -i -t ubuntu /bin/bash
 ip:hostPort:containerPort 指定ip，容器端口和宿主机端口
     docker run -p 0.0.0.0:8080:80 -i -t ubuntu /bin/bash

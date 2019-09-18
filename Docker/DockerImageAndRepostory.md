@@ -56,6 +56,7 @@ Docker Hub  https://hub.docker.com/
 # 练习
 docker search ubuntu
 docker search -s 3 ubuntu  # 查找3星以上的仓库
+docker search --filter=stars=3 ubuntu # 最新推荐语法
 ```
 
 ### 拉取镜像
@@ -75,7 +76,7 @@ docker pull [OPTIONS] NAME[:TAG]
 > 1. https://docker.mirrors.ustc.edu.cn
 > 2. http://f1361db2.m.daocloud.io   daocloud提供的
 > 3. https://registry.docker-cn.com  这个我ping不通了
-> 4. alicloud 阿里云也提供了docker加速器，不过比ustc更麻烦：不光要注册为阿里云的用户，还得加入开发者平台。不过捏着鼻子做完这些以后，它的服务还真是不错，基本1MB/s的pull速度(部分原因可能是因为我也在杭州吧)。配置方法跟daocloud类似，也是开通加速器以后给一个url。
+> 4. alicloud 阿里云也提供了docker加速器，不过比ustc更麻烦：不光要注册为阿里云的用户，还得加入开发者平台。它的服务还真是不错，基本1MB/s的pull速度(部分原因可能是因为我也在杭州吧)。配置方法跟daocloud类似，也是开通加速器以后给一个url。
 
 ### 推送镜像
 

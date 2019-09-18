@@ -116,12 +116,6 @@ docker info   # 在labels中就能查看到之前所做的修改
 
 ​	  将Docker客户端和服务端配置到不用的机器上，实现docker客户端到服务端的远程访问。
 
-- 第二胎安装Docker的服务器
-- 修改Docker守护进程启动选项，区别服务器
-- 保证Client API与Server API版本一致
-
-
-
 **环境准备**
 
 ```bash

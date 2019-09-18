@@ -25,8 +25,8 @@ docker run -i -t IMAGE /bin/bash
 docker run -i -t ubuntu /bin/bash
 exit  # exit就可以退回原来的终端
 # 练习2
-docker pull alpine /bin/sh # alpine是微型linux操作系统，只有5M多
-docker run -i -t alpine
+docker pull alpine # alpine是微型linux操作系统，只有5M多
+docker run -i -t alpine /bin/sh 
 
 ```
 
@@ -52,6 +52,7 @@ docker inspect 容器名/id  以json的形式展示容器详情信息
 ```bash
 docker start [-i] 容器名/id
 	-i 以交互的方式启动已经有的容器
+docker stop 容器名/id
 ```
 
 
@@ -132,8 +133,7 @@ always：容器退出时总是重启
 ```bash
 docker run -i -t IMAGE /bin/bash
 交互式下按ctrl+p然后按ctrl + q    退出交互式命令行，这样容器就会以交互式形式运行。
-
-在windows好像不太管用，按了没什么效果
+-i -t 可以缩写为-it
 
 #练习
 docker start -i 容器id
@@ -168,7 +168,8 @@ docker logs [-f] [-t] [--tail] 容器名/id
         附加时间戳
     --tail ="all"
         返回结尾处日志，未指定则返回所有日志
-        
+# 其它详细参数了解  docker logs --help
+
 # 练习
 docker run --name dc1 -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1; done"
 docker logs dc1 # 会返回所有的日志，不容易看出日志的价值

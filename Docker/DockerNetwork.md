@@ -22,11 +22,31 @@ docker0的地址划分：
 
 ```bash
 安装网桥管理程序
-        yum -y install bridge-utils
+yum -y install bridge-utils 或  apt -y install bridge-utils
+tangcheng@ubuntu:~$ brctl
+Usage: brctl [commands]
+commands:
+        addbr           <bridge>                add bridge
+        delbr           <bridge>                delete bridge
+        addif           <bridge> <device>       add interface to bridge
+        delif           <bridge> <device>       delete interface from bridge
+        hairpin         <bridge> <port> {on|off}        turn hairpin on/off
+        setageing       <bridge> <time>         set ageing time
+        setbridgeprio   <bridge> <prio>         set bridge priority
+        setfd           <bridge> <time>         set bridge forward delay
+        sethello        <bridge> <time>         set hello time
+        setmaxage       <bridge> <time>         set max message age
+        setpathcost     <bridge> <port> <cost>  set path cost
+        setportprio     <bridge> <port> <prio>  set port priority
+        show            [ <bridge> ]            show a list of bridges
+        showmacs        <bridge>                show a list of mac addrs
+        showstp         <bridge>                show bridge stp info
+        stp             <bridge> {on|off}       turn stp on/off
     查看网桥设备
-        # brctl show
-        自定义Docker0
-
+        # brctl show   # 其中docker0是docker默认的网桥
+        ifconfig和docker network ls和ip addr show 都能看见docker0网桥的踪影
+        
+    自定义Docker0
     修改docker0地址
     $ sudo ifconfig docker0 192.168.200.1 netmask 255.255.255.0
 
