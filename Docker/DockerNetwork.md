@@ -109,6 +109,7 @@ inet addr:172.17.0.2
 # docker attach cct2
 测试连接：curl http://172.17.0.2
 
+# 我们将一个容器停止然后再次重新启动的时候，容器的ip地址会发生变化。也就是容器的服务如果通过ip地址去暴露，那么这个服务是不可靠的，这个时候我们可以为其它的容器取一个别名。
 --link
     # docker run --link=[CONTAINER_NAME]:[ALIAS] [IMAGE] [COMMAND]
 
@@ -118,7 +119,7 @@ inet addr:172.17.0.2
 
 重启docker服务
     # systemctl restart docker
-    # docker restart cct1 cct2 cct3
+    # docker restart cct1 cct2 cct3 # 被链接的容器要先启动，否则要报错
     /# ping webtest
 ```
 
@@ -153,10 +154,15 @@ $ sudo docker attach cct3
 Docker守护进程的启动选项
     --icc=false --iptables=true
     --link
+# --icc 用来控制容器之间是否允许访问。 仅仅允许使用link配置的网络进行访问
+# --iptables 允许docker容器将配置添加到linux中的iptables中。（iptables是linux中控制网络访问的重要组件）
+# --link 为其它容器的网络配置一个别名
 
-$ sudo iptables -F
-$ sudo iptables -L -n
+$ sudo iptables -F  # 将iptables中的内容清空
+$ sudo iptables -L -n # 查看iptables的内容
 ```
+
+### 容器与外部网络的连接
 
 **ip-forward**
 
@@ -175,3 +181,25 @@ iptables是与Linux内核集成的包过滤防火墙系统，
 ```
 
 ![Alt](.\img\20190802105416694.png)
+
+整体数据包分类：
+
+- 发给防火墙本身的数据包	
+- 需要经过防火墙的数据表
+
+下图中的PREROUTING、INPUT、FORWARD、OUTPUT、POSTROUTING可以称为表，然后下面的mangle、nat、raw这些可以称为规则链。也就是“表”->“规则链”-> "规则"。
+
+![1568887001289](.\img\1568887001289.png)
+
+表间的优先顺序： raw>mangle>nat>filter
+
+链间的匹配顺序：
+
+- 入站数据：PREROUTING、INPUT
+- 出站数据：OUTPUT、POSTROUTING
+- 转发数据：PREROUTING、FORWARD、POSTROUTING
+
+链内的匹配顺序
+
+- 自上而下按顺序依次进行检查，找到相匹配的规则即停止（LOG选项表示记录相关日志）
+- 若在该链中找不到相匹配的规则，则按该链的默认策略规则。

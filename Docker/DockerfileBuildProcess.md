@@ -9,7 +9,8 @@
 
 
 ```bash
-docker build -t="tc1096648786/webNginx"
+# 镜像的名称必须是小写
+docker build -t="tc1096648786/web-nginx" .  # 这个.表示存放Dockerfile的目录
 # 从返回的结果可以看出一些dockerfile的构建过程中每一步执行的情况。
 从返回中可以看到
 

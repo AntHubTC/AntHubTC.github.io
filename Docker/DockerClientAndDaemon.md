@@ -42,7 +42,7 @@ status docker # linux
 service docker start|stop|restart 
 # windows
 net start | findStr Docker
-net start/stop $()
+net start/stop docker
 ```
 
 ### Docker的启动选项

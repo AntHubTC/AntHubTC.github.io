@@ -122,7 +122,7 @@ docker logout
 docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
     -a  --author="" 指定镜像作者，一般：name@email
     -m  --message=""    提交信息
-    -p  --pause=true    在commit过程中不暂停容器
+    -p  --pause=true    在commit过程中暂停容器
 
     ********************demo***************
     # docker run -it -p 80 --name commit_test ubuntu /bin/bash
