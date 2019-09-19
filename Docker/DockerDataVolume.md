@@ -53,6 +53,11 @@ Dockerfile指令：VOLUME["/data"]
 sudo docker run --volumes-from [CONTAINER NAME]
 ```
 
+### 删除容器和数据卷的关系
+
+- docker rm 容器    该命令只会删除容器，不会删除容器的数据卷
+- docker rm -v  容器  改名了会删除容器，并且**有可能**删除数据卷（因为如果数据卷信息被多个容器正在使用，数据卷中的文件是不会删除的）
+
 ## Docker数据卷的备份和还原
 
 ### 数据备份方法
