@@ -68,6 +68,12 @@ sudo docker run --volumes-from [container name] -v $(pwd):/backup[:wr] ubuntu ta
 
 ![Alt](.\img\2019080212104349.png)
 
+### Docker另一种比较好用的备份数据的方法
+
+```bash
+docker cp $ID:/var/jenkins_home # 后面是跟的目录
+```
+
 ### 数据还原方法
 
 ```bash
