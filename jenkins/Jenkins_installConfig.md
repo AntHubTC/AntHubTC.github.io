@@ -23,10 +23,10 @@
 #### Docker安装Jenkins并启动
 
 ```bash
-# 拉取镜像  这里是使用的alpine版本的。 allpine系统大小很小 
-docker pull jenkins:2.60.3-alpine
+# 拉取镜像  jenkins好像是docker维护的Jenkins      jenkins/jenkins应该是jenkins维护的jenkins
+docker pull jenkins/jenkins:alpine
 # jenkins端口暴露使用的8081和50000
-docker run -it --name=ci_jenkins -p 8081:8080 -p 50000:50000 jenkins:2.60.3-alpine /bin/sh
+docker run -it --name=ci_jenkins -p 8081:8080 -p 50000:50000 jenkins/jenkins:alpine /bin/sh
 cd /usr/local/bin
 ./jenkins.sh
 ```
@@ -67,3 +67,64 @@ jenkins:2.60.3-alpine镜像说明：
 
 然后后续可以配置用户，也可以不建立账户继续使用admin账户都是可以的。
 
+
+
+### 安装特别慢解决办法
+
+镜像：
+
+https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
+
+http://mirror.esuni.jp/jenkins/updates/update-center.json
+
+http://mirror.xmission.com/jenkins/updates/update-center.json
+
+![1569295330143](.\img\1569295330143.png)
+
+上图配置在/var/jenkins_home/hudson.model.UpdateCenter.xml文件中。  
+
+
+
+> 改这个配置需要重启
+
+### 遇到的问题
+
+​	插件反复的安装失败，在后续可以在插件管理中单独对安装失败的插件再次进行安装，反复还是不能安装成功的话可以在update-center.json找到这个插件，将url复制到迅雷中去下载，然后再Jenkins中安装hpi包。
+
+​	最后，安装插件很不容易，形成镜像:
+
+​	docker commit -a "tc1096648786" -m "jenkins" ci_jenkins tc1096648786/jenkins
+
+
+## 全局工具配置
+
+“Manage Jenkins”-> "Global Tool Configuration" 这里配置Jenkins使用的一些工具信息。比如下面是用了Maven，然后再里面配置了一个maven信息。
+
+![1569322792675](.\img\1569322792675.png)
+
+如果要为这个myMaven配置镜像，可
+
+```bash
+vi /var/jenkins_home/tools/hudson.tasks.Maven_MavenInstallation/myMaven/conf/settings.xml 
+```
+
+加入镜像配置：
+
+```xml
+        <mirror>      
+            <id>alimaven</id>        
+            <name>aliyun maven</name>       
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>     
+            <mirrorOf>central</mirrorOf>   
+        </mirror>   
+        <mirror>                                                                        
+            <id>maven</id>                                                              
+            <name>central maven</name>                                                  
+            <url>http://central.maven.org/maven2/</url>                                   
+            <mirrorOf>central</mirrorOf>                                                 
+        </mirror> 
+```
+
+使用日志：
+
+![1569324566373](.\img\1569324566373.png)
