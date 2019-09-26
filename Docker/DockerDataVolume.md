@@ -15,6 +15,21 @@
 - 数据卷的变化不会影响镜像的更新。
 - 卷会一直存在，及时挂载数据卷的容器已经被删除。
 
+
+
+如果想要持久化数据，就必须将读写层的数据暂存在host machine，因此当你使用:
+
+- `docker run .... -v /data`
+- `docker volume create --name **`
+
+以上两种指令都可以帮助你创建一个Volume，其实是在host machine上创建一个directory。
+
+`docker volume ls` 可以看到当前所有的volume
+
+docker volume inspect  <volume name> 查看数据卷的详细信息，以及挂载点位置。
+
+
+
 为容器添加数据卷
 
 ```bash
