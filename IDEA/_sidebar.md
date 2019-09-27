@@ -8,5 +8,7 @@
 
 * [IDEA快捷键](IDEAShortCut)
 
+* [IDEA插件](IDEAPlugin)
+
   
 
