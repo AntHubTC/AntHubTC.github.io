@@ -57,6 +57,8 @@ public interface List<E> {
      */
     public List<E> insert(E elem);
 
+    public List<E> insertAt(int index, E elem);
+
     /**
      * 删除一个元素
      * @param elem
@@ -124,7 +126,6 @@ public class ArrayList <E> implements List<E>, Serializable {
      * 初始容量
      */
     private static final int INIT_CAPACITY = 10;
-
     private static final Object[] EMPTY_OBJECTS = new Object[0];
 
     public ArrayList() {
@@ -171,6 +172,23 @@ public class ArrayList <E> implements List<E>, Serializable {
             this.elementData = newDataElems;
         }
         this.elementData[this.size ++] = elem;
+
+        return this;
+    }
+
+    @Override
+    public List<E> insertAt(int index, E elem) {
+        if (index < 0 || index >= this.size) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (this.size > this.elementData.length - 1) {
+            Object[] newDataElems = new Object[this.elementData.length + INIT_CAPACITY * 2];
+            System.arraycopy(this.elementData, 0, newDataElems, 0, this.elementData.length);
+            this.elementData = newDataElems;
+        }
+        System.arraycopy(this.elementData, index, this.elementData, index + 1, this.elementData.length - index - 1);
+        this.elementData[index] = elem;
+        this.size++;
 
         return this;
     }
@@ -236,20 +254,22 @@ public class ArrayList <E> implements List<E>, Serializable {
 App.java测试
 
 ```java
-package com.tc.dsa.line.list.test;
-
-import org.junit.Test;
-
-import java.util.Arrays;
-
-public class App {
-    @Test
+@Test
     public void ArrayListTest() {
         System.out.println("基本构建测试");
         List<Integer> list = new ArrayList<Integer>();
         System.out.println("插入测试");
         list.insert(4).insert(9).insert(1).insert(15).insert(10);
         System.out.println("打印测试");
+        System.out.println(list.toString());
+
+        System.out.println("insertAt");
+        list.insertAt(2, 9999);
+        list.insertAt(2, 9999);
+        list.insertAt(2, 9999);
+        list.insertAt(2, 9991);
+        list.insertAt(2, 9991);
+        list.insertAt(2, 9991);
         System.out.println(list.toString());
 
         System.out.println("超过容量测试");
@@ -293,16 +313,15 @@ public class App {
         list.delete(99);
         System.out.println(list);
 
-        new java.util.ArrayList<String>(0x7fffffff);
+//        new java.util.ArrayList<String>(0x7fffffff);
     }
-}
 ```
 
 
 
 ### 思考
 
-​		顺序存储结构中，删除和在指定位置新增都需要移动大量的元素，是否能在基于数组上优化成一个不需要大量移动的结构。
+​		顺序存储结构中，删除和在指定位置新增都需要移动大量的元素，是否能在基于数组上优化成一个不需要大量移动的结构。参考后面的**静态链表**。
 
 
 
@@ -340,74 +359,6 @@ public class App {
 ![1569812267479](.\img\1569812267479.png)
 
 #### 带头节点的单向链表练习
-
-List.java
-
-```java
-package com.tc.dsa.line.list;
-
-public interface List<E> {
-
-    /**
-     * 获取一个元素
-     * @param pos 从0开始到len-1
-     * @return
-     */
-    public E getElem(int pos);
-
-    /**
-     * 新增一个元素
-     * @param elem
-     */
-    public List<E> insert(E elem);
-
-    /**
-     * 删除一个元素
-     * @param elem
-     */
-    public List<E> delete(E elem);
-
-    /**
-     * 检查是否为空
-     *
-     * @return
-     */
-    public boolean isEmpty();
-
-    /**
-     * 清空一个列表
-     */
-    public void emptyList();
-
-    /**
-     * 检测元素在列表中的位置，查找成功返回第一个匹配元素的位置，否则-1
-     *
-     * @param elem
-     * @return 从0开始到len-1的位置
-     */
-    public int locateElem(E elem);
-
-    /**
-     * 序列转换为数组
-     * @return
-     */
-    public Object[] toArray();
-
-    /**
-     * 序列转换为数组
-     * @param a
-     * @param <T>
-     * @return
-     */
-    public <T> T[] toArray(T[] a);
-
-    /**
-     * 获取序列当前的大小
-     * @return
-     */
-    public int size();
-}
-```
 
 LinkedList.java
 
@@ -460,6 +411,30 @@ public class LinkedList<E> implements List<E>, Serializable {
         last.next = new Node<E>(elem);
         last = last.next; // 尾指针指向最新元素
         size ++; // 节点数变更
+
+        return this;
+    }
+
+    @Override
+    public List<E> insertAt(int index, E elem) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+        Node<E> node = first;
+        // 得到待插入节点的上一个节点
+        for (int i = -1;node != null && i + 1 != index; i ++) {
+            node = node.next;
+        }
+        Node<E> eNode = new Node<E>(elem);
+        eNode.next = node.next;
+        node.next = eNode;
+
+        if (index == this.size - 1) {
+            this.last = eNode;
+        }
+
+        // 元素个数发生改变
+        this.size++;
 
         return this;
     }
@@ -570,13 +545,23 @@ public class LinkedList<E> implements List<E>, Serializable {
 测试代码：
 
 ```java
-	@Test
+@Test
     public void LinkedListWithHead() {
         // 带头结点的单向链表
         List<Integer> list = new LinkedList<Integer>();
         System.out.println("插入测试");
         list.insert(4).insert(9).insert(1).insert(15).insert(10);
         System.out.println("打印");
+        System.out.println(list.toString());
+
+        System.out.println("insertAt");
+        list.insertAt(0, 9999);
+        list.insertAt(2, 9999);
+        list.insertAt(2, 9999);
+        list.insertAt(2, 9991);
+        list.insertAt(2, 9991);
+        list.insertAt(2, 9991);
+        list.insertAt(list.size(), 6666);
         System.out.println(list.toString());
 
         System.out.println("清空测试");
@@ -623,7 +608,7 @@ public class LinkedList<E> implements List<E>, Serializable {
 
 #### 不带头节点的单向链表练习(尾部插入法)
 
-下面是采用**尾部插入法**。
+单链表建表有[头插法和尾插法](https://blog.csdn.net/qq_40938077/article/details/80216563)，下面是采用**尾部插入法**。
 
 LinkedListNoHead.java
 
@@ -681,6 +666,34 @@ public class LinkedListNoHead<E> implements List<E>, Serializable{
         }
         last = newNode; // 尾指针指向最新元素
         size ++; // 节点数变更
+
+        return this;
+    }
+
+    @Override
+    public List<E> insertAt(int index, E elem) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+        Node<E> node = first;
+        Node<E> eNode = new Node<E>(elem);
+        if (index == 0) {
+            eNode.next = this.first;
+            this.first = eNode;
+        } else {
+            for (int i = 0;node != null && i + 1 != index; i ++) {
+                node = node.next;
+            }
+            eNode.next = node.next;
+            node.next = eNode;
+        }
+
+        if (index == this.size - 1) {
+            this.last = eNode;
+        }
+
+        // 元素个数发生改变
+        this.size++;
 
         return this;
     }
@@ -810,12 +823,22 @@ public class LinkedListNoHead<E> implements List<E>, Serializable{
 测试代码：
 
 ```java
-	@Test
+@Test
     public void LinkedListNoHead() {
         List<Integer> list = new LinkedListNoHead<Integer>();
         System.out.println("插入测试");
         list.insert(4).insert(9).insert(1).insert(15).insert(10);
         System.out.println("打印");
+        System.out.println(list.toString());
+
+        System.out.println("insertAt");
+        list.insertAt(0, 9999);
+        list.insertAt(2, 9999);
+        list.insertAt(2, 9999);
+        list.insertAt(2, 9991);
+        list.insertAt(2, 9991);
+        list.insertAt(2, 9991);
+        list.insertAt(list.size(), 6666);
         System.out.println(list.toString());
 
         System.out.println("清空测试");
@@ -859,4 +882,421 @@ public class LinkedListNoHead<E> implements List<E>, Serializable{
         System.out.println(list);
     }
 ```
+
+
+
+## 单链表结构与顺序存储结构的优缺点
+
+我们分别从存储方式、时间性能、空间性能三方面来做对比。
+
+### 存储方式
+
+- 顺序存储结构用一段连续的存储单元依次存储线性表的数据元素；
+- 单链表采用链式存储结构，用一组任意的存储单元存放线性表的元素。
+
+### 时间性能
+
+1. 查找
+   - 顺序存储结构O(1)
+   - 单链表O(n)
+2. 插入和删除指定位置的元素
+   - 顺序存储结构需要平均移动表长一般的元素，时间为O(n)。
+   - 单链表在计算出某位置的指针后，插入和删除时间仅为O(1)。
+
+### 空间性能
+
+-  顺序存储结构需要预分配存储空间，分大了，容易造成空间浪费，分小了，容易发生溢出（上面的代码采用的超出范围重新分配更大空间）。
+- 单链表不需要分配额外的存储空间，只要有足够的内存，元素个数不受限制。
+
+### 总结
+
+- 若线性表需要频繁查找，很少进行插入和删除操作时，宜采用顺序存储方式。
+- 若需要频繁插入和删除时，宜采用单链表结构。
+- 当线性表中的元素个数变化较大或者根本不知道有多大时，最好用单链表结构，这样可以不需要考虑存储空间的大小问题。
+
+## 静态链表
+
+​	静态链表的定义：首先让数组的元素都是由两个数据域构成，data和cur，也就是说每一个数组的下标都要对应一个data和一个cur。数据域data用来存放数据元素，也就是通常我们要处理的数据，而cur相当于单链表中的next指针，存放该元素的后继在数组中的下标，我们把cur叫做游标。
+
+我们把这种用数组描述的链表叫做静态链表，这种描述方法还有起名叫做游标实现法。
+
+
+| 游标 | 5    | 2    | 3    | 4    | 0    | 6    | 7    | ...  | 1    |
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| 数据 |      | A    | C    | D    | E    |      |      | ...  |      |
+| 下标 | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    |
+
+​	从表中可以看出：
+
+- 我们对数组的第一个和最后一个元素做特殊处理，他们的data不存放数据。
+- 我们通常把未使用的数组元素称为备用链表。
+- 数组的第一个元素，即下标为0的那个元素的cur就存放备用链表的第一个节点的下标。
+- 数组的最后一个元素，即下标为MAXSIZE-1的cur则存放第一个有数据的元素的下标，相当于单链表中的头节点作用。
+- 最后一个数据游标指向0。
+
+### 线性表的静态链表存储结构
+
+```c
+#define MAXSIZE 1000
+typedef struct
+{
+    ElemType data; // 数据
+    int cur; // 游标(Cursor)
+} Component, StaticLinkList[MAXSIZE];
+```
+
+### 优缺点
+
+优点：
+
+- ​	在插入和删除操作时，只需要修改游标，不需要移动元素，从而改进了在顺序存储结构中的插入和删除操作需要移动大量元素的确定。
+
+缺点：
+
+- 没有解决连续存储分配（数组）带来的表长难以确定的问题。
+- 失去了顺序存储结构的随机存取的特性。
+
+总的来说，静态链表其实是为了给没有指针的编程语言设计的一种实现单链表功能的方法。
+
+尽管我们可以用单链表就不用静态链表了，但这样的思考方式是非常巧妙的，应该理解其思想，以备不时之需。
+
+### 练习代码
+
+```java
+package com.tc.dsa.line.list;
+
+import java.io.Serializable;
+import java.util.Arrays;
+
+/**
+ * 线性表-静态链表
+ *
+ * 本例中数组有两个特殊的节点，第一个节点和最后一个节点，第一个节点的存放的游标是备用链表的第一个节点，最后一个节点
+ * 存放的是数据节点链表的第一个节点。 所以，关键是存放了两个节点的数据，不用管他们放在数组什么位置，不过一般放在最前和最后，
+ * 所以， 我们也可以将数组的第一个节点和第二个节点来存储这些信息。
+ * 另外，我们还可以将这两个节点的游标信息可以提取出来封装到类里面，然后数组就只放数据和备用链表信息。
+ *
+ */
+public class StaticLinkedList<E> implements List<E>, Serializable {
+
+    private Node<E>[] elements;
+
+    private static final int MAXSIZE = 200;
+
+    /**
+     * 初始化静态链表
+     */
+    public StaticLinkedList() {
+        elements = new Node[MAXSIZE];
+        for (int i = 0; i < MAXSIZE; i++) {
+            elements[i] = new Node<E>();
+            elements[i].cur = i + 1;
+        }
+        // 数组末尾指向第一个元素
+        elements[MAXSIZE - 1].cur = 0;
+    }
+
+    private int mallocSLL () {
+        // 第一个元素存放的是备用链表的第一个元素
+        int nextUseCur = this.elements[0].cur;
+        if (nextUseCur != 0) {
+            // 将下一个元素的cur用来作为下一个备用链表的第一个元素
+            this.elements[0].cur = this.elements[nextUseCur].cur;
+        }
+        return nextUseCur;
+    }
+
+    @Override
+    public E getElem(int pos) {
+        Node<E> node = this.elements[this.elements.length - 1];
+        int i = 0;
+        while (node.cur != 0) {
+            node = this.elements[node.cur];
+            if (i == pos) {
+                return node.data;
+            }
+            i ++;
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<E> insert(E elem) {
+        int nextCur = mallocSLL();
+        if (nextCur == 0) {
+            throw new RuntimeException("内容已满");
+        }
+        // 这里默认将内容插入到头部
+        this.elements[nextCur] = new Node<E>(elem);
+        this.elements[nextCur].cur = this.elements[this.elements.length - 1].cur;
+        this.elements[this.elements.length - 1].cur = nextCur;
+
+        return this;
+    }
+
+    @Override
+    public List<E> insertAt(int index, E elem) {
+        int nextCur = mallocSLL();
+        if (nextCur == 0) {
+            throw new RuntimeException("内容已满");
+        }
+        int size = this.size();
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+        Node<E> newNode = new Node<E>(elem);
+        Node<E> node = this.elements[this.elements.length - 1];
+
+        for (int i = 0; node.cur != 0; i++) {
+            if (i == index) {
+                break;
+            }
+            node = this.elements[node.cur];
+        }
+
+        this.elements[nextCur] = newNode;
+        newNode.cur = node.cur;
+        node.cur = nextCur;
+
+        // 检测插入的位置是否是头部
+        if (index == 0) {
+            this.elements[this.elements.length - 1].cur = nextCur;
+        }
+
+        // 插入到尾部因为继承上次指向的0，所以不用做特殊处理
+        return this;
+    }
+
+    @Override
+    public List<E> delete(E elem) {
+        Node<E> node = this.elements[this.elements.length - 1];
+        Node<E> pNode = node;
+        boolean isFind = false;
+        do {
+            node = this.elements[node.cur];
+            if (node.data == elem) {
+                isFind = true;
+                break;
+            }
+            pNode = node;
+        } while (node.cur != 0);
+
+        if (isFind) {
+            // 备用链表回收该节点
+            int nodeCur = node.cur;
+            this.elements[0].cur = pNode.cur;
+            node.cur = this.elements[0].cur;
+
+            pNode.cur = nodeCur; // 跳过node节点
+        }
+
+        return this;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return this.size() == 0;
+    }
+
+    @Override
+    public void emptyList() {
+        // 如果已经是空表就不再继续了
+        if (isEmpty()) {
+            return;
+        }
+
+        int lastCur = this.elements.length - 1;
+        // 将已经使用的数据节点清空并找到数据节点最后一个
+        Node<E> node = this.elements[lastCur];// 最后一个节点
+        for (;node.cur != 0;) {
+            node = this.elements[node.cur];
+            node.data = null; // 清空(也可以后期自动覆盖)
+        }
+        // 将数据节点串到备用链表中去
+        node.cur = this.elements[0].cur;
+        // 将之前的数据节点的第一个作为新的备用链表的第一个。
+        this.elements[0].cur = this.elements[lastCur].cur;
+        // 将当前数据节点置为0
+        this.elements[lastCur].cur = 0;
+    }
+
+    @Override
+    public int locateElem(E elem) {
+        Node<E> node = this.elements[this.elements.length - 1];
+        int i = -1;
+        while(node.cur != 0) {
+            i++;
+            node = this.elements[node.cur];
+            if (node.data == elem) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public Object[] toArray() {
+        int size = this.size();
+        Object[] arr = new Object[size];
+
+        Node<E> node = this.elements[this.elements.length - 1];
+        for (int i = 0; node.cur != 0 ;) {
+            node = this.elements[node.cur];
+            arr[i++] = node.data;
+        }
+
+        return arr;
+    }
+
+    @Override
+    public <T> T[] toArray(T[] a) {
+        int size = this.size();
+        if (a.length < size)
+            a = (T[])java.lang.reflect.Array.newInstance(a.getClass().getComponentType(), size);
+
+        Object[] arr = a;
+
+        Node<E> node = this.elements[this.elements.length - 1];
+        for (int i = 0; node.cur != 0 ;) {
+            node = this.elements[node.cur];
+            arr[i++] = node.data;
+        }
+
+        return a;
+    }
+
+    @Override
+    public int size() {
+        int i = 0;
+        Node<E> node = this.elements[this.elements.length - 1];
+        while (node.cur != 0) {
+            i ++;
+            node = this.elements[node.cur];
+        }
+        return i;
+    }
+
+    @Override
+    public String toString() {
+        return "StaticLinkedList{" +
+                "elements=" + Arrays.toString(toArray()) +
+                '}';
+    }
+
+    private static class Node<E> implements Serializable {
+        private E data;
+        private int cur;
+
+        public Node() {
+        }
+
+        public Node(E data) {
+            this.data = data;
+        }
+
+        public E getData() {
+            return data;
+        }
+
+        public void setData(E data) {
+            this.data = data;
+        }
+
+        public int getCur() {
+            return cur;
+        }
+
+        public void setCur(int cur) {
+            this.cur = cur;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "data=" + data +
+                    '}';
+        }
+    }
+}
+```
+
+测试代码：
+
+```java
+@Test
+    public void StaticLinkedList() {
+        List<Integer> list = new StaticLinkedList<Integer>();
+        System.out.println("插入测试");
+        list.insert(4).insert(9).insert(1).insert(15).insert(10);
+        System.out.println("打印");
+        System.out.println(list.toString());
+
+        System.out.println("insertAt");
+        list.insertAt(0, 9999);
+        list.insertAt(2, 9999);
+        list.insertAt(2, 9999);
+        list.insertAt(2, 9991);
+        list.insertAt(2, 9991);
+        list.insertAt(2, 9991);
+        list.insertAt(list.size(), 6666);
+        System.out.println(list.toString());
+
+        System.out.println("清空测试");
+        list.emptyList();
+        System.out.println(list);
+
+        boolean isEmpty = list.isEmpty();
+        System.out.println("isEmpty:" + isEmpty);
+
+        System.out.println("清空后数据重新新增测试");
+        list.insert(10).insert(100).insert(44).insert(5).insert(58);
+        System.out.println(list);
+        System.out.println("size:" +list.size());
+
+        System.out.println("to array测试");
+        Object[] objects = list.toArray();
+        System.out.println("objects:" + Arrays.toString(objects));
+
+        System.out.println("to array测试");
+        Integer[] objectArr = list.toArray(new Integer[2]);
+        System.out.println("objectArr:" + Arrays.toString(objectArr));
+
+        System.out.println("定位元素测试");
+        int pos = list.locateElem(5);
+        System.out.println("pos:" + pos);
+        pos = list.locateElem(99999);
+        System.out.println("pos:" + pos);
+
+        System.out.println("getElem测试");
+        Integer elem = list.getElem(2);
+        System.out.println(elem);
+
+        System.out.println("delete测试");
+        System.out.println(list);
+        list.delete(44);
+        System.out.println(list);
+        list.delete(10);
+        System.out.println(list);
+        list.delete(58);
+//        list.delete(99);
+        System.out.println(list);
+    }
+```
+
+## 腾讯面试题
+
+1. 快速找到未知长度单链表的中间节点。
+
+   **普通解答方法：**
+
+   ​		首先遍历一遍单链表以确定单链表的长度L。然后再次从头节点触发循环L/2次找到单链表的中间节点。
+
+   ​	算法复杂度为：O(L+L/2)=O(3L/2)  这里由于需要比较精确的比较，所以不对算法复杂度求简。
+
+   **高级解答方法：**
+
+   ​		**快慢指针！**
+
+   ​		利用快慢指针原理：设置两个指针*search、\*mid都指向单链表的头结点。其中\*search指向末尾节点的时候，mid正好就在中间了。这就是标尺的思想。
 
