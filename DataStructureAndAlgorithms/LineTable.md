@@ -885,6 +885,24 @@ public class LinkedListNoHead<E> implements List<E>, Serializable{
 
 
 
+#### 腾讯面试题
+
+1. 快速找到未知长度单链表的中间节点。
+
+   **普通解答方法：**
+
+   ​		首先遍历一遍单链表以确定单链表的长度L。然后再次从头节点触发循环L/2次找到单链表的中间节点。
+
+   ​	算法复杂度为：O(L+L/2)=O(3L/2)  这里由于需要比较精确的比较，所以不对算法复杂度求简。
+
+   **高级解答方法：**
+
+   ​		**快慢指针！**
+
+   ​		利用快慢指针原理：设置两个指针*search、\*mid都指向单链表的头结点。其中\*search指向末尾节点的时候，mid正好就在中间了。这就是标尺的思想。
+
+
+
 ## 单链表结构与顺序存储结构的优缺点
 
 我们分别从存储方式、时间性能、空间性能三方面来做对比。
@@ -1284,19 +1302,225 @@ public class StaticLinkedList<E> implements List<E>, Serializable {
     }
 ```
 
-## 腾讯面试题
+## 循环链表
 
-1. 快速找到未知长度单链表的中间节点。
+### 	介绍
 
-   **普通解答方法：**
+​	将单链表中终端节点的指针端由空指针改为指向头结点，使整个单链表形成一个环，这种头尾相接的单链表成为单循环链表，简称循环链表。
 
-   ​		首先遍历一遍单链表以确定单链表的长度L。然后再次从头节点触发循环L/2次找到单链表的中间节点。
+![1570327968372](.\img\1570327968372.png)
 
-   ​	算法复杂度为：O(L+L/2)=O(3L/2)  这里由于需要比较精确的比较，所以不对算法复杂度求简。
+> 注：这里并不是说循环链表一定要有头节点。
 
-   **高级解答方法：**
+​	其实循环链表和单链表的主要差异就在于循环的判断空链表的条件上，原来判断head->next是否为null，现在则是head->next是否等于head。
 
-   ​		**快慢指针！**
+​	终端节点用尾指针rear指示，则查找终端节点是O(1)，而开始节点是rear->next->next，当然也是O(1)。
 
-   ​		利用快慢指针原理：设置两个指针*search、\*mid都指向单链表的头结点。其中\*search指向末尾节点的时候，mid正好就在中间了。这就是标尺的思想。
+### 约瑟夫问题
+
+​	据说著名犹太历史学家Josephus有过以下的故事：在罗马人占领乔塔帕特后，39个犹太人与Josephus及他的朋友躲到一个洞中，39个犹太人决定宁愿死也不要被敌人抓到，于是决定了一个自杀方式，41个人排成一个圆圈，由第1个人开始报数，每报数到第3人该人就必须自杀，然后再由下一个重新报数，直到所有人都自杀身亡为止。然而Josephuse和他的朋友并不想遵从，Josephus要他的朋友先假装遵从，他将朋友与自己安排在第16个与第31个位置，于是逃过了这场死亡游戏。
+
+#### 循环链表求解
+
+实现代码：
+
+```java
+package com.tc.dsa.line.list.test;
+
+/**
+ * 约瑟夫问题
+ */
+public class JosephusIssue {
+    private static class Node<E> {
+        E data;
+        Node<E> next;
+
+        public Node() {
+        }
+
+        public Node(E data) {
+            this.data = data;
+        }
+    }
+
+    /**
+     * 创建单向循环链表
+     * @param num 创建的节点数量
+     * @return
+     */
+    public static Node createCycleLinkTable(int num) {
+        if (num < 0 || num > 9999999) {
+            throw new IndexOutOfBoundsException();
+        }
+        Node head, node;// 头节点, 临时节点
+        head = node = new Node();
+        if (num != 0) {
+            for (int i = 1; i <= num; i++) {
+                node.next = new Node(i);
+                node = node.next;
+            }
+            // 构成一个环
+            node.next = head.next;
+        }
+
+        return head.next;
+    }
+
+    public static void printCycleLinkTable(Node cltNode) {
+        Node node = cltNode;
+        do {
+            System.out.print(node.data + " ");
+            node = node.next;
+        } while (node != cltNode);
+        System.out.println( " => 1...");
+    }
+
+    public static void selfKill(Node cltNode,int totalPerson, int nextKillPersion) {
+        Node node = cltNode;
+        nextKillPersion = totalPerson % nextKillPersion; // 这个是
+        do {
+            for (int i = 1; i < nextKillPersion; i ++) {
+                node = node.next;
+            }
+            System.out.print(node.next.data + " ");
+            node.next = node.next.next;
+            node = node.next;
+        } while (node.next != node);
+        System.out.println(node.data);
+    }
+
+    public static void main(String[] args) {
+        int totalPerson = 41; // 41个人
+        int nextKillPersion = 3;// 往下数第3个自杀
+        Node headNode = createCycleLinkTable(totalPerson);
+        printCycleLinkTable(headNode);
+        System.out.println("自杀顺序:");
+        selfKill(headNode, totalPerson, nextKillPersion);
+    }
+}
+```
+
+输出：
+
+```
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41  => 1...
+自杀顺序：
+3 6 9 12 15 18 21 24 27 30 33 36 39 1 5 10 14 19 23 28 32 37 41 7 13 20 26 34 40 8 17 29 38 11 25 2 22 4 35 16 31
+```
+
+#### 递归求解
+
+假设下标从0开始，0，1，2 .. m-1共m个人，从1开始报数，报到k则此人从环出退出，问最后剩下的一个人的编号是多少？
+
+现在假设m=10
+
+0 1 2 3  4 5 6 7 8 9    k=3
+
+第一个人出列后的序列为：
+
+0 1    3 4 5 6 7 8 9
+
+即:
+
+3 4 5 6 7 8 9 0 1       <-=> AA
+
+我们把该式转化为:
+
+0 1 2 3 4 5 6 7 8       <==> BB
+
+则你会发现: AA = ((BB) + 3) % 10
+
+也就是说，我们求出9个人中第9次出环的编号，最后进行上面的转换就能得到10个人第10次出环的编号了 
+
+设f(m,k,i)为m个人的环，报数为k，第i个人出环的编号，则f(10,3,10)是我们要的结果
+
+当i=1时，  f(m,k,i) = (m+k-1)%m        为什么要减去1,因为序号是从0开始的
+
+当i!=1时，  f(m,k,i)= (f(m-1,k,i-1)+k)%m     由上一次的m,k,i推导出这一次
+
+代码：
+
+```java
+package com.tc.dsa.line.list.test;
+
+/**
+ * 约瑟夫问题
+ * 递归解决方案
+ */
+public class JosephusIssue2 {
+
+    public static int josephusIssue(
+            int m, // 当前总人数
+            int k, // 多少次杀一个
+            int i // 当前第几次
+    ) {
+        if (i == 1) {
+            return (m + k -1) % m;
+        } else {
+            return (josephusIssue(m - 1,k, i - 1) + k) % m;
+        }
+    }
+
+    public static void main(String[] args) {
+        int m = 41, // 总次数
+            k = 3; // 3次杀一个
+        for (int i = 1; i <= m; i++) { // i表示第i次杀的是那个
+            System.out.print(josephusIssue(m, k, i) + " ");
+        }
+    }
+}
+```
+
+输出：
+
+```
+2 5 8 11 14 17 20 23 26 29 32 35 38 0 4 9 13 18 22 27 31 36 40 6 12 19 25 33 39 7 16 28 37 10 24 1 21 3 34 15 30
+```
+
+### 思考问题
+
+1. 如果连接两个循环链表（尾指针）。
+
+   ![1570413172659](.\img\1570413172659.png)
+
+   p = rear1.next;
+
+   rear1.next = rear2.next.next;
+
+   free(rear2.next);
+
+   rear2.next = p;
+
+   
+
+2. 判断单链表中是否有环。
+
+有环的定义是，链表的节点指向了链表中的某个节点。比如有可能是下面这种情况：
+
+![1570413383122](.\img\1570413383122.png)
+
+- 方法一
+
+  使用p、q两个指针，p总是向前走，但q每次都从头开始走，对于每个节点，看p走的步数是否和q一样。如图，当p从6走到3时，用了6步，此时若q从head出发，则只需两步就到3,因而步数不等，出现矛盾，存在环。
+
+- 方法二(推荐，比方法一好)
+
+  使用p、q两个指针，p每次向前走一步，q每次向前走两步，若在某个时候p == q，则存在环（快慢指针）。
+
+
+
+### 魔术师发牌问题
+
+​	问题描述：魔术师利用一副牌中的13张黑牌，预先将他们排好后叠放在一起，牌面朝下。对观众说：“我不看牌，只数数就可以猜到没张牌是什么，我大声数数，你们听，不信？现场演示。”魔术师将最上面的那张牌为1，把他翻过来正好是黑桃A，将黑桃A放在桌上，第二次数1,2将第一张牌放在这些牌的下面，将第二张牌翻过来，正好是黑桃2，也将它放在桌上这样依次进行将13张牌全部翻出，准确无误。
+
+### 拉丁方阵问题
+
+拉丁方阵是一种n*n的方阵，方阵中洽有n中不同的元素，每种元素恰有n个，并且每种元素在一行和一列中恰好出现一次。著名数学家和物理学家欧拉使用拉丁字母来作为拉丁方阵里元素的符号，拉丁方阵因此而得名。
+
+例如下面的3*3的拉丁方阵：
+
+| 1    | 2    | 3    |
+| ---- | ---- | ---- |
+| 2    | 3    | 1    |
+| 3    | 1    | 2    |
 
