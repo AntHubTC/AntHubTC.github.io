@@ -885,6 +885,10 @@ public class LinkedListNoHead<E> implements List<E>, Serializable{
 
 
 
+#### 头插法和尾插法
+
+​	头插法建立单链表的算法虽然简单，但生成的链表中结点的次序和输入数据的顺序不一致。若希望两者次序一致，可采用尾插法。尾插法是将新结点插入到当前链表的表尾上，为此必须增加一个尾指针r,使其始终指向当前链表的尾结点
+
 #### 腾讯面试题
 
 1. 快速找到未知长度单链表的中间节点。
@@ -1511,7 +1515,110 @@ public class JosephusIssue2 {
 
 ### 魔术师发牌问题
 
-​	问题描述：魔术师利用一副牌中的13张黑牌，预先将他们排好后叠放在一起，牌面朝下。对观众说：“我不看牌，只数数就可以猜到没张牌是什么，我大声数数，你们听，不信？现场演示。”魔术师将最上面的那张牌为1，把他翻过来正好是黑桃A，将黑桃A放在桌上，第二次数1,2将第一张牌放在这些牌的下面，将第二张牌翻过来，正好是黑桃2，也将它放在桌上这样依次进行将13张牌全部翻出，准确无误。
+​	问题描述：魔术师发牌问题的简介：一位魔术师掏出一叠扑克牌，魔术师取出其中13张黑桃，洗好后，把牌面朝下。说：“我不看牌，只数一数就能知道每张牌是什么？”魔术师口中念一，将第一张牌翻过来看正好是A；魔术师将黑桃A放到桌上，继续数手里的余牌，第二次数1，2，将第一张牌放到这叠牌的下面，将第二张牌翻开，正好是黑桃2，也把它放在桌子上。第三次数1，2，3，前面二张牌放到这叠牌的下面，取出第三张牌，正好是黑桃3，这样依次将13张牌翻出，全部都准确无误。求解：魔术师手中牌的原始顺序是什么样子的？
+
+#### 数组求解
+
+```java
+public class MagicCard {
+    public static void main(String[] args) {
+        int[] cards = new int[13]; // 数组初始为0 // 长度为13的数组用来存放13张牌，有先后顺序，我们将每一个位置称为卡槽
+        int cur = -1; // 当前数组指向游标位置
+        for (int i = 1; i <= cards.length; i++) {
+            for (int step = 1; step <= i; step ++) { // step是走的步数，走的步数是当前卡片数字减1。
+                cur = ++cur % cards.length; // 逻辑循环数组，游标在0到cards.length-1。
+                if (cards[cur] != 0) { // 当前数数的目标位置
+                    step --; // 如果游标位置有存放卡片，那么这个步骤不算数, 下次循环游标跳过。
+                    continue;
+                }
+                // i == step 表示步数已经走完了
+                // cards[cur] == 0 表示该卡槽没有卡片在（已经发出去的卡片位置），如果有，卡片肯定不能放这里，要继续寻找下一个卡槽。
+                if (i == step && cards[cur] == 0) {
+                    cards[cur] = i;// 将卡片放入卡槽
+                }
+            }
+        }
+        // 输出卡片最初的顺序
+        for (int i = 0; i < cards.length; i++) {
+            System.out.print(cards[i] + " ");
+        }
+        System.out.println();
+        // 牌序: 1 8 2 5 10 3 12 11 9 4 7 6 13
+    }
+}
+```
+
+#### 循环链表求解
+
+```java
+package com.tc.dsa.line.list.test;
+
+/**
+ * 魔术师发牌问题：
+ *      （单）循环链表实现方式
+ */
+public class MagicCardCycleList {
+
+    public static class Node<E> {
+        E data;
+        Node<E> next;
+
+        public Node() {
+        }
+
+        public Node(E data) {
+            this.data = data;
+        }
+    }
+
+    /**
+     * 创建循环链表
+     *
+     * @param len 链表长度
+     * @return
+     */
+    public static <E> Node<E> createCycleLinkList(int len) {
+        if (len < 0) { // 考试要注意处理边界问题
+            throw new RuntimeException("循环链表节点数目无效!");
+        }
+        Node<E> head = new Node<E>();
+        Node tNode = head;
+        for (int i = 0; i < len; i++) {
+            tNode.next = new Node(0);
+            tNode = tNode.next;
+        }
+        if (tNode != head) {
+            tNode.next = head.next; // 首尾相接
+        }
+        return head.next;
+    }
+
+
+    public static void main(String[] args) {
+        int cardNum = 13; // 卡片总数量
+        Node<Integer> cardLink = MagicCardCycleList.<Integer>createCycleLinkList(cardNum); // 创建循环链表
+        Node<Integer> tempCardLink = cardLink;
+        tempCardLink.data = 1;// 第一张牌
+        for (int i = 2; i <= cardNum; i++) { // 这里应该从2开始走，因为第一张牌已经放到卡槽中了
+            for (int step = 0; step < i; step++) { // 走step步到期望的目标卡槽
+                tempCardLink = tempCardLink.next; // 前往下一个卡槽
+                if (tempCardLink.data != 0) {
+                    step --; // 如果该卡槽中有卡片，该卡槽不记录到步数中
+                }
+            }
+            tempCardLink.data = i;
+        }
+        // 临时引用重置到头部
+        tempCardLink = cardLink;
+        do { // 遍历得出卡槽链中得到的卡片顺序
+            System.out.print(tempCardLink.data + " ");
+            tempCardLink = tempCardLink.next;
+        } while (tempCardLink != cardLink);
+        System.out.println();
+    }
+}
+
+```
 
 ### 拉丁方阵问题
 
@@ -1524,3 +1631,120 @@ public class JosephusIssue2 {
 | 2    | 3    | 1    |
 | 3    | 1    | 2    |
 
+#### 普通/数组求解
+
+```java
+package com.tc.dsa.line.list.test;
+
+/**
+ * 拉丁方阵问题
+ */
+public class LatinSquare {
+    public static void main(String[] args) {
+        int num = 4; // num*num的方阵， num表示维度数
+//        int result[][] = new int[num][num]; // 当然也可以将结果存放到数组中
+        for (int i = 0; i < num; i++) {
+            int x = i; // 基于基础i进行加数
+            for (int j = 0; j < num; j++) {
+                // 如果不是用的有序数字，我们可以将x和其它符号映射起来达到不同符号排列符合拉丁方阵
+                System.out.print((x + 1) + " ");
+                x = ++x % num;
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+输出：
+
+> 1 2 3 4 
+> 2 3 4 1 
+> 3 4 1 2 
+> 4 1 2 3 
+
+#### 循环链表求解
+
+思路：
+
+1. 用循环链表来接受n个不同的数据。
+2. 矩阵第i行数据，是从循环链表的第i个位置的数据遍历完整个循环链表 将其数据取出。
+
+代码：
+
+```java
+package com.tc.dsa.line.list.test;
+
+/**
+ * 拉丁方阵
+ *       链表方法求解
+ */
+public class LatinSquareCycleList {
+    public static class Node<E> {
+        E data;
+        Node<E> next;
+
+        public Node() {
+        }
+
+        public Node(E data) {
+            this.data = data;
+        }
+    }
+
+    /**
+     * 创建循环链表
+     *
+     * @param len 链表长度
+     * @return
+     */
+    public static <E> Node<E> createCycleLinkList(int len) {
+        if (len < 0) { // 考试要注意处理边界问题
+            throw new RuntimeException("循环链表节点数目无效!");
+        }
+        Node<E> head = new Node<E>();
+        Node tNode = head;
+        for (int i = 0; i < len; i++) {
+            tNode.next = new Node(0);
+            tNode = tNode.next;
+        }
+        if (tNode != head) {
+            tNode.next = head.next; // 首尾相接
+        }
+        return head.next;
+    }
+
+    public static void main(String[] args) {
+        char[] uniqueChar = new char[]{'!','@','#','$','%','^','&'};
+        // 创建一个空链表
+        Node<String> linkList = LatinSquareCycleList.<String>createCycleLinkList(uniqueChar.length);
+        Node<String> tempList = linkList;
+        // 链表赋值
+        for (char ch : uniqueChar) {
+            tempList.data = String.valueOf(ch);
+            tempList = tempList.next;
+        }
+        // 经过上面的赋值，这个时候tempList走到是链表的结尾，下一个next就是头节点(其实可以不用考虑目前哪里是头节点，该问题从哪里开始结果都是拉丁方阵)
+        for (int i = 0; i < uniqueChar.length; i++) {
+            Node<String> node = tempList = tempList.next; // tempList走往下一个节点
+            do {
+                System.out.print(node.data + " ");
+                node = node.next;
+            } while (node != tempList); // 链表走一圈
+            System.out.println();
+        }
+    }
+}
+```
+
+输出：
+
+> @ # $ % ^ & ! 
+> \# $ % ^ & ! @ 
+> $ % ^ & ! @ # 
+> % ^ & ! @ # $ 
+> ^ & ! @ # $ % 
+> & ! @ # $ % ^ 
+> ! @ # $ % ^ & 
+
+ 扩展知识：拉丁矩阵中进行行交换或者列交换，结果还是拉丁矩阵。
