@@ -16,8 +16,8 @@ docker images [OPTIONS] [REPOSITORY]
     -q  --quiet=false   只显示镜像的v-id
     
 # 练习
-dokcer images
-dokcer images ubun*
+docker images
+docker images ubun*
 docker images --no-trunc=true
 docker images -a -q --no-trunc=true
 ```

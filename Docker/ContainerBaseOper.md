@@ -214,8 +214,8 @@ docker kill 容器名/id      # 直接停止容器
 ### 在linux下查看帮助文件
 
 ```bash
-man dokcer-run
-man docer-logs
+man docker-run
+man docker-logs
 man docker-top
 man docker-exec
 ...
