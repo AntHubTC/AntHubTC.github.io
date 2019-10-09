@@ -1483,7 +1483,7 @@ public class JosephusIssue2 {
 
 ### 思考问题
 
-1. 如果连接两个循环链表（尾指针）。
+1. 如何连接两个循环链表（尾指针）。
 
    ![1570413172659](.\img\1570413172659.png)
 
@@ -1748,3 +1748,235 @@ public class LatinSquareCycleList {
 > ! @ # $ % ^ & 
 
  扩展知识：拉丁矩阵中进行行交换或者列交换，结果还是拉丁矩阵。
+
+## 双向链表
+
+​	双向链表也叫双链表，是链表的一种，它的每个数据结点中都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表中的任意一个结点开始，都可以很方便地访问它的前驱结点和后继结点。
+
+### 节点数据结构
+
+```c
+typedef struct DualNode
+{
+    ElemType data;
+    struct DualNode *prior; // 前驱节点
+    struct DualNode *next; // 后继节点
+} DualNode, *DuLinkList;
+```
+
+![img](.\img\922236-20171220110004678-643077430.png)
+
+![img](.\img\922236-20171220110011240-853997173.png)
+
+### 双向链表示例代码
+
+```java
+package com.tc.dsa.line.list.test;
+
+/**
+ *  双向链表
+ */
+public class DoublyLinkList {
+    public static class Node<E> {
+        E data;
+        Node<E> prior;
+        Node<E> next;
+
+        public Node() {
+        }
+
+        public Node(E data) {
+            this.data = data;
+        }
+    }
+
+    public static Node<String> initList () {
+        Node<String> head = new Node<String>();
+        Node<String> pNode = head;
+        for (int i = 0; i < 26; i++) {
+            Node<String> node = new Node<String>(String.valueOf((char)('A' + i)));
+            node.next = null;
+            node.prior = pNode;
+            pNode.next = node;
+            pNode = node; // 父节点前往新的节点
+        }
+
+        return head.next;
+    }
+
+    /**
+     * 为链表中的节点链接数字，相当于在做双向链表的新增操作
+     * @param firstNode
+     * @return
+     */
+    public static Node<String> connectNumber(Node<String> firstNode) {
+        Node<String> pNode = firstNode;
+        while (pNode != null) {
+            char ch = pNode.data.charAt(0);
+            int num = ch - 'A' + 1;
+            Node<String> newNode = new Node<String>(String.valueOf(num));
+            // 双向链表的插入关键步骤（有些顺序很重要）
+            newNode.prior = pNode;
+            newNode.next = pNode.next;
+            if (pNode.next != null) {
+                pNode.next.prior =  newNode;
+            }
+            pNode.next = newNode;
+
+            // 临时指针父节点指向下一个字母节点
+            pNode = newNode.next;
+        }
+
+        return firstNode;
+    }
+
+    /**
+     * 断开链表中的数字节点，相当于在做双向链表的删除操作
+     * @param firstNode
+     * @return
+     */
+    public static Node<String> disConnectNumber(Node<String> firstNode) {
+        Node<String> pNode = firstNode;
+        while (pNode != null) {
+            // 提示: 现在的pNode是字母节点，也可以走到数字节点再执行删除，或许看着更简单些
+            if (pNode.next.next != null) {
+                // 下下个节点的前驱指向当前节点
+                pNode.next.next.prior = pNode;
+            }
+            // 当前节点的后继前往下下节点
+            pNode.next = pNode.next.next;
+            // 前往下一个节点
+            pNode = pNode.next;
+        }
+        return firstNode;
+    }
+
+    // 打印双向链表
+    public static void printLink(Node node) {
+        Node<String> tempNode = node;
+        while (tempNode != null) {
+            System.out.print(tempNode.data + " ");
+            tempNode = tempNode.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        // 初始化链表，在链表中放了26个英文字母
+        Node<String> node = initList();
+        printLink(node);
+
+        // 问题： 为每一个字母后面链接一个数字如 A=>1=>B=>2=>C=>3...
+        connectNumber(node);
+        printLink(node);
+
+        // 问题： 去掉链表中含有的数字
+        disConnectNumber(node);
+        printLink(node);
+    }
+}
+```
+
+
+
+## 双向循环链表
+
+### 介绍
+
+![img](.\img\632293-20170306150003297-951612143.png)
+
+
+
+![img](.\img\632293-20170306150039609-1719195275.png)
+
+
+
+![img](.\img\632293-20170306150105453-2068434988.png)
+
+### 凯撒密码问题实战
+
+- 要求实现用户输入一个数使得26个字母的排列发生变化，例如用户输入3，输出结果：
+- DEFGHIJKLMNOPQRSTUVWXYZABC
+- 同时需要支持负数，例如用户输入-3，输出结果：
+- XYZABCDEFGHIJKLMNOPQRSTUVW
+
+```java
+package com.tc.dsa.line.list.issue;
+
+import java.util.Scanner;
+
+/**
+ * 类似凯撒密码的程序
+ *      双向循环链表
+ */
+public class Caesar {
+    public static class Node<E> {
+        E data;
+        Node<E> prior;
+        Node<E> next;
+
+        public Node() {
+        }
+
+        public Node(E data) {
+            this.data = data;
+        }
+    }
+
+    public static Node<String> initList () {
+        Node<String> head = new Node<String>();
+        Node<String> pNode = head;
+        for (int i = 0; i < 26; i++) {
+            Node<String> node = new Node<String>(String.valueOf((char)('A' + i)));
+            node.next = null;
+            node.prior = pNode;
+            pNode.next = node;
+            pNode = node; // 父节点前往新的节点
+        }
+
+        pNode.next = head.next;
+        head.next.prior = pNode;
+
+        return head.next;
+    }
+
+    private static void print(Node node) {
+        Node<String> tNode = node; // 移动后的首节点
+        do {
+            System.out.print(node.data + " ");
+            node = node.next;
+        } while (node != tNode);
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        // 初始化双向循环链表
+        Node<String> nodeHead = initList();
+        Node<String> tNode = nodeHead;
+        System.out.println("原始顺序：");
+        print(tNode);
+
+        System.out.print("请输入移位数字:");
+        Scanner scanner = new Scanner(System.in);
+        int num = scanner.nextInt();
+        num = num % 24; // 24是一圈
+        for (int i = 0; i < Math.abs(num); i++) {
+            tNode = num > 0 ? tNode.next: tNode.prior;
+        }
+
+        System.out.println("结果输出:");
+        print(tNode);
+    }
+}
+```
+
+输出结果：
+
+```
+原始顺序：
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 
+请输入移位数字:-3
+结果输出:
+X Y Z A B C D E F G H I J K L M N O P Q R S T U V W 
+```
+
