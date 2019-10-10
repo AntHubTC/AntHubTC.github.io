@@ -1,0 +1,46 @@
+body {
+    background-color: #d1a5bb;
+}
+.app-title {
+    text-align: center;
+}
+.search-container {
+    text-align: center;
+    margin: 20px;
+}
+.search-container .ipt-text {
+    height: 30px;
+}
+.search-container .ipt-btn {
+    height: 37px;
+}
+.search-container .ipt-text {
+    width: 40%;
+    font-size: 14px;
+}
+.doc-container {
+    width: 90%;
+    margin: 0 auto;
+    clear: both;
+}
+.doc-container .doc-item {
+    display: inline-block;
+    width: auto;
+    padding: 0px 15px;
+    height: 70px;
+    line-height: 70px;
+    overflow: hidden;
+    border: 1px solid black;
+    float: left;
+    margin: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    background-color: #d2e5ee;
+}
+.doc-container .doc-item:hover {
+    background-color: #1abc9c;
+}
+.doc-container .flip-list-move {
+    transition: transform 1s;
+}
