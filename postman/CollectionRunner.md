@@ -4,6 +4,13 @@
 
 ​		[官方介绍](https://learning.getpostman.com/docs/postman/collection_runs/intro_to_collection_runs)非常详细，这里不再自己做一次记录。
 
-
-
 ![img](.\img\Collection_Run_Export_Results.png)
+
+
+
+![1570860016940](.\img\1570860016940.png)
+
+
+
+Postman可以基于数据集的测试，在脚本中可以使用"data.key"去访问数据。
+
