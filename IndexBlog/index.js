@@ -28,6 +28,10 @@ let docs = [
         href: '../postman'
     },
     {
+        title: 'tomcat',
+        href: '../tomcat'
+    },
+    {
         title: '前端知识学习',
         href: '../前端知识学习'
     },
