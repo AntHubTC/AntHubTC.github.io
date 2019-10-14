@@ -37,9 +37,9 @@
 
 ​		服务器：安装了服务器软件的计算机。
 
-​		服务器软件：接收用户请求，处理请求，做出相应。
+​		服务器软件：接收用户请求，处理请求，做出响应。
 
-​		web服务器软件：接收用户的请求，处理请求，做出相应。在web服务器软件中，可以部署web项目，让用户通过浏览器来访问这些项目。
+​		web服务器软件：接收用户的请求，处理请求，做出响应。在web服务器软件中，可以部署web项目，让用户通过浏览器来访问这些项目。
 
 ### 常见web服务器软件
 
@@ -77,7 +77,7 @@
 | 目录    | 目录下的文件              | 说明                                                         |
 | ------- | ------------------------- | ------------------------------------------------------------ |
 | bin     | /                         | 存放tomcat的启动、停止等批处理脚本文件                       |
-|         | startup.bat、startup.sh   | 用于在windows和linux下的启动加班                             |
+|         | startup.bat、startup.sh   | 用于在windows和linux下的启动脚本                             |
 |         | shutdown.bat、shutdown.sh | 用于在windows和linux下的停止脚本                             |
 | conf    | /                         | 用于存放Tomcat相关的配置文件                                 |
 |         | Catalina                  | 用于存储对每个虚拟机的Context配置                            |
@@ -230,3 +230,62 @@ Main class设置为org.apache.catalina.startup.Bootstrap
 运行项目,提示找不到类“CookieFIlter”，这里我从网上找的直接加上:
 
 CookieFilter.java
+
+```java
+package util;
+
+import java.util.Locale;
+import java.util.StringTokenizer;
+
+public class CookieFilter {
+    private static final String OBFUSCATED = "[obfuscated]";
+
+    private CookieFilter() {
+        // Hide default constructor
+    }
+
+    public static String filter(String cookieHeader, String sessionId) {
+
+        StringBuilder sb = new StringBuilder(cookieHeader.length());
+
+        // Cookie name value pairs are ';' separated.
+        // Session IDs don't use ; in the value so don't worry about quoted
+        // values that contain ;
+        StringTokenizer st = new StringTokenizer(cookieHeader, ";");
+
+        boolean first = true;
+        while (st.hasMoreTokens()) {
+            if (first) {
+                first = false;
+            } else {
+                sb.append(';');
+            }
+            sb.append(filterNameValuePair(st.nextToken(), sessionId));
+        }
+
+
+        return sb.toString();
+    }
+
+    private static String filterNameValuePair(String input, String sessionId) {
+        int i = input.indexOf('=');
+        if (i == -1) {
+            return input;
+        }
+        String name = input.substring(0, i);
+        String value = input.substring(i + 1, input.length());
+
+        return name + "=" + filter(name, value, sessionId);
+    }
+
+    public static String filter(String cookieName, String cookieValue, String sessionId) {
+        if (cookieName.toLowerCase(Locale.ENGLISH).contains("jsessionid") &&
+                (sessionId == null || !cookieValue.contains(sessionId))) {
+            cookieValue = OBFUSCATED;
+        }
+
+        return cookieValue;
+    }
+}
+```
+
