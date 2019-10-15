@@ -34,7 +34,7 @@ let docs = [
     {
     	title: 'SecureCRT',
         href: '../SecureCRT'
-    }，
+    },
     {
         title: '前端知识学习',
         href: '../前端知识学习'
