@@ -32,6 +32,10 @@ let docs = [
         href: '../tomcat'
     },
     {
+    	title: 'SecureCRT',
+        href: '../SecureCRT'
+    }，
+    {
         title: '前端知识学习',
         href: '../前端知识学习'
     },
@@ -65,7 +69,8 @@ let docs = [
     },
     {
         title: '文档的组织方式',
-        href: '../docBuildMethod'
+        href: '../docBuildMethod',
+        private: true // 后面可将一些文档隐藏起来
     },
     {
         title: '找工作的一些经历',
