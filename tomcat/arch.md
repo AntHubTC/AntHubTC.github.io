@@ -145,7 +145,7 @@ Catalina各个组件的职责：
 
 ### Container结构
 
-​		Tomcat设计了4中容器，分别是Engine、Host、Context和Wrapper。这4中容器不是平行关系，而是父子关系。Tomcat通过一种分层架构，使得Servlet容器具有很好的灵活性。
+​		Tomcat设计了4种容器，分别是Engine、Host、Context和Wrapper。这4种容器不是平行关系，而是父子关系。Tomcat通过一种分层架构，使得Servlet容器具有很好的灵活性。
 
 ![1571026831697](.\img\1571026831697.png)
 

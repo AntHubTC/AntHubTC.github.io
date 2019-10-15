@@ -1,6 +1,6 @@
 # tomcat基础
 
-****[tomcat官网](https://tomcat.apache.org/)
+[tomcat官网](https://tomcat.apache.org/)
 
 [tomcat7.0官方文档](http://tomcat.apache.org/tomcat-7.0-doc/index.html)
 
@@ -8,9 +8,7 @@
 
 [tomcat9.0官方文档](http://tomcat.apache.org/tomcat-9.0-doc/index.html)
 
-##  Tomcat基础
-
-### web概念
+## web概念
 
 1. 软件架构
 
