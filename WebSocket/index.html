@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="description" content="Description">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<!-- 不同风格样式 -->
+	<link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+	<!-- <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/buble.css"> -->
+	<!-- <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/dark.css"> -->
+	<!-- <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/pure.css"> -->
+	<!-- <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/dolphin.css"> -->
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+    	// 使用文档 https://docsify.js.org
+	    window.$docsify = {
+	        // 文档标题，会显示在侧边栏顶部。
+	        name: 'docsify',
+	        // 点击文档标题后跳转的链接地址。
+	        nameLink: '/',
+	        // 在侧边栏中出现的网站图标，你可以使用CSS来更改大小
+	        logo: './img/doc-logo.svg',
+	        // 配置仓库地址或者 username/repo 的字符串，会在页面右上角渲染一个 GitHub Corner 挂件。
+	        repo: 'https://github.com/FallenGodCoder/FallenGodCoder.github.io',
+	        // 自定义侧边栏
+	        loadSidebar: true,
+	        // 自定义侧边栏同时也可以开启目录功能
+	        subMaxLevel: 4,
+	        // 自定义导航栏 
+	        loadNavbar: false,
+	        // 自定义封面
+	        coverpage: false,
+		    // 用于配置多个封面
+		    // ,coverpage: ['/', '/zh-cn/']
+		    // 切换页面后是否自动跳转到页面顶部
+		    auto2top: true,
+		    // 全文搜素配置
+		    search: {
+		      maxAge: 86400000, // 过期时间，单位毫秒，默认一天
+		      paths: 'auto', // or []
+		      placeholder: 'Type to search',
+		      // 支持本地化
+		      // placeholder: {
+		      //   '/zh-cn/': '搜索',
+		      //   '/': 'Type to search'
+		      // },
+		      noData: 'No Result!',
+		      // 支持本地化
+		      // noData: {
+		      //   '/zh-cn/': '找不到结果',
+		      //   '/': 'No Results'
+		      // },
+		      // 搜索标题的最大程级, 1 - 6
+		      depth: 4
+		    }
+	    }
+    </script>
+    <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+    <!--   =====================插件====================== -->
+    <!-- 全文搜素Search -->
+    <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
+    <!-- emoji插件 -->
+    <script src="//unpkg.com/docsify/lib/plugins/emoji.js"></script>
+    <!-- 外链脚本 - External Script -->
+    <!-- <script src="//unpkg.com/docsify/lib/plugins/external-script.js"></script> -->
+    <!-- 图片缩放 - Zoom image -->
+	<!-- 复制到剪贴板  在所有的代码块上添加一个简单的Click to copy按钮来允许用户从你的文档中轻易地复制代码。  -->
+	<script src="//unpkg.com/docsify-copy-code"></script>
+	<!-- Disqus评论系统支持。 -->
+	<!-- <script src="//unpkg.com/docsify/lib/plugins/disqus.min.js"></script> -->
+	<!-- Gitalk Gitalk，一个现代化的，基于Preact和Github Issue的评论系统  使用详情参考文档-->
+	<!-- docsify的分页导航插件 -->
+	<script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+
+	<!-- 代码高亮 -->
+	<!-- 
+		其它代码高亮插件参考： https://github.com/PrismJS/prism/tree/gh-pages/components
+	 -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-bash.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-css.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-docker.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-git.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-go.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-groovy.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-haml.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-http.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-ini.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-json.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-javascript.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-json.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-kotlin.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-less.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-nginx.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-python.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-sass.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/componentsprism-stylus.min.js/"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-yaml.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-scala.min.js"></script> -->
+	
+	<script>
+	  // 离线模式
+	  if (typeof navigator.serviceWorker !== 'undefined') {
+	    navigator.serviceWorker.register('sw.js')
+	  }
+	</script>
+</body>
+
+</html>

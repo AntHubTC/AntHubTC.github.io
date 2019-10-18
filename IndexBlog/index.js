@@ -8,6 +8,10 @@ let docs = [
         href: '../springBoot'
     },
     {
+        title: 'WebSocket',
+        href: '../WebSocket'
+    },
+    {
         title: 'ElasticSearch',
         href: '../ElasticSearch'
     },
