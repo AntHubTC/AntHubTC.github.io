@@ -17,6 +17,27 @@ ip:hostPort:containerPort 指定ip，容器端口和宿主机端口
     docker run -p 0.0.0.0:8080:80 -i -t ubuntu /bin/bash
 ```
 
+### 修改运行的容器的端口号
+
+#### 方法一
+
+1. 首先获取到容器的ip信息
+
+   ```shell
+   docker inspect `container_name` | grep IPAddress
+   ```
+
+2. iptable添加转发端口
+
+   ```shell
+   # 将容器的8000端口映射到docker主机的8001端口
+   iptables -t nat -A DOCKER -p tcp --dport 8001 -j DNAT --to-destination 容器ip:8000
+   ```
+
+#### 方法二
+
+​		将当前容器提交为镜像，然后基于镜像使用docker run命令后指定-p参数进行主机和容器的端口映射。
+
 ## Nginx部署流程
 
 > 提示：docker hub上有现成的nginx镜像
