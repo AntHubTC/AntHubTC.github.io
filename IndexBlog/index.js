@@ -36,6 +36,10 @@ let docs = [
         href: '../tomcat'
     },
     {
+        title: 'Zookeeper',
+        href: '../Zookeeper'
+    },
+    {
     	title: 'SecureCRT',
         href: '../SecureCRT'
     },
