@@ -127,3 +127,16 @@
 > 如果覆盖率达不到，并且没有跳过测试，那么install会报错。
 
 ![img](.\img\20180925110855419.png)
+
+## CamelCase
+
+大小写及驼峰转换插件 快捷键使用 ➡️ `Shift + Alt + U`
+
+## CodeGlance
+
+代码编辑区缩略图插件 快捷键使用 ➡️ `Ctrl + Shift + G`
+
+### Free MyBatis plugin
+
+让方法和mapper文件之间直接跳转
+
