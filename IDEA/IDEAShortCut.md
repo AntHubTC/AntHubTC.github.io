@@ -1,5 +1,9 @@
 # IDEA快捷键
 
+[网络上朋友的IDEA使用总结](https://www.cnblogs.com/jingmoxukong/p/7813862.html)
+
+
+
 ## IDEA官方快捷键指南图
 
 **windows的IDEA快捷键:**
@@ -9,6 +13,8 @@
 **Mac的IDEA快捷键**
 
 ![Mac的IDEA快捷键](./img/IDEA快捷键_01.png)
+
+
 
 
 
