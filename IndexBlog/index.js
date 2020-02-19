@@ -32,6 +32,10 @@
         href: '../jenkins'
     },
     {
+        title: 'Jmeter',
+        href: '../Jmeter'
+    },
+    {
         title: 'Postman',
         href: '../postman'
     },
