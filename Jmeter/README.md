@@ -118,3 +118,13 @@ Jmeter元件是可以通过拖动来改变它的作用域和执行顺序。
 
 
 
+## 更改界面主题
+
+"Options" --> "Look and Feel" - > "Nimbus"
+
+## 更改界面语言
+
+更改界面语言为“中文简体”：“Options” --> "Choose Language" --> "Chinese(Simplified)"
+
+![1582101502827](.\img\1582101502827.png)
+
