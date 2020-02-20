@@ -4,5 +4,8 @@
 * [断言（检查点）](assert)
 * [JMeter参数化](JMeterParameters)
 * [JMeter集合点与关联](collectionDot)
+* [JMeter图形监控扩展](graphExtention)
+* [测试JDBC](TestJDBC)
+* [JMeter分布式测试](JMeterDistributedTest)
 * [遇到的问题](issues)
 
