@@ -69,7 +69,7 @@
     },
     {
     	title: 'vi/vim',
-    	href: './vi_vim'
+    	href: '../vi_vim'
     },
     {
         title: 'markdown',
