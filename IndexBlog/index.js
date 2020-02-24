@@ -70,7 +70,7 @@
     {
     	title: 'vi/vim',
     	href: './vi_vim'
-    }，
+    },
     {
         title: 'markdown',
         href: '../markdown'
