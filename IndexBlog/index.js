@@ -1,5 +1,9 @@
 ﻿let docs = [
     {
+        title: 'github个人首页',
+        href: 'https://github.com/FallenGodCoder'
+    },
+    {
         title: '数据结构与算法',
         href: '../DataStructureAndAlgorithms'
     },
@@ -58,6 +62,10 @@
     {
         title: 'Windows',
         href: '../windowsOS'
+    },
+    {
+        title: '批处理bat',
+        href: '../BAT'
     },
 	{
         title: 'git文档',
