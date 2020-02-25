@@ -475,6 +475,15 @@ if ... goto break
 
 :break
 
+
+
+**for与%%  %var%  !var!**
+
+for循环体里，用于循环的那个的变量写法，不能是 %var%，循环体的变量必须写为  %%a
+for里也可以有%var%，但这会优先显示为外面的 var变量的值
+在for循环内部，如果不加 setlocal enabledelayedexpansion,那么 !var!只会被当做字符串
+!var!会优先识别 for循环内的变量变化
+
 ## 其它命令
 
 ### ping 命令
@@ -527,7 +536,11 @@ echo %random%
 
 ### exit命令
 
-结束程序。即时是被调用的程序，结束后也不会返回原程序
+exit [/B] [exitCode]
+
+/B          指定要退出当前批处理脚本而不是 CMD.EXE。如果从一个批处理脚本外执行，则会退出 CMD.EXE
+
+exitCode    指定一个数字号码。如果指定了 /B，将 ERRORLEVEL设成那个数字。如果退出 CMD.EXE，则用那个数字设置过程退出代码。
 
 ### shutdown命令
 

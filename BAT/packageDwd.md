@@ -1,11 +1,41 @@
 # 工程打包部署文件实战
 
+## 效果图
+
+检查脚本执行环境：
+
+![1582617900074](.\img\1582617900074.png)
+
+菜单界面1：
+
+![1582617999229](.\img\1582617999229.png)
+
+菜单界面2：
+
+![1582618031469](.\img\1582618031469.png)
+
+构建打包中:
+
+![1582618082452](.\img\1582618082452.png)
+
+## 源码
+
+**package.bat:**
+
+> 文件编码：ANSI。    如果使用UTF-8，在执行bat的时候中文字符显示乱码。
+
 ```bash
 @echo off & setlocal enabledelayedexpansion & color 1a & title dwd package script
 
 setlocal
 
 :init :: init scipt variable
+	echo ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+	echo ▇▇▇▇▇              PROGRAM NAME:dwd package script       ▇▇▇▇▇
+	echo ▇▇▇▇▇              AUTHOR: tangcheng_cd                  ▇▇▇▇▇
+	echo ▇▇▇▇▇              CREATE DATE:2020/02/21                ▇▇▇▇▇
+	echo ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+
 	echo;
 	echo=
 	echo ...init...
@@ -15,7 +45,85 @@ setlocal
 	set SOURCE_DIR=%CD%
 	echo SCRIPT_HOME:%SCRIPT_HOME%
 	cd /d %SCRIPT_HOME%
-	cls
+
+:checkEnv :: check script environment
+	echo check soft run environment...
+
+	echo=
+	echo check npm command...
+	call npm -version && (
+		title dwd package script
+		echo success: npm already installed.
+	) || (
+		title dwd package script
+		echo error: npm not install, please install.
+		goto end
+	)
+
+	echo=
+	echo check node command...
+	call node -v && (
+		echo success: node already installed.
+	) || (
+		echo error: node not install, please install.
+		goto end
+	)
+
+	echo=
+	echo check mvn command...
+	call mvn -v && (
+		echo success: maven already installed.
+	) || (
+		echo error: maven not install, please install.
+		goto end
+	)
+
+	echo=
+	echo check tar command...
+	call tar --help >nul && (
+		echo success: tar already installed.
+	) || (
+		echo error: tar not install, please install.
+		goto end
+	)
+
+	echo=
+	echo check SOURCE_DIR direcotry
+	if not exist %SOURCE_DIR% (
+		echo error: %SOURCE_DIR% directory not exist.
+		goto end
+	) else (
+		echo success: %SOURCE_DIR% direcotry exist.
+	)
+
+
+	echo=
+	for %%p in (dwd_core,dwd_dt,dwd_ops) do (
+		if not exist %SOURCE_DIR%\%%p (
+			echo error: %SOURCE_DIR%\%%p directory not exist.
+			goto end
+		) else (
+			echo success: %SOURCE_DIR%\%%p direcotry exist.
+		)
+
+		if not exist %SOURCE_DIR%\%%p\%%p_FRONT1 (
+			echo error: %SOURCE_DIR%\%%p\%%p_FRONT directory not exist.
+			goto end
+		) else (
+			echo success: %SOURCE_DIR%\%%p\%%p_FRONT direcotry exist.
+		)
+
+		if not exist %SOURCE_DIR%\%%p\%%p%_BACK1 (
+			echo error: %SOURCE_DIR%\%%p\%%p%_BACK directory not exist.
+			goto end
+		) else (
+			echo success: %SOURCE_DIR%\%%p\%%p%_BACK direcotry exist.
+		)
+	)
+
+
+	pause
+	exit /b
 
 :menu1 :: first menu
 	cls
@@ -241,6 +349,7 @@ setlocal
 :end
 	cd /d %SCRIPT_HOME%
 	endlocal
+	echo ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
 	echo The program has ended
 ```
 
