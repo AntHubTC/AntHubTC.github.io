@@ -1,5 +1,7 @@
 * [首页](README)
 
+* [IDEA破解](ideaCrack)
+
 * [IDEA设置Settings](IDEASettings)
 
 * [我的IDEA常用配置](selfIDEAConfiguration)
