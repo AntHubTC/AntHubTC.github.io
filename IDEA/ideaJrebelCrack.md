@@ -16,6 +16,8 @@
 
    JetBrains Activation address was:https://jrebel.qekang.com/{guid}
 
+   网上的一个guiid生成助手： https://www.guidgen.com/
+   
    Demo JRebel address was: 【https://jrebel.qekang.com/8bfabde9-e434-4e9e-9abc-72b723321c7f】, with any email.
 
 ​		![1583809078152](.\img\1583809078152.png)
