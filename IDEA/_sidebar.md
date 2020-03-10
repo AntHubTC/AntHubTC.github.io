@@ -2,6 +2,8 @@
 
 * [IDEA破解](ideaCrack)
 
+* [IDEA中JRebel破解](ideaJrebelCrack)
+
 * [IDEA设置Settings](IDEASettings)
 
 * [我的IDEA常用配置](selfIDEAConfiguration)
