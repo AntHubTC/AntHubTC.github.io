@@ -1,15 +1,15 @@
 ﻿let docs = [
     {
-        title: 'github个人首页',
-        href: 'https://github.com/FallenGodCoder'
-    },
-    {
         title: '数据结构与算法',
         href: '../DataStructureAndAlgorithms'
     },
     {
         title: 'SpringBoot',
         href: '../springBoot'
+    },
+    {
+        title: 'SpringSecurity',
+        href: '../SpringSecurity'
     },
     {
         title: 'WebSocket',
@@ -36,10 +36,6 @@
         href: '../jenkins'
     },
     {
-        title: 'Jmeter',
-        href: '../Jmeter'
-    },
-    {
         title: 'Postman',
         href: '../postman'
     },
@@ -63,10 +59,6 @@
         title: 'Windows',
         href: '../windowsOS'
     },
-    {
-        title: '批处理bat',
-        href: '../BAT'
-    },
 	{
         title: 'git文档',
         href: '../gitDoc'
@@ -74,10 +66,6 @@
     {
         title: 'IDEA',
         href: '../IDEA'
-    },
-    {
-    	title: 'vi/vim',
-    	href: '../vi_vim'
     },
     {
         title: 'markdown',
