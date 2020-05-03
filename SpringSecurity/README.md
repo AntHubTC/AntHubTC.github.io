@@ -701,5 +701,5 @@ public void addInterceptors(InterceptorRegistry registry) {
 
 ### 案例代码
 
-https://github.com/FallenGodCoder/FallenGodCoder.github.io/SpringSecurity/codeSource/securityspringmvc
+[securityspringmvc](https://github.com/FallenGodCoder/FallenGodCoder.github.io/tree/master/SpringSecurity/codeSource/securityspringmvc)
 
