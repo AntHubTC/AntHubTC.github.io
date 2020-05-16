@@ -261,7 +261,7 @@ public class ApplicationConfig {
 
 #### servletContext配置
 
-本案例采用Servlet3.0无web.xml方式，的config包下定义WebConfig.java，它对应s对应于DispatcherServlet配置。
+本案例采用Servlet3.0无web.xml方式，的config包下定义WebConfig.java，它对应于DispatcherServlet配置。
 
 ```java
 @Configuration
@@ -703,3 +703,311 @@ public void addInterceptors(InterceptorRegistry registry) {
 
 [securityspringmvc](https://github.com/FallenGodCoder/FallenGodCoder.github.io/tree/master/SpringSecurity/codeSource/securityspringmvc)
 
+
+
+# Spring Security 快速上手
+
+## Spring Security介绍
+
+​		Spring Security是一个能够为基于Spring的企业应用系统提供声明式的安全访问控制解决方案的安全框架。由于它是Spring生态系统中的一员，因此它伴随着整个Spring生态系统不断修正、升级，在spring boot项目中加入spring security更是十分简单，使用Spring Security 减少了为企业系统安全控制编写大量重复代码的工作。
+
+## 创建工程
+
+### 创建Maven工程
+
+创建maven工程security-spring-security，工程结构如下：
+
+![工程结构](.\img\20191009081634636.png)
+
+2）引入以下依赖：
+
+在security-springmvc的基础上增加spring-security的依赖：
+
+```xml
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>5.1.4.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.1.4.RELEASE</version>
+        </dependency>
+```
+
+### Spring容器配置
+
+同security-springmvc.
+
+```java
+@Configuration
+@ComponentScan(basePackages = "com.pbteach.security.springmvc"
+                ,excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,value = Controller.class)})
+public class ApplicationConfig {
+    //在此配置除了Controller的其它bean，比如：数据库链接池、事务管理器、业务bean等。
+}
+```
+
+### Servlet Context配置
+
+```java
+@Configuration
+@EnableWebMvc
+@ComponentScan(basePackages = "com.pbteach.security.springmvc"
+            ,includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,value = Controller.class)})
+public class WebConfig implements WebMvcConfigurer {
+
+    //视频解析器
+    @Bean
+    public InternalResourceViewResolver viewResolver(){
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix("/WEB-INF/views/");
+        viewResolver.setSuffix(".jsp");
+        return viewResolver;
+    }
+ }
+```
+
+### 加载 Spring容器
+
+在init包下定义Spring容器初始化类SpringApplicationInitializer，此类实现WebApplicationInitializer接口，Spring容器启动时加载WebApplicationInitializer接口的所有实现类。
+
+```java
+public class SpringApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class<?>[] { ApplicationConfig.class };//指定rootContext的配置类
+    }
+
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class<?>[] { WebConfig.class }; //指定servletContext的配置类
+    }
+
+    @Override
+    protected String[] getServletMappings() {
+        return new String [] {"/"};
+    }
+}
+```
+
+## 认证
+
+### 认证页面
+
+springSecurity默认提供认证页面，不需要额外开发。
+
+![springSecurity默认提供认证页面](.\img\20191009081810807.png)
+
+### 安全配置
+
+spring security提供了用户名密码登录、退出、会话管理等认证功能，只需要配置即可使用。
+
+1. 在config包下定义WebSecurityConfig，安全配置的内容包括：用户信息、密码编码器、安全拦截机制。
+
+```java
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    //配置用户信息服务
+        @Bean
+        public UserDetailsService userDetailsService()  {
+            InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+            manager.createUser(User.withUsername("zhangsan").password("123").authorities("p1").build());
+            manager.createUser(User.withUsername("lisi").password("456").authorities("p2").build());
+        return manager;
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+    	return  NoOpPasswordEncoder.getInstance();
+    }
+    //配置安全拦截机制
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/r/**").authenticated()               （1）
+                .anyRequest().permitAll()                           （2）
+                .and()
+                .formLogin().successForwardUrl("/login-success");   （3）
+    }
+}
+```
+
+在userDetailsService()方法中，我们返回了一个UserDetailsService给spring容器，Spring Security会使用它来获取用户信息。我们暂时使用InMemoryUserDetailsManager实现类，并在其中分别创建了zhangsan、lisi两个用户，并设置密码和权限。
+
+而在configure()中，我们通过HttpSecurity设置了安全拦截规则，其中包含了以下内容：
+
+（1）url匹配/r/**的资源，经过认证后才能访问。
+
+（2）其他url完全开放。
+
+（3）支持form表单认证，认证成功后转向/login-success。
+
+关于HttpSecurity的配置清单请参考附录 HttpSecurity。
+
+加载 WebSecurityConfig
+修改SpringApplicationInitializer的getRootConfigClasses()方法，添加WebSecurityConfig.class：
+
+```java
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class<?>[] { ApplicationConfig.class, WebSecurityConfig.class};
+    }
+```
+
+## Spring Security初始化
+
+Spring Security初始化，这里有两种情况
+
+若当前环境没有使用Spring或Spring MVC，则需要将 WebSecurityConfig(Spring Security配置类) 传入超类，以确保获取配置，并创建spring context。
+相反，若当前环境已经使用spring，我们应该在现有的springContext中注册Spring Security(上一步已经做将WebSecurityConfig加载至rootcontext)，此方法可以什么都不做。
+在init包下定义SpringSecurityApplicationInitializer：
+
+```java
+    public class SpringSecurityApplicationInitializer
+            extends AbstractSecurityWebApplicationInitializer {
+        public SpringSecurityApplicationInitializer() {
+            //super(WebSecurityConfig.class);
+        }
+    }
+```
+
+## 默认根路径请求
+
+在WebConfig.java中添加默认请求根路径跳转到/login，此url为spring security提供：
+
+// 默认Url根路径跳转到/login，此url为spring security提供
+
+```java
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("redirect:/login");
+    }
+```
+
+spring security默认提供的登录页面。
+
+## 认证成功页面
+
+在安全配置中，认证成功将跳转到/login-success，代码如下：
+
+```java
+//配置安全拦截机制
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+    http
+            .authorizeRequests()
+            .antMatchers("/r/**").authenticated()               （1）
+            .anyRequest().permitAll()                           （2）
+            .and()
+            .formLogin().successForwardUrl("/login-success");   （3）
+}
+```
+
+spring security支持form表单认证，认证成功后转向/login-success。
+
+在LoginController中定义/login-success:
+
+```java
+@RequestMapping(value = "/login-success",produces = {"text/plain;charset=UTF-8"})
+public String loginSuccess(){
+    return " 登录成功";
+}
+```
+
+## 测试
+
+（1）启动项目，访问http://localhost:8080/security-spring-security/路径地址
+
+![登录界面](.\img\20191009081907180.png)
+
+页面会根据WebConfig中addViewControllers配置规则，跳转至/login，/login是pring Security提供的登录页面。
+
+（2）登录
+
+1、输入错误的用户名、密码
+
+![登录错误](.\img\20191009081921100.png)
+
+2、输入正确的用户名、密码，登录成功
+
+（3）退出
+
+1、请求/logout退出
+
+![注销](.\img\20191009081946780.png)
+
+2、退出 后再访问资源自动跳转到登录页面
+
+## 授权
+
+实现授权需要对用户的访问进行拦截校验，校验用户的权限是否可以操作指定的资源，Spring Security默认提供授权实现方法。
+
+在LoginController添加/r/r1或/r/r2
+
+```java
+/**
+ * 测试资源1
+ * @return
+ */
+@GetMapping(value = "/r/r1",produces = {"text/plain;charset=UTF-8"})
+public String r1(){
+    return " 访问资源1";
+}
+
+/**
+ * 测试资源2
+ * @return
+ */
+@GetMapping(value = "/r/r2",produces = {"text/plain;charset=UTF-8"})
+public String r2(){
+    return " 访问资源2";
+}
+```
+
+在安全配置类WebSecurityConfig.java中配置授权规则：
+
+```java
+.antMatchers("/r/r1").hasAuthority("p1")                                      
+ .antMatchers("/r/r2").hasAuthority("p2")
+```
+
+.antMatchers("/r/r1").hasAuthority(“p1”)表示：访问/r/r1资源的 url需要拥有p1权限。
+
+.antMatchers("/r/r2").hasAuthority(“p2”)表示：访问/r/r2资源的 url需要拥有p2权限。
+
+完整的WebSecurityConfig方法如下：
+
+```java
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+    http
+            .authorizeRequests()
+            .antMatchers("/r/r1").hasAuthority("p1")
+            .antMatchers("/r/r2").hasAuthority("p2")
+            .antMatchers("/r/**").authenticated()
+            .anyRequest().permitAll()
+            .and()
+            .formLogin().successForwardUrl("/login-success");
+}
+```
+
+测试：
+
+1、登录成功
+
+2、访问/r/r1和/r/r2，有权限时则正常访问，否则返回403（拒绝访问）
+
+
+
+## 小结
+
+​	通过快速上手，咱们使用Spring Security实现了认证和授权，Spring Security提供了基于账号和密码的认证方式，通过安全配置即可实现请求拦截，授权功能，Spring Security能完成的不仅仅是这些。
+
+
+
+# Spring应用详解
+
+asf
