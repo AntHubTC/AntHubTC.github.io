@@ -54,6 +54,10 @@ Mac OS X + Parallels
 - 不容易管理
 - 兼容性不佳
 
+### 扩展
+
+​		以上使用网桥的方法不太好，查看[这个文档](https://www.cnblogs.com/jsonhc/p/7823286.html)使用网桥的方法更好。
+
 ## 使用Open vSwitch实现跨主机容器连接
 
 **Open vSwitch是什么？**
