@@ -77,7 +77,8 @@
     },
     {
         title: '简历Resume',
-        href: '../resume/resume.html'
+        href: '../resume/resume.html',
+        private: true // 后面可将一些文档隐藏起来
     },
 	{
         title: '第三方文档收集',
