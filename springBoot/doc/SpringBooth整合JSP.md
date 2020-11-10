@@ -1,4 +1,4 @@
-# SpringBooth整合JSP
+# SpringBoot整合JSP
 
 源代码项目参考: 09-spring-boot-view-jsp
 

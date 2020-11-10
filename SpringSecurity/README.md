@@ -1,5 +1,9 @@
 # Spring Security OAuth2.0认证授权
 
+​	学习来源：哔哩哔哩上《[java进阶教程2天快速入门Spring Security OAuth2.0认证授权](https://www.bilibili.com/video/BV1VE411h7aL?p=13)》
+
+​	文档参考：[地址](https://so.csdn.net/so/search/s.do?q=%E8%B7%9F%E7%9D%80%E7%87%95%E9%9D%92%E5%AD%A6Spring%20Security&t=blog&u=weixin_44062339)
+
 ## 基本概念
 
 ### 什么是认证
@@ -1010,4 +1014,234 @@ protected void configure(HttpSecurity http) throws Exception {
 
 # Spring应用详解
 
-asf
+## 集成Spring Boot
+
+### Spring Boot介绍
+
+​		Spring Boot是一套Spring的快速开发框架，基于Spring 4.0设计，使用Spring Boot开发可以避免一些繁琐的工程搭建和配置，同时它集成了大量的常用框架，快速导入依赖包，避免依赖包的冲突。基本上常用的开发框架都支持Spring Boot开发，例如：MyBatis、Dubbo等，Spring 家族更是如此，例如：Spring cloud、Spring mvc、Spring security等，使用Spring Boot开发可以大大得高生产率，所以Spring Boot的使用率非常高。
+
+​		本章节讲解如何通过Spring Boot开发Spring Security应用，Spring Boot提供spring-boot-starter-security用于开发Spring Security应用。
+
+## 创建工程
+
+### 创建Maven工程
+
+创建maven工程 security-spring-boot，工程结构如下：
+
+![security-spring-boot](.\img\20191010075247892.png)
+
+引入以下依赖：
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.pbteach.security</groupId>
+    <artifactId>security-springboot</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.3.RELEASE</version>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+    <dependencies>
+        <!-- 以下是>spring boot依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 以下是>spring security依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+
+        <!-- 以下是jsp依赖-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--jsp页面使用jstl标签 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--用于编译jsp -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
+        </dependency>
+         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.0</version>
+          </dependency>
+    </dependencies>
+    <build>
+        <finalName>security-springboot</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <version>2.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <configuration>
+                        <encoding>utf-8</encoding>
+                        <useDefaultDelimiters>true</useDefaultDelimiters>
+                        <resources>
+                            <resource>
+                                <directory>src/main/resources</directory>
+                                <filtering>true</filtering>
+                                <includes>
+                                    <include>**/*</include>
+                                </includes>
+                            </resource>
+                            <resource>
+                                <directory>src/main/java</directory>
+                                <includes>
+                                    <include>**/*.xml</include>
+                                </includes>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
+```
+
+### spring 容器配置
+
+SpringBoot工程启动会自动扫描启动类所在包下的所有Bean，加载到spring容器。
+
+1）Spring Boot配置文件
+
+在resources下添加application.properties，内容如下：
+
+```properties
+server.port=8080
+server.servlet.context-path=/security-springboot
+spring.application.name = security-springboot
+```
+
+2）Spring Boot 启动类
+
+```java
+@SpringBootApplication
+public class SecuritySpringBootApp {
+    public static void main(String[] args) {
+        SpringApplication.run(SecuritySpringBootApp.class, args);
+    }
+
+}
+```
+
+### Servlet Context配置
+
+由于Spring boot starter自动装配机制，这里无需使用@EnableWebMvc与@ComponentScan，WebConfig如下
+
+```java
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+    //默认Url根路径跳转到/login，此url为spring security提供
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("redirect:/login");
+    }
+}
+```
+
+视图解析器配置在application.properties中
+
+```properties
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
+```
+
+### 安全配置
+
+由于Spring boot starter自动装配机制，这里无需使用@EnableWebSecurity，WebSecurityConfig内容如下
+
+在config包下定义WebSecurityConfig，安全配置的内容包括：用户信息、密码编码器、安全拦截机制。
+
+```java
+ @Configuration
+    public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    //配置用户信息服务
+        @Bean
+        public UserDetailsService userDetailsService()  {
+            InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+            manager.createUser(User.withUsername("zhangsan").password("123").authorities("p1").build());
+            manager.createUser(User.withUsername("lisi").password("456").authorities("p2").build());
+        return manager;
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+    	return  NoOpPasswordEncoder.getInstance();
+    }
+    //配置安全拦截机制
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/r/**").authenticated()               （1）
+                .anyRequest().permitAll()                           （2）
+                .and()
+                .formLogin().successForwardUrl("/login-success");   （3）
+    }
+}
+```
+
+​		在userDetailsService()方法中，我们返回了一个UserDetailsService给spring容器，Spring Security会使用它来获取用户信息。我们暂时使用InMemoryUserDetailsManager实现类，并在其中分别创建了zhangsan、lisi两个用户，并设置密码和权限。
+
+> 而在configure()中，我们通过HttpSecurity设置了安全拦截规则，其中包含了以下内容：
+> （1）url匹配/r/**的资源，经过认证后才能访问。
+> （2）其他url完全开放。
+> （3）支持form表单认证，认证成功后转向/login-success。
+
+### 测试
+
+LoginController的内容同同Spring security入门程序。
+
+测试过程：
+
+1、测试认证
+
+2、测试退出
+
+3、测试授权
