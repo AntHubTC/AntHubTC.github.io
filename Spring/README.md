@@ -80,3 +80,13 @@ https://docs.spring.io/spring-framework/docs/ 能看见各个版本的文档
 ​       因为现在大多数公司都在使用SpringBoot进行快速开发，学习SpringBoot的前提，需要完全掌握Spring及SpringMVC！承上启下！
 
 ​		**弊端：发展了太久之后，违背了原来的理念！配置十分繁琐，人称：“配置地狱”。**
+
+
+
+### 不错的资料
+
+[Spring源码解析：BeanFactory深入理解](https://blog.csdn.net/qq_36688143/article/details/84968036)
+
+[最详细的Spring核心IOC的源码分析](https://blog.csdn.net/nuomizhende45/article/details/81158383)
+
+[Spring源码分析](https://www.cnblogs.com/warehouse/p/9372260.html)
