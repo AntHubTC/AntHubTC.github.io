@@ -106,6 +106,10 @@
         title: '人生规划',
         href: '../LifePlan',
         private: true // 后面可将一些文档隐藏起来
+    },
+    {
+        title: '中国礼仪',
+        href: '../chinaCeremony'
     }
 ]
 
