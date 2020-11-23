@@ -4,6 +4,10 @@
         href: '../DataStructureAndAlgorithms'
     },
     {
+        title: 'JUC',
+        href: '../JUC'
+    },
+    {
         title: 'Spring',
         href: '../Spring'
     },
@@ -63,7 +67,7 @@
         title: 'Windows',
         href: '../windowsOS'
     },
-	{
+    {
         title: 'git文档',
         href: '../gitDoc'
     },
