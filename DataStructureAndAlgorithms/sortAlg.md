@@ -1,5 +1,11 @@
 # 排序算法
 
+参考资料： 
+
+[视频资料](https://www.bilibili.com/video/BV1nJ411V7bd?p=160)
+
+https://www.runoob.com/w3cnote/radix-sort.html
+
 ## 基本概念和排序方法概述
 
 ## 插入排序
@@ -20,6 +26,8 @@
 ​	顺序法定位插入位置。
 
 ​	[视频资料](https://www.bilibili.com/video/BV1nJ411V7bd?p=160)
+
+![img](img/sortAlg/insertionSort.gif)
 
 ```java
 public class Main {
@@ -158,6 +166,8 @@ public class Main {
 
 ​	[视频资料](https://www.bilibili.com/video/BV1nJ411V7bd?p=162)
 
+![img](img/sortAlg/Sorting_shellsort_anim.gif)
+
 ```java
 package com.csii;
 
@@ -237,6 +247,8 @@ public class Main {
 　　**内层循环**：即副循环，需要辅助我们进行相邻元素之间的比较和换位，把大的或者小的浮到水面上。所以我们会一直遍历 n-1-i 次这样可以保证没有归位的尽量归位，而归位的就不用再比较了。
 
 　　而上面的问题，出现的原因也来源于这两次无脑的循环，正是因为循环不顾一切的向下执行，所以会导致在一些特殊情况下得多余。例如 5，4，3，1，2 的情况下，常规版会进行四次循环，但实际上第一次就已经完成排序了。
+
+![img](img/sortAlg/bubbleSort.gif)
 
 ```java
 
@@ -391,6 +403,51 @@ public static void main(String[] args){
 
 　　关于最优时间复杂度为什么是O(n)，当然是优化过算法之后了！大家继续向下看就知道了！。
 
+### 鸡尾酒排序
+
+​	鸡尾酒排序又称双向冒泡排序、鸡尾酒搅拌排序、搅拌排序、涟漪排序、来回排序或快乐小时排序, 是冒泡排序的一种变形。**该算法与冒泡排序的不同处在于排序时是以双向在序列中进行排序。**
+
+​	使用鸡尾酒排序为一列数字进行排序的过程可以通过右图形象的展示出来：
+​	数组中的数字本是无规律的排放，先找到最小的数字，把他放到第一位，然后找到最大的数字放到最后一位。然后再找到第二小的数字放到第二位，再找到第二大的数字放到倒数第二位。以此类推，直到完成排序。
+
+![img](img/sortAlg/20180521164746118)
+
+```java
+public static int[] cocktailSort(int[] src)
+{
+        int len = src.length;
+    //将最小值排到队尾
+    for(int i = 0 ; i < len/2 ; i++)
+    {
+        for(int j = i ; j < len-i-1 ; j++)
+        {
+            if(src[j] < src[j+1])
+            {
+                int temp = src[j];
+                src[j] = src[j+1];
+                src[j+1] = temp;
+            }
+            System.out.println("交换小"+Arrays.toString(src));
+        }
+        //将最大值排到队头
+        for(int j = len-1-(i+1); j > i ; j--)
+        {
+            if(src[j] > src[j-1])
+            {
+                int temp = src[j];
+                src[j] = src[j-1];
+                src[j-1] = temp;
+            }
+            System.out.println("交换大"+Arrays.toString(src));
+        }
+        System.out.println("第"+i+"次排序结果："+Arrays.toString(src));
+    }
+    return src;
+}
+```
+
+
+
 ### 快速排序
 
 ​	不稳定排序
@@ -406,6 +463,8 @@ public static void main(String[] args){
 - 直到每个子表的元素只剩一个；
 
   参考资料：[这个文章不错](https://blog.csdn.net/shujuelin/article/details/82423852)
+  
+  ![img](img/sortAlg/quickSort.gif)
 
 ```java
     public static void main(String[] args){
@@ -489,6 +548,8 @@ $$
 2. 再通过n-2次比较，从剩余的n-1个记录中找出关键字最小的记录，将它与第二个记录交换。
 3. 重复上述操作，共进行n-1趟排序后，排序结束。
 
+![img](img/sortAlg/selectionSort.gif)
+
 ```java
     public static void main(String[] args){
         int[] array={49,38,65,97,76,13,27,49,78,34,12,64,1};
@@ -542,7 +603,25 @@ $$
 
 ### 堆排序
 
-​	
+堆排序（Heapsort）是指利用堆这种数据结构所设计的一种排序算法。堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。堆排序可以说是一种利用堆的概念来排序的选择排序。分为两种方法：
+
+1. 大顶堆：每个节点的值都大于或等于其子节点的值，在堆排序算法中用于升序排列；
+2. 小顶堆：每个节点的值都小于或等于其子节点的值，在堆排序算法中用于降序排列；
+
+堆排序的平均时间复杂度为 Ο(nlogn)。
+
+#### 1. 算法步骤
+
+1. 创建一个堆 H[0……n-1]；
+2. 把堆首（最大值）和堆尾互换；
+3. 把堆的尺寸缩小 1，并调用 shift_down(0)，目的是把新的数组顶端数据调整到相应位置；
+4. 重复步骤 2，直到堆的尺寸为 1。
+
+#### 2. 动图演示
+
+​	![img](img/sortAlg/heapSort.gif)
+
+![img](img/sortAlg/Sorting_heapsort_anim.gif)
 
 ```java
 
@@ -646,13 +725,21 @@ $$
 
 - 堆排序是一种不稳定的排序方法，它不适用于待排序n-1次循环所需时间不超过记录个数n较少的情况。
 
+## 二叉树排序
+
+​	**二叉树排序的基本原理：**使用第一个元素作为根节点，如果之后的元素比第一个小，则放到左子树，否则放到右子树，之后按中序遍历。中序遍历的结果就是有序的。
+
+
+
 ## 归并排序
 
 ​	[百度查询](https://baike.baidu.com/item/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/1639015?fr=aladdin)
 
-​	基本思想：将两个或两个以上的有序子序列”归并“为一个有序序列。常见的2路归并排序。
+​	基本思想：将两个或两个以上的**有序子序列**”归并“为一个有序序列。常见的2路归并排序。
 
 ​	归并排序（Merge Sort）是建立在归并操作上的一种有效，稳定的排序算法，该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。若将两个有序表合并成一个有序表，称为二路归并。
+
+![img](img/sortAlg/mergeSort.gif)
 
 ```java
 
@@ -683,7 +770,8 @@ $$
         int[] leftArr = mergeSort(nums, l, mid); //左有序数组
         int[] rightArr = mergeSort(nums, mid + 1, h); //右有序数组
         int[] newNum = new int[leftArr.length + rightArr.length]; //新有序数组
-
+		
+        // 递归使用归并思想归并有序序列（按理是对一个已经有序的序列进行合并）
         int m = 0, i = 0, j = 0;
         while (i < leftArr.length && j < rightArr.length) {
             newNum[m++] = leftArr[i] < rightArr[j] ? leftArr[i++] : rightArr[j++];
@@ -698,9 +786,176 @@ $$
 
 
 
+
+
+## 计数排序
+
+计数排序的核心在于将输入的数据值转化为键存储在额外开辟的数组空间中。作为一种线性时间复杂度的排序，计数排序要求输入的数据必须是有确定范围的整数。
+
+1. 计数排序的特征
+
+当输入的元素是 n 个 0 到 k 之间的整数时，它的运行时间是 Θ(n + k)。计数排序不是比较排序，排序的速度快于任何比较排序算法。
+
+由于用来计数的数组C的长度取决于待排序数组中数据的范围（等于待排序数组的最大值与最小值的差加上1），这使得计数排序对于数据范围很大的数组，需要大量时间和内存。例如：计数排序是用来排序0到100之间的数字的最好的算法，但是它不适合按字母顺序排序人名。但是，计数排序可以用在基数排序中的算法来排序数据范围很大的数组。
+
+通俗地理解，例如有 10 个年龄不同的人，统计出有 8 个人的年龄比 A 小，那 A 的年龄就排在第 9 位,用这个方法可以得到其他每个人的位置,也就排好了序。当然，年龄有重复时需要特殊处理（保证稳定性），这就是为什么最后要反向填充目标数组，以及将每个数字的统计减去 1 的原因。
+
+ 算法的步骤如下：
+
+- （1）找出待排序的数组中最大和最小的元素
+- （2）统计数组中每个值为i的元素出现的次数，存入数组C的第i项
+- （3）对所有的计数累加（从C中的第一个元素开始，每一项和前一项相加）
+- （4）反向填充目标数组：将每个元素i放在新数组的第C(i)项，每放一个元素就将C(i)减去1
+
+![img](img/sortAlg/countingSort-1606358504227.gif)
+
+```java
+public class CountingSort implements IArraySort {
+
+    @Override
+    public int[] sort(int[] sourceArray) throws Exception {
+        // 对 arr 进行拷贝，不改变参数内容
+        int[] arr = Arrays.copyOf(sourceArray, sourceArray.length);
+
+        int maxValue = getMaxValue(arr);
+
+        return countingSort(arr, maxValue);
+    }
+
+    private int[] countingSort(int[] arr, int maxValue) {
+        int bucketLen = maxValue + 1;
+        int[] bucket = new int[bucketLen];
+
+        for (int value : arr) {
+            bucket[value]++;
+        }
+
+        int sortedIndex = 0;
+        for (int j = 0; j < bucketLen; j++) {
+            while (bucket[j] > 0) {
+                arr[sortedIndex++] = j;
+                bucket[j]--;
+            }
+        }
+        return arr;
+    }
+
+    private int getMaxValue(int[] arr) {
+        int maxValue = arr[0];
+        for (int value : arr) {
+            if (maxValue < value) {
+                maxValue = value;
+            }
+        }
+        return maxValue;
+    }
+
+}
+```
+
+
+
+## 桶排序
+
+桶排序是计数排序的升级版。它利用了函数的映射关系，高效与否的关键就在于这个映射函数的确定。为了使桶排序更加高效，我们需要做到这两点：
+
+1. 在额外空间充足的情况下，尽量增大桶的数量
+2. 使用的映射函数能够将输入的 N 个数据均匀的分配到 K 个桶中
+
+同时，对于桶中元素的排序，选择何种比较排序算法对于性能的影响至关重要。
+
+### 1. 什么时候最快
+
+当输入的数据可以均匀的分配到每一个桶中。
+
+### 2. 什么时候最慢
+
+当输入的数据被分配到了同一个桶中。
+
+### 3. 示意图
+
+元素分布在桶中：
+
+![img](img/sortAlg/Bucket_sort_1.svg_.png)
+
+然后，元素在每个桶中排序：
+
+![img](img/sortAlg/Bucket_sort_2.svg_.png)
+
+```java
+public class BucketSort implements IArraySort {
+
+    private static final InsertSort insertSort = new InsertSort();
+
+    @Override
+    public int[] sort(int[] sourceArray) throws Exception {
+        // 对 arr 进行拷贝，不改变参数内容
+        int[] arr = Arrays.copyOf(sourceArray, sourceArray.length);
+
+        return bucketSort(arr, 5);
+    }
+
+    private int[] bucketSort(int[] arr, int bucketSize) throws Exception {
+        if (arr.length == 0) {
+            return arr;
+        }
+
+        int minValue = arr[0];
+        int maxValue = arr[0];
+        for (int value : arr) {
+            if (value < minValue) {
+                minValue = value;
+            } else if (value > maxValue) {
+                maxValue = value;
+            }
+        }
+
+        int bucketCount = (int) Math.floor((maxValue - minValue) / bucketSize) + 1;
+        int[][] buckets = new int[bucketCount][0];
+
+        // 利用映射函数将数据分配到各个桶中
+        for (int i = 0; i < arr.length; i++) {
+            int index = (int) Math.floor((arr[i] - minValue) / bucketSize);
+            buckets[index] = arrAppend(buckets[index], arr[i]);
+        }
+
+        int arrIndex = 0;
+        for (int[] bucket : buckets) {
+            if (bucket.length <= 0) {
+                continue;
+            }
+            // 对每个桶进行排序，这里使用了插入排序
+            bucket = insertSort.sort(bucket);
+            for (int value : bucket) {
+                arr[arrIndex++] = value;
+            }
+        }
+
+        return arr;
+    }
+
+    /**
+     * 自动扩容，并保存数据
+     *
+     * @param arr
+     * @param value
+     */
+    private int[] arrAppend(int[] arr, int value) {
+        arr = Arrays.copyOf(arr, arr.length + 1);
+        arr[arr.length - 1] = value;
+        return arr;
+    }
+
+}
+```
+
+
+
 ## 基数排序
 
-​		基数排序（radix sort）属于“分配式排序”（distribution sort），又称“桶排序”（bucket sort）或bin sort，顾名思义，它是透过键值的部份资讯，将要排序的元素分配至某些“桶”中，藉以达到排序的作用，基数排序法是属于稳定性的排序，其时间复杂度为O (nlog(r)m)，其中r为所采取的基数，而m为堆数，在某些时候，基数排序法的效率高于其它的稳定性排序法。
+​		基数排序（radix sort）属于“分配式排序”（distribution sort），又称“桶子法”（bucket sort）或bin sort，顾名思义，它是透过键值的部份资讯，将要排序的元素分配至某些“桶”中，藉以达到排序的作用，基数排序法是属于稳定性的排序，其时间复杂度为O (nlog(r)m)，其中r为所采取的基数，而m为堆数，在某些时候，基数排序法的效率高于其它的稳定性排序法。
+
+![img](img/sortAlg/radixSort.gif)
 
 ```java
 
@@ -765,18 +1020,31 @@ $$
 
 ## 排序综合分析
 
-![image-20201109145233244](/media/tc/jx-file/2_STUDY/GitHubRepositories/00myGitHubRepository/FallenGodCoder.github.io/DataStructureAndAlgorithms/img/image-20201109145233244.png)
+![img](img/sortAlg/sort.png)
 
-### 时间性能
+![img](img/sortAlg/0B319B38-B70E-4118-B897-74EFA7E368F9.png)
 
-1. 按平均的时间性能来分，有三类排序方法：
-   - 时间复杂度为O(nlogn)的方法有：
-     - 快速排序、堆排序和归并排序，其中以快速排序为最好；
-   - 时间复杂度为O(n平方)的有：
-     - 直接插入排序、冒泡排序和简单选择排序，其中以直接插入排序为最好，特别是对那些对关键字近似有序的记录序列尤为如此；
-   - 时间复杂度为O(n)的排序方法只有：基数排序。
-2. 当待排序记录序列按关键字顺序有序时，直接插入排序和冒泡排序能达到O(n)的时间复杂度；而对于快速排序而言，这个是最不好的情况，此时的时间性能退化为O(n平方)，因此是应该尽量避免的情况。
-3. 简单选择排序、堆排序和归并排序的时间性能不随记录序列中关键字的分布而改变。
+### 关于时间复杂度
 
+**平方阶 (O(n2))** 排序 各类简单排序：直接插入、直接选择和冒泡排序。
 
+**线性对数阶 (O(nlog2n))** 排序 快速排序、堆排序和归并排序；
+
+**O(n1+§)) 排序**，§ 是介于 0 和 1 之间的常数。 希尔排序
+
+**线性阶 (O(n)) 排序** 基数排序，此外还有桶、箱排序。
+
+关于稳定性
+
+**稳定的排序算法：**冒泡排序、插入排序、归并排序和基数排序。
+
+**不是稳定的排序算法：**选择排序、快速排序、希尔排序、堆排序。
+
+名词解释：
+
+- n：数据规模
+- k："桶"的个数
+- In-place：占用常数内存，不占用额外内存
+- Out-place：占用额外内存
+- 稳定性：排序后 2 个相等键值的顺序和排序之前它们的顺序相同
 
