@@ -4,4 +4,7 @@
 * [单例模式](singleton)
 * [工厂模式](factory)
 * [抽象工厂模式](abstractFactory)
+* [模板方法模式](templateMethod)
+* [建造者模式](builder)
+* [代理模式](proxy)
 
