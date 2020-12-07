@@ -15,5 +15,6 @@
 * [12 - 策略模式](strategy)
 * [13 - 适配器模式](adapter)
 * [14 - 迭代器模式](iterator)
+* [15 - 组合模式](composite)
 * [命令模式和策略模式的区别](https://www.cnblogs.com/cg88/p/9480143.html)
 
