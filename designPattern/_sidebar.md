@@ -13,5 +13,6 @@
 * [10 - 责任链模式](chain)
 * [11 - 装饰器模式](decorator)
 * [12 - 策略模式](strategy)
+* [13 - 适配器模式](adapter)
 * [命令模式和策略模式的区别](https://www.cnblogs.com/cg88/p/9480143.html)
 
