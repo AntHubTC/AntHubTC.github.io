@@ -84,6 +84,10 @@
         href: '../markdown'
     },
     {
+        title: 'redisDoc',
+        href: 'http://redisdoc.com/'
+    },
+    {
         title: '数据治理与数据仓库模型设计',
         href: '../数据治理与数据仓库模型设计'
     },
