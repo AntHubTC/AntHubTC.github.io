@@ -1,128 +1,34 @@
 ﻿let docs = [
-    {
-        title: '数据结构与算法',
-        href: '../DataStructureAndAlgorithms'
-    },
-    {	
-        title: '设计模式',
-        href: '../designPattern'
-    },
-    {
-        title: 'JUC',
-        href: '../JUC'
-    },
-    {
-        title: 'Java NIO',
-        href: '../javaNIO'
-    },
-    {
-        title: 'Spring',
-        href: '../Spring'
-    },
-    {
-        title: 'SpringBoot',
-        href: '../springBoot'
-    },
-    {
-        title: 'SpringSecurity',
-        href: '../SpringSecurity'
-    },
-    {
-        title: 'WebSocket',
-        href: '../WebSocket'
-    },
-    {
-        title: 'ElasticSearch',
-        href: '../ElasticSearch'
-    },
-    {
-        title: 'Mock服务',
-        href: '../mockService'
-    },
-    {
-        title: 'DevOps',
-        href: '../DevOps'
-    },
-    {
-        title: 'Docker',
-        href: '../Docker'
-    },
-    {
-        title: 'Jenkins',
-        href: '../jenkins'
-    },
-    {
-        title: 'Postman',
-        href: '../postman'
-    },
-    {
-        title: 'tomcat',
-        href: '../tomcat'
-    },
-    {
-        title: 'Zookeeper',
-        href: '../Zookeeper'
-    },
-    {
-    	title: 'SecureCRT',
-        href: '../SecureCRT'
-    },
-    {
-        title: '前端知识学习',
-        href: '../前端知识学习'
-    },
-    {
-        title: 'Windows',
-        href: '../windowsOS'
-    },
-    {
-        title: 'git文档',
-        href: '../gitDoc'
-    },
-    {
-        title: 'IDEA',
-        href: '../IDEA'
-    },
-    {
-        title: 'markdown',
-        href: '../markdown'
-    },
-    {
-        title: 'redisDoc',
-        href: 'http://redisdoc.com/'
-    },
-    {
-        title: '数据治理与数据仓库模型设计',
-        href: '../数据治理与数据仓库模型设计'
-    },
-    {
-        title: '简历Resume',
-        href: '../resume/resume.html',
-        private: true // 后面可将一些文档隐藏起来
-    },
-	{
-        title: '第三方文档收集',
-        href: '../thirdDocument'
-    },
-    {
-        title: '文档的组织方式',
-        href: '../docBuildMethod',
-        private: true // 后面可将一些文档隐藏起来
-    },
-    {
-        title: '找工作的一些经历',
-        href: '../Interview',
-        private: true // 后面可将一些文档隐藏起来
-    },
-    {
-        title: '人生规划',
-        href: '../LifePlan',
-        private: true // 后面可将一些文档隐藏起来
-    },
-    {
-        title: '中国礼仪',
-        href: '../chinaCeremony'
-    }
+    { title: '数据结构与算法', href: '../DataStructureAndAlgorithms' },
+    { title: '设计模式', href: '../designPattern' },
+    { title: 'JUC', href: '../JUC' },
+    { title: 'Java NIO', href: '../javaNIO' },
+    { title: 'Spring', href: '../Spring' },
+    { title: 'SpringBoot', href: '../springBoot' },
+    { title: 'SpringSecurity', href: '../SpringSecurity' },
+    { title: 'WebSocket', href: '../WebSocket' },
+    { title: 'ElasticSearch', href: '../ElasticSearch' },
+    { title: 'Mock服务', href: '../mockService' },
+    { title: 'DevOps', href: '../DevOps' },
+    { title: 'Docker', href: '../Docker' },
+    { title: 'Jenkins', href: '../jenkins' },
+    { title: 'Postman', href: '../postman' },
+    { title: 'tomcat', href: '../tomcat' },
+    { title: 'Zookeeper', href: '../Zookeeper' },
+    { title: 'SecureCRT', href: '../SecureCRT' },
+    { title: '前端知识学习', href: '../前端知识学习' },
+    { title: 'Windows', href: '../windowsOS' },
+    { title: 'git文档', href: '../gitDoc' },
+    { title: 'IDEA', href: '../IDEA' },
+    { title: 'markdown', href: '../markdown' },
+    { title: 'redisDoc', href: 'http://redisdoc.com/' },
+    { title: '数据治理与数据仓库模型设计', href: '../数据治理与数据仓库模型设计' },
+    { title: '简历Resume', href: '../resume/resume.html', private: true /* 后面可将一些文档隐藏起来 */},
+	{ title: '第三方文档收集', href: '../thirdDocument' },
+    { title: '文档的组织方式', href: '../docBuildMethod', private: true /* 后面可将一些文档隐藏起来 */},
+    { title: '找工作的一些经历', href: '../Interview', private: true /* 后面可将一些文档隐藏起来 */},
+    { title: '人生规划', href: '../LifePlan', private: true /* 后面可将一些文档隐藏起来 */},
+    { title: '中国礼仪', href: '../chinaCeremony' }
 ]
 
 // 自定义模糊查询方法

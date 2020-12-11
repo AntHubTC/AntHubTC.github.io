@@ -10,16 +10,19 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 <body>
-	<h2 class="app-title">FallenGodCoder's Document</h2>
-    <div id="app">
-        <div class="search-container">
-            <input v-model="searchText" class="ipt-text" type="text"><input class="ipt-btn" type="button" value="查询">
+    <div id="app" class="main-content">
+        <div class="app-title">FallenGodCoder's Document</div>
+        <div>
+            <div class="search-container">
+                <input v-model="searchText" class="ipt-text" type="text" placeholder="请输入搜索内容"/><!--<span class="qry-icon-btn"></span>-->
+            </div>
+            <transition-group name="flip-list" tag="div" class="doc-container">
+                <template v-for="doc in qdocs">
+                    <a class="doc-item" v-if="!doc.show" :key="doc.title" :href="doc.href">{{doc.title}}</a>
+                </template>
+            </transition-group>
         </div>
-        <transition-group name="flip-list" tag="div" class="doc-container">
-            <template v-for="doc in qdocs">
-                <a class="doc-item" v-if="!doc.show" :key="doc.title" :href="doc.href">{{doc.title}}</a>
-            </template>
-        </transition-group>
+        <div class="background-image"></div>
     </div>
 	<script type="text/javascript" src="./index.js"></script>
 </body>
