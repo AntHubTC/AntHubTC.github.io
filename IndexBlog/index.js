@@ -22,6 +22,7 @@
     { title: 'IDEA', href: '../IDEA' },
     { title: 'markdown', href: '../markdown' },
     { title: 'redisDoc', href: '../redis' },
+    { title: 'HTTP', href: '../HTTP' },
     { title: '数据治理与数据仓库模型设计', href: '../数据治理与数据仓库模型设计' },
     { title: '简历Resume', href: '../resume/resume.html', private: true /* 后面可将一些文档隐藏起来 */},
 	{ title: '第三方文档收集', href: '../thirdDocument' },
