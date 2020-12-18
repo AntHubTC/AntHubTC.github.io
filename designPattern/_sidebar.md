@@ -19,5 +19,6 @@
 * [16 - 观察者模式](observer)
 * [17 - 门面模式](facade)
 * [18 - 备忘录模式](memento)
+* [19 - 访问者模式](visitor)
 * [命令模式和策略模式的区别](https://www.cnblogs.com/cg88/p/9480143.html)
 
