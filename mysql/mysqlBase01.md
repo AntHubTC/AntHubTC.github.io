@@ -229,9 +229,9 @@ SQL语言不同于其他编程语言的最明显特征是处理代码的顺序�
 
 (1) FROM <left_table>
 
-(2) <join_type> JOIN <right_table>
+(2) ON <join_condition>
 
-(3) ON <join_condition>
+(3) <join_type> JOIN <right_table>
 
 (4) WHERE <where_condition>
 

@@ -2,5 +2,5 @@
 * [数据库的概念](dbConcept)
 * [docker安装mysql]( mysqlInDocker)
 * [mysql基础使用](mysqlBase01)
-* [mysql高级](mysqlBase02)
-
+* [mysql高级-架构介绍](mysqlArch)
+* [mysql高级-索引优化分析](mysqlIndex)
