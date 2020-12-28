@@ -4,3 +4,8 @@
 * [mysql基础使用](mysqlBase01)
 * [mysql高级-架构介绍](mysqlArch)
 * [mysql高级-索引优化分析](mysqlIndex)
+* [mysql高级-查询截取分析](sqlCaptureAnalyse)
+* [mysql高级-锁机制](lockMechanism)
+* [mysql高级-主从复制](masterSalveCopy)
+* mysql高级-分库分表分片
+* [故障问题](issue)
