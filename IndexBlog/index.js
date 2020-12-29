@@ -13,6 +13,7 @@
     { title: 'Docker', href: '../Docker' },
     { title: 'Jenkins', href: '../jenkins' },
     { title: 'MySQL', href: '../mysql' },
+    { title: 'MyCat', href: '../mycat' },
     { title: 'Postman', href: '../postman' },
     { title: 'tomcat', href: '../tomcat' },
     { title: 'Zookeeper', href: '../Zookeeper' },
