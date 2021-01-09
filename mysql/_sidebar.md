@@ -7,6 +7,7 @@
 * [mysql高级-查询截取分析](sqlCaptureAnalyse)
 * [mysql高级-锁机制](lockMechanism)
 * [mysql高级-主从复制](masterSalveCopy)
+* [mysql高级-集群](mysqlCluster)
 * [mysql高级-MyCat分库分表分片](./../mycat)
 * [故障问题](issue)
 
