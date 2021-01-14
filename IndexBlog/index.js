@@ -2,6 +2,7 @@
     { title: '数据结构与算法', href: '../DataStructureAndAlgorithms' },
     { title: '设计模式', href: '../designPattern' },
     { title: 'JUC', href: '../JUC' },
+    { title: 'JVM', href: '../JVM' },
     { title: 'Java NIO', href: '../javaNIO' },
     { title: 'Spring', href: '../Spring' },
     { title: 'SpringBoot', href: '../springBoot' },
