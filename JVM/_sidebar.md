@@ -25,6 +25,11 @@
 * [serial回收器：串行回收](serialGC)
 * [ParNew回收器：并行回收](parNewGC)
 * [Parallel回收器：吞吐量优先](parallelGC)
+* [CMS 回收器：递延迟](CMSGC)
+* [G1回收器：区域化分代式](G1GC)
+* [7种经典垃圾回收器总结](gcReport)
+* [GC日志分析](gcLogAnalyse)
+* [GC的新发展](gcFuture)
 
 <h4>字节码与类的加载器</h4>
 
