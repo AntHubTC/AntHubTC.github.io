@@ -55,7 +55,7 @@ xxd -g 4 .bashrc | head -n 3 # 两位为一组
 
 ![image-20210115104859241](img/toolSoft/image-20210115104859241.png)
 
-## Memory Analyzer 
+## Eclipse：Memory Analyzer Tool
 
 ​		**Memory Analyzer (Eclipse MAT)**是一个跨平台的开源工具，您不仅可以用它来分析内存问题，也可以用来监控整个 Java 应用程序的状态和行为。通过读取应用程序运行时由 Java 运行时环境生成的转储文件快照，Memory Analyzer 使您能够分析那些调试代码可能无法发现的复杂问题。
 
@@ -90,3 +90,48 @@ EOF
 软件界面
 
 ![image-20210116131920447](img/toolSoft/image-20210116131920447.png)
+
+
+
+## JDK命令行
+
+​	jinfo
+
+​	jps
+
+​	jstat -gc  
+
+​	
+
+## Jconsole
+
+## Visual VM（实时监控  推荐~）
+
+## Jprofiler（推荐~）
+
+​	[Jprofiler官网](https://www.ej-technologies.com)
+
+​	[Intellij IDEA集成JProfiler性能分析神器](https://blog.csdn.net/wytocsdn/article/details/79258247)
+
+   [ Java性能分析神器-JProfiler详解](https://www.cnblogs.com/jpfss/p/8488111.html) 
+
+​	安装，直接在官网去下载JProfiler 11，然后
+
+## Java Flight Recorder（实时监控）
+
+## GCViewer
+
+## GCEasy
+
+
+
+
+
+
+
+
+
+
+
+
+

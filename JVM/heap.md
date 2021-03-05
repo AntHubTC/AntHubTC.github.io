@@ -49,7 +49,7 @@ Java 7及之前堆内存逻辑上分为三部分：新生区+养老区+永久区
 - Tenure generation space 养老区 Old/Tenure
 - Permanent Space永久区   Perm
 
-Java 8及之后堆内存逻辑上分为三部分：新生区养老区+元空间
+Java 8及之后堆内存逻辑上分为三部分：新生区+养老区+元空间
 
 - Young Generation Space新生区  Young/New  又被划分为Eden区和Survivor区
 - Tenure generation space 养老区  Old/Tenure
@@ -171,7 +171,7 @@ Java堆区进一步细分的话，可以划分为年轻代（YoungGen）和老�
 ![image-20200707080154039](img/heap/image-20200707080154039.png)
 
 - Eden：From：to ->  8:1:1
-- 新生代：老年代  - >  1 : 2
+- 新生代：老年代  - >  1 : 2 （默认）
 
 配置新生代与老年代在堆结构的占比。
 
@@ -180,13 +180,13 @@ Java堆区进一步细分的话，可以划分为年轻代（YoungGen）和老�
 
 > 当发现在整个项目中，生命周期长的对象偏多，那么就可以通过调整 老年代的大小，来进行调优
 
-在HotSpot中，Eden空间和另外两个survivor空间缺省所占的比例是8：1：1当然开发人员可以通过选项“-xx:SurvivorRatio”调整这个空间比例。比如-xx:SurvivorRatio=8
+在HotSpot中，Eden空间和另外两个survivor空间缺省所占的比例是8：1：1当然开发人员可以通过选项“-xx:SurvivorRatio”调整这个空间比例。比如-xx:SurvivorRatio=8。我们在通过工具时间看的时候为什么是6：1：1,这是由于自适应内存分配。-XX:-UseAdaptiveSizePolicy:关闭自适应内存分配策略（暂时用不到）
 
 几乎所有的Java对象都是在Eden区被new出来的。绝大部分的Java对象的销毁都在新生代进行了。（有些大的对象在Eden区无法存储时候，将直接进入老年代）
 
 > IBM公司的专门研究表明，新生代中80%的对象都是“朝生夕死”的。
 >
-> 可以使用选项"-Xmn"设置新生代最大内存大小
+> 可以使用选项"-Xmn"设置新生代最大内存大小(如何既设置了-Xmn又设置了-XX:NewRatio，那么以-Xmn设置为准)
 >
 > 这个参数一般使用默认值就可以了。
 
@@ -196,7 +196,7 @@ Java堆区进一步细分的话，可以划分为年轻代（YoungGen）和老�
 
 ### 概念
 
-为新对象分配内存是一件非常严谨和复杂的任务，JM的设计者们不仅需要考虑内存如何分配、在哪里分配等问题，并且由于内存分配算法与内存回收算法密切相关，所以还需要考虑GC执行完内存回收后是否会在内存空间中产生内存碎片。
+为新对象分配内存是一件非常严谨和复杂的任务，JVM的设计者们不仅需要考虑内存如何分配、在哪里分配等问题，并且由于内存分配算法与内存回收算法密切相关，所以还需要考虑GC执行完内存回收后是否会在内存空间中产生内存碎片。
 
 - new的对象先放伊甸园区。此区有大小限制。
 - 当伊甸园的空间填满时，程序又需要创建对象，JVM的垃圾回收器将对伊甸园区进行垃圾回收（MinorGC），将伊甸园区中的不再被其他对象所引用的对象进行销毁。再加载新的对象放到伊甸园区
@@ -207,7 +207,7 @@ Java堆区进一步细分的话，可以划分为年轻代（YoungGen）和老�
 - 在养老区，相对悠闲。当养老区内存不足时，再次触发GC：Major GC，进行养老区的内存清理
 - 若养老区执行了Major GC之后，发现依然无法进行对象的保存，就会产生OOM异常。
 
-可以设置参数：-Xx:MaxTenuringThreshold= N进行设置
+可以设置参数：-Xx:MaxTenuringThreshold= N进行设置老年代晋升临界值
 
 ### 图解过程
 
@@ -315,8 +315,8 @@ JVM在进行GC时，并非每次都对上面三个内存区域一起回收的，
 部分收集：不是完整收集整个Java堆的垃圾收集。其中又分为：
 
 - 新生代收集（MinorGC/YoungGC）：只是新生代的垃圾收集
-- 老年代收集（MajorGC/o1dGC）：只是老年代的圾收集。
-  - 目前，只有CMSGC会有单独收集老年代的行为。
+- 老年代收集（MajorGC/oldGC）：只是老年代的圾收集。
+  - 目前，只有CMS GC会有单独收集老年代的行为。
   - 注意，很多时候Major GC会和Fu11GC混淆使用，需要具体分辨是老年代回收还是整堆回收。
 - 混合收集（MixedGC）：收集整个新生代以及部分老年代的垃圾收集。
   - 目前，只有G1 GC会有这种行为
@@ -337,13 +337,14 @@ Minor GC会引发STW，暂停其它用户的线程，等垃圾回收结束，用
 
 ### Major GC
 
-指发生在老年代的GC，对象从老年代消失时，我们说 “Major Gc” 或 “Full GC” 发生了
+- 指发生在老年代的GC，对象从老年代消失时，我们说 “Major Gc” 或 “Full GC” 发生了
 
-出现了MajorGc，经常会伴随至少一次的Minor GC（但非绝对的，在Paralle1 Scavenge收集器的收集策略里就有直接进行MajorGC的策略选择过程）
 
-- 也就是在老年代空间不足时，会先尝试触发MinorGc。如果之后空间还不足，则触发Major GC
+- 出现了Major GC，经常会伴随至少一次的Minor GC（但非绝对的，在Paralle1 Scavenge收集器的收集策略里就有直接进行MajorGC的策略选择过程）
+  - 也就是在老年代空间不足时，会先尝试触发Minor GC。如果之后空间还不足，则触发Major GC
 
-Major GC的速度一般会比MinorGc慢1e倍以上，STW的时间更长，如果Major GC后，内存还不足，就报OOM了
+- Major GC的速度一般会比MinorGc慢10倍以上，STW的时间更长，如果Major GC后，内存还不足，就报OOM了
+
 
 ### Full GC
 
@@ -353,7 +354,7 @@ Major GC的速度一般会比MinorGc慢1e倍以上，STW的时间更长，如果
 - 老年代空间不足
 - 方法区空间不足
 - 通过Minor GC后进入老年代的平均大小大于老年代的可用内存
-- 由Eden区、survivor spacee（From Space）区向survivor spacel（To Space）区复制时，对象大小大于To Space可用内存，则把该对象转存到老年代，且老年代的可用内存小于该对象大小
+- 由Eden区、survivor space（From Space）区向survivor space（To Space）区复制时，对象大小大于To Space可用内存，则把该对象转存到老年代，且老年代的可用内存小于该对象大小
 
 说明：Full GC 是开发或调优中尽量要避免的。这样暂时时间会短一些
 
@@ -361,7 +362,7 @@ Major GC的速度一般会比MinorGc慢1e倍以上，STW的时间更长，如果
 
 我们编写一个OOM的异常，因为我们在不断的创建字符串，是存放在元空间的
 
-```
+```java
 /**
  * GC测试
  */
@@ -476,9 +477,9 @@ TLAB：Thread Local Allocation Buffer，也就是为每个线程单独分配了�
 
 尽管不是所有的对象实例都能够在TLAB中成功分配内存，但JVM确实是将TLAB作为内存分配的首选。
 
-在程序中，开发人员可以通过选项“-Xx:UseTLAB”设置是否开启TLAB空间。
+在程序中，开发人员可以通过选项“-Xx:UseTLAB”设置是否开启TLAB空间（默认开启 jinfo -flag UseTLAB jpsId）。
 
-默认情况下，TLAB空间的内存非常小，仅占有整个Eden空间的1，当然我们可以通过选项“-Xx:TLABWasteTargetPercent”设置TLAB空间所占用Eden空间的百分比大小。
+默认情况下，TLAB空间的内存非常小，仅占有整个Eden空间的1%，当然我们可以通过选项“-Xx:TLABWasteTargetPercent”设置TLAB空间所占用Eden空间的百分比大小。
 
 一旦对象在TLAB空间分配内存失败时，JVM就会尝试着通过使用加锁机制确保数据操作的原子性，从而直接在Eden空间中分配内存。
 
@@ -490,16 +491,32 @@ TLAB：Thread Local Allocation Buffer，也就是为每个线程单独分配了�
 
 ## 小结：堆空间的参数设置
 
+https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html
+
 - -XX：+PrintFlagsInitial：查看所有的参数的默认初始值
+
 - -XX：+PrintFlagsFinal：查看所有的参数的最终值（可能会存在修改，不再是初始值）
+
+  - 查看具体某个参数的命令: jps: 查看当前允许的进程
+
+    ​											jinfo -flag survivorRatio 进程id
+
 - -Xms：初始堆空间内存（默认为物理内存的1/64）
+
 - -Xmx：最大堆空间内存（默认为物理内存的1/4）
+
 - -Xmn：设置新生代的大小。（初始值及最大值）
+
 - -XX:NewRatio：配置新生代与老年代在堆结构的占比
+
 - -XX:SurvivorRatio：设置新生代中Eden和S0/S1空间的比例
+
 - -XX:MaxTenuringThreshold：设置新生代垃圾的最大年龄
+
 - -XX：+PrintGCDetails：输出详细的GC处理日志
+  
   - 打印gc简要信息：①-Xx：+PrintGC  ② - verbose:gc
+  
 - -XX:HandlePromotionFalilure：是否设置空间分配担保
 
 在发生Minor GC之前，虚拟机会检查老年代最大可用的连续空间是否大于新生代所有对象的总空间。I
@@ -626,7 +643,7 @@ public class EscapeAnalysis {
 使用逃逸分析，编译器可以对代码做如下优化：
 
 - 栈上分配：将堆分配转化为栈分配。如果一个对象在子程序中被分配，要使指向该对象的指针永远不会发生逃逸，对象可能是栈上分配的候选，而不是堆上分配
-- 同步省略：如果一个对象被发现只有一个线程被访问到，那么对于这个对象的操作可以不考虑同步。
+- 同步省略：如果一个对象被发现只有一个线程被 n访问到，那么对于这个对象的操作可以不考虑同步。
 - 分离对象或标量替换：有的对象可能不需要作为一个连续的内存结构存在也可以被访问到，那么对象的部分（或全部）可以不存储在内存，而是存储在CPU寄存器中。
 
 ### 栈上分配
@@ -641,7 +658,7 @@ JIT编译器在编译期间根据逃逸分析的结果，发现如果一个对�
 
 我们通过举例来说明 开启逃逸分析 和 未开启逃逸分析时候的情况
 
-```
+```java
 /**
  * 栈上分配
  */
