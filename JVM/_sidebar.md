@@ -21,6 +21,10 @@
 * [垃圾回收相关算法](gcAlgorithm)
 * [垃圾回收相关概念](gcConcept)
 * [垃圾收集器](garbageCollector)
+* [不同垃圾回收器概述](garbageCollectorKindResume)
+* [serial回收器：串行回收](serialGC)
+* [ParNew回收器：并行回收](parNewGC)
+* [Parallel回收器：吞吐量优先](parallelGC)
 
 <h4>字节码与类的加载器</h4>
 
