@@ -93,16 +93,6 @@ EOF
 
 
 
-## JDK命令行
-
-​	jinfo
-
-​	jps
-
-​	jstat -gc  
-
-​	
-
 ## Jconsole
 
 ## Visual VM（实时监控  推荐~）
@@ -121,7 +111,11 @@ EOF
 
 ## GCViewer
 
+​	gc日志分析
+
 ## GCEasy
+
+​	gc日志分析
 
 
 

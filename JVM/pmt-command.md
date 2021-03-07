@@ -266,22 +266,224 @@ java -XX:+PrintFlagsFinal 查看所有JVM参数最终值。
 
 java -XX:+PrintCommandLineFlags 查看哪些已经被用户或者JVM设置过的详细的XX参数的名称和值。
 
-### jmap
+## jmap
 
-​	导出内存映像文件&内存使用情况
+​	导出内存映像文件&内存使用情况。
+
+**基本情况：**
+
+​	jmap(JVM Memory Map)：作用一方面是获取dump文件(堆转储快照文件，二进制文件)，它还可以获取目标]ava进程的内存相关信息，包括]ava堆各区域的使用情况、堆中对象的统计信息、类加载信息等。开发人员可以在控制台中输入命令“jmap -help”查阅jmap工具的具体使用方式和一些标准选项配置。
+
+官方帮助文档：https://docs.oracle.com/en/java/javase//11/tools/jmap.html
+
+**基本语法：**
+    jmap [option] \<pid\>
+        (to connect to running process)
+    jmap [option] \<executable \<core\>
+        (to connect to a core file)
+    jmap [option] [server_id@]\<remote server IP or hostname\>
+        (to connect to remote debug server)
+
+-dump 生成Java堆转储快照：dump文件。 特别的: -dump:live 只保存堆中的存活对象
+
+-heap 输出整个堆空间的详细信息，包括GC的使用、堆配置信息，以及内存的使用信息等
+
+-histo 输出堆中对象的统计信息，包括类、实例数量和合计容量。特别的: -histo:live只统计堆中的存活对象
+
+-permstat 以 Classloader为统计口径输出永久代的内存状态信息。**仅 linux/ solaris平台有效**
+
+-finalizerinfo 显示在 F-queue中等待Finalizer线程执行finalize方法的对象。**仅 linux/solaris平台有效**
+
+-F 当虚拟机进程对-dump选项没有任何响应时，可使用此选项强制执行生成dump文件。**仅lnux/ solaris平台有效**
+
+-h | -help 显示jmap工具使用的帮助命令
+
+-J \<flag\> 传递参数给jmap启动的jvm
+
+**使用1：导出内存镜像文件**
+
+Heap Dump又叫堆存储文件，指一个Java进程在某个时间点的内存快照。Heap Dump在触发内存快照的时候会保存此刻的信息如下：
+
+- All Objects
+
+  Class，fields，primitive value and references
+
+- All Classs
+
+  ClassLoader，name，super class，static fields
+
+- Garbage Collection Roots
+
+  Objects defined to be reachable by the JVM
+
+- Thread stack and Local variables
+
+  The call-stacks of threads at the moment of the snapshot，and per-frame information about local objects.
+
+  说明：
+
+  1. 通常在写Heap Dump文件前会触发一次Full GC，所以heap dump文件里保存的都是Full GC后留下的对象信息。
+  2. 由于生成dump文件比较耗时，因此大家需要耐心等待，尤其是大内存镜像生成dump文件则需要耗费更长时间来完成。
+
+手动方式：
+
+​		jmap -dump:format=b，file=\<filename.hprof\> \<pid\>
+
+​		jmap -dump:live，format=b，file=\<filename.hprof\> \<pid\>
+
+自动方式：
+
+​	-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=\<filename.hprof\>
+
+**使用2：显示堆内存相关情况**
+
+jmap -heap pid     gc线程数、堆配置信息、堆使用情况. 
+
+jmap -histo   内存中java对象占用情况。
+
+**使用3：其它作用**
+
+jmap -permstat pid 查看系统的Classloader信息
+
+jmap -finalizerinfo 查看堆积在finalizer队列中的对象
+
+**小结**
+
+​	由于jmap将访问堆中的所有对象，为了保证在此过程中不被应用线程干扰，jmap需要借助安全点机制，让所有线程停留在不改变堆中数据的状态。也就是说，由jmap导出的堆快照必定是安全点位置的。这可能导致基于该堆快照的分析结果存在偏差。
+
+举个例子，假设在编译生成的机器码中，某些对象的生命周期在两个安全点之间，那么1ive选项将无法探知到这些对象。
+
+另外，如果某个线程长时间无法跑到安全点，jmap将一直等下去。与前面的 jstat则不同，垃圾回收器会主动将 jstat所需要的摘要数据保存至固定位置之中，而jstat只需直接读取即可。
 
 ## jhat
 
-​	JDK自带堆分析工具
+​	jhat(JVM Heap Analysis Tool)，JDK自带堆分析工具
+
+​	sun JDK提供的jhat命令与jmap命令搭配使用，用于分析jmap生成的heap dump文件(堆转储快照)。jhat内置了一个微型的HTTP/HTML服务器，生成dump文件的分析结果后，用户可以在浏览器中查看分析结果(分析虚拟机转储快照信息)。
+
+​	使用了jhat命令，就启动了一个http服务，端口是7000.即http://localhost:7000/就可以在浏览器里分析。
+
+​	说明：jhat命令在JDK9、JDK10中已经被删除，官方建议用 VisualVM代替。 
+
+基本语法：jhat [option] [dumpfile] 更详细用法查看jhat --help
 
 ## jstack
 
-​	打印JVM中线程快照
+​	jstack(JVM Stack Trace)打印JVM中线程快照。
+
+​	jstack用于生成虚拟机指定进程当前时刻的线程快照(虛拟机堆栈跟踪)。线程快照就是当前虚拟机内指定进程的每一条线程正在执行的方法堆栈的集合。
+
+​	生成线程快照的作用:可用于定位线程出现长时间停顿的原因，如线程间死锁、死循环、请求外部资源导致的长时间等待等问题。这些都是导致线程长时间停顿的常见原因。当线程出现停顿时，就可以用 stack显示各个线程调用的堆栈情况。
+
+官方帮助文档：
+
+https://docs.oracle.com/en/java/javase/11/tools/jstack.html
+
+在thread dump中，要留意下面几种状态
+
+- **死锁，Deadlock（重点关注）**
+- **等待资源，Waiting on condition（重点关注）**
+- **等待获取监视器，Waiting on moitor entry（重点关注）**
+- **阻塞，Blocked（重点关注）**
+- 执行中，Runnable
+- 暂停，Suspended
+
+> jstack <pid> 
 
 ## jcmd
 
 ​	多功能命令行
 
+​	在]DK1.7以后，所增了一个命令行工具jcmd。它是一个多功能的工具，可以用来实现前面除了jstat之外所有命令的功能。比如：用它来导出堆、内存使用、查看]ava进程、导岀线程信息、执行GC、JVM运行时间等。
+
+官网帮助文档：https://docs.oracle.com/en/java/javase/11/tools/jcmd.html
+
+jcmd拥有jmap的大部分功能，并且在Oracle的官方网站上也推荐使用jmd命令替代jmap命令。
+
+**基本语法：**
+
+​	jcmd -l 列出所有jcmd进程。
+
+​	jcmd pid help 针对指定的进程，列出支持的所有命令。
+
+​	jcmd pid 具体命令  显示指定进程的指令命令的数据。
+
+```
+具体命令：
+The following commands are available:
+Compiler.CodeHeap_Analytics
+Compiler.codecache
+Compiler.codelist
+Compiler.directives_add
+Compiler.directives_clear
+Compiler.directives_print
+Compiler.directives_remove
+Compiler.queue
+GC.class_histogram 类柱状图
+GC.class_stats
+GC.finalizer_info
+GC.heap_dump  生成dump文件
+GC.heap_info
+GC.run
+GC.run_finalization
+JFR.check
+JFR.configure
+JFR.dump
+JFR.start
+JFR.stop
+JVMTI.agent_load
+JVMTI.data_dump
+ManagementAgent.start
+ManagementAgent.start_local
+ManagementAgent.status
+ManagementAgent.stop
+Thread.print    打印进程信息，和jstack类似
+VM.class_hierarchy
+VM.classloader_stats
+VM.classloaders
+VM.command_line
+VM.dynlibs
+VM.flags JVM flag信息
+VM.info
+VM.log
+VM.metaspace
+VM.native_memory
+VM.print_touched_methods
+VM.set_flag
+VM.stringtable
+VM.symboltable
+VM.system_properties 系统属性
+VM.systemdictionary
+VM.uptime
+VM.version
+help
+```
+
+
+
 ## jstatd
 
 ​	远程主机信息收集
+
+​	之前的指令只涉及到监控本机的]ava应用程序，而在这些工具中，一些监控工具也支持对远程计算机的监控(如jps、jstat)。为了启用远程监控，则需要配合使用 jstatd工具。命令 jstatd是一个RMI服务端程序，它的作用相当于代理服务器，建立本地计算机与远程监控工具的通信。 jstatd服务器将本机的Java应用程序信息传递到远程计算机。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
