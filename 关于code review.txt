@@ -1,0 +1,26 @@
+https://blog.csdn.net/DQWKLC/article/details/86353077
+https://blog.csdn.net/DQWKLC/article/details/97652783
+https://blog.csdn.net/u010013573/article/details/90259682?utm_medium=distribute.pc_relevant_right.none-task-blog-BlogCommendFromMachineLearnPai2-5.nonecase&depth_1-utm_source=distribute.pc_relevant_right.none-task-blog-BlogCommendFromMachineLearnPai2-5.nonecase
+https://www.zhihu.com/question/41089988
+
+github 之 理解 Github Flow
+https://blog.csdn.net/qq_27384769/article/details/78959380
+
+代码审查工具有很多，后面可以先去尝试使用几个工具：
+1.Phabricator
+2.Gerrit
+3.CodeStriker
+4.Reviewale
+5. https://www.reviewboard.org/  
+6.codeFlow https://www.getcodeflow.com/documentation.html
+
+mybaits源码分析
+https://blog.csdn.net/u010013573/category_8679858.html
+
+findbugs
+
+
+
+https://www.reviewboard.org/
+pmd  https://pmd.github.io/latest/
+findbug http://findbugs.sourceforge.net/users.html  https://blog.csdn.net/chajinglong/article/details/81609324

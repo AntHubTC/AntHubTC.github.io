@@ -1,0 +1,10 @@
+https://www.jianshu.com/p/7402bc415ce5
+
+
+
+jpa	JVM Process Status Tool	显示指定系统内所有的 HotSpot 虚拟机进程
+jstat	JVM Statistics Monitoring Tool	用于收集 HotSpot 虚拟机各方面的运行参数
+jinfo	Configuration Info for Java	显示虚拟机配置信息
+jmap	Memory Map for Java	生成虚拟机的内存转储快照(heapdump文件)
+jhat	JVM Heap Dump Browser	用于 heapdump 文件，它会建立一个HTTP/HTML 服务器，让用户可以在浏览器上查看分析结果
+jstack	Stack Trace for Java	显示虚拟机的线程快照

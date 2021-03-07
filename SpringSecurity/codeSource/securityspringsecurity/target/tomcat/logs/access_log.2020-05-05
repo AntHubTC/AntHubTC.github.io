@@ -1,0 +1,6 @@
+0:0:0:0:0:0:0:1 - - [05/May/2020:22:39:55 +0800] "GET /security-spring-security HTTP/1.1" 302 - http-bio-8080-exec-1 0
+0:0:0:0:0:0:0:1 - - [05/May/2020:22:39:55 +0800] "GET /security-spring-security/ HTTP/1.1" 302 - http-bio-8080-exec-4 95
+0:0:0:0:0:0:0:1 - - [05/May/2020:22:39:55 +0800] "GET /security-spring-security/login HTTP/1.1" 200 1431 http-bio-8080-exec-5 11
+0:0:0:0:0:0:0:1 - - [05/May/2020:22:40:01 +0800] "POST /security-spring-security/login HTTP/1.1" 302 - http-bio-8080-exec-6 21
+0:0:0:0:0:0:0:1 - - [05/May/2020:22:40:02 +0800] "GET /security-spring-security/login?error HTTP/1.1" 200 1506 http-bio-8080-exec-8 6
+0:0:0:0:0:0:0:1 - - [05/May/2020:22:40:05 +0800] "POST /security-spring-security/login HTTP/1.1" 200 13 http-bio-8080-exec-9 66
