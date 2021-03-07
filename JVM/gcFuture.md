@@ -73,7 +73,7 @@ ZGC几乎在所有地方并发执行的，除了初始标记的是STW的。所�
 
 在ZGC的强项停顿时间测试上，它毫不留情的将Parallel、G1拉开了两个数量级的差距。无论平均停顿、95号停顿、99停顿、99.9号停顿，还是最大停顿时间，ZGC都能毫不费劲控制在10毫秒以内。
 
-虽然GC还在试验状态,没有完成所有特性但此时性能已经相当亮眼,用“令人震惊革命性”来形容,不为过。
+虽然GC还在试验状态，没有完成所有特性但此时性能已经相当亮眼，用“令人震惊革命性”来形容，不为过。
 
 **未来将在服务端、大内存、低延迟应用的首选垃圾收集器。**
 
@@ -83,11 +83,11 @@ JEP 364：ZGC应用在macOS上
 
 JEP 365：ZGC应用在Windows上
 
-- JDK14之前,ZGC仅 Linux.才支持。
+- JDK14之前，ZGC仅 Linux.才支持。
 
-- 尽管许多使用ZGC的用户都使用类linux的环境,但在 Windows和 macos上,人们也需要ZGC进行开发部署和测试。许多桌面应用也可以从ZGC中受益。因此,ZGC特性被移植到了 Windows和 macOS上。
+- 尽管许多使用ZGC的用户都使用类linux的环境，但在 Windows和 macos上，人们也需要ZGC进行开发部署和测试。许多桌面应用也可以从ZGC中受益。因此，ZGC特性被移植到了 Windows和 macOS上。
 
-- 现在mac或 Windows上也能使用ZGC了,示例如下:
+- 现在mac或 Windows上也能使用ZGC了，示例如下:
 
   ​	**-XX：+UnlockExperimentalVMOptions -XX:UseZGC**
 
