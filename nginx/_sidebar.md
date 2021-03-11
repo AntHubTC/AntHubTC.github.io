@@ -1,0 +1,8 @@
+* [指南](README)
+* [nginx基本概念](baseConcepts)
+* [nginx安装、常用命令和配置文件](nginxInstallConfig)
+* [反向代理](reverseProxy)
+* [负载均衡](loadBlance)
+* [动静分离](sepMS)
+* [高可用集群](clusterHA)
+* [nginx原理](principle)
