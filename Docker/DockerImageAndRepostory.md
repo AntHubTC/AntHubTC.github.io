@@ -68,7 +68,14 @@ docker pull [OPTIONS] NAME[:TAG]
 提速
     使用--registry-mirror选项
         1.修改：vim /etc/default/docker  永久配置  windows中在用户目录下.docker目录下去找，也可以直接用提供的软件去改
-        2.添加：DOCKER_OPTS = "--registry-mirror=http://MIRROR-ADDR"
+        2.vim /etc/docker/daemon.json
+        {
+            "debug": true,
+            "experimental": false,
+            "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]
+        }
+        :wq!
+        3.添加：DOCKER_OPTS = "--registry-mirror=http://MIRROR-ADDR"
 ```
 
 > 如果没有配置国内的镜像仓库，你会发现获取镜像的时候非常缓慢。这时候可以通过--registry-mirror来指定国内的镜像  https://www.daocloud.io
