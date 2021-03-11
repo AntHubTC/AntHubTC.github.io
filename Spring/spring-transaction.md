@@ -269,3 +269,5 @@ public void save(){
 ```
 
 ​	导致事务不生效的原因可能还有很多，例如数据库引擎不支持（例如mysql需要innodb引擎可以支持事务，myisam不支持），spring的xml配置文件没有导入相应xsi:schemaLocation，再次无法一一列举
+
+**更多导致事务不生效的情况**，请参考[这里](https://www.cnblogs.com/jajian/articles/12844069.html)

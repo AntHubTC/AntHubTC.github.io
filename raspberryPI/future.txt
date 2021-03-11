@@ -1,0 +1,12 @@
+用 Python3 & OpenCV 将视频转成字符动画	https://www.jianshu.com/p/a6699f6c98f8
+【Python AsciiArt】利用命令行打印出字符图案  https://blog.csdn.net/u014636245/article/details/83661559
+相关视频： https://www.bilibili.com/video/BV1SK4y157EY/?spm_id_from=333.788.videocard.6
+视频中的源码：https://github.com/Rainbow-Dreamer/ascii_converter
+  或许github上还有这种项目，搞来学习借鉴一下，吸收思想
+用树莓派的方式打开《Bad Apple!!》原来是这样子的  https://blog.csdn.net/QbitAI/article/details/113820960
+neofetch screenfetch 玩法
+
+
+百度爱采购 https://b2b.baidu.com/ 是不是可以买元件
+
+OLED12864 小屏幕

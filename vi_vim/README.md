@@ -8,6 +8,8 @@
 
 [vi常见操作](https://blog.csdn.net/xiao_jj_jj/article/details/81291386)
 
+[这个文章不错](https://dalin.blog.csdn.net/article/details/110944477)
+
 https://www.cnblogs.com/playcodes/p/6268932.html
 
 https://www.cnblogs.com/onlycxue/p/3179535.html
