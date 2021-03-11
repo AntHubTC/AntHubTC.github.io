@@ -1,5 +1,7 @@
 # Tomcat架构
 
+![img](img/arch/img.mukewang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg)
+
 ## Http工作原理
 
 ​		HTTP协议是浏览器与服务器之间的数据传送协议。作为应用层协议，HTTP是基于TCP/IP协议来传递数据的（HTML文件、图片、查询结果等），HTTP协议不涉及数据包（Packet）传输，主要规定了客户端和服务器之间的通信格式。
@@ -279,3 +281,65 @@ HTTP协议：
 
 ​		在 tomcat中定义了Pipeline和Valve两个接口, Pipeline用于构建责任链,后者代表责任链上的每个处理器。Pipeline中维护了个基础的 Valve,它始终位于 pipeline的末端(最后执行),封装了具体的请求处理和输出响应的过程。当然,我们也可以调用 addVave()方法,为Pipeline添加其他的Valve,后添加的Valve位于基础的Valve之前・并按照添加序执行。Pipeline通过获得首个Valve来启动整合链条的执行。
 
+**Tomcat Server处理一个http请求的过程：**
+
+假设来自客户的请求为：
+http://localhost:8080/test/index.jsp
+
+1) 请求被发送到本机端口8080，被在那里侦听的Coyote HTTP/1.1 Connector获得
+2) Connector把该请求交给它所在的Service的Engine来处理，并等待来自Engine的回应
+3) Engine获得请求localhost/test/index.jsp，匹配它所拥有的所有虚拟主机Host
+4) Engine匹配到名为localhost的Host（即使匹配不到也把请求交给该Host处理，因为该Host被定义为该Engine的默认主机）
+5) localhost Host获得请求/test/index.jsp，匹配它所拥有的所有Context
+6) Host匹配到路径为/test的Context（如果匹配不到就把该请求交给路径名为""的Context去处理）
+7) path="/test"的Context获得请求/index.jsp，在它的mapping table中寻找对应的servlet
+8) Context匹配到URL PATTERN为*.jsp的servlet，对应于JspServlet类
+**9) 构造HttpServletRequest对象和HttpServletResponse对象，作为参数调用JspServlet的doGet或doPost方法**
+10)Context把执行完了之后的HttpServletResponse对象返回给Host
+11)Host把HttpServletResponse对象返回给Engine
+12)Engine把HttpServletResponse对象返回给Connector
+13)Connector把HttpServletResponse对象返回给客户browser
+
+**四、SpringMVC下前后端交互过程**
+
+![img](img/arch/www.west.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg)
+
+![img](https://images2018.cnblogs.com/blog/1445861/201807/1445861-20180723031328792-270507645.jpg)
+
+**1、交互过程**
+
+由于目前接触的项目是建立在springMVC模式下的，故根据上图所示，在最后对SpringMVC下的请求响应过程进行解析：
+
+1）用户发送一个URL请求到**前端控制器DispatcherServlet**；
+
+2）前端控制器将请求发给**处理器映射器HandlerMapping**，它会根据xml配置、注解等进行查找hander；
+
+3）处理器映射器返回执行链HandlerExecutionChain(里面有handler对象，在它之前有多个interceptor拦截器)；
+
+4）前端控制器通过**处理器适配器HandlerAdapter**去执行Handler，不同的Handler由不同的适配器执行；
+
+5）通过**Handler处理器，即我们熟悉的Controller**来处理业务逻辑；
+
+6）处理完之后，返回ModelAndView对象，其中有视图名称，模型数据等；
+
+7）HandlerAdapter将ModelAndView返回给DispatcherServlet；
+
+8）DispatcherServlet将得到的ModelAndView传递给**视图解析器ViewResolver**进行解析；
+
+9）ViewResolver解析后返回具体的**视图View**；
+
+10）前端控制器对视图View和数据进行渲染，将模型数据等填充到request域中；
+
+11）将最终的视图返回给客户，产生response响应。
+
+**2、组件名词解释**
+
+**前端控制器DispatcherServlet**：接收请求响应结果，相当于转发器、中央处理器，减少了其他组件之间的耦合度；
+
+**处理器映射器HandlerMapping**：根据请求URL查找handler；
+
+**处理器适配器HandlerAdapter**：按特定规则去执行handler，故编写handler时按HandlerAdapter要求去做，这样适配器才可正确执行handler；
+
+**视图解析器ViewResolver**：根据逻辑视图解析成真正的视图（View对象）
+
+**视图View**：View是一个接口，实现类支持不同的View类型（jsp，PDF，Excel...）
