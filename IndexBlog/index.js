@@ -1,6 +1,7 @@
 ﻿let docs = [
     { title: '数据结构与算法', href: '../DataStructureAndAlgorithms' },
     { title: '设计模式', href: '../designPattern' },
+    { title: 'javasE', href: '../javaSE' },
     { title: 'JUC', href: '../JUC' },
     { title: 'JVM', href: '../JVM' },
     { title: 'Java NIO', href: '../javaNIO' },
@@ -24,6 +25,7 @@
     { title: 'git文档', href: '../gitDoc' },
     { title: 'IDEA', href: '../IDEA' },
     { title: 'markdown', href: '../markdown' },
+    { title: '架构师之路', href: '../architectRoad' },
     { title: 'redisDoc', href: '../redis' },
     { title: 'HTTP', href: '../HTTP' },
     { title: '数据治理与数据仓库模型设计', href: '../数据治理与数据仓库模型设计' },
