@@ -30,6 +30,18 @@ java默认有几个线程？2个  main，GC
 
 java真的可以自己开启线程吗？直接开不了，它是去调用start0的native方法，由虚拟机底层去和操作系统交互开启。
 
+**What are the differences between processes and threads?** （外网看见的，总结太经典了！比上面总结好：[入口](https://www.edureka.co/blog/interview-questions/java-interview-questions/)）
+
+|                   | **Process**                                                  | **Thread**                                                   |
+| ----------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **Definition**    | An executing instance of a program is called a process.      | A thread is a subset of the process.                         |
+| **Communication** | Processes must use inter-process communication to communicate with sibling processes. | Threads can directly communicate with other threads of its process. |
+| **Control**       | Processes can only exercise control over child processes.    | Threads can exercise considerable control over threads of the same process. |
+| **Changes**       | Any change in the parent process does not affect child processes. | Any change in the main thread may affect the behavior of the other threads of the process. |
+| **Memory**        | Run in separate memory spaces.                               | Run in shared memory spaces.                                 |
+| **Controlled by** | Process is controlled by the operating system.               | Threads are controlled by programmer in a program.           |
+| **Dependence**    | Processes are independent.                                   | Threads are dependent.                                       |
+
 ### 线程的状态
 
 ```java
@@ -132,6 +144,8 @@ class Ticket {
 }
 
 ```
+
+[面试题：请简述一下synchronized的锁升级过程](https://blog.csdn.net/weixin_42311349/article/details/114619927)
 
 ## Lock锁
 
@@ -1246,6 +1260,10 @@ semaphore.release() 释放，会将当前的信号量释放+1，然后唤醒等�
 
 作用：多个共享资源互斥的使用！并发限流，控制最大的线程数！
 
+## Exchanger
+
+​		Exchanger是一个用于线程间协作的工具类,用于两个线程间交换数据。它提供了一个交换的同步点,在这个同步点两个线程能够交换数据。交换数据是通过 exchange方法来实现的,如果一个线程先执行 exchange方法,那么它会同步等待另一个线程也执行 exchange方法,这个时候两个线程就都达到了同步点,两个线程就可以交换数据
+
 ## 读写锁
 
 ReadWriteLock
@@ -1354,6 +1372,10 @@ class MyCacheLock implements Cache{
     }
 }
 ```
+
+## StampedLock
+
+   Jdk 1.8中比ReentrantReadWriteLock更好的读写锁。 [文档参考](https://www.liaoxuefeng.com/wiki/1252599548343744/1309138673991714)
 
 ## 阻塞队列
 
@@ -1544,7 +1566,7 @@ T2 take 3
 
 ## 线程池
 
-线程池：三大方法、7大参数、4种拒绝策略。
+线程池：五大方法、7大参数、4种拒绝策略。
 
 > 池化技术：事先准备好一些资源，有人要用，就来我这里拿，用完之后还给我。
 
@@ -1560,7 +1582,7 @@ T2 take 3
 
 **<span style="color:red">线程复用、可以控制最大并发数、管理线程。</span>**
 
-### 三大方法
+### 五大方法
 
 ![image-20210106135104622](img/README/image-20210106135104622.png)
 
@@ -1572,7 +1594,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-// Executors工具类 三大方法
+// Executors工具类 五个大方法
 public class ExecutorsTest1 {
     public static void main(String[] args) {
 //        ExecutorService threadPool = Executors.newSingleThreadExecutor(); // 单个线程
@@ -1720,7 +1742,7 @@ ThreadPoolExecutor.CallerRunsPolicy 线程池满了，还有线程进来，由�
 
 ThreadPoolExecutor.DiscardPolicy 队列满了，丢掉任务，不会抛出异常。
 
-ThreadPoolExecutor.DiscardOldestPolicy 队列满了，尝试去和最早的竞争，也不会抛出异常。
+ThreadPoolExecutor.DiscardOldestPolicy 队列满了，丢掉队列中最早未执行的任务，也不会抛出异常。
 
 ### 小结拓展
 
@@ -1728,7 +1750,7 @@ ThreadPoolExecutor.DiscardOldestPolicy 队列满了，尝试去和最早的竞�
 
 了解：IO密集型、CPU密集型。（调优）
 
-**CPU密集型:**  CPU几核就写几，保存CPU的效率最高。
+**CPU密集型:**  CPU几核就写几，保证CPU的效率最高。
 
 ```java
 // 获取CPU核数  这样可以根据具体机器动态改变值，不用写死。
@@ -2087,7 +2109,7 @@ public class ForkJoinTest {
     // 算法型 高级
     @Test
     public void test4() {
-        // 1加到n  算法总结： n*(n-1)/2+n
+        // 1加到n  算法总结： n*(n-1)/2+n 进一步推导 (n^2+n)/2
         // m加到n  算法总结： (n*(n-1)/2+n) - (m*(m-1)/2+m)
         testMethod(()-> { // 耗时:0  近似0
             long m = 1;
@@ -2577,6 +2599,8 @@ public class Hungry {
 }
 ```
 
+​		这些变量一开始没有使用或很久没有用上， 这就可能会浪费空间。所以使用懒加载方式解决。
+
 ### 懒汉式
 
 ```java
@@ -2586,7 +2610,7 @@ package ceg10;
  * 单例模式
  */
 public class LazyMan1 {
-    private static LazyMan1 lazyMan1 = null;
+    private static LazyMan1 lazyMan1 = null; // DCL方式加上volatile防止重排序
 
     private LazyMan1() {
         System.out.println(Thread.currentThread().getName());
@@ -2608,7 +2632,7 @@ public class LazyMan1 {
         }
     }
 
-//    synchonized方法上枷锁
+//    synchonized方法上枷锁   锁粒度太粗，不管有没有初始化都要进行同步，并发效率不好
 //    public static synchronized LazyMan1 getInstance() {
 //        if (lazyMan1 == null) {
 //            lazyMan1 = new LazyMan1();
@@ -2616,7 +2640,7 @@ public class LazyMan1 {
 //        return lazyMan1;
 //    }
 
-//    双重检查锁  DCL懒汉式
+//    双重检查锁  DCL懒汉式    
     public static LazyMan1 getInstance() {
         if (lazyMan1 == null) {
             synchronized (LazyMan1.class) {
@@ -2627,7 +2651,7 @@ public class LazyMan1 {
                      * 实际执行会有几个步骤：
                      * 1、 分配内存空间
                      * 2、 执行构造方法，初始化对象
-                     * 3、 把这个对象指向这个空间。
+                     * 3、 把这个对象指针指向这个空间。
                      *
                      * 由于不是原子性操作，所以有可能发生指令重排现象。
                      * 我们期望的手执行 1 2 3
@@ -2878,7 +2902,7 @@ public enum EnumSingleton {
         /**
          * 安装jad
          * sudo wget https://varaneckas.com/jad/jad158e.linux.static.zip
-         * sudo mv jad158e.linux.static.zip /media/tc/jx-file/soft_setup_file/jad.zip
+         * sudo mv jad158e.linux.static.zip /media/tc/jx-soft/linux-soft/jad.zip
          * sudo unzip jad.zip
          * sudo chmod a+x -R jad
          * cd jad
@@ -2906,6 +2930,13 @@ public enum EnumSingleton {
 
         System.out.println(instance1 == instance2);
 
+        // 另一种证明枚举集成Enum，并且需要给父类构造传参
+        System.out.println(TEST_ENUM.STATE1 instanceof Enum);
+        System.out.println(TEST_ENUM.STATE2.getClass());
+        System.out.println(TEST_ENUM.STATE2.getClass().getSuperclass());
+        System.out.println(TEST_ENUM.STATE2.getClass().getSuperclass().getDeclaredConstructor(String.class, int.class));
+        System.out.println(int.class);
+        System.out.println(Integer.class);
     }
 
     public static void main(String[] args) throws Exception {
@@ -3018,6 +3049,8 @@ import java.util.concurrent.TimeUnit;
  * 自创单例，结合Holder和枚举类型
  *
  *   同时实现懒加载，防止反射破坏，线程安全多个功能！
+ *
+ * 滑稽：哈哈哈，不行的。用枚举主要是保护单例类，如果直接反射创建CustomSingleton，那就等于没有用了呀。
  */
 public class CustomSingleton {
     private CustomSingleton() {
@@ -3428,7 +3461,7 @@ class Phone2 {
 
 ### 独享锁 / 共享锁
 
-独享锁和共享锁在你去读C.U.T包下的ReeReentrantLock和ReentrantReadWriteLock你就会发现，它俩一个是独享，一个是共享锁。
+独享锁和共享锁在你去读JUC包下的ReentrantLock和ReentrantReadWriteLock你就会发现，它俩一个是独享，一个是共享锁。
 
 **独享锁**：该锁每一次只能被一个线程所持有。  AQS中tryAcquire(int arg)是独占获取锁
 
@@ -3479,7 +3512,7 @@ class Phone2 {
 
 比如：在ConcurrentHashMap中使用了一个包含16个锁的数组，每个锁保护所有散列桶的1/16，其中第N个散列**桶**由第（N mod 16）个锁来保护。假设使用合理的散列算法使关键字能够均匀的分部，那么这大约能使对锁的请求减少到越来的1/16。也正是这项技术使得ConcurrentHashMap支持多达16个并发的写入线程。
 
-### 偏向锁 / 轻量级锁 / 重量级锁
+### synchronized锁升级（偏向锁 / 轻量级锁 / 重量级锁）
 
 **锁的状态**：
 
@@ -3596,6 +3629,16 @@ T1==> myUnLock
 T2==> get Lock!
 T2==> myUnLock
 
+### 自适应自旋锁
+
+​	所谓自适应自旋锁，就意味着自旋的次数不再是固定的	
+
+自旋次数通常由前一次在同一个锁上的自旋时间及锁的拥有者的状态决定。如果线程【T1】自旋成功，自旋次数为17次，那么等到下一个线程【T2】自旋时，也会默认认为【T2】自旋17次成功，
+
+如果【T2】自旋了5次就成功了，那么此时这个自旋次数就会缩减到5次。
+
+自适应自旋锁随着程序运行和性能监控信息，从而使得虚拟机可以预判出每个线程大约需要的自旋次数
+
 ### 死锁
 
 [参考资料](https://blog.csdn.net/qq_43089516/article/details/90440592)
@@ -3629,6 +3672,19 @@ T2==> myUnLock
   **4、循环等待：** 存在一个进程链，使得每个进程都占有下一个进程所需的至少一种资源。
 
 ​    当以上四个条件均满足，必然会造成死锁，发生死锁的进程无法进行下去，它们所持有的资源也无法释放。这样会导致CPU的吞吐量下降。所以死锁情况是会浪费系统资源和影响计算机的使用性能的。那么，解决死锁问题就是相当有必要的了。如何避免死锁，避免上面产生的条件就行了。
+
+如果要避免死锁，就要想办法破坏以上几个必要条件。
+
+**网络收集，死锁避免几种方法：**
+
+- 避免一个线程同时获取多个锁。
+- 避免一个线程在锁内同时占用多个资源，尽量保证每个锁只占用一个资源。
+- 尝试使用定时锁，使用 lock.tryLock（timeout）来替代使用内部锁机制。
+- 对于数据库锁，加锁和解锁必须在一个数据库连接里，否则会岀现解锁失败的情况。
+
+另外还有一个著名的避免死锁的著名算法：银行家算法。
+
+死锁还有一个著名的哲学问题：哲学家进餐。
 
 **死锁测试，怎么排除死锁：**
 
@@ -3738,5 +3794,86 @@ Found 1 deadlock.
 1. 日志
 2. 堆栈
 
+### 锁消除
 
+- 话不多说，先撸一段代码看看先：
 
+```
+public void add(String str1){
+         StringBuffer sb = new StringBuffer("hello");
+         sb.append(str1);
+}
+
+```
+
+ 锁消除，即去除不可能存在共享资源竞争的锁。
+
+众所周知，【StringBuffer】是线程安全的，因为内部的关键方法都是被synchronized修饰过的，
+
+但是上述代码中，sb是局部变量，不存在竞争共享资源的现象，此时JVM会自动不使用【StringBuffer】中的锁。 
+
+### 锁粗化
+
+- 先看两个实例：
+
+```java
+// 第一种加锁方式
+public class SynchronizedTest {
+    private int count;
+    public void test() {
+        System.out.println("test");
+        int a = 0;
+        synchronized (this) {
+            count++;
+        }
+    }
+}
+```
+
+```java
+// 第二种加锁方式
+public class SynchronizedTest {
+    private int count;
+    public void test() {
+        synchronized (this) {
+            System.out.println("test");
+            int a = 0;
+            count++;
+        }
+    }
+}
+```
+
+通常我们为了降低锁粒度，会选择第一种加锁方式，**仅在线程共享资源处加锁**，从而使得同步需要的操作数量更少。 
+
+- 而锁粗化思想，就是扩大加锁范围，避免反复加锁，我们再看一下【StringBuffer】的例子：
+
+```java
+public String test(String str){
+       int i = 0;
+       StringBuffer sb = new StringBuffer():
+       while(i < 100){
+           sb.append(str);
+           i++;
+       }
+       return sb.toString():
+} 
+```
+
+由于【StringBuffer】是在内部方法实现的【synchronized】加锁，我们无法把锁提取到循环体外，如果没有锁粗化，此处要进行100次加锁。
+
+此时JVM会检测到这样一连串的操作都对同一个对象加锁，JVM就会将锁的范围粗化到这一连串的操作的外部（比如while的虚幻体外），使得这一连串的操作只需要加一次锁即可。
+
+## 多线程相关问题
+
+[死锁哲学问题-哲学家就餐问题](https://www.cnblogs.com/vettel/p/3438257.html)
+
+[死锁哲学问题-银行家算法](https://baike.baidu.com/item/%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95/1679781?fr=aladdin)
+
+[什么是竞态条件？如何解决？](https://blog.csdn.net/weixin_34080571/article/details/91935295)  
+
+[java中的管程](https://blog.csdn.net/death05/article/details/94177146)
+
+[为什么局部变量是线程安全的？](https://blog.csdn.net/qq_39530821/article/details/102315175)
+
+[什么是死锁？什么是活锁？什么是饿死？](https://www.cnblogs.com/wzdnwyyu/p/11162985.html)
