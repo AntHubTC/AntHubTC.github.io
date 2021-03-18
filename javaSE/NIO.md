@@ -1,5 +1,7 @@
 # NIO
 
+资料:  [尚硅谷NIO视频(java nio线程精讲)](https://www.bilibili.com/video/BV14W411u7ro?t=396&p=6)
+
 ## 基础知识
 
 ### NIO与IO的主要区别

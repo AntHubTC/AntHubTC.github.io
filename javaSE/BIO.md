@@ -1,5 +1,7 @@
 # BIO
 
+资料：[JAVA IO流精讲上    Java讲师孙探](https://www.bilibili.com/video/BV1Y4411P7Ey?t=364&p=11)    [JAVA IO流精讲下    Java讲师孙探](https://www.bilibili.com/video/BV1WJ411y7KH/?spm_id_from=333.788.recommend_more_video.0)
+
 ​	所有涉及的类的API都翻越JDK API文档对照着看。
 
 ![image-20210317104922371](img/BIO/image-20210317104922371.png)
@@ -1019,3 +1021,10 @@ public class RandomAccessFileTest2 {
     }
 ```
 
+
+
+
+
+
+
+之前还不知道，原来还有下篇，后面有抽时间补上。[《JAVA IO流精讲下》](https://www.bilibili.com/video/BV1WJ411y7KH?p=1)
