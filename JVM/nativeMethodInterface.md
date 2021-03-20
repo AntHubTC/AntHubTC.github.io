@@ -2,7 +2,7 @@
 
 ## 什么是本地方法
 
-简单地讲，一个Native Methodt是一个Java调用非Java代码的接囗。一个Native  Method是这样一个Java方法：该方法的实现由非Java语言实现，比如C。这个特征并非Java所特有，很多其它的编程语言都有这一机制，比如在C++中，你可以用extern "c" 告知c++编译器去调用一个c的函数。
+简单地讲，一个Native Method是一个Java调用非Java代码的接囗。一个Native  Method是这样一个Java方法：该方法的实现由非Java语言实现，比如C。这个特征并非Java所特有，很多其它的编程语言都有这一机制，比如在C++中，你可以用extern "c" 告知c++编译器去调用一个c的函数。
 
 "A native method is a Java method whose implementation is provided by non-java code."（本地方法是一个非Java的方法，它的具体实现是非Java代码的实现）
 

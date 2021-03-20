@@ -20,9 +20,9 @@ GC仍然处于飞速发展之中，目前的默认选项G1 GC在不断的进行�
 
 > Open JDK12的Shenandoah GC：低停顿时间的GC（实验性）
 
-**Shenandoah，无疑是众多GC中最孤独的一个**。是第一款不由 Oracle公司团队领导开发的 Hotspot垃圾收集器。不可避免的**受到官方的排挤**。比如号称 openjdk和Oracle]DK没有区别的 Oracle公司仍拒绝在orac1eJDK12中支持 shenandoah。
+**Shenandoah，无疑是众多GC中最孤独的一个**。是第一款不由 Oracle公司团队领导开发的 Hotspot垃圾收集器。不可避免的**受到官方的排挤**。比如号称 openjdk和Oracle]DK没有区别的 Oracle公司仍拒绝在oracle JDK12中支持 shenandoah。
 
-Shenandoah垃圾回收器最初由 Redhat进行的一项垃圾收集器研究项目 Pauseless GC的实现，**旨在针对JwM上的内存回收实现低停顿的需求**。在2014年贡献给OpenJDK。
+Shenandoah垃圾回收器最初由 Redhat进行的一项垃圾收集器研究项目 Pauseless GC的实现，**旨在针对JVM上的内存回收实现低停顿的需求**。在2014年贡献给OpenJDK。
 
 Red Hat研发 Shenandoah团队对外宣称， **Shenandoah垃圾回收器的暂停时间与堆大小无关，这意味着无论将堆设置为288MB还是288GB，99.9%的目标都可以把垃圾收集的停顿时间限制在十毫秒以内**。不过实际使用性能将取决于实际工作堆的大小和工作负载。
 

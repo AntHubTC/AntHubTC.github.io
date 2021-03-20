@@ -79,9 +79,20 @@ https://docs.oracle.com/javase/7/docs/technotes/guides/management/jconsole.html
 
 官方文档： http://arthas.gitee.io/
 
+[Arthas，一个JAVA项目分析/诊断工具在mac上的试用记录](https://www.deathearth.com/1345.html)
+
 ## Java Mission Control
 
 ## Btrace
 
 ## Flame Graphs（火焰图）
 
+## IBM HeapAnalyzer
+
+​	IBM *HeapAnalyzer* is a graphical tool for discovering possible Java heap leaks.
+
+
+
+
+
+[JVM性能调优的6大步骤，及关键调优参数详解](https://zhuanlan.zhihu.com/p/58897189)

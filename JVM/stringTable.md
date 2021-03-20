@@ -37,9 +37,6 @@ String：代表不可变的字符序列。简称：不可变性。
 ```
 /**
  * String的不可变性
- *
- * @author: 陌溪
- * @create: 2020-07-11-8:57
  */
 public class StringTest1 {
 
@@ -98,12 +95,6 @@ mbc
 ### 面试题
 
 ```
-/**
- * 面试题
- *
- * @author: 陌溪
- * @create: 2020-07-11-9:05
- */
 public class StringExer {
     String str = new String("good");
     char [] ch = {'t','e','s','t'};
@@ -133,13 +124,13 @@ best
 
 **字符串常量池是不会存储相同内容的字符串的**
 
-String的string Pool是一个固定大小的Hashtable，默认值大小长度是1009。如果放进string  Pool的string非常多，就会造成Hash冲突严重，从而导致链表会很长，而链表长了后直接会造成的影响就是当调用string.intern时性能会大幅下降。
+String的String Pool是一个固定大小的Hashtable，默认值大小长度是1009。如果放进String  Pool的String非常多，就会造成Hash冲突严重，从而导致链表会很长，而链表长了后直接会造成的影响就是当调用String.intern时性能会大幅下降。
 
-使用-XX:StringTablesize可设置stringTab1e的长度
+使用-XX:StringTablesize可设置StringTable的长度。
 
-在jdk6中stringTable是固定的，就是1009的长度，所以如果常量池中的字符串过多就会导致效率下降很快。stringTablesize设置没有要求
+在jdk6中StringTable是固定的，就是1009的长度，所以如果常量池中的字符串过多就会导致效率下降很快。StringTablesize设置没有要求
 
-在jdk7中，stringTable的长度默认值是60013，
+在jdk7中，StringTable的长度默认值是60013，
 
 在JDK8中，StringTable可以设置的最小值为1009
 
@@ -165,9 +156,9 @@ Java 7中 oracle的工程师对字符串池的逻辑做了很大的改变，即�
 
 Java8元空间，字符串常量在堆
 
-![image-20200711093546398](img/stringTable/image-20200711093546398.png)
+![image-20200711093546398](img/StringTable/image-20200711093546398.png)
 
-![image-20200711093558709](img/stringTable/image-20200711093558709.png)
+![image-20200711093558709](img/StringTable/image-20200711093558709.png)
 
 ### 为什么StringTable从永久代调整到堆中
 
@@ -230,7 +221,7 @@ Java语言规范里要求完全相同的字符串字面量，应该包含同样�
 
 拼接操作的底层其实使用了StringBuilder
 
-![image-20200711102231129](img/stringTable/image-20200711102231129.png)
+![image-20200711102231129](img/StringTable/image-20200711102231129.png)
 
 s1 + s2的执行细节
 
@@ -332,8 +323,6 @@ String myInfo = new string("I love atguigu").intern();
 ```
 /**
  * 使用Intern() 测试执行效率
- * @author: 陌溪
- * @create: 2020-07-11-15:19
  */
 public class StringIntern2 {
     static final int MAX_COUNT = 1000 * 10000;
@@ -369,8 +358,6 @@ public class StringIntern2 {
 /**
  * new String("ab") 会创建几个对象？ 看字节码就知道是2个对象
  *
- * @author: 陌溪
- * @create: 2020-07-11-11:17
  */
 public class StringNewTest {
     public static void main(String[] args) {
@@ -401,8 +388,6 @@ public class StringNewTest {
 /**
  * new String("ab") 会创建几个对象？ 看字节码就知道是2个对象
  *
- * @author: 陌溪
- * @create: 2020-07-11-11:17
  */
 public class StringNewTest {
     public static void main(String[] args) {
@@ -500,7 +485,7 @@ String s4 = "11";
 System.out.println(s3 == s4); // true
 ```
 
-![image-20200711145925091](img/stringTable/image-20200711145925091.png)
+![image-20200711145925091](img/StringTable/image-20200711145925091.png)
 
 ### 扩展
 
@@ -529,7 +514,7 @@ JDK1.7起，将这个字符串对象尝试放入串池。
 
 练习：
 
-![image-20200711150859709](img/stringTable/image-20200711150859709.png)
+![image-20200711150859709](img/StringTable/image-20200711150859709.png)
 
 - 在JDK6中，在字符串常量池中创建一个字符串 “ab”
 - 在JDK8中，在字符串常量池中没有创建 “ab”，而是将堆中的地址复制到 串池中。
@@ -548,11 +533,11 @@ false
 true
 ```
 
-![image-20200711151326909](img/stringTable/image-20200711151326909.png)
+![image-20200711151326909](img/StringTable/image-20200711151326909.png)
 
 针对下面这题，在JDK6和8中表现的是一样的
 
-![image-20200711151433277](img/stringTable/image-20200711151433277.png)
+![image-20200711151433277](img/StringTable/image-20200711151433277.png)
 
 ## StringTable的垃圾回收
 
@@ -560,8 +545,6 @@ true
 /**
  * String的垃圾回收
  * -Xms15m -Xmx15m -XX:+PrintStringTableStatistics -XX:+PrintGCDetails
- * @author: 陌溪
- * @create: 2020-07-11-16:55
  */
 public class StringGCTest {
     public static void main(String[] args) {

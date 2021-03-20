@@ -35,7 +35,7 @@ ThreadLocal：如何保证多个线程在并发环境下的安全性？典型应
 - 方法区（Method Area）与Java堆一样，是各个线程共享的内存区域。
 - 方法区在JVM启动的时候被创建，并且它的实际的物理内存空间中和Java堆区一样都可以是不连续的。
 - 方法区的大小，跟堆空间一样，可以选择固定大小或者可扩展。
-- 方法区的大小决定了系统可以保存多少个类，如果系统定义了太多的类，导致方法区溢出，虚拟机同样会抛出内存溢出错误：ava.lang.OutofMemoryError：PermGen space 或者java.lang.OutOfMemoryError:Metaspace
+- 方法区的大小决定了系统可以保存多少个类，如果系统定义了太多的类，导致方法区溢出，虚拟机同样会抛出内存溢出错误：java.lang.OutofMemoryError：PermGen space 或者java.lang.OutOfMemoryError:Metaspace
   - 加载大量的第三方的jar包
   - Tomcat部署的工程过多（30~50个）
   - 大量动态的生成反射类
@@ -49,7 +49,7 @@ ThreadLocal：如何保证多个线程在并发环境下的安全性？典型应
 
 本质上，方法区和永久代并不等价。仅是对hotspot而言的。《Java虚拟机规范》对如何实现方法区，不做统一要求。例如：BEAJRockit / IBM J9 中不存在永久代的概念。
 
-> 现在来看，当年使用永久代，不是好的idea。导致Java程序更容易oom（超过-XX:MaxPermsize上限）
+> 现在来看，当年使用永久代，不是好的idea。导致Java程序更容易oom（超过-XX:MaxPermSize上限）
 
 ![image-20200708102919149](img/methodArea/image-20200708102919149.png)
 
@@ -70,7 +70,7 @@ ThreadLocal：如何保证多个线程在并发环境下的安全性？典型应
 ### jdk7及以前
 
 - 通过-xx:Permsize来设置永久代初始分配空间。默认值是20.75M
-- -XX:MaxPermsize来设定永久代最大可分配空间。32位机器默认是64M，64位机器模式是82M
+- -XX:MaxPermsize来设定永久代最大可分配空间。32位机器默认是64M，64位机器默认是82M
 - 当JVM加载的类信息容量超过了这个值，会报异常OutofMemoryError:PermGen space。
 
 ![image-20200708111756800](img/methodArea/image-20200708111756800.png)
@@ -89,7 +89,7 @@ ThreadLocal：如何保证多个线程在并发环境下的安全性？典型应
 
 ### 如何解决这些OOM
 
-- 要解决ooM异常或heap space的异常，一般的手段是首先通过内存映像分析工具（如Ec1ipse Memory  Analyzer）对dump出来的堆转储快照进行分析，重点是确认内存中的对象是否是必要的，也就是要先分清楚到底是出现了内存泄漏（Memory  Leak）还是内存溢出（Memory Overflow）
+- 要解决OOM异常或heap space的异常，一般的手段是首先通过内存映像分析工具（如Ec1ipse Memory  Analyzer）对dump出来的堆转储快照进行分析，重点是确认内存中的对象是否是必要的，也就是要先分清楚到底是出现了内存泄漏（Memory  Leak）还是内存溢出（Memory Overflow）
   - 内存泄漏就是 有大量的引用指向某些对象，但是这些对象以后不会使用了，但是因为它们还和GC ROOT有关联，所以导致以后这些对象也不会被回收，这就是内存泄漏的问题
 - 如果是内存泄漏，可进一步通过工具查看泄漏对象到GC  Roots的引用链。于是就能找到泄漏对象是通过怎样的路径与GCRoots相关联并导致垃圾收集器无法自动回收它们的。掌握了泄漏对象的类型信息，以及GCRoots引用链的信息，就可以比较准确地定位出泄漏代码的位置。
 - 如果不存在内存泄漏，换句话说就是内存中的对象确实都还必须存活着，那就应当检查虚拟机的堆参数（-Xmx与-Xms），与机器物理内存对比看是否还可以调大，从代码上检查是否存在某些对象生命周期过长、持有状态时间过长的情况，尝试减少程序运行期的内存消耗。
@@ -104,7 +104,7 @@ ThreadLocal：如何保证多个线程在并发环境下的安全性？典型应
 
 ### 类型信息
 
-对每个加载的类型（类class、接口interface、枚举enum、注解annotation），JVm必须在方法区中存储以下类型信息：
+对每个加载的类型（类class、接口interface、枚举enum、注解annotation），JVM必须在方法区中存储以下类型信息：
 
 - 这个类型的完整有效名称（全名=包名.类名）
 - 这个类型直接父类的完整有效名（对于interface或是java.lang.object，都没有父类）
@@ -183,7 +183,7 @@ class Order {
 
 #### 为什么需要常量池
 
-一个java源文件中的类、接口，编译后产生一个字节码文件。而Java中的字节码需要数据支持，通常这种数据会很大以至于不能直接存到字节码里，换另一种方式，可以存到常量池，这个字节码包含了指向常量池的引用。r在动态链接的时候会用到运行时常量池，之前有介绍。
+一个java源文件中的类、接口，编译后产生一个字节码文件。而Java中的字节码需要数据支持，通常这种数据会很大以至于不能直接存到字节码里，换另一种方式，可以存到常量池，这个字节码包含了指向常量池的引用。在动态链接的时候会用到运行时常量池，之前有介绍。
 
 比如：如下的代码：
 
@@ -303,7 +303,7 @@ Hotspot中方法区的变化：
 
 | JDK1.6及以前 | 有永久代，静态变量存储在永久代上                             |
 | ------------ | ------------------------------------------------------------ |
-| JDK1.7       | 有永久代，但已经逐步 “去永久代”，字符串常量池，静态变量移除，保存在堆中 |
+| JDK1.7       | 有永久代，但已经逐步 “去永久代”，字符串常量池，静态变量移除，保存在堆中  [JDK 1.7 的 java.lang.Class 对象和 static 成员变量在堆还是方法区？](https://blog.csdn.net/Xu_JL1997/article/details/89433916?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&dist_request_id=1328679.21679.16162065888373727&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control) |
 | JDK1.8       | 无永久代，类型信息，字段，方法，常量保存在本地内存的元空间，但字符串常量池、静态变量仍然在堆中。 |
 
 JDK6的时候
@@ -328,7 +328,7 @@ JRockit是和HotSpot融合后的结果，因为JRockit没有永久代，所以�
 
 - 为永久代设置空间大小是很难确定的。
 
-在某些场景下，如果动态加载类过多，容易产生Perm区的oom。比如某个实际Web工 程中，因为功能点比较多，在运行过程中，要不断动态加载很多类，经常出现致命错误。
+在某些场景下，如果动态加载类过多，容易产生Perm区的OOM。比如某个实际Web工程中，因为功能点比较多，在运行过程中，要不断动态加载很多类，经常出现致命错误。
 
 “Exception in thread‘dubbo client x.x connector'java.lang.OutOfMemoryError:PermGen space”
 
@@ -343,9 +343,9 @@ JRockit是和HotSpot融合后的结果，因为JRockit没有永久代，所以�
 
 ### StringTable为什么要调整位置
 
-jdk7中将StringTable放到了堆空间中。因为永久代的回收效率很低，在full gc的时候才会触发。而ful1gc是老年代的空间不足、永久代不足时才会触发。
+jdk7中将StringTable放到了堆空间中。因为永久代的回收效率很低，在full gc的时候才会触发。而full gc是老年代的空间不足、永久代不足时才会触发。
 
-这就导致stringTable回收效率不高。而我们开发中会有大量的字符串被创建，回收效率低，导致永久代内存不足。放到堆里，能及时回收内存。
+这就导致StringTable回收效率不高。而我们开发中会有大量的字符串被创建，回收效率低，导致永久代内存不足。放到堆里，能及时回收内存。
 
 ### 静态变量存放在那里？
 
@@ -353,7 +353,7 @@ jdk7中将StringTable放到了堆空间中。因为永久代的回收效率很�
 
 可以使用 jhsdb.ext，需要在jdk9的时候才引入的
 
-staticobj随着Test的类型信息存放在方法区，instanceobj随着Test的对象实例存放在Java堆，localobject则是存放在foo（）方法栈帧的局部变量表中。
+static obj随着Test的类型信息存放在方法区，instance obj随着Test的对象实例存放在Java堆，localobject则是存放在foo()方法栈帧的局部变量表中。
 
 ![image-20200708215025527](img/methodArea/image-20200708215025527.png)
 
@@ -401,7 +401,7 @@ HotSpot虚拟机对常量池的回收策略是很明确的，只要常量池中�
 
 小米： jvm内存分区，为什么要有新生代和老年代
 
-字节跳动： 二面：Java的内存分区 二面：讲讲vm运行时数据库区 什么时候对象会进入老年代？
+字节跳动： 二面：Java的内存分区 二面：讲讲JVM运行时数据区 什么时候对象会进入老年代？
 
 京东： JVM的内存结构，Eden和Survivor比例。 JVM内存为什么要分成新生代，老年代，持久代。新生代中为什么要分为Eden和survivor。
 
