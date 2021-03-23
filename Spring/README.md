@@ -37,12 +37,12 @@ https://docs.spring.io/spring-framework/docs/ 能看见各个版本的文档
 
 ### 优点
 
-- Spring是一个开源的免费的框架（容器）！
+- Spring是一个开源的免费的框架（控制反转容器）！
 - Spring是一个轻量级，非入侵式框架！
 - 控制反转（IOC），面向切面编程（AOP）！
 - 支持事务的处理，对框架整合的支持！
 
-> 总结一句话：Spring就是一个轻量级的控制反转IOC和面向切面编程AOP的框架！
+> 总结一句话：**Spring就是一个轻量级的控制反转IOC和面向切面编程AOP的框架！**
 
 ### 组成
 
@@ -81,6 +81,22 @@ https://docs.spring.io/spring-framework/docs/ 能看见各个版本的文档
 
 ​		**弊端：发展了太久之后，违背了原来的理念！配置十分繁琐，人称：“配置地狱”。**
 
+## BeanFactory和ApplicationContext
+
+Spring通过一个配置文件描述Bean和Bean之间的依赖关系，利用Java反射功能实例化Bean，并建立Bean之间的依赖关系。
+
+Spring的IOC容器在完成这些底层工作的基础上，还提供了Bean实例缓存、生命周期管理、Bean实例代理、时间发布、资源装载等高级服务。
+
+BeanFactory是Spring框架最核心的接口，它提供了高级IOC的配置机制。
+
+ApplicationContext建立在BeanFactory的基础上，提供了更多面向应用的功能， 它提供了国际化支持和框架事件体系。
+
+我们一般称BeanFactory为IoC容器，而称ApplicationContext为应用上下文，但有时候为了行文方便，我们也将ApplicationContext称为Spring容器。
+
+对于BeanFactory 和 ApplicationContext的用途：
+
+BeanFactory是Spring框架的基础设施，面向Spring本身
+ApplicationContext面向使用Spring框架的开发者，几乎所有的应用场合都可以直接使用Application而非底层的BeanFactory.
 
 
 ### 不错的资料

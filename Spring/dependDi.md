@@ -309,7 +309,7 @@ beans.xml
 
 ### bean的作用域
 
-![img](/media/tc/jx-file/2_STUDY/GitHubRepositories/00myGitHubRepository/FallenGodCoder.github.io/Spring/img/beanScope.png)
+![img](./img/beanScope.png)
 
 ​		Singleton是单例类型，就是在创建起容器时就同时自动创建了一个bean的对象，不管你是否使用，他都存在了，每次获取到的对象都是同一个对象。注意，Singleton作用域是Spring中的缺省作用域。
 
@@ -325,11 +325,11 @@ beans.xml
 
 ### bean的生命周期
 
-![img](/media/tc/jx-file/2_STUDY/GitHubRepositories/00myGitHubRepository/FallenGodCoder.github.io/Spring/img/beanInstance.png)
+![img](./img/beanInstance.png)
 
 与上图类似，bean的生命周期流程图：
 
-![image-20201113190021606](/media/tc/jx-file/2_STUDY/GitHubRepositories/00myGitHubRepository/FallenGodCoder.github.io/Spring/img/image-20201113190021606.png)
+![image-20201113190021606](./img/image-20201113190021606.png)
 
 　　Bean实例生命周期的执行过程如下：
 
