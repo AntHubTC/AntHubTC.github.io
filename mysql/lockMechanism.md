@@ -32,6 +32,7 @@
 
 - 表锁
 - 行锁
+  - 行锁包括了共享锁、排他锁、间隙锁、记录锁、临键锁.
 
 ## 表锁（偏读）
 
@@ -239,9 +240,12 @@ Innodb_row_lock_waits: 系统启动后到现在总共等待的次数；
 
 
 
+## 事务隔离与锁
 
+[Mysql 百问系列：幻读到底是什么？](https://juejin.cn/post/6844904051453198343)          
 
+[MySQL事务隔离级别和实现原理](https://zhuanlan.zhihu.com/p/117476959)
 
+[MySQL MVCC多版本并发控制](https://www.jianshu.com/p/8845ddca3b23)
 
-
-
+[Mysql快照读与当前读](https://blog.csdn.net/mingtiannihaoabc/article/details/107018110)
