@@ -180,3 +180,16 @@ nofile 表示所限制的资源是打开文件的最大数目。
 # 注意：这个文件的修改需要重启系统才可以生效。
 ```
 
+## SysBench性能基准测试工具
+
+SysBench是一个模块化的、跨平台、多线程基准测试工具，主要用于评估测试各种**不同系统参数**下的**数据库负载情况**。它主要包括以下几种方式的测试：
+       1、cpu性能
+       2、磁盘io性能
+       3、调度程序性能
+       4、内存分配及传输速度
+       5、POSIX线程性能
+       6、数据库性能(OLTP基准测试)      
+
+目前sysbench主要支持 MySQL,pgsql,oracle这3种数据库。
+
+[sysbench测试mysql性能（TPS、QPS、IOPS）](https://blog.csdn.net/qq_36357820/article/details/80079012)
