@@ -20,7 +20,7 @@
     { title: 'MySQL', href: '../mysql' },
     { title: 'MyCat', href: '../mycat' },
     { title: 'mybatis', href: '../mybatis' },
-    // { title: 'mybatisPlus', href: '../mybatisPlus' },
+    { title: 'mybatis-Plus', href: '../mybatisPlus' },
     { title: 'Swagger', href: '../Swagger' },
     { title: 'Postman', href: '../postman' },
     { title: 'tomcat', href: '../tomcat' },
