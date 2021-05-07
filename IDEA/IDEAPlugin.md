@@ -136,7 +136,48 @@
 
 代码编辑区缩略图插件 快捷键使用 ➡️ `Ctrl + Shift + G`
 
-### Free MyBatis plugin
+## MybatisX
 
-让方法和mapper文件之间直接跳转
+在好用的插件Free MyBatis plugin之上进行改造的一个插件。
 
+- 生成mapper xml文件
+- 快速从代码跳转到mapper及从mapper返回代码
+- mybatis自动补全及语法错误提示
+- 集成mybatis generator gui界面
+- 根据数据库注解，生成swagger model注解
+
+- mapper and xml can jump back and forth
+- mybatis.xml, mapper.xml prompt
+- mapper and xml support auto prompt like jpa (reference MybatisCodeHelperPro)
+
+## 翻译插件Translation 
+
+第一步下载插件：
+
+![img](img/IDEAPlugin/20200821173930427.png)
+
+使用很简单：选中单词或者段落ctrl+shift+y翻译，ctrl+shift+s切换翻译源 
+
+![img](img/IDEAPlugin/20200821174107554.png)
+
+但是有的时候会快捷键冲突，我们需要重新设置一下：
+
+![img](img/IDEAPlugin/2020082117425899.png)
+
+ 
+
+![img](img/IDEAPlugin/2020082117432686.png)
+
+ 
+
+![img](img/IDEAPlugin/20200821174537348.png)
+
+ 以下为效果图：
+
+汉译英
+
+![img](img/IDEAPlugin/20200821175522748.png)
+
+ 英译汉
+
+![img](img/IDEAPlugin/20200821175551875.png)
