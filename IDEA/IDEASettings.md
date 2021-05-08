@@ -2,6 +2,12 @@
 
 ​	进入IDEA全局设置，File | Settings (Ctrl + Alt + S)
 
+## 代码自动导入包
+
+​	**功能路径：**File | Settings | Editor | Genreal | Auto Import
+
+![image-20210508105058428](img/IDEASettings/image-20210508105058428.png)
+
 ## 文件和代码模板 File and Code Templates
 
 ### 功能介绍

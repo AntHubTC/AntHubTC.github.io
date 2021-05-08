@@ -19,3 +19,4 @@
 ​	Default中：命名规则：”my+技术名+模板描述“，例如："mySpringController", "mySpringService"等。
 
 ​	Project中：命名规则：”项目简称+技术名+模板描述“，例如: "dwdSpringController", "dwdVueGridPage", "OASpringDao", "OAJunitTest", "DGMockTest"等。
+
