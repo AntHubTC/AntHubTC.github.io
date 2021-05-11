@@ -36,6 +36,7 @@
     { title: 'HTTP', href: '../HTTP' },
     { title: 'windows批处理', href: '../windows-batch' },
     { title: 'Python', href: '../python' },
+    { title: 'Hutool糊涂工具包', href: 'https://www.hutool.cn/' },
     // { title: 'raspberryPI', href: '../raspberryPI' },
     // { title: 'vi_vim', href: '../vi_vim' },
     { title: '论软件外包', href: '../outsource' },
