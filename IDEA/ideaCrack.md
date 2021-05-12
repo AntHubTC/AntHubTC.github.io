@@ -4,7 +4,9 @@
 
 ​		自从http://idea.lanyus.com/这个网站关闭后，在IDEA快到期的时候开始为难了，下面是我一次crack学习的经历，记录下来。
 
-## 环境
+## JetbrainsCrack法
+
+### 资源
 
 ​		IntelliJ IDEA 2017.3.4 （我看网上2018版本也有相关文章，所以我估计2017-2018都可以使用该方法）
 
@@ -73,9 +75,19 @@ cmd，然后运行 java -jar JetbrainsCrack-2.7.jar，会得到下面的结果�
 
 ![1583807737146](.\img\1583807737146.png)
 
+## 无限重置法
 
+插件市场安装：
+在Settings/Preferences… -> Plugins 内手动添加第三方插件仓库地址：https://plugins.zhile.io
+搜索：IDE Eval Reset插件进行安装。如果搜索不到请注意是否做好了上一步？网络是否通畅？
+插件会提示安装成功。
 
+手动唤出插件的主界面：
+如果IDE没有打开项目，在Welcome界面点击菜单：Get Help -> Eval Reset
+如果IDE打开了项目，点击菜单：Help -> Eval Reset
 
-
-
+唤出的插件主界面中包含了一些显示信息，2个按钮，1个勾选项：
+按钮：Reload 用来刷新界面上的显示信息。
+按钮：Reset 点击会询问是否重置试用信息并重启IDE。选择Yes则执行重置操作并重启IDE生效，选择No则什么也不做。（此为手动重置方式）
+**勾选项：Auto reset before per restart 如果勾选了，则自勾选后每次重启/退出IDE时会自动重置试用信息，你无需做额外的事情。（此为自动重置方式）**
 
