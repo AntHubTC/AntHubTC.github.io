@@ -26,6 +26,14 @@ IDEA安装目录下两个文件idea.exe.vmoptions和idea64.exe.vmoptions文件�
 
 
 
+## 新建项目默认配置
+
+​	防止比如每次新建项目都要改一次maven配置，仓库settings文件，编码等。
+
+"File"->"New Projects Settings " -> "Settings for New Projects"
+
+![image-20210513091433559](img/IDEASettings/image-20210513091433559.png)
+
 ## 代码自动导入包
 
 ​	**功能路径：**File | Settings | Editor | Genreal | Auto Import
