@@ -2,6 +2,30 @@
 
 ​	进入IDEA全局设置，File | Settings (Ctrl + Alt + S)
 
+## 编码设置
+
+​	防止项目代码编码问题，以及控制台乱码等问题。
+
+项目编码设置：
+
+![image-20210513083947296](img/IDEASettings/image-20210513083947296.png)
+
+防止控制台输出中文乱码问题：
+
+Help->Edit Custom VM Options 在打开的文件中追加上这一行：
+
+```
+-Dfile.encoding=utf-8
+```
+
+IDEA安装目录下两个文件idea.exe.vmoptions和idea64.exe.vmoptions文件末尾添加上一行。
+
+```
+-Dfile.encoding=utf-8
+```
+
+
+
 ## 代码自动导入包
 
 ​	**功能路径：**File | Settings | Editor | Genreal | Auto Import
