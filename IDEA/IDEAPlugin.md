@@ -156,7 +156,10 @@
 
 ![img](img/IDEAPlugin/20200821173930427.png)
 
-使用很简单：选中单词或者段落ctrl+shift+y翻译，ctrl+shift+s切换翻译源 
+使用很简单：
+
+- 选中单词或者段落ctrl+shift+y翻译，ctrl+shift+s切换翻译源 
+- 选择输入字符，然后ctrl+shift+x，能够将代码中的汉字转换为对应的英文
 
 ![img](img/IDEAPlugin/20200821174107554.png)
 
@@ -181,3 +184,59 @@
  英译汉
 
 ![img](img/IDEAPlugin/20200821175551875.png)
+
+## grep console
+
+java 开发的过程中，日志都会输出到console，输出的内容是非常多的，所以需要有一个工具可以方便的查找日志，或者可以非常明显显示我们关注的内容，grep console就是这样的一个工具。
+
+安装完成后，在console中右键就能打开。
+
+![配置好各级日志的前景色](img/IDEAPlugin/4593846-c7b759a429bed87a.png)
+
+![测试最终效果](img/IDEAPlugin/4593846-0df2b267067e7467.png)
+
+## MyBatis Log Plugin
+
+Mybatis现在是java中操作数据库的首选，在开发的时候，我们都会把Mybatis的脚本直接输出在console中，但是默认的情况下，输出的脚本不是一个可以直接执行的。>MyBatis Log Plugin
+
+![image](img/IDEAPlugin/4593846-543333b6992dce1a.png)
+
+## Alibaba Java Coding Guidelines
+
+阿里代码规约检测：Alibaba Java Coding Guidelines
+
+![image](img/IDEAPlugin/4593846-e0d1b55fe861490d)
+
+### Key promoter X
+
+快捷键提示工具：Key promoter X
+
+![image](img/IDEAPlugin/4593846-b122bd2d56418fd8.png)
+
+## Lombok
+
+代码注解插件： Lombok
+
+## CodeMaker
+
+代码生成工具：CodeMaker     有时间的时候可以试一试好不好用
+
+## GsonFormatPlus
+
+JSON转领域对象工具
+
+![image](img/IDEAPlugin/4593846-328f2534c8820a43.png)
+
+## String Manipulation
+
+字符串工具：String Manipulation
+
+![image](img/IDEAPlugin/4593846-06fed03fd9ad14aa.png)
+
+## Iedis
+
+Redis可视化：Iedis
+
+## Kubernetes
+
+K8s工具：Kubernetes

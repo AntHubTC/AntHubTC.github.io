@@ -10,7 +10,11 @@
 
 * [IDEA快捷键](IDEAShortCut)
 
+* [我的IDEA奇技淫巧](IDEASkill)
+
 * [IDEA插件](IDEAPlugin)
+
+* [IDEA官网文档（W3CSchool）](https://www.w3cschool.cn/intellij_idea_doc/intellij_idea_doc-8iwv2pc4.html)
 
   
 
