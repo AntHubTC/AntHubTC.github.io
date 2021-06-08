@@ -4,7 +4,7 @@
     { title: 'javasE', href: '../javaSE' },
     { title: 'JUC', href: '../JUC' },
     { title: 'JVM', href: '../JVM' },
-    // { title: 'Netty', href: '../Netty' },
+    { title: 'Netty', href: '../Netty' },
     { title: 'JavaSE', href: '../javaSE' },
     { title: 'Spring', href: '../Spring' },
     { title: 'SpringBoot', href: '../springBoot' },
