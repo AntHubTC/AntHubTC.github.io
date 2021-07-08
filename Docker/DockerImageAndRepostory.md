@@ -51,12 +51,11 @@ Docker Hub  https://hub.docker.com/
 # docker search [OPTIONS] TERM
     --automated=false   只显示自动化构建的选项
     --no-trunc=false    以截断方式显示image id
-    -s,--stars=0   设置显示结果的最低星级
+    -f=stars=0   设置显示结果的最低星级
     一次最多返回25个结果
 # 练习
 docker search ubuntu
-docker search -s 3 ubuntu  # 查找3星以上的仓库
-docker search --filter=stars=3 ubuntu # 最新推荐语法
+docker search --filter=stars=3 ubuntu # 查找3星以上的仓库
 ```
 
 ### 拉取镜像
