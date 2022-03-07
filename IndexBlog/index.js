@@ -82,43 +82,66 @@ var getLocationSearchMap = function () {
     return locationMap
 }
 
-new Vue({
-    el: '#app',
-    data: {
-        searchText: '',
-        docs: []
-    },
-    computed: {
-        qdocs () {
-            let result = []
-            if (this.searchText.trim().length) {
-                for (var i = 0; i < this.docs.length; i++) {
-                    var doc = this.docs[i]
-                    if (searchFun(doc.title, this.searchText)) {
-                        result.push(doc)
-                    }
-                }
-            } else {
-                result = this.docs
-            }
-            return result
-        }
-    },
-    created () {
-        var locationSearchMap = getLocationSearchMap()
-        var isPrivate = (locationSearchMap['p'] === '1')
+
+// 页面准备
+function pageReady(callBack) {
+	let isLoaded = false
+	let loadedFun = function () {
+		if (!isLoaded) {
+			isLoaded = true;
+			callBack();
+		}
+	}
+	window.onload = loadedFun;
+	if ('addEventListener' in document){
+		document.addEventListener('DOMContentLoaded', loadedFun, false)//false代表在冒泡阶段触发，true在捕获阶段触发
+	}
+	document.onreadystatechange = function(){
+		if(document.readyState === 'complete'){
+			loadedFun();
+		}
+	}
+}
+
+pageReady(() => {
+	new Vue({
+		el: '#app',
+		data: {
+			searchText: '',
+			docs: []
+		},
+		computed: {
+			qdocs () {
+				let result = []
+				if (this.searchText.trim().length) {
+					for (var i = 0; i < this.docs.length; i++) {
+						var doc = this.docs[i]
+						if (searchFun(doc.title, this.searchText)) {
+							result.push(doc)
+						}
+					}
+				} else {
+					result = this.docs
+				}
+				return result
+			}
+		},
+		created () {
+			var locationSearchMap = getLocationSearchMap()
+			var isPrivate = (locationSearchMap['p'] === '1')
 
 
-        for (var i = 0; i < docs.length; i++) {
-            if (isPrivate) {
-                if (docs[i].private) {
-                    this.docs.push(docs[i])
-                }
-            } else {
-                if (!docs[i].private) {
-                    this.docs.push(docs[i])
-                }
-            }
-        }
-    }
-})
+			for (var i = 0; i < docs.length; i++) {
+				if (isPrivate) {
+					if (docs[i].private) {
+						this.docs.push(docs[i])
+					}
+				} else {
+					if (!docs[i].private) {
+						this.docs.push(docs[i])
+					}
+				}
+			}
+		}
+	})
+});
