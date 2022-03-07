@@ -2262,11 +2262,15 @@ public class FutureTest1 {
 
 ## JMM、Volatile
 
+[面试官：说说什么是Java内存模型](https://github.com/CoderLeixiaoshuai/java-eight-part/blob/master/docs/java/juc/%E9%9D%A2%E8%AF%95%E5%AE%98%EF%BC%9A%E8%AF%B4%E8%AF%B4%E4%BB%80%E4%B9%88%E6%98%AFJava%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%9F.md)
+
 [JMM和底层实现原理](https://www.jianshu.com/p/8a58d8335270)
 
 [java内存模型JMM理解整理](https://www.cnblogs.com/null-qige/p/9481900.html)
 
 [final重排序规则](https://blog.csdn.net/riemann_/article/details/96390511)
+
+[缓存一致性协议（MESI）](https://www.cnblogs.com/ynyhl/articles/12119690.html)
 
 ### 请你谈谈你对Volatile的理解？
 
