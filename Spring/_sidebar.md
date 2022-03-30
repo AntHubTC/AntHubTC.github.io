@@ -6,6 +6,8 @@
 
 * [bean的自动注入](beanAutowired)
 
+* [bean的创建和销毁顺序](beanCreateDestoryOrder)
+
 * [代理模式](proxyPattern)
 
 * [AOP](AOP)

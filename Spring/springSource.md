@@ -18,3 +18,5 @@
 
 [Aware](Aware)
 
+[bean中的autowire-candidate](beanAutowireCandidate)
+
