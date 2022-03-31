@@ -47,7 +47,8 @@
     { title: '文档的组织方式', href: '../docBuildMethod', private: true /* 后面可将一些文档隐藏起来 */},
     { title: '找工作的一些经历', href: '../Interview', private: true /* 后面可将一些文档隐藏起来 */},
     { title: '人生规划', href: '../LifePlan', private: true /* 后面可将一些文档隐藏起来 */},
-    { title: '中国礼仪', href: '../chinaCeremony' }
+    { title: '中国礼仪', href: '../chinaCeremony' }，
+    { title: 'IT那些趣事', href: '../IT那些有意思的事' }
 ]
 
 // 自定义模糊查询方法
