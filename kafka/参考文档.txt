@@ -1,1 +1,7 @@
 http://www.jasongj.com/2015/01/02/Kafka%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/
+
+基于kafka实现延迟队列(有人面试遇到过)
+https://zhuanlan.zhihu.com/p/365802989
+
+kafka延迟队列、重试队列、死信队列
+https://blog.csdn.net/jy02268879/article/details/106014372
