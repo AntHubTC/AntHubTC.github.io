@@ -3868,6 +3868,11 @@ public String test(String str){
 
 此时JVM会检测到这样一连串的操作都对同一个对象加锁，JVM就会将锁的范围粗化到这一连串的操作的外部（比如while的虚幻体外），使得这一连串的操作只需要加一次锁即可。
 
+## Lock 在@Transactional事务注解内的Service方法失效 (重要)
+
+https://blog.csdn.net/weixin_39360124/article/details/120074312
+https://blog.csdn.net/weixin_42771651/article/details/120070820
+
 ## 多线程相关问题
 
 [死锁哲学问题-哲学家就餐问题](https://www.cnblogs.com/vettel/p/3438257.html)
