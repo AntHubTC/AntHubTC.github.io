@@ -1,9 +1,6 @@
-package com.xinchao.trade.aop;
+package com.minibyte.aop;
 
 import cn.hutool.core.lang.UUID;
-import com.xinchao.trade.api.common.Code;
-import com.xinchao.trade.api.common.RespData;
-import com.xinchao.trade.api.exception.BizException;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -23,7 +20,7 @@ import java.util.concurrent.Executor;
 import static org.springframework.core.Ordered.HIGHEST_PRECEDENCE;
 
 /**
- * @author XC16775
+ * @author
  */
 @Aspect
 @Component

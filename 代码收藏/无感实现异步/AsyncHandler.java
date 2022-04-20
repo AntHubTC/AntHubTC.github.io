@@ -1,9 +1,9 @@
-package com.xinchao.trade.aop;
+package com.minibyte.aop;
 
 import java.lang.annotation.*;
 
 /**
- * @author XC16775
+ * @author
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
