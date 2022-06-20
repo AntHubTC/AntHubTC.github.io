@@ -114,8 +114,10 @@ public class BIOServer {
             }
         }
     }
-}Copy to clipboardErrorCopied
+}
 ```
+
+![image-20220620152030497](img/bio/image-20220620152030497.png)
 
 ## 2.6 Java BIO 问题分析
 
