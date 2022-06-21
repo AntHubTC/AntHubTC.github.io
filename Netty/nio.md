@@ -40,7 +40,7 @@ public class BasicBuffer {
             System.out.println(intBuffer.get());
         }
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 ## 3.2 NIO 和 BIO 的比较
@@ -53,7 +53,7 @@ public class BasicBuffer {
 
 一张图描述 `NIO` 的 `Selector`、`Channel` 和 `Buffer` 的关系。
 
-### 3.3.1 Selector、Channel 和 Buffer 关系图（简单版）
+### 3.3.1 Selector、Channel 和 Buffer 关系图
 
 关系图的说明:
 
@@ -99,21 +99,19 @@ public class BasicBuffer {
 
 ## 3.6 基本介绍
 
-1. ```
-   NIO
-   ```
+1. NIO
    
    的通道类似于流，但有些区别如下：
-
+   
    - 通道可以同时进行读写，而流只能读或者只能写
    - 通道可以实现异步读写数据
    - 通道可以从缓冲读数据，也可以写数据到缓冲:
-
+   
 2. `BIO` 中的 `Stream` 是单向的，例如 `FileInputStream` 对象只能进行读取数据的操作，而 `NIO` 中的通道（`Channel`）是双向的，可以读操作，也可以写操作。
 
 3. `Channel` 在 `NIO` 中是一个接口 `public interface Channel extends Closeable{}`
 
-4. 常用的 `Channel` 类有：**`FileChannel`、`DatagramChannel`、`ServerSocketChannel` 和 `SocketChannel`**。【`ServerSocketChanne` 类似 `ServerSocket`、`SocketChannel` 类似 `Socket`】
+4. 常用的 `Channel` 类有：**`FileChannel`、`DatagramChannel`、`ServerSocketChannel` 和 `SocketChannel`**。【`ServerSocketChannel` 类似 `ServerSocket`、`SocketChannel` 类似 `Socket`】
 
 5. `FileChannel` 用于文件的数据读写，`DatagramChannel` 用于 `UDP` 的数据读写，`ServerSocketChannel` 和 `SocketChannel` 用于 `TCP` 的数据读写。
 
@@ -169,7 +167,7 @@ public class NIOFileChannel01 {
         fileChannel.write(byteBuffer);
         fileOutputStream.close();
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 ### 3.6.3 应用实例2 - 本地文件读数据
@@ -209,7 +207,7 @@ public class NIOFileChannel02 {
         System.out.println(new String(byteBuffer.array()));
         fileInputStream.close();
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 ### 3.6.4 应用实例3 - 使用一个 Buffer 完成文件读取、写入
@@ -268,7 +266,7 @@ public class NIOFileChannel03 {
         fileInputStream.close();
         fileOutputStream.close();
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 ### 3.6.5 应用实例4 - 拷贝文件 transferFrom 方法
@@ -306,7 +304,7 @@ public class NIOFileChannel04 {
         fileInputStream.close();
         fileOutputStream.close();
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 ### 3.6.6 关于 Buffer 和 Channel 的注意事项和细节
@@ -341,7 +339,7 @@ public class NIOByteBufferPutGet {
         System.out.println(buffer.getChar());
         System.out.println(buffer.getShort());
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 1. 可以将一个普通 `Buffer` 转成只读 `Buffer`【举例说明】
@@ -376,7 +374,7 @@ public class ReadOnlyBuffer {
 
         readOnlyBuffer.put((byte) 100); //ReadOnlyBufferException
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 1. `NIO` 还提供了 `MappedByteBuffer`，可以让文件直接在内存（堆外的内存）中进行修改，而如何同步到文件由 `NIO` 来完成。【举例说明】
@@ -415,7 +413,7 @@ public class MappedByteBufferTest {
         randomAccessFile.close();
         System.out.println("修改成功~~");
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 1. 前面我们讲的读写操作，都是通过一个 `Buffer` 完成的，`NIO` 还支持通过多个 `Buffer`（即 `Buffer`数组）完成读写操作，即 `Scattering` 和 `Gathering`【举例说明】
@@ -474,7 +472,7 @@ public class ScatteringAndGatheringTest {
                 long l = socketChannel.write(byteBuffers);//
                 byteWirte += l;
             }
-            
+
             //将所有的buffer进行clear
             Arrays.asList(byteBuffers).forEach(buffer -> {
                 buffer.clear();
@@ -483,7 +481,7 @@ public class ScatteringAndGatheringTest {
             System.out.println("byteRead = " + byteRead + ", byteWrite = " + byteWirte + ", messagelength = " + messageLength);
         }
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 ## 3.7 Selector（选择器）
@@ -515,12 +513,8 @@ public class ScatteringAndGatheringTest {
 
 1. `NIO` 中的 `ServerSocketChannel` 功能类似 `ServerSocket`、`SocketChannel` 功能类似 `Socket`。
 
-2. ```
-   Selector
-   ```
-
-    
-
+2. Selector 
+   
    相关方法说明
 
    - `selector.select();` //阻塞
@@ -555,22 +549,7 @@ public class ScatteringAndGatheringTest {
 
 ## 3.10 SelectionKey
 
-1. ```
-   SelectionKey
-   ```
-
-   ，表示
-
-    
-
-   ```
-   Selector
-   ```
-
-    
-
-   和网络通道的注册关系，共四种：
-
+1. SelectionKey，表示Selector和网络通道的注册关系，共四种：
    - `int OP_ACCEPT`：有新的网络连接可以 `accept`，值为 `16`
    - `int OP_CONNECT`：代表连接已经建立，值为 `8`
    - `int OP_READ`：代表读操作，值为 `1`
@@ -582,7 +561,7 @@ public class ScatteringAndGatheringTest {
 public static final int OP_READ = 1 << 0;
 public static final int OP_WRITE = 1 << 2;
 public static final int OP_CONNECT = 1 << 3;
-public static final int OP_ACCEPT = 1 << 4;Copy to clipboardErrorCopied
+public static final int OP_ACCEPT = 1 << 4;
 ```
 
 1. `SelectionKey` 相关方法
@@ -857,7 +836,7 @@ public class GroupChatClient {
             chatClient.sendInfo(s);
         }
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 ## 3.14 NIO 与零拷贝
@@ -880,7 +859,7 @@ byte[] arr = new byte[(int) file.length()];
 raf.read(arr);
 
 Socket socket = new ServerSocket(8080).accept();
-socket.getOutputStream().write(arr);Copy to clipboardErrorCopied
+socket.getOutputStream().write(arr);
 ```
 
 ### 3.14.3 传统 IO 模型
@@ -998,7 +977,7 @@ public class NewIOClient {
         //关闭
         fileChannel.close();
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 ## 3.15 Java AIO 基本介绍

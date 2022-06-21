@@ -174,7 +174,7 @@ public class NettyByteBuf01 {
         }
         System.out.println("执行完毕");
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 案例 2
@@ -225,7 +225,7 @@ public class NettyByteBuf02 {
             System.out.println(byteBuf.getCharSequence(4, 6, Charset.forName("utf-8")));
         }
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 ## 6.11 Netty 应用实例-群聊系统
@@ -483,7 +483,7 @@ public class GroupChatClientHandler extends SimpleChannelInboundHandler<String> 
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         System.out.println(msg.trim());
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 ## 6.12 Netty 心跳检测机制案例
@@ -602,7 +602,7 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
             // ctx.channel().close();
         }
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 ## 6.13 Netty 通过 WebSocket 编程实现服务器和客户端长连接
@@ -791,5 +791,5 @@ hello.html
         <input type="button" value="清空内容" onclick="document.getElementById('responseText').value=''">
     </form>
 </body>
-</html>Copy to clipboardErrorCopied
+</html>
 ```

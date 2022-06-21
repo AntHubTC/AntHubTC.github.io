@@ -27,9 +27,15 @@ Netty is an asynchronous event-driven network application framework for rapid de
 ## 4.4 Netty 版本说明
 
 1. `Netty` 版本分为 `Netty 3.x` 和 `Netty 4.x`、`Netty 5.x`
-2. 因为 `Netty 5` 出现重大 `bug`，已经被官网废弃了，目前推荐使用的是 `Netty 4.x`的稳定版本
+
+2. 因为 `Netty 5` 有一定问题，已经被官网废弃了，目前推荐使用的是 `Netty 4.x`的稳定版本
+
+   [Netty5废弃官方原因](https://github.com/netty/netty/issues/4466) 主要意思：**使用ForkJoinPool增加了复杂性，并且没有显示出明显的性能优势。**同时保持所有的分支同步是相当多的工作，没有必要。
+
 3. 目前在官网可下载的版本 `Netty 3.x`、`Netty 4.0.x` 和 `Netty 4.1.x`
+
 4. 在本套课程中，我们讲解 `Netty4.1.x` 版本
+
 5. `Netty` 下载地址：https://bintray.com/netty/downloads/netty/
 
 [

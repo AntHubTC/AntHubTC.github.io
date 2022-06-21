@@ -9,9 +9,7 @@
 3. 根据 `Reactor` 的数量和处理资源池线程的数量不同，有 `3` 种典型的实现单 `Reactor` 单线程；单 `Reactor`多线程；主从 `Reactor`多线程
 4. `Netty` 线程模式（`Netty` 主要基于主从 `Reactor` 多线程模型做了一定的改进，其中主从 `Reactor` 多线程模型有多个 `Reactor`）
 
-## 5.2 传统阻塞 I/O 服务模型
-
-### 5.2.1 工作原理图
+## 5.2 传统阻塞 I/O 服务模型5.2.1 工作原理图
 
 1. 黄色的框表示对象，蓝色的框表示线程
 2. 白色的框表示方法（`API`）
@@ -455,7 +453,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
         cause.printStackTrace();
         ctx.close();
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 ### 5.8.7 任务队列中的 Task 有 3 种典型使用场景
@@ -569,7 +567,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         ctx.close();
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 ### 5.8.8 方案再说明
@@ -638,7 +636,7 @@ cf.addListener(new ChannelFutureListener() {
          System.out.println("监听端口6668失败");
       }
    }
-});Copy to clipboardErrorCopied
+});
 ```
 
 ## 5.10 快速入门实例 - HTTP服务
@@ -775,5 +773,13 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
 
         }
     }
-}Copy to clipboardErrorCopied
+}
 ```
+
+
+
+
+
+**扩展阅读：**
+
+[一篇文章，读懂Netty的高性能架构之道](https://blog.51cto.com/u_14006572/3149277)
