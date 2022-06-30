@@ -36,6 +36,7 @@
     { title: 'HTTP', href: '../HTTP' },
     { title: 'windows批处理', href: '../windows-batch' },
     { title: 'Python', href: '../python' },
+    { title: 'mysql45讲', href: 'https://funnylog.gitee.io/mysql45/' },
     { title: 'Hutool糊涂工具包', href: 'https://www.hutool.cn/' },
     // { title: 'raspberryPI', href: '../raspberryPI' },
     // { title: 'vi_vim', href: '../vi_vim' },
