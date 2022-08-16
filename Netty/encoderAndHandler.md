@@ -48,7 +48,7 @@
 3. 应用实例：使用 `ReplayingDecoder` 编写解码器，对前面的案例进行简化[案例演示]
 
 ```java
-package com.atguigu.netty.inboundhandlerandoutboundhandler;
+package com.demo.netty.inboundhandlerandoutboundhandler;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

@@ -44,7 +44,7 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package atguigu.netty.example.echo2;
+package demo.netty.example.echo2;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -174,7 +174,7 @@ DEFAULT_EVENT_LOOP_THREADS = Math.max(1, SystemPropertyUtil.getInt("io.netty.eve
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package atguigu.netty.example.echo2;
+package demo.netty.example.echo2;
 
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;

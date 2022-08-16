@@ -28,7 +28,7 @@
 
 MyClientHandler.java
 
-package com.atguigu.netty.tcp;
+package com.demo.netty.tcp;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -70,7 +70,7 @@ public class MyClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
 MyServerHandler.java
 
-package com.atguigu.netty.tcp;
+package com.demo.netty.tcp;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -129,7 +129,7 @@ public class MyServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
 ```java
 // 核心
 
-package com.atguigu.netty.protocoltcp;
+package com.demo.netty.protocoltcp;
 
 //协议包
 public class MessageProtocol {
@@ -155,7 +155,7 @@ public class MessageProtocol {
     }
 }
 
-package com.atguigu.netty.protocoltcp;
+package com.demo.netty.protocoltcp;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -203,7 +203,7 @@ public class MyClientHandler extends SimpleChannelInboundHandler<MessageProtocol
     }
 }
 
-package com.atguigu.netty.protocoltcp;
+package com.demo.netty.protocoltcp;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -219,7 +219,7 @@ public class MyMessageEncoder extends MessageToByteEncoder<MessageProtocol> {
     }
 }
 
-package com.atguigu.netty.protocoltcp;
+package com.demo.netty.protocoltcp;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -246,7 +246,7 @@ public class MyMessageDecoder extends ReplayingDecoder<Void> {
     }
 }
 
-package com.atguigu.netty.protocoltcp;
+package com.demo.netty.protocoltcp;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

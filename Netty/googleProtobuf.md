@@ -70,7 +70,7 @@ Student.proto
 
 syntax = "proto3";
 option optimize_for = SPEED; // 加快解析
-option java_package="com.atguigu.netty.codec2";   //指定生成到哪个包下
+option java_package="com.demo.netty.codec2";   //指定生成到哪个包下
 option java_outer_classname="MyDataInfo"; // 外部类名, 文件名
 
 //protobuf 可以使用message 管理其他的message

@@ -50,7 +50,7 @@
 4. 代码演示：
 
 ```java
-package com.atguigu.bio;
+package com.demo.bio;
 
 import java.io.InputStream;
 import java.net.ServerSocket;

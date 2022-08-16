@@ -50,7 +50,7 @@
 ### 11.4.3 代码实现
 
 ```java
-package com.atguigu.netty.dubborpc.publicinterface;
+package com.demo.netty.dubborpc.publicinterface;
 
 //这个是接口，是服务提供方和 服务消费方都需要
 public interface HelloService {
@@ -58,9 +58,9 @@ public interface HelloService {
     String hello(String mes);
 }
 
-package com.atguigu.netty.dubborpc.provider;
+package com.demo.netty.dubborpc.provider;
 
-import com.atguigu.netty.dubborpc.publicinterface.HelloService;
+import com.demo.netty.dubborpc.publicinterface.HelloService;
 
 public class HelloServiceImpl implements HelloService {
 
@@ -79,9 +79,9 @@ public class HelloServiceImpl implements HelloService {
     }
 }
 
-package com.atguigu.netty.dubborpc.provider;
+package com.demo.netty.dubborpc.provider;
 
-import com.atguigu.netty.dubborpc.netty.NettyServer;
+import com.demo.netty.dubborpc.netty.NettyServer;
 
 //ServerBootstrap 会启动一个服务提供者，就是 NettyServer
 public class ServerBootstrap {
@@ -94,7 +94,7 @@ public class ServerBootstrap {
 }
 
 
-package com.atguigu.netty.dubborpc.netty;
+package com.demo.netty.dubborpc.netty;
 
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -154,10 +154,10 @@ public class NettyServer {
     }
 }
 
-package com.atguigu.netty.dubborpc.netty;
+package com.demo.netty.dubborpc.netty;
 
-import com.atguigu.netty.dubborpc.customer.ClientBootstrap;
-import com.atguigu.netty.dubborpc.provider.HelloServiceImpl;
+import com.demo.netty.dubborpc.customer.ClientBootstrap;
+import com.demo.netty.dubborpc.provider.HelloServiceImpl;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -184,7 +184,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 }
 
 
-package com.atguigu.netty.dubborpc.netty;
+package com.demo.netty.dubborpc.netty;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -237,7 +237,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter implements 
     }
 }
 
-package com.atguigu.netty.dubborpc.netty;
+package com.demo.netty.dubborpc.netty;
 
 
 import io.netty.bootstrap.Bootstrap;
@@ -315,10 +315,10 @@ public class NettyClient {
     }
 }
 
-package com.atguigu.netty.dubborpc.customer;
+package com.demo.netty.dubborpc.customer;
 
-import com.atguigu.netty.dubborpc.netty.NettyClient;
-import com.atguigu.netty.dubborpc.publicinterface.HelloService;
+import com.demo.netty.dubborpc.netty.NettyClient;
+import com.demo.netty.dubborpc.publicinterface.HelloService;
 
 public class ClientBootstrap {
     
