@@ -185,54 +185,18 @@ Netty` 主要基于主从 `Reactors` 多线程模型（如图）做了一定的�
 
 5. `NioEventLoopGroup` 可以有多个线程，即可以含有多个 `NioEventLoop`
 
-6. 每个
-
-    
-
-   ```
-   BossNioEventLoop
-   ```
-
-    
-
-   循环执行的步骤有
-
-    
-
-   ```
-   3
-   ```
-
-    
-
-   步
+6. 每个BossNioEventLoop循环执行的步骤有3步
 
    - 轮询 `accept` 事件
    - 处理 `accept` 事件，与 `client` 建立连接，生成 `NioScocketChannel`，并将其注册到某个 `worker` `NIOEventLoop` 上的 `Selector`
    - 处理任务队列的任务，即 `runAllTasks`
-
-7. 每个
-
-    
-
-   ```
-   Worker
-   ```
-
-    
-
-   ```
-   NIOEventLoop
-   ```
-
-    
-
-   循环执行的步骤
+   
+7. 每个Worker NIOEventLoop循环执行的步骤
 
    - 轮询 `read`，`write` 事件
    - 处理 `I/O` 事件，即 `read`，`write` 事件，在对应 `NioScocketChannel` 处理
    - 处理任务队列的任务，即 `runAllTasks`
-
+   
 8. 每个 `Worker` `NIOEventLoop` 处理业务时，会使用 `pipeline`（管道），`pipeline` 中包含了 `channel`，即通过 `pipeline` 可以获取到对应通道，管道中维护了很多的处理器
 
 ### 5.8.6 Netty 快速入门实例 - TCP 服务
@@ -248,7 +212,7 @@ Netty` 主要基于主从 `Reactors` 多线程模型（如图）做了一定的�
 ```java
 NettyServer.java
 
-package com.atguigu.netty.simple;
+package com.demo.netty.simple;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -322,7 +286,7 @@ public class NettyServer {
 
 NettyServerHandler.java
 
-package com.atguigu.netty.simple;
+package com.demo.netty.simple;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -346,7 +310,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        
         System.out.println("服务器读取线程 " + Thread.currentThread().getName() + " channle =" + ctx.channel());
         System.out.println("server ctx =" + ctx);
         System.out.println("看看channel 和 pipeline的关系");
@@ -378,7 +341,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
 NettyClient.java
 
-package com.atguigu.netty.simple;
+package com.demo.netty.simple;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -423,7 +386,7 @@ public class NettyClient {
 
 NettyClientHandler.java
 
-package com.atguigu.netty.simple;
+package com.demo.netty.simple;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -464,7 +427,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
 4. 代码演示
 
 ```java
-package com.atguigu.netty.simple;
+package com.demo.netty.simple;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -650,7 +613,7 @@ cf.addListener(new ChannelFutureListener() {
 ```java
 TestServer.java
 
-package com.atguigu.netty.http;
+package com.demo.netty.http;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -683,7 +646,7 @@ public class TestServer {
 
 TestServerInitializer.java
 
-package com.atguigu.netty.http;
+package com.demo.netty.http;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -713,7 +676,7 @@ public class TestServerInitializer extends ChannelInitializer<SocketChannel> {
 
 TestHttpServerHandler.java
 
-package com.atguigu.netty.http;
+package com.demo.netty.http;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

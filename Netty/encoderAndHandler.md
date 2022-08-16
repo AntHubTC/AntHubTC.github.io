@@ -64,17 +64,10 @@ public class MyByteToLongDecoder2 extends ReplayingDecoder<Void> {
         //在 ReplayingDecoder 不需要判断数据是否足够读取，内部会进行处理判断
         out.add(in.readLong());
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
-1. ```
-   ReplayingDecoder
-   ```
-
-    
-
-   使用方便，但它也有一些局限性：
-
+1. ReplayingDecoder使用方便，但它也有一些局限性：
    - 并不是所有的 `ByteBuf` 操作都被支持，如果调用了一个不被支持的方法，将会抛出一个 `UnsupportedOperationException`。
    - `ReplayingDecoder` 在某些情况下可能稍慢于 `ByteToMessageDecoder`，例如网络缓慢并且消息格式复杂时，消息会被拆成了多个碎片，速度变慢
 
@@ -117,7 +110,7 @@ public class MyByteToLongDecoder2 extends ReplayingDecoder<Void> {
     <artifactId>slf4j-simple</artifactId>
     <version>1.7.25</version>
     <scope>test</scope>
-</dependency>Copy to clipboardErrorCopied
+</dependency>
 ```
 
 1. 配置 `Log4j`，在 `resources/log4j.properties`
@@ -126,7 +119,7 @@ public class MyByteToLongDecoder2 extends ReplayingDecoder<Void> {
 log4j.rootLogger=DEBUG,stdout
 log4j.appender.stdout=org.apache.log4j.ConsoleAppender
 log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
-log4j.appender.stdout.layout.ConversionPattern=[%p]%C{1}-%m%nCopy to clipboardErrorCopied
+log4j.appender.stdout.layout.ConversionPattern=[%p]%C{1}-%m%n
 ```
 
 1. 演示整合

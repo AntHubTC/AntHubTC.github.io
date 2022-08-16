@@ -176,7 +176,6 @@ Reactor类实现了Runnable接口，并且实现了run方法，在run方法中�
 ```java
 public class Acceptor implements Runnable {
     private Selector selector;
- 
     private ServerSocketChannel serverSocketChannel;
  
     public Acceptor(Selector selector, ServerSocketChannel serverSocketChannel) {
@@ -433,8 +432,7 @@ process thread:pool-1-thread-1
 
 ![img](img/Reactor/MasterSlave.png)
 
-这就是主从Reactor模型了，可以看到mainReactor只负责连接请求，而subReactor
-只负责处理客户端的写事件。
+这就是主从Reactor模型了，可以看到mainReactor只负责连接请求，而subReactor只负责处理客户端的写事件。
 
 下面来实现一个主从Reactor模型，需要注意的是，我实现的主从Reactor模型和图片上有区别。图片上是一主一从，而我实现的是一主八从，图片上一个subReactor下面开了一个线程池，而我实现的subReactor之下没有线程池，虽然有所不同，但是核心思路是一样的。
 

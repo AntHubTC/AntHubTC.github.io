@@ -55,7 +55,7 @@ message Student { //会在 StudentPOJO 外部类生成一个内部类 Student，
 
 编译
 protoc.exe--java_out=.Student.proto
-将生成的 StudentPOJO 放入到项目使用Copy to clipboardErrorCopied
+将生成的 StudentPOJO 放入到项目使用
 ```
 
 ## 7.5 Protobuf 快速入门实例 2
@@ -101,5 +101,5 @@ message Student {
 message Worker {
     string name=1;
     int32 age=2;
-}Copy to clipboardErrorCopied
+}
 ```

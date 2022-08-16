@@ -111,7 +111,7 @@ public final class EchoServer {
             workerGroup.shutdownGracefully();
         }
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明：
@@ -121,7 +121,7 @@ public final class EchoServer {
 
 ```java
 EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-EventLoopGroup workerGroup = new NioEventLoopGroup();Copy to clipboardErrorCopied
+EventLoopGroup workerGroup = new NioEventLoopGroup();
 ```
 
 (1) 这两个对象是整个 `Netty` 的核心对象，可以说，整个 `Netty` 的运作都依赖于他们。`bossGroup` 用于接受 `TCP` 请求，他会将请求交给 `workerGroup`，`workerGroup` 会获取到真正的连接，然后和连接进行通信，比如读写解码编码等操作。
@@ -131,7 +131,7 @@ EventLoopGroup workerGroup = new NioEventLoopGroup();Copy to clipboardErrorCopie
 (3) `new NioEventLoopGroup(1);` 这个 `1` 表示 `bossGroup` 事件组有 `1` 个线程你可以指定，如果 `new NioEventLoopGroup()` 会含有默认个线程 `cpu核数 * 2`，即可以充分的利用多核的优势，【可以dubug一把】
 
 ```java
-DEFAULT_EVENT_LOOP_THREADS = Math.max(1, SystemPropertyUtil.getInt("io.netty.eventLoopThreads", NettyRuntime.availableProcessors() * 2));Copy to clipboardErrorCopied
+DEFAULT_EVENT_LOOP_THREADS = Math.max(1, SystemPropertyUtil.getInt("io.netty.eventLoopThreads", NettyRuntime.availableProcessors() * 2));
 ```
 
 会创建 `EventExecutor` 数组 `children = new EventExecutor[nThreads];` // `debug` 一下每个元素的类型就是 `NIOEventLoop`，`NIOEventLoop` 实现了 `EventLoop` 接口和 `Executor` 接口 `try` 块中创建了一个 `ServerBootstrap` 对象，他是一个引导类，用于启动服务器和引导整个程序的初始化（看下源码 `allowseasybootstrapof{@linkServerChannel}`）。它和 `ServerChannel` 关联，而 `ServerChannel` 继承了 `Channel`，有一些方法 `remoteAddress` 等[可以Debug下]随后，变量 `b` 调用了 `group` 方法将两个 `group` 放入了自己的字段中，用于后期引导使用【`debug` 下 `group` 方法
@@ -141,7 +141,7 @@ DEFAULT_EVENT_LOOP_THREADS = Math.max(1, SystemPropertyUtil.getInt("io.netty.eve
  *Set the {@link EventLoopGroup} for the parent (acceptor) and the child (client) . These
  *{@link EventLoopGroup}'s are used to handle all the events and IO for {@link ServerChannel} and 
  *{@link Channel}'s.
- */Copy to clipboardErrorCopied
+ */
 ```
 
 】。
@@ -203,7 +203,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
         ctx.close();
     }
 }
-Copy to clipboardErrorCopied
+
 ```
 
 说明:
@@ -218,7 +218,7 @@ Copy to clipboardErrorCopied
 ```java
 public NioEventLoopGroup (int nThreads) { 
     this(nThreads, (Executor) null);
-}Copy to clipboardErrorCopied
+}
 ```
 
 2.2 上面的 `this(nThreads, (Executor) null);` 调用构造器（通过 `alt + d` 看即可）
@@ -226,7 +226,7 @@ public NioEventLoopGroup (int nThreads) {
 ```java
 public NioEventLoopGroup (int nThreads, Executor executor) {
     this(nThreads, executor, SelectorProvider.provider());
-}Copy to clipboardErrorCopied
+}
 ```
 
 2.3 上面的 `this(nThreads, executor, SelectorProvider.provider());` 调用下面构造器
@@ -234,7 +234,7 @@ public NioEventLoopGroup (int nThreads, Executor executor) {
 ```java
 public NioEventLoopGroup (int nThreads, Executor executor, final SelectorProvider selectorProvider) {
     this(nThreads, executor, selectorProvider,DefaultSelectStrategyFactory.INSTANCE);
-}Copy to clipboardErrorCopied
+}
 ```
 
 2.4 上面的 `this()...` 调用构造器（`alt + d`）
@@ -242,7 +242,7 @@ public NioEventLoopGroup (int nThreads, Executor executor, final SelectorProvide
 ```java
 public NioEventLoopGroup (int nThreads, Executor executor, final SelectorProvider selectorProvider,final SelectStrategyFactory selectStrategyFactory) {
     super(nThreads, executor, selectorProvider, selectStrategyFactory, RejectedExecutionHandlers.reject());
-}Copy to clipboardErrorCopied
+}
 ```
 
 2.5 上面的 `super()..` 的方法是父类：`MultithreadEventLoopGroup`
@@ -250,7 +250,7 @@ public NioEventLoopGroup (int nThreads, Executor executor, final SelectorProvide
 ```java
 protected MultithreadEventLoopGroup (int nThreads, Executor executor, Object...args) {
     super(nThreads == 0 ? DEFAULT_EVENT_LOOP_THREADS : nThreads, executor, args);
-}Copy to clipboardErrorCopied
+}
 ```
 
 2.6 追踪到源码抽象类 `MultithreadEventExecutorGroup` 的构造器方法 `MultithreadEventExecutorGroup` 才是 `NioEventLoopGroup` 真正的构造方法，这里可以看成是一个模板方法，使用了设计模式的模板模式（可看我录制视频），所以，我们就需要好好分析 `MultithreadEventExecutorGroup` 方法了
@@ -331,7 +331,7 @@ protected MultithreadEventExecutorGroup(int nThreads, Executor executor,
     //将所有的单例线程池添加到一个 HashSet 中。
     Collections.addAll(childrenSet, children);
     readonlyChildren = Collections.unmodifiableSet(childrenSet);
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明：
@@ -355,7 +355,7 @@ private final Map<AttributeKey<?>, Object> childAttrs = new ConcurrentHashMap<At
 private final ServerBootstrapConfig config = new ServerBootstrapConfig(this);
 private volatile EventLoopGroup childGroup;
 private volatile ChannelHandler childHandler;
-Copy to clipboardErrorCopied
+
 ```
 
 3.2 分析一下 `ServerBootstrap` 基本使用情况
@@ -377,7 +377,7 @@ b.group(bossGroup, workerGroup)
                 p.addLast(new EchoServerHandler());
             }
         });
-Copy to clipboardErrorCopied
+
 ```
 
 说明:
@@ -399,7 +399,7 @@ public ChannelFuture bind(SocketAddress localAddress) {
         throw new NullPointerException("localAddress");
     }
     return doBind(localAddress);
-}Copy to clipboardErrorCopied
+}
 ```
 
 4.3 `doBind` 源码剖析，核心是两个方法 `initAndRegister` 和 `doBind0`
@@ -442,7 +442,7 @@ private ChannelFuture doBind(final SocketAddress localAddress) {
         });
         return promise;
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 4.4 分析说明 `initAndRegister`
@@ -487,7 +487,7 @@ final ChannelFuture initAndRegister() {
         }
     }
     return regFuture;
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明：
@@ -521,7 +521,7 @@ public final ChannelPipeline addLast(EventExecutorGroup group, String name, Chan
     }
     callHandlerAdded0(newCtx);
     return this;
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明：
@@ -553,7 +553,7 @@ private static void doBind0(
             }
         }
     });
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明：
@@ -584,7 +584,7 @@ public final void bind (final SocketAddress localAddress, final ChannelPromise p
         closeIfClosed();
         return;
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 1. 最终 `doBind` 就会追踪到 `NioServerSocketChannel` 的 `doBind`，说明 `Netty` 底层使用的是 `NIO`
@@ -597,7 +597,7 @@ protected void doBind (SocketAddress localAddress) throws Exception {
     } else {
         javaChannel().socket().bind(localAddress, config.getBacklog());
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 1. 回到 `bind` 方法（`alt + v`），最后一步：`safeSetSuccess(promise)`，告诉 `promise` 任务成功了。其可以执行监听器的方法了。到此整个启动过程已经结束了，ok 了
@@ -611,7 +611,7 @@ protected void run() {
 
         }
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 ### 10.2.4 Netty 启动过程梳理
@@ -653,7 +653,7 @@ protected void run() {
 ```java
 if((readyOps & (SelectionKey.OP_READ | SelectionKey.OP_ACCEPT)) != 0 || readyOps == 0) {
     unsafe.read();//断点位置
-}Copy to clipboardErrorCopied
+}
 ```
 
 1. 执行浏览器 `http://localhost:8007/` ，客户端发出请求
@@ -721,7 +721,7 @@ public void read() {
             removeReadOp();
         }
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明： 1)检查该 `eventloop` 线程是否是当前线程。`asserteventLoop().inEventLoop()`
@@ -741,7 +741,7 @@ protected int doReadMessages (List<Object> buf) throws Exception {
     SocketChannel ch = SocketUtils.accept(javaChannel());
     buf.add(newNioSocketChannel(this, ch));
     return 1;
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明： 1)通过工具类，调用 `NioServerSocketChannel` 内部封装的 `serverSocketChannel` 的 `accept` 方法，这是 `NIO` 做法。
@@ -782,7 +782,7 @@ public void channelRead (ChannelHandlerContext ctx, Object msg) {
     } catch (Throwable t) {
         forceClose(child, t);
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明： 1)`msg` 强转成 `Channel`，实际上就是 `NioSocketChannel`。
@@ -813,7 +813,7 @@ public final void register (EventLoop eventLoop, final ChannelPromise promise) {
     }
 }
 
-// 继续进入到下面方法，执行管道中可能存在的任务,这里我们就不追了Copy to clipboardErrorCopied
+// 继续进入到下面方法，执行管道中可能存在的任务,这里我们就不追了
 ```
 
 1. 最终会调用 `doBeginRead` 方法，也就是 `AbstractNioChannel` 类的方法
@@ -831,7 +831,7 @@ protected void doBeginRead() throws Exception {
     if ((interestOps&readInterestOp) == 0) {
         selectionKey.interestOps(interestOps | readInterestOp);
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 1. 这个地方调试时，请把前面的断点都去掉，然后启动服务器就会停止在 `doBeginRead`（需要先放过该断点，然后浏览器请求，才能看到效果）
@@ -917,7 +917,7 @@ public interface ChannelHandler {
     //当处理过程中在 pipeline 发生异常时调用
     @Deprecated
     void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception;
-}Copy to clipboardErrorCopied
+}
 ```
 
 2)`ChannelHandler` 的作用就是处理 `IO` 事件或拦截 `IO` 事件，并将其转发给下一个处理程序 `ChannelHandler`。`Handler` 处理事件时分入站和出站的，两个方向的操作都是不同的，因此，`Netty` 定义了两个子接口继承 `ChannelHandler`
@@ -996,7 +996,7 @@ protected AbstractChannel(Channel parent) {
     id = newId();
     unsafe = new Unsafe();
     pipeline = new ChannelPipeline();
-}Copy to clipboardErrorCopied
+}
 ```
 
 `Debug` 一下，可以看到代码会执行到这里，然后继续追踪到
@@ -1010,7 +1010,7 @@ protected DefaultChannelPipeline(Channel channel) {
     head = new HeadContext(this);
     head.next = tail;
     tail.prev = head;
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明：
@@ -1040,7 +1040,7 @@ public final ChannelPipeline addLast(EventExecutorGroup executor, ChannelHandler
         addLast(executor, null, h);
     }
     return this;
-}Copy to clipboardErrorCopied
+}
 ```
 
 继续 Debug
@@ -1076,7 +1076,7 @@ public final ChannelPipeline addLast(EventExecutorGroup group, String name, Chan
     }
     callHandlerAdded0(newCtx);
     return this;
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明 1)`pipeline` 添加 `handler`，参数是线程池，`name` 是 `null`，`handler` 是我们或者系统传入的 `handler`。`Netty` 为了防止多个线程导致安全问题，同步了这段代码，步骤如下：
@@ -1115,7 +1115,7 @@ public final ChannelPipeline addLast(EventExecutorGroup group, String name, Chan
 public final ChannelPipeline fireChannelActive() {
     AbstractChannelHandlerContext.invokeChannelActive(head);//断点
     return this;
-}Copy to clipboardErrorCopied
+}
 ```
 
 源码分析
@@ -1165,7 +1165,7 @@ public class DefaultChannelPipeline implements ChannelPipeline {
         AbstractChannelHandlerContext.invokeChannelWritabilityChanged(head);
         return this;
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明： 可以看出来，这些方法都是 `inbound` 的方法，也就是入站事件，调用静态方法传入的也是 `inbound` 的类型 `head` `handler`。这些静态方法则会调用 `head` 的 `ChannelInboundInvoker` 接口的方法，再然后调用 `handler` 的真正方法
@@ -1229,7 +1229,7 @@ public class DefaultChannelPipeline implements ChannelPipeline {
     public final ChannelFuture disconnect(ChannelPromise promise) {
         return tail.disconnect(promise);
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明：
@@ -1290,7 +1290,7 @@ private final long readerIdleTimeNanos; //读事件空闲时间，0 则禁用事
 
 private final long writerIdleTimeNanos;//写事件空闲时间，0 则禁用事件
 
-private final long allIdleTimeNanos;//读或写空闲时间，0 则禁用事件Copy to clipboardErrorCopied
+private final long allIdleTimeNanos;//读或写空闲时间，0 则禁用事件
 ```
 
 6.2`handlerAdded` 方法
@@ -1324,7 +1324,7 @@ private void initialize(ChannelHandlerContext ctx) {
     if(allIdleTimeNanos > 0) {
         allIdleTimeout = schedule(ctx, new AllIdleTimeoutTask(ctx), allIdleTimeNanos, TimeUnit.NANOSECONDS);
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 只要给定的参数大于 `0`，就创建一个定时任务，每个事件都创建。同时，将 `state` 状态设置为 `1`，防止重复初始化。调用 `initOutputChanged` 方法，初始化“监控出站数据属性”。
@@ -1353,7 +1353,7 @@ private abstract static class AbstractIdleTask implements Runnable {
     }
     
     protected abstract void run(ChannelHandlerContext ctx);
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明：当通道关闭了，就不执行任务了。反之，执行子类的 `run` 方法
@@ -1388,7 +1388,7 @@ protected void run(ChannelHandlerContext ctx) {
         //Read occurred before the timeout - set a new timeout with shorter delay.
         readerIdleTimeout = schedule(ctx, this, nextDelay, TimeUnit.NANOSECONDS);
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明：
@@ -1431,7 +1431,7 @@ protected void run(ChannelHandlerContext ctx) {
         //Write occurred before the timeout - set a new timeout with shorter delay.
         writerIdleTimeout = schedule(ctx, this, nextDelay, TimeUnit.NANOSECONDS);
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明：写任务的 `run` 代码逻辑基本和读任务的逻辑一样，唯一不同的就是有一个针对出站较慢数据的判断 `hasOutputChanged`
@@ -1469,7 +1469,7 @@ protected void run(ChannelHandlerContext ctx) {
         //timeout with shorter delay.
         allIdleTimeout = schedule(ctx, this, nextDelay, TimeUnit.NANOSECONDS);
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明：
@@ -1483,7 +1483,7 @@ long nextDelay = allIdleTimeNanos;
 if(!reading) {
     //当前时间减去最后一次写或读的时间，若大于 0，说明超时了
     nextDelay -= ticksInNanos() - Math.max(lastReadTime, lastWriteTime);
-}Copy to clipboardErrorCopied
+}
 ```
 
 3)这里的时间计算是取读写事件中的最大值来的。然后像写事件一样，判断是否发生了写的慢的情况。
@@ -1556,7 +1556,7 @@ public void execute(Runnable task) {
     if(!addTaskWakesUp&&wakesUpForTask(task)) {
         wakeup(inEventLoop);
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明: 1)首先判断该 `EventLoop` 的线程是否是当前线程，如果是，直接添加到任务队列中去，如果不是，则尝试启动线程（但由于线程是单个的，因此只能启动一次），随后再将任务添加到队列中去。
@@ -1585,7 +1585,7 @@ final boolean offerTask(Runnable task) {
         reject();
     }
     return taskQueue.offer(task);
-}Copy to clipboardErrorCopied
+}
 ```
 
 3.`NioEventLoop` 的父类 `SingleThreadEventExecutor` 的 `startThread` 方法 3.1当执行 `execute` 方法的时候，如果当前线程不是 `EventLoop` 所属线程，则尝试启动线程，也就是 `startThread` 方法，dubug 代码如下：
@@ -1602,7 +1602,7 @@ private void startThread() {
             }
         }
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明:该方法首先判断是否启动过了，保证 `EventLoop` 只有一个线程，如果没有启动过，则尝试使用 `Cas` 将 `state` 状态改为 `ST_STARTED`，也就是已启动。然后调用 `doStartThread` 方法。如果失败，则进行回滚
@@ -1644,7 +1644,7 @@ private void doStartThread() {
             }
         }
     });
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明： 1)首先调用 `executor` 的 `execute` 方法，这个 `executor` 就是在创建 `EventLoopGroup` 的时候创建的 `ThreadPerTaskExecutor` 类。该 `execute` 方法会将 `Runnable` 包装成 `Netty` 的 `FastThreadLocalThread`。
@@ -1712,7 +1712,7 @@ protected void run() {
             handleLoopException(t);
         }
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明: 1)从上面的步骤可以看出，整个 `run` 方法做了 `3` 件事情： `select` 获取感兴趣的事件。 `processSelectedKeys` 处理事件。 `runAllTasks` 执行队列中的任务。
@@ -1798,7 +1798,7 @@ private void select(boolean oldWakenUp) throws IOException {
         }
         //Harmless exception - log anyway
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明：调用 `selector` 的 `select` 方法，默认阻塞一秒钟，如果有定时任务，则在定时任务剩余时间的基础上在加上 `0.5` 秒进行阻塞。当执行 `execute` 方法的时候，也就是添加任务的时候，唤醒 `selector`，防止 `selector` 阻塞时间过长
@@ -1871,7 +1871,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
         cause.printStackTrace();
         ctx.close();
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明： 1)在 `channelRead` 方法，模拟了一个耗时 `10` 秒的操作，这里，我们将这个任务提交到了一个自定义的业务线程池中，这样，就不会阻塞 `Netty` 的 `IO` 线程。
@@ -1908,7 +1908,7 @@ private void write(Object msg, boolean flush, ChannelPromise promise) {
         }
         safeExecute(executor, task, promise, m);
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 说明:
@@ -1939,7 +1939,7 @@ ServerBootstrap b = new ServerBootstrap();
                          //p.addLast(new EchoServerHandler());
                          p.addLast(group, new EchoServerHandler());
                     }
-                });Copy to clipboardErrorCopied
+                });
 ```
 
 说明：
@@ -1964,7 +1964,7 @@ static void invokeChannelRead(final AbstractChannelHandlerContext next, Object m
             }
         });
     }
-}Copy to clipboardErrorCopied
+}
 ```
 
 4)验证时，我们如果去掉 `p.addLast(group,newEchoServerHandler());` 改成 `p.addLastnewEchoServerHandler());` 你会发现代码不会进行异步执行。

@@ -12,7 +12,7 @@
 8. 案例说明 `NIO` 的 `Buffer`
 
 ```java
-package com.atguigu.nio;
+package com.demo.nio;
 
 import java.nio.IntBuffer;
 
@@ -132,12 +132,12 @@ public class BasicBuffer {
 
 实例要求：
 
-1. 使用前面学习后的 `ByteBuffer`（缓冲）和 `FileChannel`（通道），将 "hello,尚硅谷" 写入到 `file01.txt` 中
+1. 使用前面学习后的 `ByteBuffer`（缓冲）和 `FileChannel`（通道），将 "hello,xxx" 写入到 `file01.txt` 中
 2. 文件不存在就创建
 3. 代码演示
 
 ```java
-package com.atguigu.nio;
+package com.demo.nio;
 
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
@@ -146,7 +146,7 @@ import java.nio.channels.FileChannel;
 public class NIOFileChannel01 {
 
     public static void main(String[] args) throws Exception {
-        String str = "hello,尚硅谷";
+        String str = "hello,xxx";
         //创建一个输出流 -> channel
         FileOutputStream fileOutputStream = new FileOutputStream("d:\\file01.txt");
 
@@ -179,7 +179,7 @@ public class NIOFileChannel01 {
 3. 代码演示
 
 ```java
-package com.atguigu.nio;
+package com.demo.nio;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -221,7 +221,7 @@ public class NIOFileChannel02 {
 ![img](img/nio/chapter03_09.png)
 
 ```java
-package com.atguigu.nio;
+package com.demo.nio;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -277,7 +277,7 @@ public class NIOFileChannel03 {
 4. 代码演示
 
 ```java
-package com.atguigu.nio;
+package com.demo.nio;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -312,7 +312,7 @@ public class NIOFileChannel04 {
 1. `ByteBuffer` 支持类型化的 `put` 和 `get`，`put` 放入的是什么数据类型，`get` 就应该使用相应的数据类型来取出，否则可能有 `BufferUnderflowException` 异常。【举例说明】
 
 ```java
-package com.atguigu.nio;
+package com.demo.nio;
 
 import java.nio.ByteBuffer;
 
@@ -326,7 +326,7 @@ public class NIOByteBufferPutGet {
         //类型化方式放入数据
         buffer.putInt(100);
         buffer.putLong(9);
-        buffer.putChar('尚');
+        buffer.putChar('美');
         buffer.putShort((short) 4);
 
         //取出
@@ -345,7 +345,7 @@ public class NIOByteBufferPutGet {
 1. 可以将一个普通 `Buffer` 转成只读 `Buffer`【举例说明】
 
 ```java
-package com.atguigu.nio;
+package com.demo.nio;
 
 import java.nio.ByteBuffer;
 
@@ -380,7 +380,7 @@ public class ReadOnlyBuffer {
 1. `NIO` 还提供了 `MappedByteBuffer`，可以让文件直接在内存（堆外的内存）中进行修改，而如何同步到文件由 `NIO` 来完成。【举例说明】
 
 ```java
-package com.atguigu.nio;
+package com.demo.nio;
 
 import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
@@ -419,7 +419,7 @@ public class MappedByteBufferTest {
 1. 前面我们讲的读写操作，都是通过一个 `Buffer` 完成的，`NIO` 还支持通过多个 `Buffer`（即 `Buffer`数组）完成读写操作，即 `Scattering` 和 `Gathering`【举例说明】
 
 ```java
-package com.atguigu.nio;
+package com.demo.nio;
 
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -600,7 +600,7 @@ public static final int OP_ACCEPT = 1 << 4;
 ```java
 // 服务端：
 
-package com.atguigu.nio.groupchat;
+package com.demo.nio.groupchat;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -737,7 +737,7 @@ public class GroupChatServer {
 
 // 客户端：
 
-package com.atguigu.nio.groupchat;
+package com.demo.nio.groupchat;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -911,7 +911,7 @@ socket.getOutputStream().write(arr);
 ```java
 NewIOServer.java
 
-package com.atguigu.nio.zerocopy;
+package com.demo.nio.zerocopy;
 
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
@@ -950,7 +950,7 @@ public class NewIOServer {
 
 NewIOClient.java
 
-package com.atguigu.nio.zerocopy;
+package com.demo.nio.zerocopy;
 
 import java.io.FileInputStream;
 import java.net.InetSocketAddress;
@@ -969,7 +969,6 @@ public class NewIOClient {
         long startTime = System.currentTimeMillis();
         //在 linux 下一个 transferTo 方法就可以完成传输
         //在 windows 下一次调用 transferTo 只能发送 8m, 就需要分段传输文件,而且要主要
-        //传输时的位置=》课后思考...
         //transferTo 底层使用到零拷贝
         long transferCount = fileChannel.transferTo(0, fileChannel.size(), socketChannel);
         System.out.println("发送的总的字节数 = " + transferCount + " 耗时: " + (System.currentTimeMillis() - startTime));

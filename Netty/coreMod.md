@@ -38,27 +38,7 @@
 
 6. 支持关联 `I/O` 操作与对应的处理程序
 
-7. 不同协议、不同的阻塞类型的连接都有不同的
-
-    
-
-   ```
-   Channel
-   ```
-
-    
-
-   类型与之对应，常用的
-
-    
-
-   ```
-   Channel
-   ```
-
-    
-
-   类型：
+7. 不同协议、不同的阻塞类型的连接都有不同的Channel类型与之对应，常用的Channel类型：
 
    - `NioSocketChannel`，异步的客户端 `TCP` `Socket` 连接。
    - `NioServerSocketChannel`，异步的服务器端 `TCP` `Socket` 连接。
@@ -140,7 +120,7 @@
 案例 1
 
 ```java
-package com.atguigu.netty.buf;
+package com.demo.netty.buf;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -180,7 +160,7 @@ public class NettyByteBuf01 {
 案例 2
 
 ```java
-package com.atguigu.netty.buf;
+package com.demo.netty.buf;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -237,14 +217,14 @@ public class NettyByteBuf02 {
 3. 服务器端：可以监测用户上线，离线，并实现消息转发功能
 4. 客户端：通过 `channel` 可以无阻塞发送消息给其它所有用户，同时可以接受其它用户发送的消息（有服务器转发得到）
 5. 目的：进一步理解 `Netty` 非阻塞网络编程机制
-6. 看老师代码演示
+6. 看代码演示
 
 ![img](./img/coreMod/chapter06_10.png)
 
 代码如下：
 
 ```java
-package com.atguigu.netty.groupchat;
+package com.demo.netty.groupchat;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -311,7 +291,7 @@ public class GroupChatServer {
 }
 
 
-package com.atguigu.netty.groupchat;
+package com.demo.netty.groupchat;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -403,7 +383,7 @@ public class GroupChatServerHandler extends SimpleChannelInboundHandler<String> 
     }
 }
 
-package com.atguigu.netty.groupchat;
+package com.demo.netty.groupchat;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -472,7 +452,7 @@ public class GroupChatClient {
 }
 
 
-package com.atguigu.netty.groupchat;
+package com.demo.netty.groupchat;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -496,7 +476,7 @@ public class GroupChatClientHandler extends SimpleChannelInboundHandler<String> 
 4. 代码如下：
 
 ```java
-package com.atguigu.netty.heartbeat;
+package com.demo.netty.heartbeat;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -563,7 +543,7 @@ public class MyServer {
 }
 
 
-package com.atguigu.netty.heartbeat;
+package com.demo.netty.heartbeat;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -618,7 +598,7 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
 ![img](./img/coreMod/chapter06_11.png)
 
 ```java
-package com.atguigu.netty.websocket;
+package com.demo.netty.websocket;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -692,7 +672,7 @@ public class MyServer {
     }
 }
 
-package com.atguigu.netty.websocket;
+package com.demo.netty.websocket;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
