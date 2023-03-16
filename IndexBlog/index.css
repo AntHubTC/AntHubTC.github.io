@@ -9,13 +9,21 @@ body {
     font-size: 36px;
     font-weight: bold;
 }
+.main-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+}
 .main-content .background-image {
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-image: url("./img/efd547e4e851.jpg");
+    /* background-image: url("./img/efd547e4e851.jpg"); */
+    background-color: #333;
     z-index: -1;
     opacity: 0.8;
 }
@@ -28,7 +36,7 @@ body {
     width: 40%;
     font-size: 14px;
     background-color: #aca98c;
-    border: 10px solid #516147;
+    border: 10px solid #464646;
     border-radius: 3px;
     outline: none;
 }
@@ -58,18 +66,18 @@ body {
     height: 70px;
     line-height: 70px;
     overflow: hidden;
-    border: 1px solid #758c5f;
+    border: 1px solid #666666;
     border-radius: 4px;
     float: left;
     margin: 10px;
     text-align: center;
     text-decoration: none;
-    color: black;
+    color: white;
     /*background-color: #b0c3a4;*/
-    background-color: #c6d0bf;
+    background-color: #323030;
 }
 .doc-container .doc-item:hover {
-    background-color: #516147;
+    background-color: #666666;
 }
 .doc-container .flip-list-move {
     transition: transform 1s;
