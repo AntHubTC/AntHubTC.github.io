@@ -2,6 +2,8 @@
 
 ## 网络资料
 
+[官方文档](https://dev.mysql.com/doc/) 权威文档
+
 [MySQL_基础+高级篇- 数据库 -sql -mysql教程_mysql视频_mysql入门_尚硅谷](https://www.bilibili.com/video/BV12b411K7Zu?from=search&seid=3501033786952474821) 基础  高级
 
 [RUNOOB SQL教程文档](https://www.runoob.com/sql/sql-tutorial.html)

@@ -1,0 +1,8 @@
+
+GitHub新功能  ：
+   github profile：
+   	Github profile 还能这样玩儿  https://zhuanlan.zhihu.com/p/257657066
+	GitHub 统计卡片  https://github.com/anuraghazra/github-readme-stats/blob/master/docs/readme_cn.md
+	
+
+   github action

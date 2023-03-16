@@ -7,3 +7,5 @@
 **扩展阅读：**
 [《进大厂系列》系列-Redis常见面试题（带答案）](https://zhuanlan.zhihu.com/p/91539644) 这个感觉讲得还是非常不错的！
 [php中文网 redis网络文章集](https://www.php.cn/redis/)
+
+[Redis中的CAP理论](https://www.pianshen.com/article/8615715308/)

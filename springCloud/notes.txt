@@ -1,2 +1,6 @@
 https://www.cnblogs.com/qdhxhz/p/11372658.html
 \n snowflake
+
+哔哩哔哩上学过，有代码，有思维导图笔记。没有整理markdown笔记
+
+微服务拆分方法： https://www.jianshu.com/p/9d3a1f597bd0?clicktime=1576758146

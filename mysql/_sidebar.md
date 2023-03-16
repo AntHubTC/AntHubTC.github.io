@@ -5,6 +5,7 @@
 * [mysql高级-架构介绍](mysqlArch)
 * [mysql高级-日志系统](mysqlLog)
 * [mysql高级-索引优化分析](mysqlIndex)
+* [mysql高级-sql写法优化](sqlWriteOptimize)
 * [mysql高级-查询截取分析](sqlCaptureAnalyse)
 * [mysql高级-服务器参数优化](mysqlServerArgs)
 * [mysql高级-锁机制](lockMechanism)

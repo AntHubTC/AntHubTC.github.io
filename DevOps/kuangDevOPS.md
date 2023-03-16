@@ -20,6 +20,10 @@ DevOps强调软件开发人员与软件测试、软件运维、质量保障(QA)�
 ​		DevOps兴起于2009年,近年来由于云计算、互联网的发展，促进了DevOps的基础设施及工具链的发展,涌现了-大批优秀的工具，这些工具包括开发,测试，运维的各个领域，例如: GitHub, Git/sn, Docker. Jenkins, HudSon,
 Ant/Maven/Gradle,QUnit、JMeter等， 看下图:
 
+![image-20210421234224711](img/kuangDevOPS/image-20210421234224711.png)
+
+![image-20210421234237270](img/kuangDevOPS/image-20210421234237270.png)
+
 ![在这里插入图片描述](./img/923jkao.png)
 
 ![在这里插入图片描述](./img/ifosf20938923.png)
