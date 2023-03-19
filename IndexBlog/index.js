@@ -18,6 +18,7 @@
     { title: 'Jenkins', href: '../jenkins' },
     { title: 'Jmeter', href: '../Jmeter' },
     { title: 'MySQL', href: '../mysql' },
+    { title: 'Mongo', href: '../mongo' },
     { title: 'MyCat', href: '../mycat' },
     { title: 'mybatis', href: '../mybatis' },
     { title: 'mybatis-Plus', href: '../mybatisPlus' },
