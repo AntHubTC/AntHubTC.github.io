@@ -26,6 +26,7 @@
     { title: 'Postman', href: '../postman' },
     { title: 'tomcat', href: '../tomcat' },
     { title: 'Zookeeper', href: '../Zookeeper' },
+    { title: 'esp8266', href: '../esp8266' },
     { title: 'SecureCRT', href: '../SecureCRT' },
     { title: '前端知识学习', href: '../前端知识学习' },
     { title: 'Windows', href: '../windowsOS' },
