@@ -36,6 +36,7 @@
     { title: '架构师之路', href: '../architectRoad' },
     { title: 'redis', href: '../redis' },
     { title: 'HTTP', href: '../HTTP' },
+    { title: 'NodeJS', href: '../NodeJs' },
     { title: 'windows批处理', href: '../windows-batch' },
     { title: 'Python', href: '../python' },
     { title: 'mysql45讲', href: 'https://funnylog.gitee.io/mysql45/' },
