@@ -11,6 +11,7 @@
     { title: 'SpringSecurity', href: '../SpringSecurity' },
     { title: 'WebSocket', href: '../WebSocket' },
     { title: 'ElasticSearch', href: '../ElasticSearch' },
+    { title: 'Electron', href: '../electron' },
     { title: 'Mock服务', href: '../mockService' },
     { title: 'DevOps', href: '../DevOps' },
     { title: 'Docker', href: '../Docker' },
