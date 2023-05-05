@@ -10,6 +10,7 @@
     { title: 'SpringBoot', href: '../springBoot' },
     { title: 'SpringSecurity', href: '../SpringSecurity' },
     { title: 'WebSocket', href: '../WebSocket' },
+	{ title: 'Apache Luncene', href: '../luncene' },
     { title: 'ElasticSearch', href: '../ElasticSearch' },
     { title: 'Electron', href: '../electron' },
     { title: 'Mock服务', href: '../mockService' },
