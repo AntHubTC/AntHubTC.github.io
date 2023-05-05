@@ -1,13 +1,15 @@
-前言
+## 前言
+
 本节袁老师将带领大家学习Lucene技术。Lucene是apache下的一个开源的全文检索引擎工具包。接下来带领大家进行Lucene编程的实战。你准备好了嘛？
 
-一. 需求说明
+## 一. 需求说明
+
 生成职位信息索引库，从索引库检索数据。例如我们在招聘网站进行职位搜索。
 
 ![img](img/lucene03/eb0ee70f672ba92e95e84c29be246f0aacb6e09f.png@942w_227h_progressive.webp)
 
+## 二. 准备开发环境
 
-二. 准备开发环境
 1.准备数据
 1.1 运行sql脚本
 1.通过Navicat Premium软件运行课前资料中的job_info.sql脚本。完成初始化数据的准备工作。
@@ -16,18 +18,20 @@
 
 3.数据库脚本文件job_info.sql中的内容见下。
 
+```sql
 CREATE DATABASE `es_db` CHARACTER SET utf8mb4; USE `es_db`; CREATE TABLE `job_info` (  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键 id',  `company_name` varchar(100) DEFAULT NULL COMMENT '公司名称',  `company_addr` varchar(200) DEFAULT NULL COMMENT '公司联系方式',  `company_info` mediumtext DEFAULT NULL COMMENT '公司信息',  `job_name` varchar(100) DEFAULT NULL COMMENT '职位名称',  `job_addr` varchar(50) DEFAULT NULL COMMENT '工作地点',  `job_info` mediumtext DEFAULT NULL COMMENT '职位信息',  `salary_min` int(10) DEFAULT NULL COMMENT '薪资范围，最小',  `salary_max` int(10) DEFAULT NULL COMMENT '薪资范围，最大',  `url` varchar(150) DEFAULT NULL COMMENT '招聘信息详情页',  `time` varchar(10) DEFAULT NULL COMMENT '职位最近发布时间',  PRIMARY KEY (`id`) ) ENGINE=InnoDB AUTO_INCREMENT=7656 DEFAULT CHARSET=utf8mb3 COMMENT='招聘信息'; INSERT INTO `job_info` (`id`, `company_name`, `company_addr`, `company_info`, `job_name`, `job_addr`, `job_info`, `salary_min`, `salary_max`, `url`, `time`) VALUES (1397, '北京中认环宇信息安全技术有限公司', '北京市丰台区南四环西路188号9区8号楼', '北京中认环宇信息安全技术有限公司（简称CQCCA）是由中国质量认证中心投资...', ' JAVA软件开发程师 (职位编号：002)', '北京-丰台区', '参与产品需求分析、系统设计工作...', 120000, 180000, 'https://jobs.51job.com/beijing-ftq/101555054.html?s=01&t=5', '2022-02-26'); # 后面省略10000+条INSERT插入语句
+```
 
 1.2 潜在异常
 如果在运行job_info.sql脚本时提示1153 - Got a packet bigger than 'max_allowed_packet' bytes出错，解决方案见下：
 
 1.查看max_allowed_packet变量默认值。原因是我安装的MySQL的默认配置为16MB，而导入的文件数据大于默认配置所以出错。
 
-# 16777216 / 1024 / 1024 = 16M SHOW VARIABLES LIKE '%max_allowed_packet%';
+16777216 / 1024 / 1024 = 16M SHOW VARIABLES LIKE '%max_allowed_packet%';
 
 2.修改max_allowed_packet变量的默认值。需要重启Navicat Premium软件。
 
-# 设置成512M SET GLOBAL max_allowed_packet = 524288000;
+设置成512M SET GLOBAL max_allowed_packet = 524288000;
 
 3.再次使用Navicat Premium软件运行job_info.sql脚本。便可执行成功。
 
@@ -143,7 +147,22 @@ CREATE DATABASE `es_db` CHARACTER SET utf8mb4; USE `es_db`; CREATE TABLE `job_in
 
 3.将项目自动生成的application.properties文件后缀改为yml类型。并添加数据库连接配置。
 
-server:  port: 9000 Spring:  application:    name: yx-lucene  datasource:    driver-class-name: com.mysql.cj.jdbc.Driver    url: jdbc:mysql://localhost:3306/es_db?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC    username: root    password: 123456 # 开启驼峰命名匹配映射 mybatis:  configuration:    map-underscore-to-camel-case: true
+```yaml
+server:
+  port: 9000
+  Spring:
+    application:
+      name: yx-lucene
+    datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/es_db?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+      username: root
+      password: 123456
+    # 开启驼峰命名匹配映射
+    mybatis:
+      configuration:
+        map-underscore-to-camel-case: true
+```
 
 4.搭建项目的MVC分层结构。在com.yx包下创建：pojo包、mapper包、service包、service.impl包、controller包。
 
@@ -182,7 +201,8 @@ package com.yx.controller; import com.yx.pojo.JobInfo; import com.yx.service.Job
 
 http://localhost:9000/job-info/query http://localhost:9000/job-info/query/1397
 
-三. 创建索引
+## 三. 创建索引
+
 1.创建索引实现
 在test下创建com.yx.lucene包，并在该包下创建LuceneTests测试类，并添加创建索引的createIndex()方法。
 
