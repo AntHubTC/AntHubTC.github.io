@@ -451,3 +451,36 @@ Java程序对类的使用方式分为：主动使用和被动使用。 主动使
 - java.lang.invoke.MethodHandle实例的解析结果REF getStatic、REF putStatic、REF invokeStatic句柄对应的类没有初始化，则初始化
 
 除了以上七种情况，其他使用Java类的方式都被看作是对类的被动使用，都不会导致类的初始化。
+
+
+
+## 违反双亲委派机制
+
+[tomcat 打破双亲委派机制](https://blog.csdn.net/lawsssscat/article/details/108369694)
+
+[Tomcat - 都说Tomcat违背了双亲委派机制，到底对不对？](https://new-developer.aliyun.com/article/1232871)
+
+### Tomcat为什么要破坏这个机制呢？
+
+- 如有多个应用程序部署在Tomcat上，这些应用程序可能会依赖**同一第三方类库的不同版本**，因此Tomcat必须支持**每个应用程序的类库可以相互隔离**
+- 部署在同一个Tomcat上的不同应用程序，**相同类库的相同版本应该是共享的**，否则就会出现大量相同的类加载到[虚拟机](https://www.zhihu.com/search?q=虚拟机&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"answer"%2C"sourceId"%3A2712763072})中
+- Tomcat本身也有依赖的类库，与应用程序依赖的类库可能会混淆，基于安全考虑，应该将两者进行隔离
+- 要支持Jsp文件修改后，其生成的class能在不重启的情况下及时被加载进JVM
+
+### **采用默认机制会出现的问题**
+
+- 问题1、3，如果Tomcat采用默认的双亲委派加载机制，是无法加载同一类库不同版本的类的，因为默认的双亲委派加载机制在加载类时，是通过类的全[限定名](https://www.zhihu.com/search?q=限定名&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"answer"%2C"sourceId"%3A2712763072})做唯一性校验的
+- 问题2，默认的双亲委派类加载机制可以实现，因为它本就能保证唯一性
+- 问题4，我们知道Jsp文件更新其实也就是[class文件](https://www.zhihu.com/search?q=class文件&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"answer"%2C"sourceId"%3A2712763072})更新了，此时类的全限定名并没有改变，修改Jsp文件后，类加载器会从方法区中直接取到已存在的，这会导致修改后Jsp文件其实不会重新加载。那么，如果直接卸载掉这个Jsp文件的类加载器，再重新创建类加载器去加载修改后的Jsp文件，不就能解决问题了吗？那么你应该能猜到**每个Jsp文件应对应一个唯一的类加载器**吧
+
+### **Tomcat如何打破双亲委派**
+
+- Tomcat通过自定义类加载器WebAppClassLoader打破双亲委派，即重写了JVM的类加载器ClassLoader的findClass方法和loadClass方法，以优先加载Web应用目录下的类。
+- Tomcat负责加载我们的Servlet类、加载Servlet所依赖的JAR包。Tomcat本身也是个Java程序，因此它需要加载自己的类和依赖的JAR包。
+- 若在Tomcat运行两个Web应用程序，它们有功能不同的同名Servlet，Tomcat需同时加载和管理这两个同名的Servlet类，保证它们不会冲突。所以Web应用之间的类需要隔离
+- 若两个Web应用都依赖同一三方jar，比如Spring，则Spring jar被加载到内存后，Tomcat要保证这两个Web应用能共享，即Spring jar只被加载一次，否则随着三方jar增多，JVM的内存会占用过大。 所以，和 JVM 一样，需要隔离Tomcat本身的类和Web应用的类。
+
+Tomcat的Context组件为每个Web应用创建一个WebAppClassLoader类加载器，由于不同类加载器实例加载的类是互相隔离的，因此达到了隔离Web应用的目的，同时通过CommonClassLoader等父加载器来共享第三方JAR包。
+
+
+

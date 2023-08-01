@@ -1,0 +1,766 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>SpringBoot整合Quartz框架.md · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="SpringBoot整合redis.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="文档笔记组织方式.html">
+            
+                <a href="文档笔记组织方式.html">
+            
+                    
+                    文档笔记组织方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="SpringBoot Hello.html">
+            
+                <a href="SpringBoot Hello.html">
+            
+                    
+                    SpringBootHello
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="SpringBoot整合Servlet.html">
+            
+                <a href="SpringBoot整合Servlet.html">
+            
+                    
+                    SpringBoot整合Servlet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="SpringBoot整合Filter.html">
+            
+                <a href="SpringBoot整合Filter.html">
+            
+                    
+                    SpringBoot整合Filter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="SpringBoot整合Listener.html">
+            
+                <a href="SpringBoot整合Listener.html">
+            
+                    
+                    SpringBoot整合Listener
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Spring Boot拦截器.html">
+            
+                <a href="Spring Boot拦截器.html">
+            
+                    
+                    SpringBoot整合拦截器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="SpringBoot 静态资源访问.html">
+            
+                <a href="SpringBoot 静态资源访问.html">
+            
+                    
+                    SpringBoot静态资源访问
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="SpringBoot上传文件.html">
+            
+                <a href="SpringBoot上传文件.html">
+            
+                    
+                    SpringBoot上传文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="SpringBoot视图层技术.html">
+            
+                <a href="SpringBoot视图层技术.html">
+            
+                    
+                    SpringBoot视图层技术
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="SpringBooth整合JSP.html">
+            
+                <a href="SpringBooth整合JSP.html">
+            
+                    
+                    SpringBoot视图层技术---整合JSP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="SpringBoot整合FreeMarker.html">
+            
+                <a href="SpringBoot整合FreeMarker.html">
+            
+                    
+                    SpringBoot视图层技术---整合FreeMarker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="SpringBoot整合thymeleaf.html">
+            
+                <a href="SpringBoot整合thymeleaf.html">
+            
+                    
+                    SpringBoot视图层技术---整合thymeleaf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="SpringBoot自定义属性配置.html">
+            
+                <a href="SpringBoot自定义属性配置.html">
+            
+                    
+                    SpringBoot自定义属性配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="SpringBoot整合内存数据库H2.html">
+            
+                <a href="SpringBoot整合内存数据库H2.html">
+            
+                    
+                    SpringBoot整合内存数据库H2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="SpringBoot+JPA+H2.html">
+            
+                <a href="SpringBoot+JPA+H2.html">
+            
+                    
+                    SpringBoot+JPA+H2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="JPA核心接口学习.html">
+            
+                <a href="JPA核心接口学习.html">
+            
+                    
+                    JPA核心接口学习.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="JPA关系映射操作.html">
+            
+                <a href="JPA关系映射操作.html">
+            
+                    
+                    JPA关系映射操作.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="SpringBoot使用Druid.html">
+            
+                <a href="SpringBoot使用Druid.html">
+            
+                    
+                    SpringBoot使用Druid
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="SpringBoot做数据验证.html">
+            
+                <a href="SpringBoot做数据验证.html">
+            
+                    
+                    SpringBoot做数据验证
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="SpringBoot异常处理方式.html">
+            
+                <a href="SpringBoot异常处理方式.html">
+            
+                    
+                    SpringBoot异常处理方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="SpringBoot单元测试.html">
+            
+                <a href="SpringBoot单元测试.html">
+            
+                    
+                    SpringBoot单元测试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="SpringBoot热部署.html">
+            
+                <a href="SpringBoot热部署.html">
+            
+                    
+                    SpringBoot热部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="SpringBoot整合Ehcache.html">
+            
+                <a href="SpringBoot整合Ehcache.html">
+            
+                    
+                    SpringBoot整合Ehcache
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="SpringBoot整合redis.html">
+            
+                <a href="SpringBoot整合redis.html">
+            
+                    
+                    SpringBoot整合redis.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.26" data-path="SpringBoot整合Quartz框架.html">
+            
+                <a href="SpringBoot整合Quartz框架.html">
+            
+                    
+                    SpringBoot整合Quartz框架.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >SpringBoot整合Quartz框架.md</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="springboot&#x6574;&#x5408;quartz&#x6846;&#x67B6;">SpringBoot&#x6574;&#x5408;Quartz&#x6846;&#x67B6;</h1>
+<p><strong>Quartz&#x4ECB;&#x7ECD;&#xFF1A;</strong></p>
+<p><img src="../img/1556545302948.png" alt="1556545302948"></p>
+<p><strong>Quartz&#x7684;&#x4F7F;&#x7528;&#x601D;&#x8DEF;&#xFF1A;</strong></p>
+<ol>
+<li><p>job &#x4EFB;&#x52A1;  - &#x4F60;&#x8981;&#x505A;&#x4EC0;&#x4E48;&#x4E8B;&#xFF1F;</p>
+</li>
+<li><p>Trigger &#x89E6;&#x53D1;&#x5668; - &#x4F60;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x53BB;&#x505A;&#xFF1F;</p>
+</li>
+<li><p>Scheduler &#x4EFB;&#x52A1;&#x8C03;&#x5EA6; - &#x4F60;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x9700;&#x8981;&#x53BB;&#x505A;&#x4EC0;&#x4E48;&#x4E8B;&#xFF1F;</p>
+<p>&#x200B;    </p>
+<p>&#x200B;    &#x5BF9;&#x4E8E;&#x6B64;&#x6574;&#x5408;&#xFF0C;&#x7F51;&#x4E0A;&#x597D;&#x50CF;&#x8FD8;&#x6709;&#x76F8;&#x5BF9;&#x66F4;&#x7B80;&#x5355;&#x7684;&#x6574;&#x5408;&#x65B9;&#x6848;&#xFF0C;&#x53E6;&#x5916;&#x4E0B;&#x9762;&#x7684;&#x611F;&#x89C9;&#x6CA1;&#x6709;&#x600E;&#x4E48;&#x4F7F;&#x7528;&#x5230;springBoot&#x672C;&#x8EAB;&#x5BF9;Quartz&#x7684;&#x652F;&#x6301;&#xFF0C;&#x6211;&#x770B;&#x4E86;&#x4E0B;&#xFF0C;SpringBoot&#x5E94;&#x8BE5;&#x662F;&#x6709;Quartz&#x7684;&#x6574;&#x5408;&#x65B9;&#x6CD5;&#xFF0C;&#x6BD4;&#x5982;&#x8FD9;&#x4E2A;QuartzAutoConfiguration&#x7C7B;&#x3002;</p>
+</li>
+</ol>
+<p><strong>&#x6DFB;&#x52A0;pom&#x5750;&#x6807;&#xFF1A;</strong></p>
+<pre><code class="lang-xml"><span class="hljs-comment">&lt;!-- QuartZ&#x5750;&#x6807; --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.quartz-scheduler<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>quartz<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.3.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+            <span class="hljs-comment">&lt;!--spring-boot-starter-web&#x542B;&#x6709;slf4j-api&#x5305;&#x4E86;--&gt;</span>
+            <span class="hljs-comment">&lt;!--&lt;exclusions&gt;--&gt;</span>
+                <span class="hljs-comment">&lt;!--&lt;exclusion&gt;--&gt;</span>
+                    <span class="hljs-comment">&lt;!--&lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;--&gt;</span>
+                    <span class="hljs-comment">&lt;!--&lt;groupId&gt;org.slf4j&lt;/groupId&gt;--&gt;</span>
+                <span class="hljs-comment">&lt;!--&lt;/exclusion&gt;--&gt;</span>
+            <span class="hljs-comment">&lt;!--&lt;/exclusions&gt;--&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+
+        <span class="hljs-comment">&lt;!-- Scheduled&#x5750;&#x6807;--&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-context-support<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+
+        <span class="hljs-comment">&lt;!-- Spring tx &#x5750;&#x6807;--&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-tx<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<p><strong>&#x7F16;&#x5199;Demo Job&#x4EFB;&#x52A1;&#xFF1A;</strong></p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.tc.quartz;
+
+<span class="hljs-keyword">import</span> com.tc.service.UserService;
+<span class="hljs-keyword">import</span> org.quartz.Job;
+<span class="hljs-keyword">import</span> org.quartz.JobExecutionContext;
+<span class="hljs-keyword">import</span> org.quartz.JobExecutionException;
+<span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;
+
+<span class="hljs-keyword">import</span> java.util.Date;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">QuartzDemo</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Job</span> </span>{ <span class="hljs-comment">// &#x5B9E;&#x73B0;&#x4E86;Job&#x63A5;&#x53E3;</span>
+
+    <span class="hljs-comment">/*
+        &#x9519;&#x8BEF;&#x60C5;&#x51B5;&#xFF1A;
+            &#x5982;&#x679C;&#x8BE5;&#x7C7B;&#x6CE8;&#x5165;&#x4E00;&#x4E2A;&#x7C7B;&#xFF0C;&#x9ED8;&#x8BA4;&#x7684;Quartz&#x7684;job&#x5DE5;&#x5382;&#x662F;&#x4E0D;&#x80FD;&#x6CE8;&#x5165;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x9ED8;&#x8BA4;&#x7684;&#x5DE5;&#x5382;&#x662F;&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#x7684;&#xFF0C;&#x6CA1;&#x6709;&#x88AB;
+        spring&#x7BA1;&#x7406;&#x8D77;&#x6765;&#xFF0C;&#x90A3;&#x4E48;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x5C31;&#x4F1A;&#x62A5;&#x9519;&#x3002;
+        &#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#xFF1A;
+            &#x81EA;&#x5B9A;&#x4E49;&#x9ED8;&#x8BA4;&#x5DE5;&#x5382;&#xFF0C;&#x8BA9;&#x521B;&#x5EFA;&#x51FA;&#x6765;&#x7684;&#x5BF9;&#x8C61;&#x653E;&#x5230;spring&#x5BB9;&#x5668;&#x4E2D;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x6CE8;&#x5165;&#x8FDB;&#x6765;&#x4E86;
+     */</span>
+    <span class="hljs-meta">@Autowired</span>
+    <span class="hljs-keyword">private</span> UserService userService;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">(JobExecutionContext jobExecutionContext)</span> <span class="hljs-keyword">throws</span> JobExecutionException </span>{
+        System.out.println(<span class="hljs-string">&quot;QuartzDemo Execute...&quot;</span> + <span class="hljs-keyword">new</span> Date());
+
+        System.out.println(userService);
+        userService.add();
+    }
+}
+</code></pre>
+<p><strong>&#x7528;&#x6237;&#x670D;&#x52A1;&#x7C7B;:</strong></p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.tc.service;
+
+<span class="hljs-keyword">import</span> org.springframework.stereotype.Service;
+
+<span class="hljs-meta">@Service</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserService</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">()</span></span>{
+        System.out.println(<span class="hljs-string">&quot;add user...&quot;</span>);
+    }
+}
+</code></pre>
+<p><strong>&#x7F16;&#x5199;&#x914D;&#x7F6E;&#x7C7B;&#xFF1A;</strong></p>
+<p>&#x200B;    &#x4E2D;&#x5305;&#x542B;&#x4E86;SimpleTriggerFactoryBean&#x548C;CronTriggerFactoryBean&#x4E24;&#x79CD;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.tc.config;
+
+<span class="hljs-keyword">import</span> com.tc.quartz.QuartzDemo;
+<span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;
+<span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;
+<span class="hljs-keyword">import</span> org.springframework.scheduling.quartz.CronTriggerFactoryBean;
+<span class="hljs-keyword">import</span> org.springframework.scheduling.quartz.JobDetailFactoryBean;
+<span class="hljs-keyword">import</span> org.springframework.scheduling.quartz.SchedulerFactoryBean;
+<span class="hljs-keyword">import</span> org.springframework.scheduling.quartz.SimpleTriggerFactoryBean;
+
+<span class="hljs-comment">/**
+ * Quartz&#x914D;&#x7F6E;&#x7C7B;
+ */</span>
+<span class="hljs-meta">@Configuration</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">QuartzConfig</span> </span>{
+
+    <span class="hljs-comment">/**
+     * 1. &#x521B;&#x5EFA;Job&#x5BF9;&#x8C61;
+     */</span>
+    <span class="hljs-meta">@Bean</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> JobDetailFactoryBean <span class="hljs-title">jobDetailFactoryBean</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-comment">// spring-context-support&#x5305;&#x4E0B;&#x7684;&#x7C7B;</span>
+        JobDetailFactoryBean factory = <span class="hljs-keyword">new</span> JobDetailFactoryBean();
+        factory.setJobClass(QuartzDemo.class);
+
+        <span class="hljs-keyword">return</span> factory;
+    }
+
+<span class="hljs-comment">//    /**</span>
+<span class="hljs-comment">//     * 2. &#x521B;&#x5EFA;&#x7B80;&#x5355;Trigger&#x5BF9;&#x8C61;</span>
+<span class="hljs-comment">//     */</span>
+<span class="hljs-comment">//    @Bean</span>
+<span class="hljs-comment">//    public SimpleTriggerFactoryBean simpleTriggerFactoryBean(JobDetailFactoryBean jobDetailFactoryBean) {</span>
+<span class="hljs-comment">//        SimpleTriggerFactoryBean factory = new SimpleTriggerFactoryBean();</span>
+<span class="hljs-comment">//        // &#x5173;&#x8054;JobDetail</span>
+<span class="hljs-comment">//        factory.setJobDetail(jobDetailFactoryBean.getObject());</span>
+<span class="hljs-comment">//        factory.setRepeatInterval(2000L);// &#x5355;&#x4F4D;&#x6BEB;&#x79D2;</span>
+<span class="hljs-comment">//        factory.setRepeatCount(5); // &#x91CD;&#x590D; 1 + 5 &#x6B21;  (1&#x662F;&#x672C;&#x8EAB;&#x5C31;&#x6709;&#x4E00;&#x6B21;)</span>
+<span class="hljs-comment">//        return factory;</span>
+<span class="hljs-comment">//    }</span>
+<span class="hljs-comment">//    /**</span>
+<span class="hljs-comment">//     * 3. &#x521B;&#x5EFA;Scheduler&#x5BF9;&#x8C61;</span>
+<span class="hljs-comment">//     */</span>
+<span class="hljs-comment">//    @Bean</span>
+<span class="hljs-comment">//    public SchedulerFactoryBean schedulerFactoryBean(SimpleTriggerFactoryBean simpleTriggerFactoryBean) {</span>
+<span class="hljs-comment">//        SchedulerFactoryBean factory = new SchedulerFactoryBean();</span>
+<span class="hljs-comment">//        // &#x5173;&#x8054;trigger</span>
+<span class="hljs-comment">//        factory.setTriggers(simpleTriggerFactoryBean.getObject());</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">//        return factory;</span>
+<span class="hljs-comment">//    }</span>
+
+    <span class="hljs-comment">/**
+     * 2. &#x521B;&#x5EFA;cron Trigger&#x5BF9;&#x8C61;
+     */</span>
+    <span class="hljs-meta">@Bean</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> CronTriggerFactoryBean <span class="hljs-title">simpleTriggerFactoryBean</span><span class="hljs-params">(JobDetailFactoryBean jobDetailFactoryBean)</span> </span>{
+        CronTriggerFactoryBean factory = <span class="hljs-keyword">new</span> CronTriggerFactoryBean();
+        <span class="hljs-comment">// &#x5173;&#x8054;JobDetail</span>
+        factory.setJobDetail(jobDetailFactoryBean.getObject());
+        factory.setCronExpression(<span class="hljs-string">&quot;0/2 * * * * ?&quot;</span>);
+        <span class="hljs-keyword">return</span> factory;
+    }
+
+    <span class="hljs-comment">/*
+        3. &#x521B;&#x5EFA;Scheduler&#x5BF9;&#x8C61;
+        &#x6CE8;&#x5165;cron trigger&#x5230;scheduler&#x4E2D;&#x3002;
+     */</span>
+    <span class="hljs-meta">@Bean</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> SchedulerFactoryBean <span class="hljs-title">schedulerFactoryBean</span><span class="hljs-params">(CronTriggerFactoryBean cronTriggerFactoryBean,
+                                                     SpringAdaptableJobFactory springAdaptableJobFactory)</span> </span>{
+        SchedulerFactoryBean factory = <span class="hljs-keyword">new</span> SchedulerFactoryBean();
+        <span class="hljs-comment">// &#x5173;&#x8054;trigger</span>
+        factory.setTriggers(cronTriggerFactoryBean.getObject());
+        <span class="hljs-comment">// &#x6539;&#x5199;&#x9ED8;&#x8BA4;&#x7684;Job&#x7684;&#x5DE5;&#x5382;&#xFF0C;&#x8BA9;Job&#x4E2D;&#x7684;&#x5C5E;&#x6027;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;spring IOC&#x6CE8;&#x5165;&#x8FDB;&#x6765;&#x3002;</span>
+        factory.setJobFactory(springAdaptableJobFactory);
+
+        <span class="hljs-keyword">return</span> factory;
+    }
+}
+</code></pre>
+<p><strong>&#x7F16;&#x5199;&#x9002;&#x914D;&#x5668;JOB&#x5DE5;&#x5382;:</strong></p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.tc.config;
+
+<span class="hljs-keyword">import</span> org.quartz.spi.TriggerFiredBundle;
+<span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;
+<span class="hljs-keyword">import</span> org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+<span class="hljs-keyword">import</span> org.springframework.scheduling.quartz.AdaptableJobFactory;
+<span class="hljs-keyword">import</span> org.springframework.stereotype.Component;
+<span class="hljs-keyword">import</span> org.springframework.util.ReflectionUtils;
+
+<span class="hljs-meta">@Component</span>(<span class="hljs-string">&quot;springAdaptableJobFactory&quot;</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpringAdaptableJobFactory</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AdaptableJobFactory</span> </span>{
+
+    <span class="hljs-comment">/*
+        AutowireCapableBeanFactory &#x53EF;&#x4EE5;&#x5C06;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x6DFB;&#x52A0;&#x5230;Spring IOC&#x5BB9;&#x5668;&#x4E2D;&#xFF0C;&#x5E76;&#x4E14;&#x5B8C;&#x6210;&#x8BE5;&#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;&#x6CE8;&#x5165;&#x3002;
+     */</span>
+    <span class="hljs-meta">@Autowired</span>
+    <span class="hljs-keyword">private</span> AutowireCapableBeanFactory autowireCapableBeanFactory;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> Object <span class="hljs-title">createJobInstance</span><span class="hljs-params">(TriggerFiredBundle bundle)</span> <span class="hljs-keyword">throws</span> Exception </span>{
+        Class&lt;?&gt; jobClass = bundle.getJobDetail().getJobClass();
+        Object obj = ReflectionUtils.accessibleConstructor(jobClass, <span class="hljs-keyword">new</span> Class[<span class="hljs-number">0</span>]).newInstance();
+
+        <span class="hljs-comment">// &#x5C06;obj&#x5BF9;&#x8C61;&#x6DFB;&#x52A0;&#x5230;Spring IOC&#x5BB9;&#x5668;&#x4E2D;&#xFF0C;&#x5E76;&#x5B8C;&#x6210;&#x6CE8;&#x5165;&#x3002;</span>
+        autowireCapableBeanFactory.autowireBean(obj);
+        <span class="hljs-keyword">return</span> obj;
+    }
+}
+</code></pre>
+<p><strong>&#x7F16;&#x5199;&#x542F;&#x52A8;&#x7C7B;</strong></p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.tc;
+
+<span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;
+<span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;
+<span class="hljs-keyword">import</span> org.springframework.scheduling.annotation.EnableScheduling;
+
+<span class="hljs-meta">@SpringBootApplication</span>
+<span class="hljs-meta">@EnableScheduling</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        SpringApplication.run(App.class, args);
+    }
+}
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="SpringBoot整合redis.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: SpringBoot整合redis.md">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"SpringBoot整合Quartz框架.md","level":"1.26","depth":1,"previous":{"title":"SpringBoot整合redis.md","level":"1.25","depth":1,"path":"doc/SpringBoot整合redis.md","ref":"doc/SpringBoot整合redis.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/SpringBoot整合Quartz框架.md","mtime":"2019-04-29T14:44:21.100Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-29T14:48:09.497Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

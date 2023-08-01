@@ -1,0 +1,603 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>JPA核心接口学习.md · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="JPA关系映射操作.html" />
+    
+    
+    <link rel="prev" href="SpringBoot+JPA+H2.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="文档笔记组织方式.html">
+            
+                <a href="文档笔记组织方式.html">
+            
+                    
+                    文档笔记组织方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="SpringBoot Hello.html">
+            
+                <a href="SpringBoot Hello.html">
+            
+                    
+                    SpringBootHello
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="SpringBoot整合Servlet.html">
+            
+                <a href="SpringBoot整合Servlet.html">
+            
+                    
+                    SpringBoot整合Servlet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="SpringBoot整合Filter.html">
+            
+                <a href="SpringBoot整合Filter.html">
+            
+                    
+                    SpringBoot整合Filter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="SpringBoot整合Listener.html">
+            
+                <a href="SpringBoot整合Listener.html">
+            
+                    
+                    SpringBoot整合Listener
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Spring Boot拦截器.html">
+            
+                <a href="Spring Boot拦截器.html">
+            
+                    
+                    SpringBoot整合拦截器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="SpringBoot 静态资源访问.html">
+            
+                <a href="SpringBoot 静态资源访问.html">
+            
+                    
+                    SpringBoot静态资源访问
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="SpringBoot上传文件.html">
+            
+                <a href="SpringBoot上传文件.html">
+            
+                    
+                    SpringBoot上传文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="SpringBoot视图层技术.html">
+            
+                <a href="SpringBoot视图层技术.html">
+            
+                    
+                    SpringBoot视图层技术
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="SpringBooth整合JSP.html">
+            
+                <a href="SpringBooth整合JSP.html">
+            
+                    
+                    SpringBoot视图层技术---整合JSP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="SpringBoot整合FreeMarker.html">
+            
+                <a href="SpringBoot整合FreeMarker.html">
+            
+                    
+                    SpringBoot视图层技术---整合FreeMarker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="SpringBoot整合thymeleaf.html">
+            
+                <a href="SpringBoot整合thymeleaf.html">
+            
+                    
+                    SpringBoot视图层技术---整合thymeleaf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="SpringBoot自定义属性配置.html">
+            
+                <a href="SpringBoot自定义属性配置.html">
+            
+                    
+                    SpringBoot自定义属性配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="SpringBoot整合内存数据库H2.html">
+            
+                <a href="SpringBoot整合内存数据库H2.html">
+            
+                    
+                    SpringBoot整合内存数据库H2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="SpringBoot+JPA+H2.html">
+            
+                <a href="SpringBoot+JPA+H2.html">
+            
+                    
+                    SpringBoot+JPA+H2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.17" data-path="JPA核心接口学习.html">
+            
+                <a href="JPA核心接口学习.html">
+            
+                    
+                    JPA核心接口学习.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="JPA关系映射操作.html">
+            
+                <a href="JPA关系映射操作.html">
+            
+                    
+                    JPA关系映射操作.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="SpringBoot使用Druid.html">
+            
+                <a href="SpringBoot使用Druid.html">
+            
+                    
+                    SpringBoot使用Druid
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="SpringBoot做数据验证.html">
+            
+                <a href="SpringBoot做数据验证.html">
+            
+                    
+                    SpringBoot做数据验证
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="SpringBoot异常处理方式.html">
+            
+                <a href="SpringBoot异常处理方式.html">
+            
+                    
+                    SpringBoot异常处理方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="SpringBoot单元测试.html">
+            
+                <a href="SpringBoot单元测试.html">
+            
+                    
+                    SpringBoot单元测试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="SpringBoot热部署.html">
+            
+                <a href="SpringBoot热部署.html">
+            
+                    
+                    SpringBoot热部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="SpringBoot整合Ehcache.html">
+            
+                <a href="SpringBoot整合Ehcache.html">
+            
+                    
+                    SpringBoot整合Ehcache
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="SpringBoot整合redis.html">
+            
+                <a href="SpringBoot整合redis.html">
+            
+                    
+                    SpringBoot整合redis.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="SpringBoot整合Quartz框架.html">
+            
+                <a href="SpringBoot整合Quartz框架.html">
+            
+                    
+                    SpringBoot整合Quartz框架.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >JPA核心接口学习.md</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="jpa&#x6838;&#x5FC3;&#x63A5;&#x53E3;&#x5B66;&#x4E60;">JPA&#x6838;&#x5FC3;&#x63A5;&#x53E3;&#x5B66;&#x4E60;</h1>
+<p>&#x6E90;&#x4EE3;&#x7801;&#x9879;&#x76EE;&#x53C2;&#x8003;&#xFF1A; 0013-spring-boot-jpa-h2 </p>
+<p><img src="E:\2_STUDY\testspace\SpringBoot&#x5B66;&#x4E60;\learn_spring_boot\0000-spring-boot-doc\img\JPA Repository.png" alt="JPA Repository"></p>
+<h2 id="spring-data-jpa-&#x63D0;&#x4F9B;&#x7684;&#x6838;&#x5FC3;&#x63A5;&#x53E3;">Spring Data JPA &#x63D0;&#x4F9B;&#x7684;&#x6838;&#x5FC3;&#x63A5;&#x53E3;</h2>
+<ol>
+<li><h3 id="repository&#x63A5;&#x53E3;">Repository&#x63A5;&#x53E3;</h3>
+<p>&#x200B;    &#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x672C;&#x8EAB;&#x662F;&#x4E00;&#x4E2A;&#x7A7A;&#x63A5;&#x53E3;&#x3002;</p>
+<h4 id="&#x4F7F;&#x7528;&#x65B9;&#x5F0F;&#xFF1A;">&#x4F7F;&#x7528;&#x65B9;&#x5F0F;&#xFF1A;</h4>
+<ul>
+<li><p>&#x63D0;&#x4F9B;&#x4E86;&#x65B9;&#x6CD5;&#x540D;&#x79F0;&#x547D;&#x540D;&#x7684;&#x65B9;&#x5F0F;&#x64CD;&#x4F5C;&#x6570;&#x636E;&#x5E93;</p>
+<p>  &#x5982;&#x679C;&#x67E5;&#x8BE2;&#x6761;&#x4EF6;&#x4E0D;&#x591A;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x6765;&#x67E5;&#x8BE2;&#xFF0C;&#x5982;&#x679C;&#x6761;&#x4EF6;&#x591A;&#x4E86;&#x53EF;&#x8BFB;&#x6027;&#x5C31;&#x4F1A;&#x5F88;&#x5DEE;&#xFF0C;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x65B9;&#x6CD5;&#x4E8C;&#x66F4;&#x597D;&#x4E00;&#x4E9B;&#x3002;</p>
+<p>&#x6E90;&#x4EE3;&#x7801;&#x53C2;&#x8003;UserRepositoryByName&#x7C7B;&#x4E2D;&#x7684;&#x5B9E;&#x73B0;&#x3002;</p>
+</li>
+<li><p>&#x63D0;&#x4F9B;&#x4E86;&#x57FA;&#x4E8E;@Query&#x6CE8;&#x89E3;&#xFF0C;&#x901A;&#x8FC7;SQL&#x3001;HQL&#x6765;&#x64CD;&#x4F5C;&#x6570;&#x636E;&#x5E93;</p>
+<p>&#x6E90;&#x4EE3;&#x7801;&#x53C2;&#x8003;UserRepositoryQueryAnnotation&#x7C7B;&#x4E2D;&#x7684;&#x5B9E;&#x73B0;&#x3002;</p>
+</li>
+</ul>
+</li>
+<li><h3 id="crudrepository&#x63A5;&#x53E3;">CrudRepository&#x63A5;&#x53E3;</h3>
+<p>&#x200B;    &#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x4E3B;&#x8981;&#x662F;&#x5B8C;&#x6210;&#x4E00;&#x4E9B;&#x589E;&#x5220;&#x6539;&#x67E5;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x200B;    &#x6CE8;&#x610F;&#xFF1A;CrudRepository&#x7EE7;&#x627F;&#x4E86;Repository&#x63A5;&#x53E3;&#xFF0C;&#x90A3;&#x4E48;Repository&#x4E2D;&#x7684;&#x7279;&#x6027;&#x90A3;&#x4E48;&#x5728;&#x672C;&#x63A5;&#x53E3;&#x4E2D;&#x4E00;&#x6837;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;, &#x4EE5;&#x4E0B;&#x63A5;&#x53E3;&#x5982;&#x679C;&#x6709;&#x7EE7;&#x627F;&#x5173;&#x7CFB;&#x4E5F;&#x662F;&#x5DEE;&#x4E0D;&#x591A;&#x7684;&#x3002;</p>
+<p><img src="../img/1556523017554.png" alt="1556523017554"></p>
+<p>&#x6B64;&#x63A5;&#x53E3;&#x7684;&#x5B9E;&#x73B0;&#x4E2D;&#xFF0C;&#x6240;&#x6709;&#x7684;DML&#x64CD;&#x4F5C;&#x90FD;&#x5DF2;&#x7ECF;&#x88AB;&#x52A0;&#x4E0A;&#x4E86;@Transactional&#x6CE8;&#x89E3;&#x3002;</p>
+<p>&#x6E90;&#x4EE3;&#x7801;&#x53C2;&#x8003;UserRepositoryCrudRepository&#x7C7B;&#x548C;UserRepositoryCrudRepositoryTest&#x6D4B;&#x8BD5;&#x7C7B;&#x3002;</p>
+</li>
+<li><h3 id="pagingandsortingrepository&#x63A5;&#x53E3;">PagingAndSortingRepository&#x63A5;&#x53E3;</h3>
+<p>&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x4E3B;&#x8981;&#x662F;&#x63D0;&#x4F9B;&#x4E86;&#x5206;&#x9875;&#x548C;&#x6392;&#x5E8F;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;PagingAndSortingRepository&#x7EE7;&#x627F;&#x4E86;CrudRepository&#x63A5;&#x53E3;&#xFF0C; &#x7236;&#x63A5;&#x53E3;&#x7684;&#x7279;&#x6027;&#x5728;&#x672C;&#x63A5;&#x53E3;&#x4E2D;&#x540C;&#x6837;&#x53EF;&#x7528;&#x3002;</p>
+<p><img src="../img/1556524642989.png" alt="1556524642989"></p>
+<p>&#x6E90;&#x4EE3;&#x7801;&#x53C2;&#x8003;UserRepositoryPagingAndSorting&#x7C7B;&#x548C;UserRepositoryPagingAndSortingTest&#x6D4B;&#x8BD5;&#x7C7B;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x4E24;&#x4E2A;&#x63A5;&#x53E3; &#x662F;&#x4E0D;&#x80FD;&#x5E26;&#x53C2;&#x6570;&#x67E5;&#x8BE2;&#x7684;&#xFF0C;&#x8FD9;&#x662F;&#x4E24;&#x4E2A;&#x63A5;&#x53E3;&#x7684;&#x7279;&#x70B9;&#x3002;</p>
+</li>
+<li><h3 id="jparepository&#x63A5;&#x53E3;">JpaRepository&#x63A5;&#x53E3;</h3>
+<p>&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x4E3B;&#x8981;&#x63D0;&#x4F9B;&#x4E86;&#x5BF9;&#x7EE7;&#x627F;&#x7684;&#x7236;&#x63A5;&#x53E3;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x8FDB;&#x884C;&#x9002;&#x914D;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;JpaRepository&#x7EE7;&#x627F;&#x4E86;PagingAndSortingRepository&#x63A5;&#x53E3;&#xFF0C; &#x7236;&#x63A5;&#x53E3;&#x7684;&#x7279;&#x6027;&#x5728;&#x672C;&#x63A5;&#x53E3;&#x4E2D;&#x540C;&#x6837;&#x53EF;&#x7528;&#x3002;</p>
+<p><img src="../img/1556527279449.png" alt="1556527279449"></p>
+<p>&#x6E90;&#x4EE3;&#x7801;&#x53C2;&#x8003;UserJPA&#x548C;UserJpaRepositoryTest&#x6D4B;&#x8BD5;&#x7C7B;&#x3002;</p>
+</li>
+<li><h3 id="jpaspecificationexectuor&#x63A5;&#x53E3;">JPASpecificationExectuor&#x63A5;&#x53E3;</h3>
+<p>&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x4E3B;&#x8981;&#x63D0;&#x4F9B;&#x4E86;&#x591A;&#x6761;&#x4EF6;&#x67E5;&#x8BE2;&#x7684;&#x652F;&#x6301;&#xFF0C;&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x5728;&#x67E5;&#x8BE2;&#x4E2D;&#x6DFB;&#x52A0;&#x5206;&#x9875;&#x548C;&#x6392;&#x5E8F;&#x3002;</p>
+<p>&#x6CE8;&#x610F;: &#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x6CA1;&#x6709;&#x7EE7;&#x627F;&#x5176;&#x5B83;&#x63A5;&#x53E3;&#xFF0C; &#x5E76;&#x4E14;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x5FC5;&#x987B;&#x548C;&#x4E0A;&#x9762;&#x7684;&#x63A5;&#x53E3;&#x642D;&#x914D;&#x4F7F;&#x7528;&#xFF08;&#x9664;&#x4E86;&#x7EE7;&#x627F;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#xFF0C;&#x8FD8;&#x8981;&#x7EE7;&#x627F;&#x5176;&#x5B83;&#x63A5;&#x53E3;&#xFF09;&#xFF0C;&#x5426;&#x5219;spring&#x4F1A;&#x62A5;&#x9519;&#x3002;</p>
+</li>
+</ol>
+<p><img src="../img/1556527895209.png" alt="1556527895209"></p>
+<p>&#x6E90;&#x4EE3;&#x7801;&#x53C2;&#x8003;UserJPA&#x548C;UserJpaSpecificationTest&#x6D4B;&#x8BD5;&#x7C7B;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="SpringBoot+JPA+H2.html" class="navigation navigation-prev " aria-label="Previous page: SpringBoot+JPA+H2">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="JPA关系映射操作.html" class="navigation navigation-next " aria-label="Next page: JPA关系映射操作.md">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"typora-root-url":"./","title":"JPA核心接口学习.md","level":"1.17","depth":1,"next":{"title":"JPA关系映射操作.md","level":"1.18","depth":1,"path":"doc/JPA关系映射操作.md","ref":"doc/JPA关系映射操作.md","articles":[]},"previous":{"title":"SpringBoot+JPA+H2","level":"1.16","depth":1,"path":"doc/SpringBoot+JPA+H2.md","ref":"doc/SpringBoot+JPA+H2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/JPA核心接口学习.md","mtime":"2019-04-29T09:36:36.268Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-29T14:48:09.497Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

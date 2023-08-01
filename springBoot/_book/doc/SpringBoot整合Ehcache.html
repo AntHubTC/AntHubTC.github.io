@@ -1,0 +1,649 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>SpringBoot整合Ehcache · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="SpringBoot整合redis.html" />
+    
+    
+    <link rel="prev" href="SpringBoot热部署.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="文档笔记组织方式.html">
+            
+                <a href="文档笔记组织方式.html">
+            
+                    
+                    文档笔记组织方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="SpringBoot Hello.html">
+            
+                <a href="SpringBoot Hello.html">
+            
+                    
+                    SpringBootHello
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="SpringBoot整合Servlet.html">
+            
+                <a href="SpringBoot整合Servlet.html">
+            
+                    
+                    SpringBoot整合Servlet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="SpringBoot整合Filter.html">
+            
+                <a href="SpringBoot整合Filter.html">
+            
+                    
+                    SpringBoot整合Filter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="SpringBoot整合Listener.html">
+            
+                <a href="SpringBoot整合Listener.html">
+            
+                    
+                    SpringBoot整合Listener
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Spring Boot拦截器.html">
+            
+                <a href="Spring Boot拦截器.html">
+            
+                    
+                    SpringBoot整合拦截器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="SpringBoot 静态资源访问.html">
+            
+                <a href="SpringBoot 静态资源访问.html">
+            
+                    
+                    SpringBoot静态资源访问
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="SpringBoot上传文件.html">
+            
+                <a href="SpringBoot上传文件.html">
+            
+                    
+                    SpringBoot上传文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="SpringBoot视图层技术.html">
+            
+                <a href="SpringBoot视图层技术.html">
+            
+                    
+                    SpringBoot视图层技术
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="SpringBooth整合JSP.html">
+            
+                <a href="SpringBooth整合JSP.html">
+            
+                    
+                    SpringBoot视图层技术---整合JSP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="SpringBoot整合FreeMarker.html">
+            
+                <a href="SpringBoot整合FreeMarker.html">
+            
+                    
+                    SpringBoot视图层技术---整合FreeMarker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="SpringBoot整合thymeleaf.html">
+            
+                <a href="SpringBoot整合thymeleaf.html">
+            
+                    
+                    SpringBoot视图层技术---整合thymeleaf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="SpringBoot自定义属性配置.html">
+            
+                <a href="SpringBoot自定义属性配置.html">
+            
+                    
+                    SpringBoot自定义属性配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="SpringBoot整合内存数据库H2.html">
+            
+                <a href="SpringBoot整合内存数据库H2.html">
+            
+                    
+                    SpringBoot整合内存数据库H2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="SpringBoot+JPA+H2.html">
+            
+                <a href="SpringBoot+JPA+H2.html">
+            
+                    
+                    SpringBoot+JPA+H2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="JPA核心接口学习.html">
+            
+                <a href="JPA核心接口学习.html">
+            
+                    
+                    JPA核心接口学习.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="JPA关系映射操作.html">
+            
+                <a href="JPA关系映射操作.html">
+            
+                    
+                    JPA关系映射操作.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="SpringBoot使用Druid.html">
+            
+                <a href="SpringBoot使用Druid.html">
+            
+                    
+                    SpringBoot使用Druid
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="SpringBoot做数据验证.html">
+            
+                <a href="SpringBoot做数据验证.html">
+            
+                    
+                    SpringBoot做数据验证
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="SpringBoot异常处理方式.html">
+            
+                <a href="SpringBoot异常处理方式.html">
+            
+                    
+                    SpringBoot异常处理方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="SpringBoot单元测试.html">
+            
+                <a href="SpringBoot单元测试.html">
+            
+                    
+                    SpringBoot单元测试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="SpringBoot热部署.html">
+            
+                <a href="SpringBoot热部署.html">
+            
+                    
+                    SpringBoot热部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.24" data-path="SpringBoot整合Ehcache.html">
+            
+                <a href="SpringBoot整合Ehcache.html">
+            
+                    
+                    SpringBoot整合Ehcache
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="SpringBoot整合redis.html">
+            
+                <a href="SpringBoot整合redis.html">
+            
+                    
+                    SpringBoot整合redis.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="SpringBoot整合Quartz框架.html">
+            
+                <a href="SpringBoot整合Quartz框架.html">
+            
+                    
+                    SpringBoot整合Quartz框架.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >SpringBoot整合Ehcache</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="springboot&#x6574;&#x5408;ehcache">SpringBoot&#x6574;&#x5408;Ehcache</h1>
+<p>&#x6E90;&#x4EE3;&#x7801;&#x9879;&#x76EE;&#x53C2;&#x8003;&#xFF1A;0025-spring-boot-ehcache</p>
+<h2 id="pomxml&#x6587;&#x4EF6;&#x6DFB;&#x52A0;&#x5750;&#x6807;">pom.xml&#x6587;&#x4EF6;&#x6DFB;&#x52A0;&#x5750;&#x6807;</h2>
+<pre><code class="lang-xml">        <span class="hljs-comment">&lt;!-- Spring Boot&#x7F13;&#x5B58;&#x652F;&#x6301;&#x542F;&#x52A8;&#x5668; --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-cache<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+
+        <span class="hljs-comment">&lt;!-- Ehcache&#x5750;&#x6807; --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>net.sf.ehcache<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>ehcache<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<h2 id="&#x521B;&#x5EFA;ehcache&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;">&#x521B;&#x5EFA;Ehcache&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h2>
+<p>&#x6587;&#x4EF6;&#x540D;&#xFF1A;ehcache.xml</p>
+<p>&#x4F4D;&#x7F6E;&#xFF1A;src/main/resources/ehcache.xml</p>
+<pre><code class="lang-xml"><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ehcache</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="hljs-attr">xsi:noNamespaceSchemaLocation</span>=<span class="hljs-string">&quot;http://ehcache.org/ehcache.xsd&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">diskStore</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;java.io.tmpdir&quot;</span>/&gt;</span>
+
+    <span class="hljs-comment">&lt;!--
+        ehcache&#x7684;&#x9ED8;&#x8BA4;&#x7F13;&#x5B58;&#x7B56;&#x7565;:
+            maxElementsInMemory &#x5185;&#x5B58;&#x4E2D;&#x7F13;&#x5B58;&#x6700;&#x5927;&#x4E2A;&#x6570;
+            eternal &#x662F;&#x5426;&#x505A;&#x6301;&#x4E45;&#x5316;&#x7684;&#x5904;&#x7406;
+            timeToIdleSeconds  &#x5F53;&#x7F13;&#x5B58;&#x95F2;&#x7F6E;n&#x79D2;&#x540E;&#x9500;&#x6BC1;
+            timeToLiveSeconds &#x5F53;&#x7F13;&#x5B58;&#x5B58;&#x6D3B;n&#x79D2;&#x540E;&#x9500;&#x6BC1;
+    --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">defaultCache</span>
+            <span class="hljs-attr">maxElementsInMemory</span>=<span class="hljs-string">&quot;10000&quot;</span>
+            <span class="hljs-attr">eternal</span>=<span class="hljs-string">&quot;false&quot;</span>
+            <span class="hljs-attr">timeToIdleSeconds</span>=<span class="hljs-string">&quot;120&quot;</span>
+            <span class="hljs-attr">timeToLiveSeconds</span>=<span class="hljs-string">&quot;120&quot;</span>
+            <span class="hljs-attr">maxElementsOnDisk</span>=<span class="hljs-string">&quot;10000000&quot;</span>
+            <span class="hljs-attr">diskExpiryThreadIntervalSeconds</span>=<span class="hljs-string">&quot;120&quot;</span>
+            <span class="hljs-attr">memoryStoreEvictionPolicy</span>=<span class="hljs-string">&quot;LRU&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">persistence</span> <span class="hljs-attr">strategy</span>=<span class="hljs-string">&quot;localTempSwap&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">defaultCache</span>&gt;</span>
+
+    <span class="hljs-comment">&lt;!-- &#x81EA;&#x5B9A;&#x4E49;&#x7F13;&#x5B58;&#x7B56;&#x7565; --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">cache</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;users&quot;</span>
+           <span class="hljs-attr">maxElementsInMemory</span>=<span class="hljs-string">&quot;10000&quot;</span>
+           <span class="hljs-attr">eternal</span>=<span class="hljs-string">&quot;false&quot;</span>
+           <span class="hljs-attr">timeToIdleSeconds</span>=<span class="hljs-string">&quot;120&quot;</span>
+           <span class="hljs-attr">timeToLiveSeconds</span>=<span class="hljs-string">&quot;120&quot;</span>
+           <span class="hljs-attr">maxElementsOnDisk</span>=<span class="hljs-string">&quot;10000000&quot;</span>
+           <span class="hljs-attr">diskExpiryThreadIntervalSeconds</span>=<span class="hljs-string">&quot;120&quot;</span>
+           <span class="hljs-attr">memoryStoreEvictionPolicy</span>=<span class="hljs-string">&quot;LRU&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">persistence</span> <span class="hljs-attr">strategy</span>=<span class="hljs-string">&quot;localTempSwap&quot;</span>/&gt;</span>
+    &gt;<span class="hljs-tag">&lt;/<span class="hljs-name">cache</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ehcache</span>&gt;</span>
+</code></pre>
+<h2 id="applicationproperties&#x6587;&#x4EF6;&#xFF1A;">application.properties&#x6587;&#x4EF6;&#xFF1A;</h2>
+<pre><code class="lang-properties"># ====================== &#x7F13;&#x5B58;&#x914D;&#x7F6E; ======================
+spring.cache.ehcache.config=classpath:ehcache.xml
+</code></pre>
+<h2 id="&#x542F;&#x52A8;&#x7C7B;&#x4FEE;&#x6539;">&#x542F;&#x52A8;&#x7C7B;&#x4FEE;&#x6539;</h2>
+<p>&#x200B;    &#x4E3A;&#x542F;&#x52A8;&#x7C7B;&#x52A0;&#x4E0A;@EnableCaching&#x6CE8;&#x89E3;&#xFF0C;&#x8868;&#x793A;&#x542F;&#x52A8;&#x7F13;&#x5B58;&#x3002;</p>
+<h2 id="javabean&#x7C7B;&#x4FEE;&#x6539;">javaBean&#x7C7B;&#x4FEE;&#x6539;</h2>
+<p>&#x200B;    ehcache&#x8981;&#x6C42;&#x7F13;&#x5B58;&#x7684;bean&#x5BF9;&#x8C61;&#xFF0C;&#x5FC5;&#x987B;&#x5B9E;&#x73B0;Serializable&#x5E8F;&#x5217;&#x53F7;&#x63A5;&#x53E3;&#x3002;</p>
+<h2 id="&#x7F13;&#x5B58;&#x63A5;&#x53E3;&#x6807;&#x6CE8;">&#x7F13;&#x5B58;&#x63A5;&#x53E3;&#x6807;&#x6CE8;</h2>
+<p>&#x200B;    &#x5728;&#x8981;&#x8FDB;&#x884C;&#x7F13;&#x5B58;&#x7684;&#x63A5;&#x53E3;&#x4E0A;&#x6DFB;&#x52A0;&#x6CE8;&#x89E3;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-comment">//    @Cacheable &#x91C7;&#x7528;&#x9ED8;&#x8BA4;&#x7684;&#x914D;&#x7F6E;&#x7B56;&#x7565;&#x7F13;&#x5B58;</span>
+    <span class="hljs-meta">@Cacheable</span>(<span class="hljs-string">&quot;users&quot;</span>) <span class="hljs-comment">// &#x91C7;&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x7B56;&#x7565;&#x7F13;&#x5B58;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> User <span class="hljs-title">findUserById</span><span class="hljs-params">(Integer id)</span> </span>{
+        <span class="hljs-keyword">return</span> userRepository.findById(id.longValue()).get();
+    }
+</code></pre>
+<h2 id="cacheable-&#x548C;cacheevict">@Cacheable &#x548C;@CacheEvict</h2>
+<h3 id="cacheable">@Cacheable</h3>
+<p>&#x200B;        &#x5C06;&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x6DFB;&#x52A0;&#x5230;Ehcache&#x4E2D;&#x505A;&#x7F13;&#x5B58;&#x3002;</p>
+<p>&#x200B;        value&#x5C5E;&#x6027;&#xFF1A;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;Ehache&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x7F13;&#x5B58;&#x7B56;&#x7565;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#x7684;value&#xFF0C;&#x8868;&#x793A;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x7684;&#x7F13;&#x5B58;&#x7B56;&#x7565;&#x3002;</p>
+<p>&#x200B;        key&#x5C5E;&#x6027;&#xFF1A; &#x7F13;&#x5B58;&#x91C7;&#x7528;&#x7684;key&#xFF0C;&#x9ED8;&#x8BA4;&#x91C7;&#x7528;&#x7684;&#x662F;&#x5C06;&#x53C2;&#x6570;&#x5BF9;&#x8C61;&#x4F5C;&#x4E3A;key&#xFF0C;&#x503C;&#x4E3A;#&#x53C2;&#x6570;&#x540D;&#x3002;  &#x662F;&#x5426;&#x4ECE;&#x7F13;&#x5B58;&#x4E2D;&#x53D6;&#x503C;&#xFF0C;&#x53D6;&#x51B3;&#x4E8E;&#x8FD9;&#x4E2A;key&#x3002;</p>
+<pre><code class="lang-java">    <span class="hljs-meta">@Override</span>
+<span class="hljs-comment">//    @Cacheable(value = &quot;users&quot;, key = &quot;#pageable&quot;) // &#x9ED8;&#x8BA4;</span>
+<span class="hljs-comment">//    @Cacheable(value = &quot;users&quot;, key = &quot;#pageable.pageSize&quot;) // &#x81EA;&#x5B9A;&#x4E49;key</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Page&lt;User&gt; <span class="hljs-title">findUserByPage</span><span class="hljs-params">(Pageable pageable)</span> </span>{
+        <span class="hljs-keyword">return</span> userRepository.findAll(pageable);
+    }
+</code></pre>
+<h3 id="cacheevict">@CacheEvict</h3>
+<p>&#x200B;    &#x4F5C;&#x7528;&#xFF1A;&#x6E05;&#x9664;&#x7F13;&#x5B58;&#x3002;</p>
+<p>&#x200B;    &#x5E38;&#x653E;&#x5728;&#x4F1A;&#x5BF9;&#x6570;&#x636E;&#x53D1;&#x751F;&#x6539;&#x53D8;&#x7684;&#x65B9;&#x6CD5;&#x4E4B;&#x4E0A;&#xFF0C;&#x6E05;&#x9664;&#x7F13;&#x5B58;&#x540E;&#x4EE5;&#x4FBF;&#x4E8E;&#x4E0B;&#x6B21;&#x67E5;&#x8BE2;&#x4ECE;&#x6301;&#x4E45;&#x5C42;&#x67E5;&#x8BE2;&#x6700;&#x65B0;&#x7684;&#x6570;&#x636E;&#x3002;</p>
+<pre><code class="lang-java">    <span class="hljs-meta">@Override</span>
+    <span class="hljs-comment">// &#x6E05;&#x9664;&#x7F13;&#x5B58;&#x4E2D;&#x5DF2;users&#x7F13;&#x5B58;&#x7B56;&#x7565;&#x7F13;&#x5B58;&#x7684;&#x5BF9;&#x8C61;</span>
+    <span class="hljs-meta">@CacheEvict</span>(value = <span class="hljs-string">&quot;users&quot;</span>, allEntries= <span class="hljs-keyword">true</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">saveUser</span><span class="hljs-params">(User user)</span> </span>{
+        userRepository.save(user);
+    }
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="SpringBoot热部署.html" class="navigation navigation-prev " aria-label="Previous page: SpringBoot热部署">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="SpringBoot整合redis.html" class="navigation navigation-next " aria-label="Next page: SpringBoot整合redis.md">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"SpringBoot整合Ehcache","level":"1.24","depth":1,"next":{"title":"SpringBoot整合redis.md","level":"1.25","depth":1,"path":"doc/SpringBoot整合redis.md","ref":"doc/SpringBoot整合redis.md","articles":[]},"previous":{"title":"SpringBoot热部署","level":"1.23","depth":1,"path":"doc/SpringBoot热部署.md","ref":"doc/SpringBoot热部署.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/SpringBoot整合Ehcache.md","mtime":"2019-04-27T06:13:45.741Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-29T14:48:09.497Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
