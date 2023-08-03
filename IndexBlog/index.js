@@ -31,6 +31,7 @@
     { title: 'esp8266', href: '../esp8266' },
     { title: 'SecureCRT', href: '../SecureCRT' },
     { title: '前端知识学习', href: '../前端知识学习' },
+    { title: 'ArchLinux', href: '../ArchLinux' },
     { title: 'Windows', href: '../windowsOS' },
     { title: 'git文档', href: '../gitDoc' },
     { title: 'IDEA', href: '../IDEA' },
