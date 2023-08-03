@@ -1,3 +1,7 @@
+# 系统安装
+
+[安装指南](https://wiki.archlinuxcn.org/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97)
+
 # 安装Arch Linux须知
 
 [为什么应该安装使用 Arch Linux？](https://blog.csdn.net/yaxuan88521/article/details/122768318)
