@@ -1,3 +1,4 @@
 * [系统安装](README)
-* [指南](test)
+* [软件安装](softinstall)
 
+softinstallsoftinstallsoftinstallsoftinstallsoftinstall
