@@ -52,6 +52,7 @@ typora-root-url: ./
 ip a
 # 我插了有线网络的，直接就获取到来ip地址，但是学习视频中还进行手动配置ip
 # 我还单独连接来家里面的无线网络
+iwctl station wlan0 scan
 iwctl device list
 # wlan0是上面显示的网络设备，下面命令是用这个网络设备查看有哪些wifi
 iwctl station wlan0 get-networks
@@ -95,6 +96,8 @@ pacman -Syy
 ```bash
 # 查看目前你的电脑所有存储设备以及磁盘分区情况，这里也找到了我的新固态硬盘，但是没没进行分区，设备名称/dev/nvme0n1
 fdisk -l
+
+lsblk
 ```
 
 ![image-20230806153354754](./img/README/image-20230806153354754.png)
@@ -486,20 +489,35 @@ zsh除了上面的插件之外，还有其他可以安装，[GitHub](https://git
 
 
 
+```bash
+# 也可以在yay中找主题安装yay theme
+yay flat-remix
+# 然后到tweaks中Appearance中找到相应的主题进行设置
+```
+
+
+
+# 字体优化
+
+```bash
+## 使用git下载微软雅黑字体
+git clone https://gitee.com/hbk01/Windows-Fonts.git
+## 进入文件夹并全部复制到fonts字体文件夹内
+cd Windows-Fonts && sudo cp -r ./* /usr/share/fonts					   	 
+## 刷新字体缓存，-v：显示过程		
+fc-cache -vf		
+```
+
+
+
 # 其他软件安装
 
 ```bash
 # chrome browser
 yay google-chrome
+# PDF阅读器
+yay Okular
 ```
-
-
-
-
-
-
-
-
 
 
 

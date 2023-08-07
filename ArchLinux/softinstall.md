@@ -60,9 +60,7 @@ neofetch --ascii "$(fortune | cowsay -f dragon -W 30)" | lolcat -ats 60
 
 
 
-## 
-
-## 卸载一些无用软件
+## https://mp.iqiyi.com/卸载一些无用软件
 
 ```bash
 # 查看yay已经安装，但是不用上得功能
