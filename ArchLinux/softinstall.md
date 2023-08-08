@@ -99,3 +99,65 @@ yay -Rsn accerciser
 yay -Rsn gnome-text-editor
 ```
 
+
+
+
+
+## PKGBUILD安装报错修复经历
+
+安装yay datagrip的时候报错：
+
+`ERROR: PKGBUILD contains CRLF characters and cannot be sourced.`
+
+![image-20230809001602214](./img/softinstall/image-20230809001602214.png)
+
+经过网络查询，是因为PKGBUILD文件是windows中的换行符导致的CRLF，然后开始解决
+
+```shell
+cd /home/tc/.cache/yay/datagrip
+# 将/r去掉
+sed -i 's/\r//' PKGBUILD 
+# 进行安装
+makepkg -si
+```
+
+然后报这个错误：
+
+`ERROR: One or more files did not pass the validity check!`
+
+然后看来这个人的[博客记录](https://blog.csdn.net/qq_37284020/article/details/103991649)
+
+核心是这句话：
+
+> 找到对应的验证部分，把里面的验证的码修改为SKIP，SKIP一定要是大写（md5sums sha1sums sha256sums sha224sums, sha384sums, sha512sums b2sums）
+
+![image-20230809002254019](/run/media/tc/File/2_STUDY/GitHubRepositories/00myGitHubRepository/AntHubTC.github.io/ArchLinux/img/softinstall/image-20230809002254019.png)
+
+```shell
+vim PKGBUILD
+b2sums=('SKIP' 'SKIP' 'SKIP')
+:wq
+# 然后进行安装，就安装成功来
+makepkg -si
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
