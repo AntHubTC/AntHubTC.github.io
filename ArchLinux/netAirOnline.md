@@ -38,3 +38,28 @@ ctrl+c退出shell
 看看这里的文章，有免费的机场可以使用。 https://github.com/bannedbook/fanqiang/tree/master/linux
 
 然后，上面文档有连接跳转到这个文档 https://w1.v2ai.top/doc/#/linux/clash， 在这个文档中，我们可以下载到两个文件 [Country.mmdb](https://w1.v2ai.top/ssr-download/Country.mmdb)全球IP地址库文件和Clash订阅链接配置文件config.yaml（我用的这个网站的订阅链接）
+
+```shell
+# 将下载好的文件移动过来
+mv /home/tc/Downloads/config_20230810.yaml ~/.config/clash/config.yaml
+mv /home/tc/Downloads/Country.mmdb ~/.config/clash/
+# 启动clash
+clash
+```
+
+稍微说以下config.yaml
+
+```yaml
+# port: 7890
+# socks-port: 7891
+mixed-port: 7890 # 这个端口是上面两个的混合端口，可以使用一个端口就可以了，没必要用两个
+```
+
+给ArchLinux设置Clash代理Settings -> Network -> Proxy：
+
+![image-20230810004004350](./img/netAirOnline/image-20230810004004350.png)
+
+
+
+
+

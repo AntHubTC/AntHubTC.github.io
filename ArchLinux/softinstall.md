@@ -145,7 +145,7 @@ makepkg -si
 
 > 找到对应的验证部分，把里面的验证的码修改为SKIP，SKIP一定要是大写（md5sums sha1sums sha256sums sha224sums, sha384sums, sha512sums b2sums）
 
-![image-20230809002254019](/run/media/tc/File/2_STUDY/GitHubRepositories/00myGitHubRepository/AntHubTC.github.io/ArchLinux/img/softinstall/image-20230809002254019.png)
+![image-20230809002254019](./img/softinstall/image-20230809002254019.png)
 
 ```shell
 vim PKGBUILD
