@@ -4,4 +4,6 @@
 
 * [科学上网](netAirOnline)
 
+* [玩转google浏览器](chrome)
+
 * [java开发环境相关安装](javaEnv)
