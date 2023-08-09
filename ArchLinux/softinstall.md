@@ -60,6 +60,18 @@ neofetch --ascii "$(fortune | cowsay -f dragon -W 30)" | lolcat -ats 60
 
 
 
+## vivaldi浏览器
+
+基于chromium内核的基础上套壳开发的浏览器，网上的结论就是更好用，更简洁。
+
+参考[这里](https://zhuanlan.zhihu.com/p/92618817)
+
+```shell
+yay vivaldi
+```
+
+
+
 ## https://mp.iqiyi.com/卸载一些无用软件
 
 ```bash
@@ -83,6 +95,8 @@ yay -Rsn four-in-a-row
 yay -Rsn tali
 yay -Rsn swell-foop
 yay -Rsn hitori
+# gnome自带的浏览器，不好用
+yay -Rsn epiphany
 
 # 卸载一些我用不上的功能
 # 联系方式

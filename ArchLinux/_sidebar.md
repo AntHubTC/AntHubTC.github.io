@@ -3,7 +3,3 @@
 * [软件安装](softinstall)
 
 * [java开发环境相关安装](javaEnv)
-
-  
-
-softinstallsoftinstallsoftinstallsoftinstallsoftinstall
