@@ -95,6 +95,7 @@ yay -Rsn four-in-a-row
 yay -Rsn tali
 yay -Rsn swell-foop
 yay -Rsn hitori
+yay -Rsn totem # gnome自带的视频播放器
 # gnome自带的浏览器，不好用
 yay -Rsn epiphany
 
