@@ -8,4 +8,6 @@
 
 * [玩转google浏览器](chrome)
 
+* [玩转VLC视频播放器](VLC)
+
 * [java开发环境相关安装](javaEnv)
