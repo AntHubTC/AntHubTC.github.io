@@ -70,6 +70,41 @@ neofetch --ascii "$(fortune | cowsay -f dragon -W 30)" | lolcat -ats 60
 yay vivaldi
 ```
 
+## wine
+
+​		为什么sudo pacman -S wine找不到对应的安装，因为 默认情况下multilib软件源是关闭的, 而wine位于multilab软件源中, 所以首先要打开multilab软件源. 打开/etc/pacman.conf, 找到[multilab], 注销该行与下一行中的#号
+
+```ini
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+:wq
+sudo pacman -Sy
+pacman -S wine
+```
+
+参考文章：
+
+https://blog.csdn.net/zbgjhy88/article/details/85110956
+
+## winetricks
+
+```shell
+sudo pacman -S winetricks
+winetricks
+```
+
+显示错误：
+
+No arguments given, so tried to start GUI, but neither zenity
+nor kdialog were found. Please install one of them if you want
+a graphical interface, or run with --help for more options.
+
+```shell
+# 安装zenity
+sudo pacman -S zenity 
+winetricks  
+```
+
 
 
 ## https://mp.iqiyi.com/卸载一些无用软件
@@ -160,9 +195,22 @@ makepkg -si
 
 
 
+## nautilus
 
+### nautilus文件浏览器搜索会崩溃
 
+nautilus文件浏览器按q搜索会导致文件浏览器崩溃的问题，采用网友也遇到这种问题，重新安装nautilus即可。
 
+```bash
+yay -Rs nautilus
+sudo pacman -S nautilus
+```
+
+### 为nautilus安装扩展
+
+```
+
+```
 
 
 

@@ -10,4 +10,6 @@
 
 * [玩转VLC视频播放器](VLC)
 
+* [开源灯光控制openrgb](openRGB)
+
 * [java开发环境相关安装](javaEnv)
