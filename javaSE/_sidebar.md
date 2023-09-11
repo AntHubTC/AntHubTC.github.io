@@ -1,4 +1,5 @@
 * [简介](README)
+* [HashMap深入理解](hashmap)
 * [IO(BIO)](BIO)
 * [NIO(NEW IO)](NIO)
 * [AIO(NIO 2)](AIO)
