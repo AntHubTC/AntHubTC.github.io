@@ -2,6 +2,8 @@
 
 ​			并发编程的学习，感谢[遇见狂神说的视频教程](https://www.bilibili.com/video/BV1B7411L7tE?p=1)！讲得非常好！其次，我再结合《Java并发编程的艺术》再系统看了一遍。
 
+[			尚硅谷JUC并发编程（对标阿里P6-P7）](https://www.bilibili.com/video/BV1ar4y1x727/?p=17&spm_id_from=333.1007.top_right_bar_window_history.content.click&vd_source=d738e4925805b87bb827090f490126cd)      [网友笔记](yuque.com/liuyanntes/vx9leh/fpy93i)
+
 
 
 ## 多线程进阶=》JUC并发编程
