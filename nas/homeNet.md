@@ -1,5 +1,64 @@
 # 家庭网络
 
+  这篇文章不错：[移动宽带配置IPV6环境，通过外网访问群晖NAS](https://zhuanlan.zhihu.com/p/402639062)
+
+ 测试你的网络目前是否支持ipv6， [测试](https://www.test-ipv6.com/)
+
+## 内网穿透
+
+原文：[地址](https://www.zhihu.com/question/507754447)
+
+一般情况，我们家中的NAS处于局域网内，是无法从外网直接访问的，局域网内的设备互相连接的方式都是直连。
+
+如果我们想让家中局域网内的NAS可以在外网访问，此时就需要穿透局域内网。
+
+百度知道对内网穿透的解释是：
+
+> 内网穿透，也即 NAT 穿透，进行 NAT 穿透是为了使具有某一个特定源 IP 地址和源端口号的数据包不被 NAT 设备屏蔽而正确路由到内网主机。
+
+在网络时代发展初期，[ipv4](https://www.zhihu.com/search?q=ipv4&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"answer"%2C"sourceId"%3A2285872457})的地址是32位的，就是我们经常看到的[http://xxx.xxx.xxx.xxx](https://link.zhihu.com/?target=http%3A//xxx.xxx.xxx.xxx)。随着全球[网络设备](https://link.zhihu.com/?target=https%3A//www.smzdm.com/fenlei/wangluoshebei/)数量不停增长，32位的ip地址很快就要不够用了，
+
+后来者被逼无奈只能N多人共用一个IP，这个技术就是NAT。
+
+NAT确实在大多数应用场景下，缓解了IP不足的问题，因为大多数时候，都是我们访问网站，只要网站[服务器](https://link.zhihu.com/?target=https%3A//www.smzdm.com/fenlei/fuwuqi/)有公网IP，就可以了。
+
+但是，NAT的最大缺点就是造成两个NAT后面的设备不能直接互访。若想访问，有两套方案，一是中继转发，二是握手打洞。
+
+通过中转服务器转发数据是100%成功的，但是在这个过程中需要使用中转服务器的带宽，而服务器带宽一般很贵。
+
+打洞方案的原理是，借助一台公网服务器牵线搭桥，让两个NAT后的设备，能够互相知晓对方的存在（即为“握手”），并在NAT中留下记录，从而使两者能够直接通讯，不走转发，成本低很多。。
+
+![img](img/homeNet/v2-4416b1109d30544a7170392eaeaae2be_720w.webp)
+
+基于转发和打洞技术的内网穿透的方案有很多，下面依次介绍5种我在自家群晖NAS上使用过的方法。
+
+![img](img/homeNet/v2-1fa80ae56a76a8bdc7c482a5206bba1b_720w.webp)
+
+1. **QuickConnect**
+
+  QuickConnect是群晖公司开发的黑科技，使得连接群晖NAS服务器变得方便快捷。
+
+  无论家中宽带有没有公网IP，也无论你的路由器有没有做端口转发，只需要通过简单的设置，它就能使得用户在外网可以轻松访问家中的NAS。
+
+  QuickConnect进行内网穿透的逻辑简单来说是这样的：它首先通过QuickConnect服务器上注册的网络地址，若客户端与NAS之间位于同一局域网内，则提供直连服务；无法直连的情况下，根据群晖NAS所处的网络环境来测试是否适合打洞；如之前所述方法都不可访问到NAS的话最后将会提供中继服务。
+
+  ![img](img/homeNet/v2-bfeb0208f36c7be905116c82ad23fcec_720w.webp)
+
+  总体来说，QuickConnect作为群晖官方的亲儿子，是正版NAS使用过程中必备的功能，可靠性是很高的。
+
+  其缺点在于，群晖的官方服务器位于中国台湾，大陆用户在使用的过程中偶尔有不稳定、连接不上服务器的情况（不过这个问题我倒是还没遇到过）。同时如果QuickConnect运行在中继转发的模式下，因为数据的传输都要途径位于中国台湾的服务器，所以速度可能会慢一些（有时会在几百KB/s的样子）。
+
+2. **群晖自带的DDNS**
+
+   群晖的正版NAS用户（包括洗白的）在家中宽带有公网ip的情况下，可以使用群晖自带的[http://synology.me](https://link.zhihu.com/?target=http%3A//synology.me) DDNS来进行映射，无论家中公网ip怎么变化，只需要访问“*.synology.me”的域名就可以登陆自己的NAS。现在电信、联通和移动三大宽带运营商都普及了ipv6地址，不过只有电信和联通可以提供免费的ipv4公网ip。
+
+3. 其它参考这里 [地址](https://www.zhihu.com/question/507754447)
+
+
+
+
+
+
 ## 家庭网络改造
 
 下图是我家有线设备的网络部署图：
@@ -74,6 +133,8 @@ http://192.168.1.1/usr=CMCCAdmin&psw=aDm8H%25MdA&cmd=1&telnet.gch
 
 ![image-20231025110836602](img/homeNet/image-20231025110836602.png)
 
+提示：下面这个配置中，宽带密码可以在浏览器控制台将type="password"去掉，可以看到宽带密码（另外也可以打电话给运营商索要密码）。
+
 ![image-20231025110632784](img/homeNet/image-20231025110632784.png)
 
 ![image-20231025111033444](img/homeNet/image-20231025111033444.png)
@@ -93,3 +154,6 @@ http://192.168.1.1/usr=CMCCAdmin&psw=aDm8H%25MdA&cmd=1&telnet.gch
 网上好多没有说一个点，移动的宽带应该将宽带账号和光猫的MAC地址进行了绑定，所以在使用路由器拨号功能的时候，路由器一定要克隆光猫的MAC地址进行播放（卡这步卡了好久，原因原来是这里的问题）；
 
 **完成网络改造后，明细感觉网速提升了!**
+
+
+
