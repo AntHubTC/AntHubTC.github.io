@@ -44,6 +44,7 @@
     { title: 'NodeJS', href: '../NodeJs' },
     { title: 'windows批处理', href: '../windows-batch' },
     { title: 'Python', href: '../python' },
+	{ title: 'Python官方文档', href: 'https://docs.python.org/zh-cn/3/' },
     { title: 'mysql45讲', href: 'https://funnylog.gitee.io/mysql45/' },
     { title: 'Hutool糊涂工具包', href: 'https://www.hutool.cn/' },
     // { title: 'raspberryPI', href: '../raspberryPI' },
