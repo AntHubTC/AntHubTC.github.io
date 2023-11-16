@@ -881,7 +881,7 @@ public class Test7 {
         new Thread(()->{
             phone2.call();
         }, "B").start();
-        // 先短信 后 电话
+        // 先电话 后 短信
     }
 }
 
