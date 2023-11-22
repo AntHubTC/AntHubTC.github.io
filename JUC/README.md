@@ -1379,6 +1379,12 @@ class MyCacheLock implements Cache{
 
    Jdk 1.8中比ReentrantReadWriteLock更好的读写锁。 [文档参考](https://www.liaoxuefeng.com/wiki/1252599548343744/1309138673991714)
 
+**不可重入，用不好很容易死锁！**
+
+乐观读，悲观读，悲观写
+
+
+
 ## 阻塞队列
 
 ![image-20210106120721213](img/README/image-20210106120721213.png)
@@ -2333,14 +2339,23 @@ public class FutureTest1 {
 
 　　Happen-Before的规则有以下几条
 
-- 程序次序规则（Program Order Rule）：在一个线程内，程序的执行规则跟程序的书写规则是一致的，从上往下执行。
-- 管程锁定规则（Monitor Lock Rule）：一个Unlock的操作肯定先于下一次Lock的操作。这里必须是同一个锁。同理我们可以认为在synchronized同步同一个锁的时候，锁内先行执行的代码，对后续同步该锁的线程来说是完全可见的。
-- volatile变量规则（volatile Variable Rule）：对同一个volatile的变量，先行发生的写操作，肯定早于后续发生的读操作
-- 线程启动规则（Thread Start Rule）：Thread对象的start()方法先行发生于此线程的没一个动作
-- 线程中止规则（Thread Termination Rule）：Thread对象的中止检测（如：Thread.join()，Thread.isAlive()等）操作，必行晚于线程中所有操作
-- 线程中断规则（Thread Interruption Rule）：对线程的interruption（）调用，先于被调用的线程检测中断事件(Thread.interrupted())的发生
-- 对象中止规则（Finalizer Rule）：一个对象的初始化方法先于一个方法执行Finalizer()方法
-- 传递性（Transitivity）：如果操作A先于操作B、操作B先于操作C,则操作A先于操作C
+**1. 程序顺序原则：**即在一个线程内必须保证语义串行性，也就是说按照代码顺序执行。
+
+**2. 锁规则：**解锁(unlock)操作必然发生在后续的同一个锁的加锁(lock)之前，也就是说，如果对于一个锁解锁后，再加锁，那么加锁的动作必须在解锁动作之后(同一个锁)。
+
+**3. volatile规则：**volatile变量的写，先发生于读，这保证了volatile变量的可见性，简单的理解就是，volatile变量在每次被线程访问时，都强迫从主内存中读该变量的值，而当该变量发生变化时，又会强迫将最新的值刷新到主内存，任何时刻，不同的线程总是能
+
+够看到该变量的最新值。
+
+**4. 线程启动规则：**线程的start()方法先于它的每一个动作，即如果线程A在执行线程B的start方法之前修改了共享变量的值，那么当线程B执行start方法时，线程A对共享变量的修改对线程B可见
+
+**5. 传递性：**A先于B ，B先于C 那么A必然先于C
+
+**6. 线程终止规则：**线程的所有操作先于线程的终结，Thread.join()方法的作用是等待当前执行的线程终止。假设在线程B终止之前，修改了共享变量，线程A从线程B的join方法成功返回后，线程B对共享变量的修改将对线程A可见。
+
+**7. 线程中断规则：**对线程 interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生，可以通过Thread.interrupted()方法检测线程是否中断。
+
+**8. 对象终结规则：**对象的构造函数执行，结束先于finalize()方法
 
 　　以上就是Happen-Before中的规则。通过这些条件的判定，仍然很难判断一个线程是否能安全执行，毕竟在我们的时候线程安全多数依赖于工具类的安全性来保证。想提高自己对线程是否安全的判断能力，必然需要理解所使用的框架或者工具的实现，并积累线程安全的经验。
 
