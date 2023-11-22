@@ -3194,6 +3194,11 @@ public class CASTest1 {
 
 这篇文章非常好，可以读一下。[CAS、乐观锁、悲观锁、ABA](https://blog.csdn.net/caisongcheng_good/article/details/79916873)
 
+**JDK具体实现方式及CAS实现原理**
+见类文件sun.misc.Unsafe中的compareAndSwapXXX方法，通过调用JNI(Java Native nterface)的代码来实现CAScompareAndSwapxXX方法借助C语言来调用CPU底层指今来实现。以lntel X86平台来说，最终映射到的CPU指令为"Cmpxhg"，这是个原子指令，cpu执行此命令时，实现比较并交换的操作。
+对于多核操作系统，cmpxhg指令会给”总线”加锁，只有一个线程会对总线加锁成功，加锁成功之后会执行CAS操作，也就是说CAS的原子性是平台级别的
+JDK中的Atomic原子类底层就是使用的无锁化的CAS机制，通过CAS机制保证多线程修改一个值的安全性。
+
 ## 原子引用
 
 AtomicReference 可以原子更新的对象引用。
