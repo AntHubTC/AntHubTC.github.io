@@ -28,6 +28,7 @@
 * [CMS 回收器：低延迟](CMSGC)
 * [G1回收器：区域化分代式](G1GC)
 * [7种经典垃圾回收器总结](gcReport)
+* [JVM: GC过程总结(minor GC 和 Full GC)](https://blog.csdn.net/Student_xx/article/details/121746854)
 * [GC日志分析](gcLogAnalyse)
 * [GC的新发展](gcFuture)
 * [其他垃圾回收器](otherGC)
