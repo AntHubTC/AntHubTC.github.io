@@ -13,4 +13,5 @@
 * [mysql高级-集群](mysqlCluster)
 * [mysql高级-MyCat分库分表分片](./../mycat)
 * [故障问题](issue)
+* [mysql存储过程收藏](prcedureCollect)
 
