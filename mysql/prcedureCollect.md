@@ -57,3 +57,4 @@ call tt_dmp.modify_ppp_online_program_info();
 DROP procedure IF EXISTS tt_dmp.modify_ppp_online_program_info;
 ```
 
+`上面的sql看着很牛逼，但是上线的时候就出现问题，售卖每张表都有几百万数据，所以执行会特别慢，并且alter table每个表的时候会锁那个表，很久都执行不完。后面采用的方法是直接写最近一周的表的alter table修改语句执行，不影响当前最新的业务，然后剩下的备份表sql慢慢执行修改`

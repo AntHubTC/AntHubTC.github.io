@@ -5,4 +5,5 @@
 * [insert on duplicate key update引发数据库死锁](case4)
 * [float精度问题引发的神奇探索](case5)
 * [手动操作事务引发的生产事务2](case6)
+* [一次糟糕的存储过程洗数据上线](case6)
 
