@@ -1,4 +1,5 @@
 ﻿let docs = [
+	{ title: 'ChatGPT', href: '../ChatGPT' },
     { title: '数据结构与算法', href: '../DataStructureAndAlgorithms' },
     { title: '设计模式', href: '../designPattern' },
     { title: 'javasE', href: '../javaSE' },
