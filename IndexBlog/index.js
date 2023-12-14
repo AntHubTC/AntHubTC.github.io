@@ -63,6 +63,17 @@
     { title: 'IT那些趣事', href: '../IT那些有意思的事' }
 ]
 
+// 防止抖动函数
+function debounce(func, delay) {
+    let timerId;
+    return function(...args) {
+        clearTimeout(timerId);
+        timerId = setTimeout(() => {
+            func.apply(this, args);
+        }, delay);
+    };
+}
+
 // 自定义模糊查询方法
 var searchFun = function (a, b) {
     let compareA = a.toLowerCase()
@@ -121,7 +132,8 @@ pageReady(() => {
 		el: '#app',
 		data: {
 			searchText: '',
-			docs: []
+			docs: [],
+            display: 'wordcloud' // cell格子 wordcloud词云
 		},
 		computed: {
 			qdocs () {
@@ -139,10 +151,75 @@ pageReady(() => {
 				return result
 			}
 		},
+        watch: {
+            qdocs(newMessage, oldMessage) {
+                const _this = this;
+                // 搜索发生导致词云重画
+                this.debounceDrawWordCloud();
+            }
+        },
+        methods: {
+            drawWordCloud () {
+                // 选择要放置词云的容器
+                const $el = this.$refs.wordcloud;
+
+                // 设置词语和频率
+                // var words = [
+                //     {text: 'Hello', size: 30},
+                //     {text: 'World', size: 25},
+                //     // 其他词语和频率
+                // ];
+                const words = [];
+                for (var i = 0; i < this.qdocs.length; i++) {
+                    words.push({
+                        word: this.qdocs[i].title,
+                        weight: 40,
+                        extData: this.qdocs[i]
+                    });
+                }
+
+                // 创建词云
+                WordCloud($el, {
+                    list: words ,
+                    classes: "word-color",
+                    backgroundColor: "rgba(0, 0, 0, 0)",
+                    fontWeight: 'normal', // bold normal
+                    shape: 'square', // circle cardioid diamond square triangle-forward triangle triangle-upright pentagon star
+                    maskGapWidth: 0.5,
+                    minRotation: -Math.PI / 2,
+                    maxRotation: Math.PI / 2,
+                    // minRotation: 0,
+                    // maxRotation: 0,
+                    rotationSteps: 0,
+                    click: function (item) {
+                        window.open(item.extData.href, '_blank');
+                    }
+                });
+
+                // 监听执行结束事件 (添加动画)
+                // $el.addEventListener("wordcloudstop", function () {
+                //     // 等待 2s 后在将动画类添加，不然正常显示的效果时间太短。
+                //     setTimeout(() => {
+                //         let els = this.querySelectorAll(".word-color")
+                //         Array.from(els).forEach((el) => {
+                //             el.classList.add("word-animate")
+                //         })
+                //     }, 1000)
+                // })
+            }
+        },
+        mounted () {
+            // 由qdocs变化触发调用，不用手动调用
+            // this.drawWordCloud();
+        },
 		created () {
+            // 防抖动
+            this.debounceDrawWordCloud = debounce(() => {
+                this.drawWordCloud();
+            }, 500);
+
 			var locationSearchMap = getLocationSearchMap()
 			var isPrivate = (locationSearchMap['p'] === '1')
-
 
 			for (var i = 0; i < docs.length; i++) {
 				if (isPrivate) {

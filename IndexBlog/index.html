@@ -8,6 +8,10 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="./index.css">
 	<script src="../static/vue.js"></script>
+    <script src="../static/wordcloud2.js"></script>
+    <style>
+
+    </style>
 </head>
 <body>
     <div id="app" class="main-content">
@@ -16,11 +20,18 @@
             <div class="search-container">
                 <input v-model="searchText" class="ipt-text" type="text" placeholder="请输入搜索内容"/><!--<span class="qry-icon-btn"></span>-->
             </div>
-            <transition-group name="flip-list" tag="div" class="doc-container">
-                <template v-for="doc in qdocs">
-                    <a class="doc-item" v-if="!doc.show" :key="doc.title" :href="doc.href">{{doc.title}}</a>
-                </template>
-            </transition-group>
+            <template v-if="display == 'cell'">
+                <transition-group name="flip-list" tag="div" class="doc-container">
+                    <template v-for="doc in qdocs">
+                        <a class="doc-item" v-if="!doc.show" :key="doc.title" :href="doc.href">{{doc.title}}</a>
+                    </template>
+                </transition-group>
+            </template>
+            <template v-else-if="display == 'wordcloud'">
+                <div>
+                    <div ref="wordcloud" style="height: 600px"></div>
+                </div>
+            </template>
         </div>
         <div class="background-image"></div>
     </div>
