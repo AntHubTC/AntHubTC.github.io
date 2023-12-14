@@ -2,20 +2,17 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>FallenGodCoder的文档</title>
+	<title>AntHubTc's Doc</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta name="description" content="Description">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="./index.css">
 	<script src="../static/vue.js"></script>
     <script src="../static/wordcloud2.js"></script>
-    <style>
-
-    </style>
 </head>
 <body>
     <div id="app" class="main-content">
-        <div class="app-title">FallenGodCoder's Document</div>
+        <div class="app-title">AntHubTc's Doc</div>
         <div>
             <div class="search-container">
                 <input v-model="searchText" class="ipt-text" type="text" placeholder="请输入搜索内容"/><!--<span class="qry-icon-btn"></span>-->
@@ -34,6 +31,30 @@
             </template>
         </div>
         <div class="background-image"></div>
+        <div>
+            <div class="setting-btn" @click="openSettingsPanel"><svg t="1702565092611" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4252" width="30" height="30"><path d="M745.904 682c66.168 0 120 53.832 120 120v12H984a40 40 0 1 1 0 80h-118.096V904c0 66.168-53.832 120-120 120-66.16 0-120-53.832-120-120v-102c0-66.168 53.84-120 120-120z m0 80c-22.048 0-40 17.944-40 40V904c0 22.056 17.952 40 40 40 22.056 0 40-17.944 40-40v-102c0-22.056-17.944-40-40-40z m-240 52a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80zM394 338c66.168 0 120 53.832 120 120v13.76H984a40 40 0 0 1 0 80H514v10.24c0 66.168-53.832 120-120 120s-120-53.832-120-120v-104c0-66.168 53.832-120 120-120z m0 80c-22.056 0-40 17.944-40 40v104c0 22.056 17.944 40 40 40s40-17.944 40-40v-104c0-22.056-17.944-40-40-40z m-240 53.76a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80zM746 0c66.168 0 120 53.832 120 120v12H984a40 40 0 1 1 0 80h-118v10c0 66.168-53.832 120-120 120s-120-53.832-120-120V120c0-66.168 53.832-120 120-120z m0 80c-22.056 0-40 17.944-40 40v102c0 22.056 17.944 40 40 40s40-17.944 40-40V120c0-22.056-17.944-40-40-40z m-240 52a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80z" p-id="4253"></path></svg></div>
+            <div class="setting-panel-box">
+                <div class="setting-panel" v-show="settingShow" style="display: none;">
+                    <div class="header">
+                        <span class="label">设置</span>
+                        <span class="close-btn" @click.prevent="closeSettingsPanel">X</span>
+                    </div>
+                    <div class="content">
+                        <div class="form-item">
+                            <span class="form-item-label">显示模式：</span>
+                            <span><input id="display-cell" name="displayMode" type="radio" value="cell" v-model="display"/></span><label for="display-cell">流式方块</span> &nbsp;
+                            <span><input id="display-wordcloud" name="displayMode" type="radio" checked value="wordcloud" v-model="display"/></span><label for="display-wordcloud">词云</span>
+                        </div>
+                        <div class="form-item" v-show="display == 'wordcloud'">
+                            <span class="form-item-label">布局模式：</span>
+                            <span><input id="theme1" name="wordcloudTheme" type="radio" value="theme1" v-model="wordcloudTheme"/></span><label for="theme1">布局1</span> &nbsp;
+                            <span><input id="theme2" name="wordcloudTheme" type="radio" checked value="theme2" v-model="wordcloudTheme"/></span><label for="theme2">布局2</span>&nbsp;
+                                <span><input id="theme3" name="wordcloudTheme" type="radio" checked value="theme3" v-model="wordcloudTheme"/></span><label for="theme3">布局3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 	<script type="text/javascript" src="./index.js"></script>
 </body>

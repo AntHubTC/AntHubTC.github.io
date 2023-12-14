@@ -48,7 +48,7 @@
 	{ title: 'Python官方文档', href: 'https://docs.python.org/zh-cn/3/' },
 	{ title: 'Python tkinter', href: 'https://zhuanlan.zhihu.com/p/569960987' },
     { title: 'mysql45讲', href: 'https://funnylog.gitee.io/mysql45/' },
-    { title: 'Hutool糊涂工具包', href: 'https://www.hutool.cn/' },
+    { title: 'Hutool', href: 'https://www.hutool.cn/' },
     // { title: 'raspberryPI', href: '../raspberryPI' },
     // { title: 'vi_vim', href: '../vi_vim' },
     { title: '论软件外包', href: '../outsource' },
@@ -90,6 +90,7 @@ var searchFun = function (a, b) {
     }
     return posB === compareB.length
 }
+
 // 获取地址栏查询map
 var getLocationSearchMap = function () {
     var locationSearch = window.location.search
@@ -105,7 +106,6 @@ var getLocationSearchMap = function () {
     }
     return locationMap
 }
-
 
 // 页面准备
 function pageReady(callBack) {
@@ -133,7 +133,9 @@ pageReady(() => {
 		data: {
 			searchText: '',
 			docs: [],
-            display: 'wordcloud' // cell格子 wordcloud词云
+            display: 'wordcloud', // cell-格子 wordcloud-词云
+            wordcloudTheme: 'theme1',
+            settingShow: false
 		},
 		computed: {
 			qdocs () {
@@ -153,13 +155,29 @@ pageReady(() => {
 		},
         watch: {
             qdocs(newMessage, oldMessage) {
-                const _this = this;
-                // 搜索发生导致词云重画
-                this.debounceDrawWordCloud();
+                this.reDraw();
+            },
+            display() {
+                this.reDraw();
+                this.saveConfig();
+            },
+            wordcloudTheme() {
+                this.reDraw();
+                this.saveConfig();
             }
         },
         methods: {
+            reDraw () {
+                // 搜索发生导致词云重画
+                if(this.display == 'wordcloud') {
+                    this.debounceDrawWordCloud();
+                }
+            },
+            // 画词云
             drawWordCloud () {
+                if(this.display !== 'wordcloud') {
+                    return
+                }
                 // 选择要放置词云的容器
                 const $el = this.$refs.wordcloud;
 
@@ -178,8 +196,7 @@ pageReady(() => {
                     });
                 }
 
-                // 创建词云
-                WordCloud($el, {
+                let wordCloudSettings = {
                     list: words ,
                     classes: "word-color",
                     backgroundColor: "rgba(0, 0, 0, 0)",
@@ -188,13 +205,36 @@ pageReady(() => {
                     maskGapWidth: 0.5,
                     minRotation: -Math.PI / 2,
                     maxRotation: Math.PI / 2,
+                    gridSize: 14,
                     // minRotation: 0,
                     // maxRotation: 0,
                     rotationSteps: 0,
                     click: function (item) {
                         window.open(item.extData.href, '_blank');
                     }
-                });
+                }
+                if (this.wordcloudTheme == 'theme1') {
+                    wordCloudSettings.shape = 'square'
+                    wordCloudSettings.maskGapWidth = 0.5
+                    wordCloudSettings.minRotation = -Math.PI / 2
+                    wordCloudSettings.maxRotation = Math.PI / 2
+                    wordCloudSettings.rotationSteps = 0
+                } else if (this.wordcloudTheme == 'theme2') {
+                    wordCloudSettings.shape = 'cardioid'
+                    wordCloudSettings.maskGapWidth = 0.5
+                    wordCloudSettings.minRotation = -Math.PI / 2
+                    wordCloudSettings.maxRotation = Math.PI / 2
+                    wordCloudSettings.rotationSteps = 0
+                } else if (this.wordcloudTheme == 'theme3') {
+                    wordCloudSettings.shape = 'square'
+                    wordCloudSettings.maskGapWidth = 0.3
+                    wordCloudSettings.minRotation = 0
+                    wordCloudSettings.maxRotation = Math.PI / 2
+                    wordCloudSettings.rotationSteps = 2
+                }
+
+                // 创建词云
+                WordCloud($el, wordCloudSettings);
 
                 // 监听执行结束事件 (添加动画)
                 // $el.addEventListener("wordcloudstop", function () {
@@ -206,6 +246,24 @@ pageReady(() => {
                 //         })
                 //     }, 1000)
                 // })
+            },
+            openSettingsPanel () {
+                this.settingShow = true;
+            },
+            closeSettingsPanel () {
+                this.settingShow = false;
+            },
+            loadConfig () {
+                if (localStorage) {
+                    this.display = localStorage.getItem("anthubtc.doc.display") || this.display;
+                    this.wordcloudTheme = localStorage.getItem("anthubtc.doc.theme") || this.wordcloudTheme;
+                }
+            },
+            saveConfig () {
+                if (localStorage) {
+                    localStorage.setItem("anthubtc.doc.display", this.display)
+                    localStorage.setItem("anthubtc.doc.theme", this.wordcloudTheme)
+                }
             }
         },
         mounted () {
@@ -213,10 +271,11 @@ pageReady(() => {
             // this.drawWordCloud();
         },
 		created () {
+            this.loadConfig();
             // 防抖动
             this.debounceDrawWordCloud = debounce(() => {
                 this.drawWordCloud();
-            }, 500);
+            }, 100);
 
 			var locationSearchMap = getLocationSearchMap()
 			var isPrivate = (locationSearchMap['p'] === '1')
