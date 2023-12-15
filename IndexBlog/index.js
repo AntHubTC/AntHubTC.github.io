@@ -113,6 +113,23 @@ function debounce(func, delay) {
     };
 }
 
+// 判断当前环境是否是移动端
+function isMobileEnvironment() {
+    // 检测用户代理字符串中是否包含移动设备的关键词
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    // 检测屏幕宽度是否小于等于 768px
+    const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
+    // 检测触摸支持
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+
+    // 综合考虑多种因素
+    if (isMobileDevice || (isSmallScreen && isTouchDevice)) {
+        return true; // 当前环境是移动端
+    } else {
+        return false; // 当前环境不是移动端
+    }
+}
+
 // 自定义模糊查询方法
 var searchFun = function (a, b) {
     let compareA = a.toLowerCase()
@@ -166,6 +183,7 @@ function pageReady(callBack) {
 	}
 }
 
+const isMobileEnv = isMobileEnvironment();
 pageReady(() => {
 	new Vue({
 		el: '#app',
@@ -185,7 +203,7 @@ pageReady(() => {
             // 是否显示设置对话框
             settingShow: false,
             // 是否显示侧边栏
-            showSide: true,
+            showSide: !isMobileEnv,
             // 背景颜色
             backgroundColor: '#FFF'
 		},
@@ -302,6 +320,14 @@ pageReady(() => {
                     wordCloudSettings.minRotation = 0
                     wordCloudSettings.maxRotation = Math.PI / 2
                     wordCloudSettings.rotationSteps = 2
+                }
+
+                // 移动端环境定制参数
+                if (isMobileEnv) {
+                    wordCloudSettings.gridSize = 6
+                    wordCloudSettings.maskGapWidth = 0.1
+                    // 字体大小因子
+                    wordCloudSettings.weightFactor = 0.6
                 }
 
                 // 创建词云
