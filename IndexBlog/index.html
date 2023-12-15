@@ -62,43 +62,43 @@
             </div>
             <!-- 背景 -->
             <div class="background-image"></div>
-            <!-- 设置对话框 -->
-            <div>
-                <div class="setting-panel-box">
-                    <div class="setting-panel" v-show="settingShow" style="display: none;">
-                        <div class="header">
-                            <span class="label">设置</span>
-                            <span class="close-btn" @click.prevent="closeSettingsPanel">X</span>
+        </section>
+        <!-- 设置对话框 -->
+        <div>
+            <div class="setting-panel-box">
+                <div class="setting-panel" v-show="settingShow" style="display: none;">
+                    <div class="header">
+                        <span class="label">设置</span>
+                        <span class="close-btn" @click.prevent="closeSettingsPanel">X</span>
+                    </div>
+                    <div class="content">
+                        <div class="form-item">
+                            <span class="form-item-label">显示模式：</span>
+                            <span><input id="display-cell" name="displayMode" type="radio" value="cell" v-model="display"/></span><label for="display-cell">流式方块</span> &nbsp;
+                            <span><input id="display-wordcloud" name="displayMode" type="radio" checked value="wordcloud" v-model="display"/></span><label for="display-wordcloud">词云</span>
                         </div>
-                        <div class="content">
-                            <div class="form-item">
-                                <span class="form-item-label">显示模式：</span>
-                                <span><input id="display-cell" name="displayMode" type="radio" value="cell" v-model="display"/></span><label for="display-cell">流式方块</span> &nbsp;
-                                <span><input id="display-wordcloud" name="displayMode" type="radio" checked value="wordcloud" v-model="display"/></span><label for="display-wordcloud">词云</span>
-                            </div>
-                            <div class="form-item" v-show="display == 'wordcloud'">
-                                <span class="form-item-label">布局模式：</span>
-                                <span><input id="theme1" name="wordcloudTheme" type="radio" value="theme1" v-model="wordcloudTheme"/></span><label for="theme1">布局1</span> &nbsp;
-                                <span><input id="theme2" name="wordcloudTheme" type="radio" checked value="theme2" v-model="wordcloudTheme"/></span><label for="theme2">布局2</span>&nbsp;
-                                    <span><input id="theme3" name="wordcloudTheme" type="radio" checked value="theme3" v-model="wordcloudTheme"/></span><label for="theme3">布局3</span>
-                            </div>
-                            <div class="form-item">
-                                <span class="form-item-label">背景颜色：</span>
-                                <span class="color-block-box">
-                                    <span class="color-block" style="background-color: #FFF;" @click="backgroundColor='#FFF'"></span>
-                                    <span class="color-block" style="background-color: #000;" @click="backgroundColor='#000'"></span>
-                                    <span class="color-block" style="background-color: #ffe7f3;" @click="backgroundColor='#ffe7f3'"></span>
-                                    <span class="color-block" style="background-color: #d1a5bb;" @click="backgroundColor='#d1a5bb'"></span>
-                                    <span class="color-block" style="background-color: rgb(157 161 159);" @click="backgroundColor='rgb(157 161 159)'"></span>
-                                    <span class="color-block" style="background-color: #6ca589;" @click="backgroundColor='#6ca589'"></span>
-                                    <span class="color-block" style="background-color: rgb(109 109 109);" @click="backgroundColor='rgb(109 109 109)'"></span>
-                                </span>
-                            </div>
+                        <div class="form-item" v-show="display == 'wordcloud'">
+                            <span class="form-item-label">布局模式：</span>
+                            <span><input id="theme1" name="wordcloudTheme" type="radio" value="theme1" v-model="wordcloudTheme"/></span><label for="theme1">布局1</span> &nbsp;
+                            <span><input id="theme2" name="wordcloudTheme" type="radio" checked value="theme2" v-model="wordcloudTheme"/></span><label for="theme2">布局2</span>&nbsp;
+                                <span><input id="theme3" name="wordcloudTheme" type="radio" checked value="theme3" v-model="wordcloudTheme"/></span><label for="theme3">布局3</span>
+                        </div>
+                        <div class="form-item">
+                            <span class="form-item-label">背景颜色：</span>
+                            <span class="color-block-box">
+                                <span class="color-block" style="background-color: #FFF;" @click="backgroundColor='#FFF'"></span>
+                                <span class="color-block" style="background-color: #000;" @click="backgroundColor='#000'"></span>
+                                <span class="color-block" style="background-color: #ffe7f3;" @click="backgroundColor='#ffe7f3'"></span>
+                                <span class="color-block" style="background-color: #d1a5bb;" @click="backgroundColor='#d1a5bb'"></span>
+                                <span class="color-block" style="background-color: rgb(157 161 159);" @click="backgroundColor='rgb(157 161 159)'"></span>
+                                <span class="color-block" style="background-color: #6ca589;" @click="backgroundColor='#6ca589'"></span>
+                                <span class="color-block" style="background-color: rgb(109 109 109);" @click="backgroundColor='rgb(109 109 109)'"></span>
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
 	<script type="text/javascript" src="./index.js"></script>
 </body>
