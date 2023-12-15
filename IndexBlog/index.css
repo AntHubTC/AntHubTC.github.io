@@ -25,7 +25,7 @@ body {
     height: 100%;
     /* background-image: url("./img/efd547e4e851.jpg"); */
     /* background-color: #333; */
-    background-color: #6ca589;
+    /* background-color: #6ca589; */
     z-index: -1;
     opacity: 0.8;
 }
@@ -208,4 +208,106 @@ body {
 }
 .word-animate:nth-child(5n + 5) {
     animation-delay: 12s;
+}
+
+/* 侧边栏 */
+.sidebar {
+    border-right: 1px solid rgba(0,0,0,.07);
+    overflow-y: auto;
+    padding: 40px 0 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transition: transform .25s ease-out;
+    width: 300px;
+    z-index: 20;
+}
+
+.sidebar ul {
+    margin: 0 0 0 15px;
+    padding: 0
+}
+
+.sidebar li>p {
+    font-weight: 700;
+    margin: 0
+}
+
+.sidebar ul,.sidebar ul li {
+    list-style: none
+}
+
+.sidebar ul li a {
+    color: #2e343b;
+    font-size: 14px;
+    font-weight: 400;
+    overflow: hidden;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-bottom: none;
+    display: block；
+}
+
+.sidebar ul li a:hover {
+    text-decoration: underline
+}
+
+.sidebar ul li.active>a {
+    border-right: 2px solid;
+    color: #42b983;
+    color: var(--theme-color,#42b983);
+    font-weight: 600
+}
+
+.sidebar ul li ul {
+    padding-left: 20px;
+    padding: 0;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 4px
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 4px
+}
+
+.sidebar:hover::-webkit-scrollbar-thumb {
+    background: hsla(0,0%,53.3%,.4)
+}
+
+.sidebar:hover::-webkit-scrollbar-track {
+    background: hsla(0,0%,53.3%,.1)
+}
+
+.sidebar-toggle {
+    background-color: transparent;
+    background-color: hsla(0,0%,100%,.8);
+    border: 0;
+    outline: none;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    transition: opacity .3s;
+    width: 284px;
+    z-index: 30;
+    cursor: pointer
+}
+
+.sidebar-toggle:hover .sidebar-toggle-button {
+    opacity: .4
+}
+
+.sidebar-toggle span {
+    background-color: #42b983;
+    background-color: var(--theme-color,#42b983);
+    display: block;
+    margin-bottom: 4px;
+    width: 16px;
+    height: 2px
 }

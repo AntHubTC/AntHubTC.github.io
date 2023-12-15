@@ -9,10 +9,14 @@
 	<link rel="stylesheet" type="text/css" href="./index.css">
 	<script src="../static/vue.js"></script>
     <script src="../static/wordcloud2.js"></script>
+    <style> 
+        
+    </style>
 </head>
 <body>
     <div id="app" class="main-content">
         <div class="app-title">AntHubTc's Doc</div>
+        <!-- 正文 -->
         <div>
             <div class="search-container">
                 <input v-model="searchText" class="ipt-text" type="text" placeholder="请输入搜索内容"/><!--<span class="qry-icon-btn"></span>-->
@@ -31,6 +35,33 @@
             </template>
         </div>
         <div class="background-image"></div>
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div class="sidebar-nav">
+                <ul>
+                    <li><p>工作</p>
+                        <ul>
+                            <li><a href="#/zh-cn/quickstart" title="快速开始">快速开始</a></li>
+                            <li><a href="#/zh-cn/more-pages" title="多页文档">多页文档</a></li>
+                            <li><a href="#/zh-cn/custom-navbar" title="定制导航栏">定制导航栏</a></li>
+                            <li><a href="#/zh-cn/cover" title="封面">封面</a></li>
+                        </ul>
+                    </li>
+                    <li><p>生活</p>
+                        <ul>
+                            <li><a href="#/zh-cn/configuration" title="配置项">配置项</a></li>
+                        </ul>
+                    </li>
+                    <li><p>感悟</p>
+                        <ul>
+                            <li><a href="#/zh-cn/configuration" title="配置项">配置项</a></li>
+                        </ul>
+                    </li>
+                    <li><p><a href="#/zh-cn/changelog" title="Changelog">其他</a></p></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 设置对话框 -->
         <div>
             <div class="setting-btn" @click="openSettingsPanel"><svg t="1702565092611" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4252" width="30" height="30"><path d="M745.904 682c66.168 0 120 53.832 120 120v12H984a40 40 0 1 1 0 80h-118.096V904c0 66.168-53.832 120-120 120-66.16 0-120-53.832-120-120v-102c0-66.168 53.84-120 120-120z m0 80c-22.048 0-40 17.944-40 40V904c0 22.056 17.952 40 40 40 22.056 0 40-17.944 40-40v-102c0-22.056-17.944-40-40-40z m-240 52a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80zM394 338c66.168 0 120 53.832 120 120v13.76H984a40 40 0 0 1 0 80H514v10.24c0 66.168-53.832 120-120 120s-120-53.832-120-120v-104c0-66.168 53.832-120 120-120z m0 80c-22.056 0-40 17.944-40 40v104c0 22.056 17.944 40 40 40s40-17.944 40-40v-104c0-22.056-17.944-40-40-40z m-240 53.76a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80zM746 0c66.168 0 120 53.832 120 120v12H984a40 40 0 1 1 0 80h-118v10c0 66.168-53.832 120-120 120s-120-53.832-120-120V120c0-66.168 53.832-120 120-120z m0 80c-22.056 0-40 17.944-40 40v102c0 22.056 17.944 40 40 40s40-17.944 40-40V120c0-22.056-17.944-40-40-40z m-240 52a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80z" p-id="4253"></path></svg></div>
             <div class="setting-panel-box">
