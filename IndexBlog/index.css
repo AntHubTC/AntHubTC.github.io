@@ -171,9 +171,10 @@ section.content-box {
     height: 30px;
     width: 40%;
     font-size: 14px;
-    background-color: #aca98c;
-    border: 5px solid #464646;
+    background-color: #f5f5f5;
+    border: 1px solid #464646;
     border-radius: 3px;
+    padding: 5px;
     outline: none;
 }
 
