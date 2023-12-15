@@ -113,11 +113,13 @@ body {
     background-color: #FFF;
     pointer-events:all;
 }
-.setting-panel .header .label {
-    font-weight: bold;
-    user-select: none;
+.setting-panel .header {
+	user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
+}
+.setting-panel .header .label {
+    font-weight: bold;
 }
 .setting-panel .header .close-btn {
     display: inline-block;
@@ -141,6 +143,12 @@ body {
 /* =======================
         word cloud style
 =========================*/
+.word-color {
+	cursor: pointer;
+}
+.word-color:hover {
+	text-decoration: underline;
+}
 /*.word-color:nth-child(7n + 1) {*/
 /*    color: rgb(202, 110, 255);*/
 /*}*/
