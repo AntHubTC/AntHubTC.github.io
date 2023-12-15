@@ -19,11 +19,13 @@
         <aside class="sidebar">
             <div class="sidebar-nav">
                 <ul>
-                    <li><a href="javascript:void(0)" @click="cateItemClick({ title: 'all' })" style="font-weight: 800;">所有类别</a></li>
+                    <li :class="{'active': curCategory === 'all'}">
+                        <a href="javascript:void(0)" @click="cateItemClick({ title: 'all' })" style="font-weight: 800;">所有类别</a>
+                    </li>
                     <li v-for="cateItem in docCategory">
                         <p>{{cateItem.title}}</p>
                         <ul>
-                            <li v-for="subCateItem in cateItem.items">
+                            <li v-for="subCateItem in cateItem.items" :class="{'active': curCategory === subCateItem.title}">
                                 <a href="javascript:void(0)" title="快速开始" @click="cateItemClick(subCateItem)">{{subCateItem.title}}</a>
                             </li>
                         </ul>
