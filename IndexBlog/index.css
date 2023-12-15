@@ -122,7 +122,6 @@ section.content-box {
 }
 .sidebar-button {
     background-color: transparent;
-    background-color: hsla(0,0%,100%,.8);
     border: 0;
     outline: none;
     padding: 5px 5px;
@@ -133,9 +132,9 @@ section.content-box {
     fill: #42b983;
 }
 
-.sidebar-button:hover .sidebar-button-button {
+.sidebar-button:hover .sidebar-toggle-button {
     opacity: .4;
-    fill: rgb(13, 82, 52);
+    fill: rgb(13, 82, 52, .4);
 }
 
 .sidebar-button span {
@@ -267,6 +266,22 @@ section.content-box {
 .setting-panel .content {
     border-top: 1px solid green;
     padding-top: 10px;
+}
+
+.setting-panel .form-item {
+    padding: 8px;
+}
+.setting-panel .form-item .color-block-box {
+    display: inline-block;
+}
+
+.setting-panel .form-item .color-block-box .color-block {
+    display: inline-block;
+    margin-right: 3px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(0,0,0,.07);
+    cursor: pointer;
 }
 
 /* =======================

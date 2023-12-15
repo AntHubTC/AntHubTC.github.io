@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-    <main id="app" class="main-content" :class="{'hide-side': !showSide}">
+    <main id="app" class="main-content" :class="{'hide-side': !showSide}" :style="{'backgroundColor': backgroundColor}">
         <!-- 侧边栏 -->
         <aside class="sidebar">
             <div class="sidebar-nav">
@@ -81,6 +81,18 @@
                                 <span><input id="theme1" name="wordcloudTheme" type="radio" value="theme1" v-model="wordcloudTheme"/></span><label for="theme1">布局1</span> &nbsp;
                                 <span><input id="theme2" name="wordcloudTheme" type="radio" checked value="theme2" v-model="wordcloudTheme"/></span><label for="theme2">布局2</span>&nbsp;
                                     <span><input id="theme3" name="wordcloudTheme" type="radio" checked value="theme3" v-model="wordcloudTheme"/></span><label for="theme3">布局3</span>
+                            </div>
+                            <div class="form-item">
+                                <span class="form-item-label">背景颜色：</span>
+                                <span class="color-block-box">
+                                    <span class="color-block" style="background-color: #FFF;" @click="backgroundColor='#FFF'"></span>
+                                    <span class="color-block" style="background-color: #000;" @click="backgroundColor='#000'"></span>
+                                    <span class="color-block" style="background-color: #ffe7f3;" @click="backgroundColor='#ffe7f3'"></span>
+                                    <span class="color-block" style="background-color: #d1a5bb;" @click="backgroundColor='#d1a5bb'"></span>
+                                    <span class="color-block" style="background-color: rgb(157 161 159);" @click="backgroundColor='rgb(157 161 159)'"></span>
+                                    <span class="color-block" style="background-color: #6ca589;" @click="backgroundColor='#6ca589'"></span>
+                                    <span class="color-block" style="background-color: rgb(109 109 109);" @click="backgroundColor='rgb(109 109 109)'"></span>
+                                </span>
                             </div>
                         </div>
                     </div>

@@ -185,7 +185,9 @@ pageReady(() => {
             // 是否显示设置对话框
             settingShow: false,
             // 是否显示侧边栏
-            showSide: true
+            showSide: true,
+            // 背景颜色
+            backgroundColor: '#FFF'
 		},
 		computed: {
 			qdocs () {
