@@ -1,4 +1,5 @@
-﻿let docs = [
+﻿// 所有文档列表
+let docs = [
     { title: 'ChatGPT', href: '../ChatGPT', category: ['工作额外技能']},
     { title: '数据结构与算法', href: '../DataStructureAndAlgorithms', category: ['程序员底蕴']},
     { title: '设计模式', href: '../designPattern', category: ['程序员底蕴']},
@@ -60,13 +61,12 @@
     { title: '人生规划', href: '../LifePlan', private: true /* 后面可将一些文档隐藏起来 */, category: ['工作经验', '人生感悟']},
     { title: '中国礼仪', href: '../chinaCeremony', category: ['小孩教育']},
     { title: 'IT那些趣事', href: '../IT那些有意思的事', category: ['工作经验'] }
-  ]
-  
-
-  let category = [
-    {
-      title: "技术",
-      items: [
+]
+// 所有文档分类
+let docCategory = [
+{
+    title: "技术",
+    items: [
         {title: "JAVA"},
         {title: "Spring"},
         {title: "程序员底蕴"},
@@ -82,25 +82,25 @@
         {title: "操作系统"},
         {title: "Linux"},
         {title: "其他技能"}
-      ]
-    },
-    {
-      title: "生活",
-      items: [
+    ]
+},
+{
+    title: "生活",
+    items: [
         {title: "小孩教育"},
         {title: "健康生活"},
         {title: "娱乐趣事"},
         {title: "NAS"}
-      ]
-    },
-    {
-      title: "感悟",
-      items: [
+    ]
+},
+{
+    title: "感悟",
+    items: [
         {title: "工作经验"},
         {title: "人生感悟"}
-      ]
-    }
-  ]
+    ]
+}
+]
 
 // 防止抖动函数
 function debounce(func, delay) {
@@ -170,25 +170,48 @@ pageReady(() => {
 	new Vue({
 		el: '#app',
 		data: {
+            // 搜索的内容
 			searchText: '',
+            // 所有的文档
 			docs: [],
-            display: 'wordcloud', // cell-格子 wordcloud-词云
+            // 所有的文档类别
+            docCategory,
+            // 当前文档类别，默认显示所有all
+            curCategory: 'all',
+            // cell-格子 wordcloud-词云
+            display: 'wordcloud',
+            // 词云布局
             wordcloudTheme: 'theme1',
-            settingShow: false
+            // 是否显示设置对话框
+            settingShow: false,
+            // 是否显示侧边栏
+            showSide: true
 		},
 		computed: {
 			qdocs () {
-				let result = []
-				if (this.searchText.trim().length) {
-					for (var i = 0; i < this.docs.length; i++) {
-						var doc = this.docs[i]
-						if (searchFun(doc.title, this.searchText)) {
-							result.push(doc)
-						}
-					}
-				} else {
-					result = this.docs
-				}
+                const isFilterSearchText = !!this.searchText.trim().length;
+                const isFilterCategory = this.curCategory !== 'all';
+                if (!isFilterSearchText && !isFilterCategory) {
+                    // 未搜索，也没有过滤类别
+                    return this.docs;
+                }
+                let result = []
+				for (var i = 0; i < this.docs.length; i++) {
+                    const doc = this.docs[i];
+                    // 是否满足类别
+                    if (isFilterCategory && (doc.category || []).indexOf(this.curCategory) === -1) {
+                        continue
+                    }
+                    // 是否满足搜索
+                    if (isFilterSearchText) {
+                        if (searchFun(doc.title, this.searchText)) {
+                            result.push(doc);
+                        }
+                    } else {
+                        // 没有进行搜索，满足了类别的情况
+                        result.push(doc);
+                    }
+                }
 				return result
 			}
 		},
@@ -206,6 +229,12 @@ pageReady(() => {
             }
         },
         methods: {
+            toogleSideBar () {
+                this.showSide = !this.showSide;
+            },
+            cateItemClick (cateItem) {
+                this.curCategory = cateItem.title;
+            },
             reDraw () {
                 // 搜索发生导致词云重画
                 if(this.display == 'wordcloud') {
@@ -287,7 +316,7 @@ pageReady(() => {
                 // })
             },
             openSettingsPanel () {
-                this.settingShow = true;
+                this.settingShow = !this.settingShow;
             },
             closeSettingsPanel () {
                 this.settingShow = false;

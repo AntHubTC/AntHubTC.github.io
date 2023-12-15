@@ -14,78 +14,77 @@
     </style>
 </head>
 <body>
-    <div id="app" class="main-content">
-        <div class="app-title">AntHubTc's Doc</div>
-        <!-- 正文 -->
-        <div>
-            <div class="search-container">
-                <input v-model="searchText" class="ipt-text" type="text" placeholder="请输入搜索内容"/><!--<span class="qry-icon-btn"></span>-->
-            </div>
-            <template v-if="display == 'cell'">
-                <transition-group name="flip-list" tag="div" class="doc-container">
-                    <template v-for="doc in qdocs">
-                        <a class="doc-item" v-if="!doc.show" :key="doc.title" :href="doc.href">{{doc.title}}</a>
-                    </template>
-                </transition-group>
-            </template>
-            <template v-else-if="display == 'wordcloud'">
-                <div>
-                    <div ref="wordcloud" style="height: 600px"></div>
-                </div>
-            </template>
-        </div>
-        <div class="background-image"></div>
+    <main id="app" class="main-content" :class="{'hide-side': !showSide}">
         <!-- 侧边栏 -->
-        <div class="sidebar">
+        <aside class="sidebar">
             <div class="sidebar-nav">
                 <ul>
-                    <li><p>工作</p>
+                    <li><a href="javascript:void(0)" @click="cateItemClick({ title: 'all' })" style="font-weight: 800;">所有类别</a></li>
+                    <li v-for="cateItem in docCategory">
+                        <p>{{cateItem.title}}</p>
                         <ul>
-                            <li><a href="#/zh-cn/quickstart" title="快速开始">快速开始</a></li>
-                            <li><a href="#/zh-cn/more-pages" title="多页文档">多页文档</a></li>
-                            <li><a href="#/zh-cn/custom-navbar" title="定制导航栏">定制导航栏</a></li>
-                            <li><a href="#/zh-cn/cover" title="封面">封面</a></li>
+                            <li v-for="subCateItem in cateItem.items">
+                                <a href="javascript:void(0)" title="快速开始" @click="cateItemClick(subCateItem)">{{subCateItem.title}}</a>
+                            </li>
                         </ul>
                     </li>
-                    <li><p>生活</p>
-                        <ul>
-                            <li><a href="#/zh-cn/configuration" title="配置项">配置项</a></li>
-                        </ul>
-                    </li>
-                    <li><p>感悟</p>
-                        <ul>
-                            <li><a href="#/zh-cn/configuration" title="配置项">配置项</a></li>
-                        </ul>
-                    </li>
-                    <li><p><a href="#/zh-cn/changelog" title="Changelog">其他</a></p></li>
                 </ul>
             </div>
+        </aside>
+        <!-- 侧边栏 显示/隐藏按钮 -->
+        <div class="button-box">
+            <button @click="toogleSideBar" class="sidebar-button" aria-label="Menu"><div class="sidebar-toggle-button"><span></span><span></span><span></span></div></button>
+            <button @click="openSettingsPanel" class="sidebar-button" aria-label="Menu">
+                <svg t="1702565092611" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4252" width="20" height="20"><path d="M745.904 682c66.168 0 120 53.832 120 120v12H984a40 40 0 1 1 0 80h-118.096V904c0 66.168-53.832 120-120 120-66.16 0-120-53.832-120-120v-102c0-66.168 53.84-120 120-120z m0 80c-22.048 0-40 17.944-40 40V904c0 22.056 17.952 40 40 40 22.056 0 40-17.944 40-40v-102c0-22.056-17.944-40-40-40z m-240 52a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80zM394 338c66.168 0 120 53.832 120 120v13.76H984a40 40 0 0 1 0 80H514v10.24c0 66.168-53.832 120-120 120s-120-53.832-120-120v-104c0-66.168 53.832-120 120-120z m0 80c-22.056 0-40 17.944-40 40v104c0 22.056 17.944 40 40 40s40-17.944 40-40v-104c0-22.056-17.944-40-40-40z m-240 53.76a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80zM746 0c66.168 0 120 53.832 120 120v12H984a40 40 0 1 1 0 80h-118v10c0 66.168-53.832 120-120 120s-120-53.832-120-120V120c0-66.168 53.832-120 120-120z m0 80c-22.056 0-40 17.944-40 40v102c0 22.056 17.944 40 40 40s40-17.944 40-40V120c0-22.056-17.944-40-40-40z m-240 52a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80z" p-id="4253"></path></svg>
+            </button>
         </div>
-        <!-- 设置对话框 -->
-        <div>
-            <div class="setting-btn" @click="openSettingsPanel"><svg t="1702565092611" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4252" width="30" height="30"><path d="M745.904 682c66.168 0 120 53.832 120 120v12H984a40 40 0 1 1 0 80h-118.096V904c0 66.168-53.832 120-120 120-66.16 0-120-53.832-120-120v-102c0-66.168 53.84-120 120-120z m0 80c-22.048 0-40 17.944-40 40V904c0 22.056 17.952 40 40 40 22.056 0 40-17.944 40-40v-102c0-22.056-17.944-40-40-40z m-240 52a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80zM394 338c66.168 0 120 53.832 120 120v13.76H984a40 40 0 0 1 0 80H514v10.24c0 66.168-53.832 120-120 120s-120-53.832-120-120v-104c0-66.168 53.832-120 120-120z m0 80c-22.056 0-40 17.944-40 40v104c0 22.056 17.944 40 40 40s40-17.944 40-40v-104c0-22.056-17.944-40-40-40z m-240 53.76a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80zM746 0c66.168 0 120 53.832 120 120v12H984a40 40 0 1 1 0 80h-118v10c0 66.168-53.832 120-120 120s-120-53.832-120-120V120c0-66.168 53.832-120 120-120z m0 80c-22.056 0-40 17.944-40 40v102c0 22.056 17.944 40 40 40s40-17.944 40-40V120c0-22.056-17.944-40-40-40z m-240 52a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80z" p-id="4253"></path></svg></div>
-            <div class="setting-panel-box">
-                <div class="setting-panel" v-show="settingShow" style="display: none;">
-                    <div class="header">
-                        <span class="label">设置</span>
-                        <span class="close-btn" @click.prevent="closeSettingsPanel">X</span>
+        <!-- 正文 -->
+        <section class="content-box">
+            <div class="app-title">AntHubTc's Doc</div>
+            <div>
+                <div class="search-container">
+                    <input v-model="searchText" class="ipt-text" type="text" placeholder="请输入搜索内容"/><!--<span class="qry-icon-btn"></span>-->
+                </div>
+                <template v-if="display == 'cell'">
+                    <transition-group name="flip-list" tag="div" class="doc-container">
+                        <template v-for="doc in qdocs">
+                            <a class="doc-item" v-if="!doc.show" :key="doc.title" :href="doc.href">{{doc.title}}</a>
+                        </template>
+                    </transition-group>
+                </template>
+                <template v-else-if="display == 'wordcloud'">
+                    <div>
+                        <div ref="wordcloud" style="height: 600px"></div>
                     </div>
-                    <div class="content">
-                        <div class="form-item">
-                            <span class="form-item-label">显示模式：</span>
-                            <span><input id="display-cell" name="displayMode" type="radio" value="cell" v-model="display"/></span><label for="display-cell">流式方块</span> &nbsp;
-                            <span><input id="display-wordcloud" name="displayMode" type="radio" checked value="wordcloud" v-model="display"/></span><label for="display-wordcloud">词云</span>
+                </template>
+            </div>
+            <!-- 背景 -->
+            <div class="background-image"></div>
+            <!-- 设置对话框 -->
+            <div>
+                <div class="setting-panel-box">
+                    <div class="setting-panel" v-show="settingShow" style="display: none;">
+                        <div class="header">
+                            <span class="label">设置</span>
+                            <span class="close-btn" @click.prevent="closeSettingsPanel">X</span>
                         </div>
-                        <div class="form-item" v-show="display == 'wordcloud'">
-                            <span class="form-item-label">布局模式：</span>
-                            <span><input id="theme1" name="wordcloudTheme" type="radio" value="theme1" v-model="wordcloudTheme"/></span><label for="theme1">布局1</span> &nbsp;
-                            <span><input id="theme2" name="wordcloudTheme" type="radio" checked value="theme2" v-model="wordcloudTheme"/></span><label for="theme2">布局2</span>&nbsp;
-                                <span><input id="theme3" name="wordcloudTheme" type="radio" checked value="theme3" v-model="wordcloudTheme"/></span><label for="theme3">布局3</span>
+                        <div class="content">
+                            <div class="form-item">
+                                <span class="form-item-label">显示模式：</span>
+                                <span><input id="display-cell" name="displayMode" type="radio" value="cell" v-model="display"/></span><label for="display-cell">流式方块</span> &nbsp;
+                                <span><input id="display-wordcloud" name="displayMode" type="radio" checked value="wordcloud" v-model="display"/></span><label for="display-wordcloud">词云</span>
+                            </div>
+                            <div class="form-item" v-show="display == 'wordcloud'">
+                                <span class="form-item-label">布局模式：</span>
+                                <span><input id="theme1" name="wordcloudTheme" type="radio" value="theme1" v-model="wordcloudTheme"/></span><label for="theme1">布局1</span> &nbsp;
+                                <span><input id="theme2" name="wordcloudTheme" type="radio" checked value="theme2" v-model="wordcloudTheme"/></span><label for="theme2">布局2</span>&nbsp;
+                                    <span><input id="theme3" name="wordcloudTheme" type="radio" checked value="theme3" v-model="wordcloudTheme"/></span><label for="theme3">布局3</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 	<script type="text/javascript" src="./index.js"></script>
 </body>
