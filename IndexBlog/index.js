@@ -233,6 +233,7 @@ pageReady(() => {
         methods: {
             toogleSideBar () {
                 this.showSide = !this.showSide;
+                this.reDraw();
             },
             cateItemClick (cateItem) {
                 this.curCategory = cateItem.title;
