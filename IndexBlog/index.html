@@ -50,7 +50,7 @@
                 <template v-if="display == 'cell'">
                     <transition-group name="flip-list" tag="div" class="doc-container">
                         <template v-for="doc in qdocs">
-                            <a class="doc-item" v-if="!doc.show" :key="doc.title" :href="doc.href">{{doc.title}}</a>
+                            <a class="doc-item" v-show="!doc.show" :key="doc.title" :href="doc.href">{{doc.title}}</a>
                         </template>
                     </transition-group>
                 </template>
