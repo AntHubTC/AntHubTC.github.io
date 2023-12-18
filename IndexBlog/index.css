@@ -151,6 +151,10 @@ section.content-box {
     text-align: center;
     font-size: 36px;
     font-weight: bold;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: pointer;
 }
 
 .main-content .background-image {
