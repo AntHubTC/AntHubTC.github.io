@@ -10,7 +10,7 @@
 
 ### wrk
 
-[ChatGPT 帮我写wrk脚本](../ChatGPT/#/doc2?id=不会写压测脚本？chatgpt)
+[ChatGPT 帮我写wrk脚本](https://anthubtc.github.io/ChatGPT/#/doc2?id=%e4%b8%8d%e4%bc%9a%e5%86%99%e5%8e%8b%e6%b5%8b%e8%84%9a%e6%9c%ac%ef%bc%9fchatgpt)
 
 [性能测试工具 wrk 使用教程](https://www.cnblogs.com/quanxiaoha/p/10661650.html)
 
