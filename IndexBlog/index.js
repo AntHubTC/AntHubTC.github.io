@@ -252,7 +252,10 @@ pageReady(() => {
         methods: {
             toogleSideBar () {
                 this.showSide = !this.showSide;
-                this.reDraw();
+                if (isMobileEnv) {
+                    // 移动端才重绘，电脑端重绘给人的效果不好
+                    this.reDraw();
+                }
             },
             cateItemClick (cateItem) {
                 this.curCategory = cateItem.title;
