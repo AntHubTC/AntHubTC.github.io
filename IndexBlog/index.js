@@ -40,6 +40,7 @@ let docs = [
     { title: 'IDEA', href: '../IDEA', category: ['开发测试工具']},
     { title: 'markdown', href: '../markdown', category: ['工作额外技能']},
     { title: '架构师之路', href: '../architectRoad', category: ['程序员底蕴']},
+	{ title: '性能测试调优', href: '../性能测试调优', category: ['程序员底蕴', '工作额外技能', '开发测试工具']},
     { title: 'redis', href: '../redis', category: ['中间件']},
     { title: 'HTTP', href: '../HTTP', category: ['程序员底蕴']},
     { title: 'NodeJS', href: '../NodeJs', category: ['JAVSCRIPT', 'NodeJs']},
