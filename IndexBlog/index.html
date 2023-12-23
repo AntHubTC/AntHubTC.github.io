@@ -9,30 +9,62 @@
 	<link rel="stylesheet" type="text/css" href="./index.css">
 	<script src="../static/vue.js"></script>
     <script src="../static/wordcloud2.js"></script>
+    <style> 
+        
+    </style>
 </head>
 <body>
-    <div id="app" class="main-content">
-        <div class="app-title">AntHubTc's Doc</div>
-        <div>
-            <div class="search-container">
-                <input v-model="searchText" class="ipt-text" type="text" placeholder="请输入搜索内容"/><!--<span class="qry-icon-btn"></span>-->
+    <main id="app" class="main-content" :class="{'hide-side': !showSide}" :style="{'backgroundColor': backgroundColor}">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-nav">
+                <ul>
+                    <li :class="{'active': curCategory === 'all'}">
+                        <a href="javascript:void(0)" @click="cateItemClick({ title: 'all' })" style="font-weight: 800;">所有类别</a>
+                    </li>
+                    <li v-for="cateItem in docCategory">
+                        <p>{{cateItem.title}}</p>
+                        <ul>
+                            <li v-for="subCateItem in cateItem.items" :class="{'active': curCategory === subCateItem.title}">
+                                <a href="javascript:void(0)" title="快速开始" @click="cateItemClick(subCateItem)">{{subCateItem.title}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-            <template v-if="display == 'cell'">
-                <transition-group name="flip-list" tag="div" class="doc-container">
-                    <template v-for="doc in qdocs">
-                        <a class="doc-item" v-if="!doc.show" :key="doc.title" :href="doc.href">{{doc.title}}</a>
-                    </template>
-                </transition-group>
-            </template>
-            <template v-else-if="display == 'wordcloud'">
-                <div>
-                    <div ref="wordcloud" style="height: 600px"></div>
-                </div>
-            </template>
+        </aside>
+        <!-- 侧边栏 显示/隐藏按钮 -->
+        <div class="button-box">
+            <button @click="toogleSideBar" class="sidebar-button" aria-label="Menu"><div class="sidebar-toggle-button"><span></span><span></span><span></span></div></button>
+            <button @click="openSettingsPanel" class="sidebar-button" aria-label="Menu">
+                <svg t="1702565092611" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4252" width="20" height="20"><path d="M745.904 682c66.168 0 120 53.832 120 120v12H984a40 40 0 1 1 0 80h-118.096V904c0 66.168-53.832 120-120 120-66.16 0-120-53.832-120-120v-102c0-66.168 53.84-120 120-120z m0 80c-22.048 0-40 17.944-40 40V904c0 22.056 17.952 40 40 40 22.056 0 40-17.944 40-40v-102c0-22.056-17.944-40-40-40z m-240 52a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80zM394 338c66.168 0 120 53.832 120 120v13.76H984a40 40 0 0 1 0 80H514v10.24c0 66.168-53.832 120-120 120s-120-53.832-120-120v-104c0-66.168 53.832-120 120-120z m0 80c-22.056 0-40 17.944-40 40v104c0 22.056 17.944 40 40 40s40-17.944 40-40v-104c0-22.056-17.944-40-40-40z m-240 53.76a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80zM746 0c66.168 0 120 53.832 120 120v12H984a40 40 0 1 1 0 80h-118v10c0 66.168-53.832 120-120 120s-120-53.832-120-120V120c0-66.168 53.832-120 120-120z m0 80c-22.056 0-40 17.944-40 40v102c0 22.056 17.944 40 40 40s40-17.944 40-40V120c0-22.056-17.944-40-40-40z m-240 52a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80z" p-id="4253"></path></svg>
+            </button>
         </div>
-        <div class="background-image"></div>
+        <!-- 正文 -->
+        <section class="content-box">
+            <div class="app-title" @click="reDraw">AntHubTc's Doc</div>
+            <div>
+                <div class="search-container">
+                    <input v-model="searchText" class="ipt-text" type="text" placeholder="请输入搜索内容"/><!--<span class="qry-icon-btn"></span>-->
+                </div>
+                <template v-if="display == 'cell'">
+                    <transition-group name="flip-list" tag="div" class="doc-container">
+                        <template v-for="doc in qdocs">
+                            <a class="doc-item" v-show="!doc.show" :key="doc.title" :href="doc.href">{{doc.title}}</a>
+                        </template>
+                    </transition-group>
+                </template>
+                <template v-else-if="display == 'wordcloud'">
+                    <div>
+                        <div ref="wordcloud" style="height: 550px"></div>
+                    </div>
+                </template>
+            </div>
+            <!-- 背景 -->
+            <div class="background-image"></div>
+        </section>
+        <!-- 设置对话框 -->
         <div>
-            <div class="setting-btn" @click="openSettingsPanel"><svg t="1702565092611" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4252" width="30" height="30"><path d="M745.904 682c66.168 0 120 53.832 120 120v12H984a40 40 0 1 1 0 80h-118.096V904c0 66.168-53.832 120-120 120-66.16 0-120-53.832-120-120v-102c0-66.168 53.84-120 120-120z m0 80c-22.048 0-40 17.944-40 40V904c0 22.056 17.952 40 40 40 22.056 0 40-17.944 40-40v-102c0-22.056-17.944-40-40-40z m-240 52a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80zM394 338c66.168 0 120 53.832 120 120v13.76H984a40 40 0 0 1 0 80H514v10.24c0 66.168-53.832 120-120 120s-120-53.832-120-120v-104c0-66.168 53.832-120 120-120z m0 80c-22.056 0-40 17.944-40 40v104c0 22.056 17.944 40 40 40s40-17.944 40-40v-104c0-22.056-17.944-40-40-40z m-240 53.76a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80zM746 0c66.168 0 120 53.832 120 120v12H984a40 40 0 1 1 0 80h-118v10c0 66.168-53.832 120-120 120s-120-53.832-120-120V120c0-66.168 53.832-120 120-120z m0 80c-22.056 0-40 17.944-40 40v102c0 22.056 17.944 40 40 40s40-17.944 40-40V120c0-22.056-17.944-40-40-40z m-240 52a40 40 0 1 1 0 80H40a40 40 0 1 1 0-80z" p-id="4253"></path></svg></div>
             <div class="setting-panel-box">
                 <div class="setting-panel" v-show="settingShow" style="display: none;">
                     <div class="header">
@@ -50,6 +82,18 @@
                             <span><input id="theme1" name="wordcloudTheme" type="radio" value="theme1" v-model="wordcloudTheme"/></span><label for="theme1">布局1</span> &nbsp;
                             <span><input id="theme2" name="wordcloudTheme" type="radio" checked value="theme2" v-model="wordcloudTheme"/></span><label for="theme2">布局2</span>&nbsp;
                                 <span><input id="theme3" name="wordcloudTheme" type="radio" checked value="theme3" v-model="wordcloudTheme"/></span><label for="theme3">布局3</span>
+                        </div>
+                        <div class="form-item">
+                            <span class="form-item-label">背景颜色：</span>
+                            <span class="color-block-box">
+                                <span class="color-block" style="background-color: #FFF;" @click="backgroundColor='#FFF'"></span>
+                                <span class="color-block" style="background-color: #000;" @click="backgroundColor='#000'"></span>
+                                <span class="color-block" style="background-color: #ffe7f3;" @click="backgroundColor='#ffe7f3'"></span>
+                                <span class="color-block" style="background-color: #d1a5bb;" @click="backgroundColor='#d1a5bb'"></span>
+                                <span class="color-block" style="background-color: rgb(157 161 159);" @click="backgroundColor='rgb(157 161 159)'"></span>
+                                <span class="color-block" style="background-color: #6ca589;" @click="backgroundColor='#6ca589'"></span>
+                                <span class="color-block" style="background-color: rgb(109 109 109);" @click="backgroundColor='rgb(109 109 109)'"></span>
+                            </span>
                         </div>
                     </div>
                 </div>
