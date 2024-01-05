@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- https://www.npmjs.com/package/xmind-embed-viewer -->
+    <script src="https://xmindltd.github.io/xmind-embed-viewer/xmind-embed-viewer.js"></script>
+    <!-- or https://www.jsdelivr.com/npm/xmind-embed-viewer/dist/umd/xmind-embed-viewer.js -->
+    <script>
+        // window.XMindEmbedViewer are available now. 
+        window.onload = function () {
+            const viewer = new XMindEmbedViewer({
+                el: '#container-or-iframe-selector', // HTMLElement | HTMLIFrameElement | string
+                // 如果在中国大陆境内速度慢，可以添加的参数 `region: 'cn'` 改为使用 xmind.cn 的图库作为依赖。
+                region: 'cn' //optinal, global(default) or cn
+            })
+            fetch('./demo.xmind')
+            .then(res => res.arrayBuffer())
+            .then(file => viewer.load(file))
+        }
+    </script>
+</head>
+<body>
+    <div id="container-or-iframe-selector"></div>
+</body>
+</html>
