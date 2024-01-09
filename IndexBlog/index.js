@@ -40,7 +40,8 @@ let docs = [
     { title: 'IDEA', href: '../IDEA', category: ['开发测试工具']},
     { title: 'markdown', href: '../markdown', category: ['工作额外技能']},
     { title: '架构师之路', href: '../architectRoad', category: ['程序员底蕴']},
-	{ title: '性能测试调优', href: '../性能测试调优', category: ['程序员底蕴', '工作额外技能', '开发测试工具']},
+    { title: '性能测试调优', href: '../性能测试调优', category: ['程序员底蕴', '工作额外技能', '开发测试工具']},
+    { title: 'selenium', href: '../selenium', category: ['工作额外技能', '开发测试工具']},
     { title: 'redis', href: '../redis', category: ['中间件']},
     { title: 'HTTP', href: '../HTTP', category: ['程序员底蕴']},
     { title: 'NodeJS', href: '../NodeJs', category: ['JAVSCRIPT', 'NodeJs']},
@@ -62,7 +63,7 @@ let docs = [
     { title: '人生规划', href: '../LifePlan', private: true /* 后面可将一些文档隐藏起来 */, category: ['工作经验', '人生感悟']},
     { title: '中国礼仪', href: '../chinaCeremony', category: ['小孩教育']},
     { title: 'IT那些趣事', href: '../IT那些有意思的事', category: ['工作经验'] },
-	{ title: '薅羊毛那些事', href: '../薅羊毛那些事', category: ['搞钱', '健康生活'] }
+    { title: '薅羊毛那些事', href: '../薅羊毛那些事', category: ['搞钱', '健康生活'] }
 ]
 // 所有文档分类
 let docCategory = [
