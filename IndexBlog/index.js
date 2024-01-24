@@ -42,6 +42,7 @@ let docs = [
     { title: '架构师之路', href: '../architectRoad', category: ['程序员底蕴']},
     { title: '性能测试调优', href: '../性能测试调优', category: ['程序员底蕴', '工作额外技能', '开发测试工具']},
     { title: 'selenium', href: '../selenium', category: ['工作额外技能', '开发测试工具']},
+    { title: '按键精灵', href: '../按键精灵', category: ['工作额外技能', '开发测试工具', '其他技能']},
     { title: 'redis', href: '../redis', category: ['中间件']},
     { title: 'HTTP', href: '../HTTP', category: ['程序员底蕴']},
     { title: 'NodeJS', href: '../NodeJs', category: ['JAVSCRIPT', 'NodeJs']},
