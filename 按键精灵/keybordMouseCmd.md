@@ -77,6 +77,106 @@ End If
 
 其他控制命令就不演示了，帮助手册都有详细例子演示和api说明。
 
+## 找颜色
+
+```vbscript
+//FindColor 1603,207, 1672,291, "2726FF", x, y
+FindCenterColor 1603,207, 1672,291, "2726FF", x, y
+If x > 0 and y > 0 Then 
+    Delay 100
+    //    MoveTo x + 20, y + 20
+    MoveTo x, y
+Else 
+    MessageBox "未找到像素"
+End If  
+```
+
+## 找图
+
+使用抓抓工具找到查找区域的左上角坐标，然后找到查找区域的右上角坐标，然后将目标区域截图存储到某位置，然后将截图命名好后拖入到按键精灵中的“附件”中，然后就可以引用了。
+
+```vb
+FindPic 1406,88, 1713,439, "Attachment:\thumb_btn.bmp", 0.5, x, y
+If x > 0 and y > 0 Then 
+    Delay 100
+    MoveTo x+20, y+20
+Else 
+    MessageBox "未找到像素"
+End If  
+```
+
+## 游戏自动喊话
+
+```vb
+MoveTo 246,103
+Delay 1000
+LeftClick 1
+Delay 1000
+KeyPress "Enter", 1
+Delay 1000
+SayString "你好啊"
+Delay 1000
+KeyPress "Enter", 1
+Delay 1000
+' 还可以使用Plugin.File.ReadFileEx去读取文件中准备好的内容用来录入到相应表单中
+```
+
+> SayString 不是所有窗口都支持的，可以用按键组合键代替
+
+## 定时执行任务
+
+```vb
+Do
+	Delay 1000
+	现在日期时间=Plugin.Sys.GetDateTime()
+	TracePrint (现在日期时间)
+	If 现在日期时间 = "2024-01-25 16:05:10" Then 
+		Call 执行任务()
+	End If
+Loop
+
+Sub 执行任务()
+	For 100
+		Delay 100
+		TracePrint "执行任务"
+	Next
+	ExitScript
+End Sub
+```
+
+## 播放音乐
+
+```vb
+
+//下面这句是音阶(标准(M))音符(DO(1))节拍(1/16拍)   
+Call Plugin.Media.Beep(523, 200)   
+//下面这句是音阶(标准(M))音符(RE(2))节拍(1/16拍)   
+Call Plugin.Media.Beep(578, 200)   
+//下面这句是音阶(标准(M))音符(MI(3))节拍(1/16拍)   
+Call Plugin.Media.Beep(659, 200)   
+//下面这句是音阶(标准(M))音符(FA(4))节拍(1/16拍)   
+Call Plugin.Media.Beep(698, 200)   
+//下面这句是音阶(标准(M))音符(SO(5))节拍(1/16拍)   
+Call Plugin.Media.Beep(784, 200)   
+//下面这句是音阶(标准(M))音符(LA(6))节拍(1/16拍)   
+Call Plugin.Media.Beep(880, 200)   
+//下面这句是音阶(标准(M))音符(SI(7))节拍(1/16拍)   
+Call Plugin.Media.Beep(988, 200)   
+Msgbox "Beep 播放结束!!"
+
+Call Plugin.Media.Vol(50)   
+Call Plugin.Media.Play("C:\WINDOWS\Media\Windows XP 启动.wav")
+Delay 3000
+Plugin Media.Stop()   
+Msgbox "播放停止!!"
+```
+
+
+
 ## 今后如何学习基本命令
 
 基本命令非常简单，多点开看看，在脑袋里面有一个有哪些命令的印象，不会的看下帮助说明，整体使用非常简单，不用一个个命令写笔记记录了。
+
+## 大漠插件
+
+非常适合来做游戏脚本，功能非常的丰富，能后台多开。
