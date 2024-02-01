@@ -55,6 +55,7 @@ let docs = [
     // { title: 'raspberryPI', href: '../raspberryPI', category: ['物联网']},
     // { title: 'vi_vim', href: '../vi_vim', category: ['快速交付', '开发测试工具', 'Linux']},
     { title: '论软件外包', href: '../outsource', category: ['工作经验']},
+    { title: '傲游外网', href: '../傲游外网', category: ['其他技能']},
     { title: '健身-减肥', href: '../lifeReduceWeight', category: ['健康生活']},
     { title: '数据治理与数据仓库模型设计', href: '../数据治理与数据仓库模型设计', category: ['其他技能']},
     { title: '简历Resume', href: '../resume/resume.html', private: true /* 后面可将一些文档隐藏起来 */, category: ['工作额外技能', '工作经验']},
