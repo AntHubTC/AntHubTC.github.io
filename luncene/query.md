@@ -26,12 +26,39 @@ TermQuery，BooleanQuery,  PhraseQuery,  PrefixQuery,  PhrasePrefixQuery,  TermR
 基础代码：
 
 ```java
+    private static Directory writeIndexDir() throws IOException {
+        return writeIndexDir(new StandardAnalyzer());
+    }
+
+    private static Directory writeIndexDir(Analyzer analyzer) throws IOException {
+        // 文档对象列表
+        List<Document> documents = new ArrayList<>();
+        // 收集文档数据
+        BaseDemoTest.collectDocument(documents);
+
+        return writeIndexDir(analyzer, documents);
+    }
+
+    private static Directory writeIndexDir(Analyzer analyzer, List<Document> documents) throws IOException {
+        // RAMDirectory写到内存的索引，已经过期，有其它类可以代替
+        Directory indexDirectory = new RAMDirectory();
+        IndexWriterConfig config = new IndexWriterConfig(analyzer);
+        IndexWriter writer = new IndexWriter(indexDirectory, config);
+        writer.addDocuments(documents);
+        writer.close();
+        return indexDirectory;
+    }
+
     private void queryData(Query query) throws IOException {
         // 设置索引存储路径
         Directory indexDir = FSDirectory.open(new File(luceneDemoConfig.getDemoIndexDbPath("testCreate")).toPath());
 
+        queryData(query, indexDir);
+    }
+
+    private static void queryData(Query query, Directory indexDir) throws IOException {
         // 创建索引读取器
-        try(IndexReader indexReader = DirectoryReader.open(indexDir)) {
+        try (IndexReader indexReader = DirectoryReader.open(indexDir)) {
             IndexSearcher indexSearcher = new IndexSearcher(indexReader);
 
             TopDocs topDocs = indexSearcher.search(query, 10);
@@ -123,19 +150,27 @@ TermQuery，BooleanQuery,  PhraseQuery,  PrefixQuery,  PhrasePrefixQuery,  TermR
 **前缀匹配查询**用于匹配索引以指定字符串开头的分词（注意是短语，而不是源文档）。
 
 ```java
-    @DisplayName("PrefixQuery")
+	@DisplayName("PrefixQuery")
     @ParameterizedTest
     @ValueSource(strings = {
-            "谷", "歌", "地图",
-            // SmartChineseAnalyzer没有切分出来的分词
-            "谷歌地图", "谷歌地图之父加盟"
+            "ls", "ch", "p", "ps"
     })
     public void testPrefixQuery(String val) throws IOException {
         // PrefixQuery 用于匹配索引以指定字符串开头的分词（注意是短语，而不是源文档）。
-        Term term = new Term("title", val);
+        List<String> sourceTxt = Arrays.asList("ls","lsof","lspci","ps","ps aux","pkill","pwd","cat","cd","cp","mv",
+                "rm","touch","grep","find","chmod","chown","chgrp","history","man");
+        // 文档对象列表
+        List<Document> documents = sourceTxt.stream().map(srcTxt -> {
+            Document document = new Document();
+            document.add(new TextField("title", srcTxt, Field.Store.YES));
+            return document;
+        }).collect(Collectors.toList());
+        Directory indexDir = writeIndexDir(new StandardAnalyzer(), documents);
+
+        Term term = new Term("command", val);
         Query query = new PrefixQuery(term);
 
-        queryData(query);
+        queryData(query, indexDir);
     }
 ```
 
@@ -171,7 +206,7 @@ TermQuery，BooleanQuery,  PhraseQuery,  PrefixQuery,  PhrasePrefixQuery,  TermR
 
 - BooleanClause.Occur.SHOULD：表示该子句应该匹配，但不是必须的，相当于逻辑上的 OR 操作。如果一个文档匹配了至少一个 SHOULD 子句，那么它就有可能会出现在查询结果中。
 - BooleanClause.Occur.MUST_NOT：表示该子句必须不匹配，相当于逻辑上的 NOT 操作。文档不能匹配 MUST_NOT 子句才能被包含在查询结果中。
-- BooleanClause.Occur.FILTER 用于表示过滤子句，它会对搜索结果进行筛选，但不会影响相关性评分和排序顺序
+- BooleanClause.Occur.FILTER 用于表示过滤子句，它会对搜索结果进行筛选，但不会影响相关性评分和排序顺序。
 
 
 
@@ -273,6 +308,46 @@ uzzyQuery 用于执行模糊查询，允许在搜索时对术语进行模糊匹�
         FuzzyQuery query = new FuzzyQuery(term);
 
         queryData(query, indexDir);
+    }
+```
+
+## MatchAllDocsQuery
+
+它的作用是匹配索引中的所有文档。当你希望检索索引中的所有文档时，可以使用 MatchAllDocsQuery。这在一些需要遍历整个索引的情况下非常有用，比如统计文档总数、分析整个索引的内容等。
+
+```java
+    @DisplayName("MatchAllDocsQuery")
+    @Test
+    public void testMatchAllDocsQuery() throws IOException {
+        Query query = new MatchAllDocsQuery();
+
+        queryData(query);
+    }
+```
+
+## SpanQuery
+
+它用于在文本中执行更精细的短语和位置相关的匹配。`SpanQuery` 允许你指定词项的顺序、跨度、以及位置之间的关系，以便更精确地匹配特定模式的文本。
+
+一些常见的使用情景包括：
+
+- 查找两个词项之间特定距离内的匹配。
+- 查找一个词项在另一个词项的附近出现的匹配。
+- 查找特定词项序列的匹配，而不考虑它们之间的具体位置。
+
+```java
+    @DisplayName("SpanQuery")
+    @Test
+    public void testSpanQuery() throws IOException {
+        // SpanQuery 是 Lucene 中的一种特殊类型的查询，它用于在文本中执行更精细的短语和位置相关的匹配
+        // 创建 SpanTermQuery 对象，用于匹配 "quick"
+        SpanTermQuery quickQuery = new SpanTermQuery(new Term("title", "今晚"));
+        // 创建 SpanTermQuery 对象，用于匹配 "brown"
+        SpanTermQuery brownQuery = new SpanTermQuery(new Term("title", "冷"));
+        // 创建 query 对象，将 quickQuery 和 brownQuery 之间的距离限制为1
+        SpanQuery query = new SpanNearQuery(new SpanQuery[]{quickQuery, brownQuery}, 1, true);
+
+        queryData(query);
     }
 ```
 
