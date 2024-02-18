@@ -5,6 +5,7 @@
 * [分词器](analyzer)
 * [查询详解](query)
 * [高亮显示查询结果](highlighter)
+* [基于内容的图像检索 CIBR](cibr)
 * [实战案例-Maven Search](mavenSearch)
 * [实战案例-SQL搜索助手](sqlSearchHelper)
 * [实战案例-我的文档搜索](myDocIndexHelper)
