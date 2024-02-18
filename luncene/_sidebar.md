@@ -4,5 +4,7 @@
 * [开发环境搭建](devEnv)
 * [分词器](analyzer)
 * [查询详解](query)
-* 实战案例-Maven Search
-* 实战案例-我的文档搜素
+* [实战案例-Maven Search](mavenSearch)
+* [实战案例-SQL搜索助手](sqlSearchHelper)
+* [实战案例-我的文档搜索](myDocIndexHelper)
+
