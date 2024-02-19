@@ -200,3 +200,15 @@ public class Main {
 [策略算法工程师之路-基于内容的图像检索(CBIR)]()
 
 [Elasticsearch 8.X “图搜图”实战](https://zhuanlan.zhihu.com/p/666082963)
+
+
+
+# 基于声音的特征的检索
+
+![image-20240219160615891](img/cibr/image-20240219160615891.png)
+
+![image-20240219160628872](img/cibr/image-20240219160628872.png)
+
+![image-20240219160647865](img/cibr/image-20240219160647865.png)
+
+![image-20240219160713188](img/cibr/image-20240219160713188.png)
