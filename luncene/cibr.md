@@ -100,7 +100,7 @@ LIRE（Lucene Image REtrieval）提供一种的简单方式来创建基于图像
     <dependency>
       <groupId>org.apache.lucene</groupId>
       <artifactId>lucene-core</artifactId>
-      <version>${lucene.version}</version>
+      <version>5.2.1</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/com.github.zengde/lire -->
     <dependency>
