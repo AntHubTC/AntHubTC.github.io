@@ -2,6 +2,10 @@
 
 **[lucene-learn](https://github.com/AntHubTC/lucene-learn)** com.tc.lucene.casedemo.LocalMavenRepoTest
 
+本案例实现下图中IDEA的Maven Search插件类似的效果:
+
+![实现类似的效果](img/mavenSearch/image-20240219154932801.png)
+
 ## 主要代码
 
 ```java
