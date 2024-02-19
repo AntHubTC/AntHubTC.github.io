@@ -6,6 +6,8 @@
 
 ![实现类似的效果](img/mavenSearch/image-20240219154932801.png)
 
+![image-20240219161129135](img/mavenSearch/image-20240219161129135.png)
+
 ## 主要代码
 
 ```java
