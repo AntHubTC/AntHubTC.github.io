@@ -2,7 +2,9 @@
 * [前景评估](prospect)
 * [前期工作](preWork)
 * [酒店建设](hotelBuild)
+* [酒店基础知识](hotelBasicKnowledge)
+* [酒店日常经营](dailyOperations)
 * [酒店运营](operations)
 * [前辈疑问解答](issue)
-
+* [不断深耕学习](deepLearn)
 
