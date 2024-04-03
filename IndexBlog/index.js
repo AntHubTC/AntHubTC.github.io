@@ -66,6 +66,7 @@ let docs = [
     { title: '人生规划', href: '../LifePlan', private: true /* 后面可将一些文档隐藏起来 */, category: ['工作经验', '人生感悟']},
     { title: '中国礼仪', href: '../chinaCeremony', category: ['小孩教育']},
     { title: 'IT那些趣事', href: '../IT那些有意思的事', category: ['工作经验'] },
+	{ title: '酒店', href: '../hotel', category: ['搞钱', '创业'] },
 	{ title: '常见中药收集', href: '../ChineseMedicine', category: ['健康生活'] },
     { title: '薅羊毛那些事', href: '../薅羊毛那些事', category: ['搞钱', '健康生活'] }
 ]
@@ -98,7 +99,8 @@ let docCategory = [
         {title: "健康生活"},
         {title: "娱乐趣事"},
         {title: "NAS"},
-        {title: "搞钱"}
+        {title: "搞钱"},
+        {title: "创业"}
     ]
 },
 {
