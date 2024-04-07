@@ -5,6 +5,7 @@
 * [酒店基础知识](hotelBasicKnowledge)
 * [酒店日常经营](dailyOperations)
 * [酒店运营](operations)
+* [酒店OTA](ota)
 * [前辈疑问解答](issue)
 * [不断深耕学习](deepLearn)
 
