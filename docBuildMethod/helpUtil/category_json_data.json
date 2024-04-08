@@ -1,0 +1,187 @@
+[
+    {
+        "id": 1,
+        "name": "技术",
+        "level": 1,
+        "parent_id": null,
+        "items": [
+            {
+                "id": 2,
+                "name": "JAVA",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 3,
+                "name": "Spring",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 4,
+                "name": "程序员底蕴",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 5,
+                "name": "数据库",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 6,
+                "name": "中间件",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 7,
+                "name": "工作额外技能",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 8,
+                "name": "NodeJs",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 9,
+                "name": "JAVSCRIPT",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 10,
+                "name": "Python",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 11,
+                "name": "快速交付",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 12,
+                "name": "开发测试工具",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 13,
+                "name": "物联网",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 14,
+                "name": "操作系统",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 15,
+                "name": "Linux",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 16,
+                "name": "其他技能",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "name": "生活",
+        "level": 1,
+        "parent_id": null,
+        "items": [
+            {
+                "id": 18,
+                "name": "小孩教育",
+                "level": 2,
+                "parent_id": 17,
+                "items": []
+            },
+            {
+                "id": 19,
+                "name": "健康生活",
+                "level": 2,
+                "parent_id": 17,
+                "items": []
+            },
+            {
+                "id": 20,
+                "name": "娱乐趣事",
+                "level": 2,
+                "parent_id": 17,
+                "items": []
+            },
+            {
+                "id": 21,
+                "name": "NAS",
+                "level": 2,
+                "parent_id": 17,
+                "items": []
+            },
+            {
+                "id": 22,
+                "name": "搞钱",
+                "level": 2,
+                "parent_id": 17,
+                "items": []
+            },
+            {
+                "id": 23,
+                "name": "创业",
+                "level": 2,
+                "parent_id": 17,
+                "items": []
+            }
+        ]
+    },
+    {
+        "id": 24,
+        "name": "感悟",
+        "level": 1,
+        "parent_id": null,
+        "items": [
+            {
+                "id": 25,
+                "name": "工作经验",
+                "level": 2,
+                "parent_id": 24,
+                "items": []
+            },
+            {
+                "id": 26,
+                "name": "人生感悟",
+                "level": 2,
+                "parent_id": 24,
+                "items": []
+            }
+        ]
+    }
+]
