@@ -1,117 +1,620 @@
-﻿// 所有文档列表
-let docs = [
-    { title: 'ChatGPT', href: '../ChatGPT', category: ['工作额外技能']},
-    { title: '数据结构与算法', href: '../DataStructureAndAlgorithms', category: ['程序员底蕴']},
-    { title: '设计模式', href: '../designPattern', category: ['程序员底蕴']},
-    { title: 'javasE', href: '../javaSE', category: ['JAVA']},
-    { title: 'JUC', href: '../JUC', category: ['JAVA']},
-    { title: 'JVM', href: '../JVM', category: ['JAVA', '程序员底蕴']},
-    { title: 'Netty', href: '../Netty', category: ['中间件', 'JAVA']},
-    { title: 'Spring', href: '../Spring', category: ['JAVA', 'Spring']},
-    { title: 'SpringBoot', href: '../springBoot', category: ['JAVA', 'Spring']},
-    { title: 'SpringSecurity', href: '../SpringSecurity', category: ['JAVA', 'Spring']},
-    { title: 'WebSocket', href: '../WebSocket', category: ['JAVA']},
-    { title: 'Apache Luncene', href: '../luncene', category: ['中间件']},
-    { title: 'ElasticSearch', href: '../ElasticSearch', category: ['中间件']},
-    { title: 'Electron', href: '../electron', category: ['NodeJs', 'JAVSCRIPT']},
-    { title: 'Mock服务', href: '../mockService', category: ['JAVA']},
-    { title: 'DevOps', href: '../DevOps', category: ['快速交付']},
-    { title: 'Docker', href: '../Docker', category: ['快速交付', '开发测试工具']},
-    { title: 'nginx', href: '../nginx', category: ['中间件']},
-    { title: 'Jenkins', href: '../jenkins', category: ['快速交付', '开发测试工具']},
-    { title: 'Jmeter', href: '../Jmeter', category: ['中间件', '开发测试工具']},
-    { title: 'MySQL', href: '../mysql', category: ['数据库']},
-    { title: 'Mongo', href: '../mongo', category: ['数据库']},
-    { title: 'Sharding Sphere', href: '../ShardingSphere', category: ['数据库', '中间件']},
-    { title: 'MyCat', href: '../mycat', category: ['数据库', '中间件']},
-    { title: 'mybatis', href: '../mybatis', category: ['JAVA', 'Spring']},
-    { title: 'mybatis-Plus', href: '../mybatisPlus', category: ['JAVA', 'Spring']},
-    { title: 'Swagger', href: '../Swagger', category: ['JAVA', 'Spring', '开发测试工具']},
-    { title: 'Postman', href: '../postman', category: ['快速交付', '开发测试工具']},
-    { title: 'tomcat', href: '../tomcat', category: ['中间件', '开发测试工具']},
-    { title: 'Zookeeper', href: '../Zookeeper', category: ['中间件']},
-    { title: '玩转nas', href: '../nas', category: ['NAS']},
-    { title: 'esp8266', href: '../esp8266', category: ['物联网']},
-    { title: 'SecureCRT', href: '../SecureCRT', category: ['开发测试工具', '快速交付']},
-    { title: '前端知识学习', href: '../前端知识学习', category: ['JAVSCRIPT']},
-    { title: 'ArchLinux', href: '../ArchLinux', category: ['操作系统', 'Linux']},
-    { title: 'Windows', href: '../windowsOS', category: ['操作系统', '开发测试工具']},
-    { title: 'git文档', href: '../gitDoc', category: ['开发测试工具']},
-    { title: 'IDEA', href: '../IDEA', category: ['开发测试工具']},
-    { title: 'markdown', href: '../markdown', category: ['工作额外技能']},
-    { title: '架构师之路', href: '../architectRoad', category: ['程序员底蕴']},
-	{ title: '高并发技术', href: '../HighConcurrencyTech', category: ['程序员底蕴']},
-    { title: '性能测试调优', href: '../性能测试调优', category: ['程序员底蕴', '工作额外技能', '开发测试工具']},
-    { title: 'selenium', href: '../selenium', category: ['工作额外技能', '开发测试工具']},
-    { title: '按键精灵', href: '../按键精灵', category: ['工作额外技能', '开发测试工具', '其他技能']},
-    { title: 'redis', href: '../redis', category: ['中间件']},
-    { title: 'HTTP', href: '../HTTP', category: ['程序员底蕴']},
-    { title: 'NodeJS', href: '../NodeJs', category: ['JAVSCRIPT', 'NodeJs']},
-    { title: 'windows批处理', href: '../windows-batch', category: ['操作系统', '工作额外技能', '快速交付']},
-    { title: 'Python', href: '../python', category: ['Python']},
-    { title: 'Python官方文档', href: 'https://docs.python.org/zh-cn/3/', category: ['Python']},
-    { title: 'Python tkinter', href: 'https://zhuanlan.zhihu.com/p/569960987', category: ['Python']},
-    { title: 'mysql45讲', href: 'https://funnylog.gitee.io/mysql45/', category: ['数据库']},
-    { title: 'Hutool', href: 'https://www.hutool.cn/', category: ['JAVA']},
-    // { title: 'raspberryPI', href: '../raspberryPI', category: ['物联网']},
-    // { title: 'vi_vim', href: '../vi_vim', category: ['快速交付', '开发测试工具', 'Linux']},
-    { title: '论软件外包', href: '../outsource', category: ['工作经验']},
-    { title: '傲游外网', href: '../傲游外网', category: ['其他技能']},
-    { title: '健身-减肥', href: '../lifeReduceWeight', category: ['健康生活']},
-    { title: '数据治理与数据仓库模型设计', href: '../数据治理与数据仓库模型设计', category: ['其他技能']},
-    { title: '简历Resume', href: '../resume/resume.html', private: true /* 后面可将一些文档隐藏起来 */, category: ['工作额外技能', '工作经验']},
-    { title: '第三方文档收集', href: '../thirdDocument', category: ['其他技能']},
-    { title: '文档的组织方式', href: '../docBuildMethod', private: true /* 后面可将一些文档隐藏起来 */, category: ['其他技能']},
-    { title: '找工作的一些经历', href: '../Interview', private: true /* 后面可将一些文档隐藏起来 */, category: ['工作经验']},
-    { title: '人生规划', href: '../LifePlan', private: true /* 后面可将一些文档隐藏起来 */, category: ['工作经验', '人生感悟']},
-    { title: '中国礼仪', href: '../chinaCeremony', category: ['小孩教育']},
-    { title: 'IT那些趣事', href: '../IT那些有意思的事', category: ['工作经验'] },
-	{ title: '酒店', href: '../hotel', category: ['搞钱', '创业'] },
-	{ title: '常见中药收集', href: '../ChineseMedicine', category: ['健康生活'] },
-    { title: '薅羊毛那些事', href: '../薅羊毛那些事', category: ['搞钱', '健康生活'] }
-]
+
+// 所有文档列表
+let docs = [
+{ 
+            "id": 1,
+            "title": "ChatGPT",
+            "href": "../ChatGPT",
+            "is_private": false, 
+            "category": ["工作额外技能"]
+         },{ 
+            "id": 2,
+            "title": "数据结构与算法",
+            "href": "../DataStructureAndAlgorithms",
+            "is_private": false, 
+            "category": ["程序员底蕴"]
+         },{ 
+            "id": 3,
+            "title": "设计模式",
+            "href": "../designPattern",
+            "is_private": false, 
+            "category": ["程序员底蕴"]
+         },{ 
+            "id": 4,
+            "title": "javasE",
+            "href": "../javaSE",
+            "is_private": false, 
+            "category": ["JAVA"]
+         },{ 
+            "id": 5,
+            "title": "JUC",
+            "href": "../JUC",
+            "is_private": false, 
+            "category": ["JAVA"]
+         },{ 
+            "id": 6,
+            "title": "JVM",
+            "href": "../JVM",
+            "is_private": false, 
+            "category": ["JAVA", "程序员底蕴"]
+         },{ 
+            "id": 7,
+            "title": "Netty",
+            "href": "../Netty",
+            "is_private": false, 
+            "category": ["中间件", "JAVA"]
+         },{ 
+            "id": 8,
+            "title": "Spring",
+            "href": "../Spring",
+            "is_private": false, 
+            "category": ["JAVA", "Spring"]
+         },{ 
+            "id": 9,
+            "title": "SpringBoot",
+            "href": "../springBoot",
+            "is_private": false, 
+            "category": ["JAVA", "Spring"]
+         },{ 
+            "id": 10,
+            "title": "SpringSecurity",
+            "href": "../SpringSecurity",
+            "is_private": false, 
+            "category": ["JAVA", "Spring"]
+         },{ 
+            "id": 11,
+            "title": "WebSocket",
+            "href": "../WebSocket",
+            "is_private": false, 
+            "category": ["JAVA"]
+         },{ 
+            "id": 12,
+            "title": "Apache Luncene",
+            "href": "../luncene",
+            "is_private": false, 
+            "category": ["中间件"]
+         },{ 
+            "id": 13,
+            "title": "ElasticSearch",
+            "href": "../ElasticSearch",
+            "is_private": false, 
+            "category": ["中间件"]
+         },{ 
+            "id": 14,
+            "title": "Electron",
+            "href": "../electron",
+            "is_private": false, 
+            "category": ["NodeJs", "JAVSCRIPT"]
+         },{ 
+            "id": 15,
+            "title": "Mock服务",
+            "href": "../mockService",
+            "is_private": false, 
+            "category": ["JAVA"]
+         },{ 
+            "id": 16,
+            "title": "DevOps",
+            "href": "../DevOps",
+            "is_private": false, 
+            "category": ["快速交付"]
+         },{ 
+            "id": 17,
+            "title": "Docker",
+            "href": "../Docker",
+            "is_private": false, 
+            "category": ["快速交付", "开发测试工具"]
+         },{ 
+            "id": 18,
+            "title": "nginx",
+            "href": "../nginx",
+            "is_private": false, 
+            "category": ["中间件"]
+         },{ 
+            "id": 19,
+            "title": "Jenkins",
+            "href": "../jenkins",
+            "is_private": false, 
+            "category": ["快速交付", "开发测试工具"]
+         },{ 
+            "id": 20,
+            "title": "Jmeter",
+            "href": "../Jmeter",
+            "is_private": false, 
+            "category": ["中间件", "开发测试工具"]
+         },{ 
+            "id": 21,
+            "title": "MySQL",
+            "href": "../mysql",
+            "is_private": false, 
+            "category": ["数据库"]
+         },{ 
+            "id": 22,
+            "title": "Mongo",
+            "href": "../mongo",
+            "is_private": false, 
+            "category": ["数据库"]
+         },{ 
+            "id": 23,
+            "title": "Sharding Sphere",
+            "href": "../ShardingSphere",
+            "is_private": false, 
+            "category": ["数据库", "中间件"]
+         },{ 
+            "id": 24,
+            "title": "MyCat",
+            "href": "../mycat",
+            "is_private": false, 
+            "category": ["数据库", "中间件"]
+         },{ 
+            "id": 25,
+            "title": "mybatis",
+            "href": "../mybatis",
+            "is_private": false, 
+            "category": ["JAVA", "Spring"]
+         },{ 
+            "id": 26,
+            "title": "mybatis-Plus",
+            "href": "../mybatisPlus",
+            "is_private": false, 
+            "category": ["JAVA", "Spring"]
+         },{ 
+            "id": 27,
+            "title": "Swagger",
+            "href": "../Swagger",
+            "is_private": false, 
+            "category": ["JAVA", "Spring", "开发测试工具"]
+         },{ 
+            "id": 28,
+            "title": "Postman",
+            "href": "../postman",
+            "is_private": false, 
+            "category": ["快速交付", "开发测试工具"]
+         },{ 
+            "id": 29,
+            "title": "tomcat",
+            "href": "../tomcat",
+            "is_private": false, 
+            "category": ["中间件", "开发测试工具"]
+         },{ 
+            "id": 30,
+            "title": "Zookeeper",
+            "href": "../Zookeeper",
+            "is_private": false, 
+            "category": ["中间件"]
+         },{ 
+            "id": 31,
+            "title": "玩转nas",
+            "href": "../nas",
+            "is_private": false, 
+            "category": ["NAS"]
+         },{ 
+            "id": 32,
+            "title": "esp8266",
+            "href": "../esp8266",
+            "is_private": false, 
+            "category": ["物联网"]
+         },{ 
+            "id": 33,
+            "title": "SecureCRT",
+            "href": "../SecureCRT",
+            "is_private": false, 
+            "category": ["开发测试工具", "快速交付"]
+         },{ 
+            "id": 34,
+            "title": "前端知识学习",
+            "href": "../前端知识学习",
+            "is_private": false, 
+            "category": ["JAVSCRIPT"]
+         },{ 
+            "id": 35,
+            "title": "ArchLinux",
+            "href": "../ArchLinux",
+            "is_private": false, 
+            "category": ["操作系统", "Linux"]
+         },{ 
+            "id": 36,
+            "title": "Windows",
+            "href": "../windowsOS",
+            "is_private": false, 
+            "category": ["操作系统", "开发测试工具"]
+         },{ 
+            "id": 37,
+            "title": "git文档",
+            "href": "../gitDoc",
+            "is_private": false, 
+            "category": ["开发测试工具"]
+         },{ 
+            "id": 38,
+            "title": "IDEA",
+            "href": "../IDEA",
+            "is_private": false, 
+            "category": ["开发测试工具"]
+         },{ 
+            "id": 39,
+            "title": "markdown",
+            "href": "../markdown",
+            "is_private": false, 
+            "category": ["工作额外技能"]
+         },{ 
+            "id": 40,
+            "title": "架构师之路",
+            "href": "../architectRoad",
+            "is_private": false, 
+            "category": ["程序员底蕴"]
+         },{ 
+            "id": 41,
+            "title": "高并发技术",
+            "href": "../HighConcurrencyTech",
+            "is_private": false, 
+            "category": ["程序员底蕴"]
+         },{ 
+            "id": 42,
+            "title": "性能测试调优",
+            "href": "../性能测试调优",
+            "is_private": false, 
+            "category": ["程序员底蕴", "工作额外技能", "开发测试工具"]
+         },{ 
+            "id": 43,
+            "title": "selenium",
+            "href": "../selenium",
+            "is_private": false, 
+            "category": ["工作额外技能", "开发测试工具"]
+         },{ 
+            "id": 44,
+            "title": "按键精灵",
+            "href": "../按键精灵",
+            "is_private": false, 
+            "category": ["工作额外技能", "开发测试工具", "其他技能"]
+         },{ 
+            "id": 45,
+            "title": "redis",
+            "href": "../redis",
+            "is_private": false, 
+            "category": ["中间件"]
+         },{ 
+            "id": 46,
+            "title": "HTTP",
+            "href": "../HTTP",
+            "is_private": false, 
+            "category": ["程序员底蕴"]
+         },{ 
+            "id": 47,
+            "title": "NodeJS",
+            "href": "../NodeJs",
+            "is_private": false, 
+            "category": ["JAVSCRIPT", "NodeJs"]
+         },{ 
+            "id": 48,
+            "title": "windows批处理",
+            "href": "../windows-batch",
+            "is_private": false, 
+            "category": ["操作系统", "工作额外技能", "快速交付"]
+         },{ 
+            "id": 49,
+            "title": "Python",
+            "href": "../python",
+            "is_private": false, 
+            "category": ["Python"]
+         },{ 
+            "id": 50,
+            "title": "Python官方文档",
+            "href": "https://docs.python.org/zh-cn/3/",
+            "is_private": false, 
+            "category": ["Python"]
+         },{ 
+            "id": 51,
+            "title": "Python tkinter",
+            "href": "https://zhuanlan.zhihu.com/p/569960987",
+            "is_private": false, 
+            "category": ["Python"]
+         },{ 
+            "id": 52,
+            "title": "mysql45讲",
+            "href": "https://funnylog.gitee.io/mysql45/",
+            "is_private": false, 
+            "category": ["数据库"]
+         },{ 
+            "id": 53,
+            "title": "Hutool",
+            "href": "https://www.hutool.cn/",
+            "is_private": false, 
+            "category": ["JAVA"]
+         },{ 
+            "id": 54,
+            "title": "raspberryPI",
+            "href": "../raspberryPI",
+            "is_private": false, 
+            "category": ["物联网"]
+         },{ 
+            "id": 55,
+            "title": "vi_vim",
+            "href": "../vi_vim",
+            "is_private": false, 
+            "category": ["快速交付", "开发测试工具", "Linux"]
+         },{ 
+            "id": 56,
+            "title": "论软件外包",
+            "href": "../outsource",
+            "is_private": false, 
+            "category": ["工作经验"]
+         },{ 
+            "id": 57,
+            "title": "傲游外网",
+            "href": "../傲游外网",
+            "is_private": false, 
+            "category": ["其他技能"]
+         },{ 
+            "id": 58,
+            "title": "健身-减肥",
+            "href": "../lifeReduceWeight",
+            "is_private": false, 
+            "category": ["健康生活"]
+         },{ 
+            "id": 59,
+            "title": "数据治理与数据仓库模型设计",
+            "href": "../数据治理与数据仓库模型设计",
+            "is_private": false, 
+            "category": ["其他技能"]
+         },{ 
+            "id": 60,
+            "title": "简历Resume",
+            "href": "../resume/resume.html",
+            "is_private": true, 
+            "category": ["工作额外技能", "工作经验"]
+         },{ 
+            "id": 61,
+            "title": "第三方文档收集",
+            "href": "../thirdDocument",
+            "is_private": false, 
+            "category": ["其他技能"]
+         },{ 
+            "id": 62,
+            "title": "文档的组织方式",
+            "href": "../docBuildMethod",
+            "is_private": true, 
+            "category": ["其他技能"]
+         },{ 
+            "id": 63,
+            "title": "找工作的一些经历",
+            "href": "../Interview",
+            "is_private": true, 
+            "category": ["工作经验"]
+         },{ 
+            "id": 64,
+            "title": "人生规划",
+            "href": "../LifePlan",
+            "is_private": true, 
+            "category": ["工作经验", "人生感悟"]
+         },{ 
+            "id": 65,
+            "title": "中国礼仪",
+            "href": "../chinaCeremony",
+            "is_private": false, 
+            "category": ["小孩教育"]
+         },{ 
+            "id": 66,
+            "title": "IT那些趣事",
+            "href": "../IT那些有意思的事",
+            "is_private": false, 
+            "category": ["工作经验"]
+         },{ 
+            "id": 67,
+            "title": "酒店",
+            "href": "../hotel",
+            "is_private": false, 
+            "category": ["搞钱", "创业"]
+         },{ 
+            "id": 68,
+            "title": "常见中药收集",
+            "href": "../ChineseMedicine",
+            "is_private": false, 
+            "category": ["健康生活"]
+         },{ 
+            "id": 69,
+            "title": "薅羊毛那些事",
+            "href": "../薅羊毛那些事",
+            "is_private": false, 
+            "category": ["搞钱", "健康生活"]
+         },{ 
+            "id": 74,
+            "title": "终极测试",
+            "href": "../finalTest",
+            "is_private": false, 
+            "category": ["Python", "其他技能"]
+         }
+];
 // 所有文档分类
 let docCategory = [
-{
-    title: "技术",
-    items: [
-        {title: "JAVA"},
-        {title: "Spring"},
-        {title: "程序员底蕴"},
-        {title: "数据库"},
-        {title: "中间件"},
-        {title: "工作额外技能"},
-        {title: "NodeJs"},
-        {title: "JAVSCRIPT"},
-        {title: "Python"},
-        {title: "快速交付"},
-        {title: "开发测试工具"},
-        {title: "物联网"},
-        {title: "操作系统"},
-        {title: "Linux"},
-        {title: "其他技能"}
-    ]
-},
-{
-    title: "生活",
-    items: [
-        {title: "小孩教育"},
-        {title: "健康生活"},
-        {title: "娱乐趣事"},
-        {title: "NAS"},
-        {title: "搞钱"},
-        {title: "创业"}
-    ]
-},
-{
-    title: "感悟",
-    items: [
-        {title: "工作经验"},
-        {title: "人生感悟"}
-    ]
-}
-]
+    {
+        "id": 1,
+        "title": "技术",
+        "level": 1,
+        "parent_id": null,
+        "items": [
+            {
+                "id": 2,
+                "title": "JAVA",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 3,
+                "title": "Spring",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 4,
+                "title": "程序员底蕴",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 5,
+                "title": "数据库",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 6,
+                "title": "中间件",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 7,
+                "title": "工作额外技能",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 8,
+                "title": "NodeJs",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 9,
+                "title": "JAVSCRIPT",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 10,
+                "title": "Python",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 11,
+                "title": "快速交付",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 12,
+                "title": "开发测试工具",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 13,
+                "title": "物联网",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 14,
+                "title": "操作系统",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 15,
+                "title": "Linux",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            },
+            {
+                "id": 16,
+                "title": "其他技能",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "title": "生活",
+        "level": 1,
+        "parent_id": null,
+        "items": [
+            {
+                "id": 18,
+                "title": "小孩教育",
+                "level": 2,
+                "parent_id": 17,
+                "items": []
+            },
+            {
+                "id": 19,
+                "title": "健康生活",
+                "level": 2,
+                "parent_id": 17,
+                "items": []
+            },
+            {
+                "id": 20,
+                "title": "娱乐趣事",
+                "level": 2,
+                "parent_id": 17,
+                "items": []
+            },
+            {
+                "id": 21,
+                "title": "NAS",
+                "level": 2,
+                "parent_id": 17,
+                "items": []
+            },
+            {
+                "id": 22,
+                "title": "搞钱",
+                "level": 2,
+                "parent_id": 17,
+                "items": []
+            },
+            {
+                "id": 23,
+                "title": "创业",
+                "level": 2,
+                "parent_id": 17,
+                "items": []
+            }
+        ]
+    },
+    {
+        "id": 24,
+        "title": "感悟",
+        "level": 1,
+        "parent_id": null,
+        "items": [
+            {
+                "id": 25,
+                "title": "工作经验",
+                "level": 2,
+                "parent_id": 24,
+                "items": []
+            },
+            {
+                "id": 26,
+                "title": "人生感悟",
+                "level": 2,
+                "parent_id": 24,
+                "items": []
+            }
+        ]
+    }
+]; 
 
+// 特殊定位符，前面是数据，后面是代码，python按最新数据重新拼接
+// >>>>>>>>>!@#$%^&*!<<<<<<<<<
+                
 // 防止抖动函数
 function debounce(func, delay) {
     let timerId;

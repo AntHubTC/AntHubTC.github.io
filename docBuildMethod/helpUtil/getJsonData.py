@@ -1,13 +1,15 @@
 import json
 import sqlite3
 
+
 class Category:
-    def __init__(self, id, name, level=1, parent_id=None):
+    def __init__(self, id, title, level=1, parent_id=None):
         self.id = id
-        self.name = name
+        self.title = title
         self.level = level
         self.parent_id = parent_id
-        self.items:list[Category] = []
+        self.items: list[Category] = []
+
 
 # Custom JSON encoder for the Category class
 class CategoryEncoder(json.JSONEncoder):
@@ -16,8 +18,9 @@ class CategoryEncoder(json.JSONEncoder):
             return obj.__dict__
         return json.JSONEncoder.default(self, obj)
 
+
 class Document:
-    def __init__(self, id, title, href, is_private=0, category:str=None):
+    def __init__(self, id, title, href, is_private=0, category: str = ""):
         self.id = id
         self.title = title
         self.href = href
@@ -32,9 +35,8 @@ class Document:
             "title": "{self.title}",
             "href": "{self.href}",
             "is_private": {"true" if self.is_private == 1 else "false"}, 
-            "category": {json.dumps(categorys, ensure_ascii = False)}
+            "category": {json.dumps(categorys, ensure_ascii=False)}
          }}"""
-
 
 
 def gen_doc_json():
@@ -42,36 +44,39 @@ def gen_doc_json():
     cursor = conn.cursor()
 
     # 从documents表中查询数据
-    cursor.execute('SELECT * FROM documents')
+    cursor.execute('SELECT id, title, href, is_private, category FROM documents')
     data = cursor.fetchall()
 
     def to_document(row):
         return Document(row[0], row[1], row[2], row[3], row[4])
-    # 打印数据
-    documents:list[str] = [to_document(row).to_json() for row in data]
-    json_data = '[' + ','.join(documents) + ']'
 
-    with open('doc_json_data.json', 'w') as f:
+    # 打印数据
+    documents: list[str] = [to_document(row).to_json() for row in data]
+    json_data = '[\r\n' + ','.join(documents) + '\r\n]'
+
+    with open('doc_json_data.json', 'w', encoding="utf-8") as f:
         f.write(json_data)
 
     # 关闭cursor和连接
     cursor.close()
     conn.close()
+    return json_data
+
 
 def gen_category_json():
     conn = sqlite3.connect("doc.db")
     cursor = conn.cursor()
 
     # 从documents表中查询数据
-    cursor.execute('SELECT * FROM categorys')
+    cursor.execute('SELECT id, name, level, parent_id FROM categorys')
     data = cursor.fetchall()
 
     def to_Categroy(row):
         return Category(row[0], row[1], row[2], row[3])
 
-    categroys:list[Category] = [to_Categroy(row) for row in data]
-    level_1_cates:list[Category] = [cate for cate in categroys if cate.level == 1]
-    level_1_cate_dict = {doc.id : doc for doc in level_1_cates}
+    categroys: list[Category] = [to_Categroy(row) for row in data]
+    level_1_cates: list[Category] = [cate for cate in categroys if cate.level == 1]
+    level_1_cate_dict = {doc.id: doc for doc in level_1_cates}
 
     level_2_cates: list[Category] = [cate for cate in categroys if cate.level == 2]
     for cate in level_2_cates:
@@ -79,12 +84,13 @@ def gen_category_json():
 
     json_data = json.dumps(level_1_cates, ensure_ascii=False, indent=4, cls=CategoryEncoder)
 
-    with open('category_json_data.json', 'w') as f:
+    with open('category_json_data.json', 'w', encoding="utf-8") as f:
         f.write(json_data)
 
     # 关闭cursor和连接
     cursor.close()
     conn.close()
+    return json_data
 
 
 if __name__ == '__main__':

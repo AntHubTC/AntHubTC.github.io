@@ -1,21 +1,22 @@
-[{ 
+[
+{ 
             "id": 1,
             "title": "ChatGPT",
             "href": "../ChatGPT",
             "is_private": false, 
-            "category": ["¹¤×÷¶îÍâ¼¼ÄÜ"]
+            "category": ["å·¥ä½œé¢å¤–æŠ€èƒ½"]
          },{ 
             "id": 2,
-            "title": "Êı¾İ½á¹¹ÓëËã·¨",
+            "title": "æ•°æ®ç»“æ„ä¸ç®—æ³•",
             "href": "../DataStructureAndAlgorithms",
             "is_private": false, 
-            "category": ["³ÌĞòÔ±µ×ÔÌ"]
+            "category": ["ç¨‹åºå‘˜åº•è•´"]
          },{ 
             "id": 3,
-            "title": "Éè¼ÆÄ£Ê½",
+            "title": "è®¾è®¡æ¨¡å¼",
             "href": "../designPattern",
             "is_private": false, 
-            "category": ["³ÌĞòÔ±µ×ÔÌ"]
+            "category": ["ç¨‹åºå‘˜åº•è•´"]
          },{ 
             "id": 4,
             "title": "javasE",
@@ -33,13 +34,13 @@
             "title": "JVM",
             "href": "../JVM",
             "is_private": false, 
-            "category": ["JAVA", "³ÌĞòÔ±µ×ÔÌ"]
+            "category": ["JAVA", "ç¨‹åºå‘˜åº•è•´"]
          },{ 
             "id": 7,
             "title": "Netty",
             "href": "../Netty",
             "is_private": false, 
-            "category": ["ÖĞ¼ä¼ş", "JAVA"]
+            "category": ["ä¸­é—´ä»¶", "JAVA"]
          },{ 
             "id": 8,
             "title": "Spring",
@@ -69,13 +70,13 @@
             "title": "Apache Luncene",
             "href": "../luncene",
             "is_private": false, 
-            "category": ["ÖĞ¼ä¼ş"]
+            "category": ["ä¸­é—´ä»¶"]
          },{ 
             "id": 13,
             "title": "ElasticSearch",
             "href": "../ElasticSearch",
             "is_private": false, 
-            "category": ["ÖĞ¼ä¼ş"]
+            "category": ["ä¸­é—´ä»¶"]
          },{ 
             "id": 14,
             "title": "Electron",
@@ -84,7 +85,7 @@
             "category": ["NodeJs", "JAVSCRIPT"]
          },{ 
             "id": 15,
-            "title": "Mock·şÎñ",
+            "title": "MockæœåŠ¡",
             "href": "../mockService",
             "is_private": false, 
             "category": ["JAVA"]
@@ -93,55 +94,55 @@
             "title": "DevOps",
             "href": "../DevOps",
             "is_private": false, 
-            "category": ["¿ìËÙ½»¸¶"]
+            "category": ["å¿«é€Ÿäº¤ä»˜"]
          },{ 
             "id": 17,
             "title": "Docker",
             "href": "../Docker",
             "is_private": false, 
-            "category": ["¿ìËÙ½»¸¶", "¿ª·¢²âÊÔ¹¤¾ß"]
+            "category": ["å¿«é€Ÿäº¤ä»˜", "å¼€å‘æµ‹è¯•å·¥å…·"]
          },{ 
             "id": 18,
             "title": "nginx",
             "href": "../nginx",
             "is_private": false, 
-            "category": ["ÖĞ¼ä¼ş"]
+            "category": ["ä¸­é—´ä»¶"]
          },{ 
             "id": 19,
             "title": "Jenkins",
             "href": "../jenkins",
             "is_private": false, 
-            "category": ["¿ìËÙ½»¸¶", "¿ª·¢²âÊÔ¹¤¾ß"]
+            "category": ["å¿«é€Ÿäº¤ä»˜", "å¼€å‘æµ‹è¯•å·¥å…·"]
          },{ 
             "id": 20,
             "title": "Jmeter",
             "href": "../Jmeter",
             "is_private": false, 
-            "category": ["ÖĞ¼ä¼ş", "¿ª·¢²âÊÔ¹¤¾ß"]
+            "category": ["ä¸­é—´ä»¶", "å¼€å‘æµ‹è¯•å·¥å…·"]
          },{ 
             "id": 21,
             "title": "MySQL",
             "href": "../mysql",
             "is_private": false, 
-            "category": ["Êı¾İ¿â"]
+            "category": ["æ•°æ®åº“"]
          },{ 
             "id": 22,
             "title": "Mongo",
             "href": "../mongo",
             "is_private": false, 
-            "category": ["Êı¾İ¿â"]
+            "category": ["æ•°æ®åº“"]
          },{ 
             "id": 23,
             "title": "Sharding Sphere",
             "href": "../ShardingSphere",
             "is_private": false, 
-            "category": ["Êı¾İ¿â", "ÖĞ¼ä¼ş"]
+            "category": ["æ•°æ®åº“", "ä¸­é—´ä»¶"]
          },{ 
             "id": 24,
             "title": "MyCat",
             "href": "../mycat",
             "is_private": false, 
-            "category": ["Êı¾İ¿â", "ÖĞ¼ä¼ş"]
+            "category": ["æ•°æ®åº“", "ä¸­é—´ä»¶"]
          },{ 
             "id": 25,
             "title": "mybatis",
@@ -159,28 +160,28 @@
             "title": "Swagger",
             "href": "../Swagger",
             "is_private": false, 
-            "category": ["JAVA", "Spring", "¿ª·¢²âÊÔ¹¤¾ß"]
+            "category": ["JAVA", "Spring", "å¼€å‘æµ‹è¯•å·¥å…·"]
          },{ 
             "id": 28,
             "title": "Postman",
             "href": "../postman",
             "is_private": false, 
-            "category": ["¿ìËÙ½»¸¶", "¿ª·¢²âÊÔ¹¤¾ß"]
+            "category": ["å¿«é€Ÿäº¤ä»˜", "å¼€å‘æµ‹è¯•å·¥å…·"]
          },{ 
             "id": 29,
             "title": "tomcat",
             "href": "../tomcat",
             "is_private": false, 
-            "category": ["ÖĞ¼ä¼ş", "¿ª·¢²âÊÔ¹¤¾ß"]
+            "category": ["ä¸­é—´ä»¶", "å¼€å‘æµ‹è¯•å·¥å…·"]
          },{ 
             "id": 30,
             "title": "Zookeeper",
             "href": "../Zookeeper",
             "is_private": false, 
-            "category": ["ÖĞ¼ä¼ş"]
+            "category": ["ä¸­é—´ä»¶"]
          },{ 
             "id": 31,
-            "title": "Íæ×ªnas",
+            "title": "ç©è½¬nas",
             "href": "../nas",
             "is_private": false, 
             "category": ["NAS"]
@@ -189,17 +190,17 @@
             "title": "esp8266",
             "href": "../esp8266",
             "is_private": false, 
-            "category": ["ÎïÁªÍø"]
+            "category": ["ç‰©è”ç½‘"]
          },{ 
             "id": 33,
             "title": "SecureCRT",
             "href": "../SecureCRT",
             "is_private": false, 
-            "category": ["¿ª·¢²âÊÔ¹¤¾ß", "¿ìËÙ½»¸¶"]
+            "category": ["å¼€å‘æµ‹è¯•å·¥å…·", "å¿«é€Ÿäº¤ä»˜"]
          },{ 
             "id": 34,
-            "title": "Ç°¶ËÖªÊ¶Ñ§Ï°",
-            "href": "../Ç°¶ËÖªÊ¶Ñ§Ï°",
+            "title": "å‰ç«¯çŸ¥è¯†å­¦ä¹ ",
+            "href": "../å‰ç«¯çŸ¥è¯†å­¦ä¹ ",
             "is_private": false, 
             "category": ["JAVSCRIPT"]
          },{ 
@@ -207,73 +208,73 @@
             "title": "ArchLinux",
             "href": "../ArchLinux",
             "is_private": false, 
-            "category": ["²Ù×÷ÏµÍ³", "Linux"]
+            "category": ["æ“ä½œç³»ç»Ÿ", "Linux"]
          },{ 
             "id": 36,
             "title": "Windows",
             "href": "../windowsOS",
             "is_private": false, 
-            "category": ["²Ù×÷ÏµÍ³", "¿ª·¢²âÊÔ¹¤¾ß"]
+            "category": ["æ“ä½œç³»ç»Ÿ", "å¼€å‘æµ‹è¯•å·¥å…·"]
          },{ 
             "id": 37,
-            "title": "gitÎÄµµ",
+            "title": "gitæ–‡æ¡£",
             "href": "../gitDoc",
             "is_private": false, 
-            "category": ["¿ª·¢²âÊÔ¹¤¾ß"]
+            "category": ["å¼€å‘æµ‹è¯•å·¥å…·"]
          },{ 
             "id": 38,
             "title": "IDEA",
             "href": "../IDEA",
             "is_private": false, 
-            "category": ["¿ª·¢²âÊÔ¹¤¾ß"]
+            "category": ["å¼€å‘æµ‹è¯•å·¥å…·"]
          },{ 
             "id": 39,
             "title": "markdown",
             "href": "../markdown",
             "is_private": false, 
-            "category": ["¹¤×÷¶îÍâ¼¼ÄÜ"]
+            "category": ["å·¥ä½œé¢å¤–æŠ€èƒ½"]
          },{ 
             "id": 40,
-            "title": "¼Ü¹¹Ê¦Ö®Â·",
+            "title": "æ¶æ„å¸ˆä¹‹è·¯",
             "href": "../architectRoad",
             "is_private": false, 
-            "category": ["³ÌĞòÔ±µ×ÔÌ"]
+            "category": ["ç¨‹åºå‘˜åº•è•´"]
          },{ 
             "id": 41,
-            "title": "¸ß²¢·¢¼¼Êõ",
+            "title": "é«˜å¹¶å‘æŠ€æœ¯",
             "href": "../HighConcurrencyTech",
             "is_private": false, 
-            "category": ["³ÌĞòÔ±µ×ÔÌ"]
+            "category": ["ç¨‹åºå‘˜åº•è•´"]
          },{ 
             "id": 42,
-            "title": "ĞÔÄÜ²âÊÔµ÷ÓÅ",
-            "href": "../ĞÔÄÜ²âÊÔµ÷ÓÅ",
+            "title": "æ€§èƒ½æµ‹è¯•è°ƒä¼˜",
+            "href": "../æ€§èƒ½æµ‹è¯•è°ƒä¼˜",
             "is_private": false, 
-            "category": ["³ÌĞòÔ±µ×ÔÌ", "¹¤×÷¶îÍâ¼¼ÄÜ", "¿ª·¢²âÊÔ¹¤¾ß"]
+            "category": ["ç¨‹åºå‘˜åº•è•´", "å·¥ä½œé¢å¤–æŠ€èƒ½", "å¼€å‘æµ‹è¯•å·¥å…·"]
          },{ 
             "id": 43,
             "title": "selenium",
             "href": "../selenium",
             "is_private": false, 
-            "category": ["¹¤×÷¶îÍâ¼¼ÄÜ", "¿ª·¢²âÊÔ¹¤¾ß"]
+            "category": ["å·¥ä½œé¢å¤–æŠ€èƒ½", "å¼€å‘æµ‹è¯•å·¥å…·"]
          },{ 
             "id": 44,
-            "title": "°´¼ü¾«Áé",
-            "href": "../°´¼ü¾«Áé",
+            "title": "æŒ‰é”®ç²¾çµ",
+            "href": "../æŒ‰é”®ç²¾çµ",
             "is_private": false, 
-            "category": ["¹¤×÷¶îÍâ¼¼ÄÜ", "¿ª·¢²âÊÔ¹¤¾ß", "ÆäËû¼¼ÄÜ"]
+            "category": ["å·¥ä½œé¢å¤–æŠ€èƒ½", "å¼€å‘æµ‹è¯•å·¥å…·", "å…¶ä»–æŠ€èƒ½"]
          },{ 
             "id": 45,
             "title": "redis",
             "href": "../redis",
             "is_private": false, 
-            "category": ["ÖĞ¼ä¼ş"]
+            "category": ["ä¸­é—´ä»¶"]
          },{ 
             "id": 46,
             "title": "HTTP",
             "href": "../HTTP",
             "is_private": false, 
-            "category": ["³ÌĞòÔ±µ×ÔÌ"]
+            "category": ["ç¨‹åºå‘˜åº•è•´"]
          },{ 
             "id": 47,
             "title": "NodeJS",
@@ -282,10 +283,10 @@
             "category": ["JAVSCRIPT", "NodeJs"]
          },{ 
             "id": 48,
-            "title": "windowsÅú´¦Àí",
+            "title": "windowsæ‰¹å¤„ç†",
             "href": "../windows-batch",
             "is_private": false, 
-            "category": ["²Ù×÷ÏµÍ³", "¹¤×÷¶îÍâ¼¼ÄÜ", "¿ìËÙ½»¸¶"]
+            "category": ["æ“ä½œç³»ç»Ÿ", "å·¥ä½œé¢å¤–æŠ€èƒ½", "å¿«é€Ÿäº¤ä»˜"]
          },{ 
             "id": 49,
             "title": "Python",
@@ -294,7 +295,7 @@
             "category": ["Python"]
          },{ 
             "id": 50,
-            "title": "Python¹Ù·½ÎÄµµ",
+            "title": "Pythonå®˜æ–¹æ–‡æ¡£",
             "href": "https://docs.python.org/zh-cn/3/",
             "is_private": false, 
             "category": ["Python"]
@@ -306,10 +307,10 @@
             "category": ["Python"]
          },{ 
             "id": 52,
-            "title": "mysql45½²",
+            "title": "mysql45è®²",
             "href": "https://funnylog.gitee.io/mysql45/",
             "is_private": false, 
-            "category": ["Êı¾İ¿â"]
+            "category": ["æ•°æ®åº“"]
          },{ 
             "id": 53,
             "title": "Hutool",
@@ -321,95 +322,102 @@
             "title": "raspberryPI",
             "href": "../raspberryPI",
             "is_private": false, 
-            "category": ["ÎïÁªÍø"]
+            "category": ["ç‰©è”ç½‘"]
          },{ 
             "id": 55,
             "title": "vi_vim",
             "href": "../vi_vim",
             "is_private": false, 
-            "category": ["¿ìËÙ½»¸¶", "¿ª·¢²âÊÔ¹¤¾ß", "Linux"]
+            "category": ["å¿«é€Ÿäº¤ä»˜", "å¼€å‘æµ‹è¯•å·¥å…·", "Linux"]
          },{ 
             "id": 56,
-            "title": "ÂÛÈí¼şÍâ°ü",
+            "title": "è®ºè½¯ä»¶å¤–åŒ…",
             "href": "../outsource",
             "is_private": false, 
-            "category": ["¹¤×÷¾­Ñé"]
+            "category": ["å·¥ä½œç»éªŒ"]
          },{ 
             "id": 57,
-            "title": "°ÁÓÎÍâÍø",
-            "href": "../°ÁÓÎÍâÍø",
+            "title": "å‚²æ¸¸å¤–ç½‘",
+            "href": "../å‚²æ¸¸å¤–ç½‘",
             "is_private": false, 
-            "category": ["ÆäËû¼¼ÄÜ"]
+            "category": ["å…¶ä»–æŠ€èƒ½"]
          },{ 
             "id": 58,
-            "title": "½¡Éí-¼õ·Ê",
+            "title": "å¥èº«-å‡è‚¥",
             "href": "../lifeReduceWeight",
             "is_private": false, 
-            "category": ["½¡¿µÉú»î"]
+            "category": ["å¥åº·ç”Ÿæ´»"]
          },{ 
             "id": 59,
-            "title": "Êı¾İÖÎÀíÓëÊı¾İ²Ö¿âÄ£ĞÍÉè¼Æ",
-            "href": "../Êı¾İÖÎÀíÓëÊı¾İ²Ö¿âÄ£ĞÍÉè¼Æ",
+            "title": "æ•°æ®æ²»ç†ä¸æ•°æ®ä»“åº“æ¨¡å‹è®¾è®¡",
+            "href": "../æ•°æ®æ²»ç†ä¸æ•°æ®ä»“åº“æ¨¡å‹è®¾è®¡",
             "is_private": false, 
-            "category": ["ÆäËû¼¼ÄÜ"]
+            "category": ["å…¶ä»–æŠ€èƒ½"]
          },{ 
             "id": 60,
-            "title": "¼òÀúResume",
+            "title": "ç®€å†Resume",
             "href": "../resume/resume.html",
             "is_private": true, 
-            "category": ["¹¤×÷¶îÍâ¼¼ÄÜ", "¹¤×÷¾­Ñé"]
+            "category": ["å·¥ä½œé¢å¤–æŠ€èƒ½", "å·¥ä½œç»éªŒ"]
          },{ 
             "id": 61,
-            "title": "µÚÈı·½ÎÄµµÊÕ¼¯",
+            "title": "ç¬¬ä¸‰æ–¹æ–‡æ¡£æ”¶é›†",
             "href": "../thirdDocument",
             "is_private": false, 
-            "category": ["ÆäËû¼¼ÄÜ"]
+            "category": ["å…¶ä»–æŠ€èƒ½"]
          },{ 
             "id": 62,
-            "title": "ÎÄµµµÄ×éÖ¯·½Ê½",
+            "title": "æ–‡æ¡£çš„ç»„ç»‡æ–¹å¼",
             "href": "../docBuildMethod",
             "is_private": true, 
-            "category": ["ÆäËû¼¼ÄÜ"]
+            "category": ["å…¶ä»–æŠ€èƒ½"]
          },{ 
             "id": 63,
-            "title": "ÕÒ¹¤×÷µÄÒ»Ğ©¾­Àú",
+            "title": "æ‰¾å·¥ä½œçš„ä¸€äº›ç»å†",
             "href": "../Interview",
             "is_private": true, 
-            "category": ["¹¤×÷¾­Ñé"]
+            "category": ["å·¥ä½œç»éªŒ"]
          },{ 
             "id": 64,
-            "title": "ÈËÉú¹æ»®",
+            "title": "äººç”Ÿè§„åˆ’",
             "href": "../LifePlan",
             "is_private": true, 
-            "category": ["¹¤×÷¾­Ñé", "ÈËÉú¸ĞÎò"]
+            "category": ["å·¥ä½œç»éªŒ", "äººç”Ÿæ„Ÿæ‚Ÿ"]
          },{ 
             "id": 65,
-            "title": "ÖĞ¹úÀñÒÇ",
+            "title": "ä¸­å›½ç¤¼ä»ª",
             "href": "../chinaCeremony",
             "is_private": false, 
-            "category": ["Ğ¡º¢½ÌÓı"]
+            "category": ["å°å­©æ•™è‚²"]
          },{ 
             "id": 66,
-            "title": "ITÄÇĞ©È¤ÊÂ",
-            "href": "../ITÄÇĞ©ÓĞÒâË¼µÄÊÂ",
+            "title": "ITé‚£äº›è¶£äº‹",
+            "href": "../ITé‚£äº›æœ‰æ„æ€çš„äº‹",
             "is_private": false, 
-            "category": ["¹¤×÷¾­Ñé"]
+            "category": ["å·¥ä½œç»éªŒ"]
          },{ 
             "id": 67,
-            "title": "¾Æµê",
+            "title": "é…’åº—",
             "href": "../hotel",
             "is_private": false, 
-            "category": ["¸ãÇ®", "´´Òµ"]
+            "category": ["æé’±", "åˆ›ä¸š"]
          },{ 
             "id": 68,
-            "title": "³£¼ûÖĞÒ©ÊÕ¼¯",
+            "title": "å¸¸è§ä¸­è¯æ”¶é›†",
             "href": "../ChineseMedicine",
             "is_private": false, 
-            "category": ["½¡¿µÉú»î"]
+            "category": ["å¥åº·ç”Ÿæ´»"]
          },{ 
             "id": 69,
-            "title": "Ş¶ÑòÃ«ÄÇĞ©ÊÂ",
-            "href": "../Ş¶ÑòÃ«ÄÇĞ©ÊÂ",
+            "title": "è–…ç¾Šæ¯›é‚£äº›äº‹",
+            "href": "../è–…ç¾Šæ¯›é‚£äº›äº‹",
             "is_private": false, 
-            "category": ["¸ãÇ®", "½¡¿µÉú»î"]
-         }]
+            "category": ["æé’±", "å¥åº·ç”Ÿæ´»"]
+         },{ 
+            "id": 74,
+            "title": "ç»ˆææµ‹è¯•",
+            "href": "../finalTest",
+            "is_private": false, 
+            "category": ["Python", "å…¶ä»–æŠ€èƒ½"]
+         }
+]
