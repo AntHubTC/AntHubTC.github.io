@@ -53,6 +53,41 @@ def addDbDoc(doc_cn_name: str, doc_name: str, category=''):
     conn.close()
 
 
+def add_db_category(parent_category: str, sub_category: str):
+    conn = sqlite3.connect("doc.db")
+    # 创建一个游标对象
+    cursor = conn.cursor()
+
+    # 1.查询是否存在父类别
+    cursor.execute('SELECT id FROM categorys where name=?', (parent_category,))
+    parent_db_categorys = cursor.fetchall()
+    p_category_id = None
+    if len(parent_db_categorys) == 0:
+        # 2.父类别不存在进行新增
+        print(f"系统无【{parent_category}】父类别，进行新增父类别")
+        cursor.execute("INSERT INTO categorys (name, level, parent_id) VALUES (?, ?, ?)", (sub_category, 1, None))
+        p_category_id = cursor.lastrowid
+        print("父类别创建成功！")
+    else:
+        p_category_id = parent_db_categorys[0][0]
+
+    # 3.检查子类别是否存在
+    cursor.execute('SELECT id FROM categorys where name=? and parent_id=?', (sub_category, p_category_id))
+    sub_db_categorys = cursor.fetchall()
+    if len(sub_db_categorys) == 0:
+        # 4.子类别不存在进行新增
+        new_category = (sub_category, 2, p_category_id)
+        cursor.execute("INSERT INTO categorys (name, level, parent_id) VALUES (?, ?, ?)", new_category)
+        print("子类别创建成功！")
+    else:
+        print("系统已经存在该父子类别!")
+
+    # 关闭cursor和连接
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
 def reGenIndexJsFile():
     """
     重新生成index.js文件
@@ -80,9 +115,10 @@ let docCategory = {category_json};
             elif line.startswith("// >>>>>>>>>!@#$%^&*!<<<<<<<<<"):
                 isCollect = True
 
-    print(result_js_data)
+    # print(result_js_data)
     with open('../../IndexBlog/index.js', 'w', encoding="utf-8") as f:
         f.writelines(result_js_data)
+    print("重新生成Index.js成功")
 
 
 def print_category():
@@ -115,7 +151,7 @@ def print_category():
             print("\t- " + cate_12.title)
 
 
-if __name__ == '__main__':
+def create_doc():
     doc_cn_name = input("请输入文档中文名称:")
     new_doc_name = input("请输入文档英文名称:")
     print_category()
@@ -129,3 +165,51 @@ if __name__ == '__main__':
     output_dir = f'../../{new_doc_name}/'
     os.mkdir(output_dir)
     decompress_file(input_file, output_dir)
+
+    print("文档创建成功！")
+
+
+def create_category():
+    category_cn_name = input("请输入类别名称(eg:技术/JAVA):")
+    splits = category_cn_name.split("/")
+    if len(splits) != 2 or len(splits[0]) == 0 or len(splits[1]) == 0:
+        print("输入无效！")
+        return
+    # 新增类别
+    add_db_category(splits[0], splits[1])
+
+
+def print_docs():
+    pass
+
+
+if __name__ == '__main__':
+    while True:
+        opt = input("""
+文档管理功能:
+    1.创建文档
+    2.创建文档类别
+    3.查看文档列表
+    4.查看类别信息
+    5.重新生成Index.js
+    q.退出
+请输入你的选项""")
+        if opt == '1':
+            # 创建文档的代码逻辑
+            create_doc()
+        elif opt == '2':
+            # 创建文档类别的代码逻辑
+            create_category()
+        elif opt == '3':
+            # 查看文档列表的代码逻辑
+            print_docs()
+        elif opt == '4':
+            # 查看类别信息的代码逻辑
+            print_category()
+        elif opt == '5':
+            # 重新生成Index.js的代码逻辑
+            reGenIndexJsFile()
+        elif opt.lower() == 'q':
+            break
+        else:
+            print("无效的选项，请重新输入")

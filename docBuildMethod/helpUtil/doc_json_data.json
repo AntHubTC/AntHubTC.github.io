@@ -414,10 +414,10 @@
             "is_private": false, 
             "category": ["搞钱", "健康生活"]
          },{ 
-            "id": 74,
-            "title": "终极测试",
-            "href": "../finalTest",
+            "id": 70,
+            "title": "JavaGuide",
+            "href": "https://javaguide.cn/",
             "is_private": false, 
-            "category": ["Python", "其他技能"]
+            "category": ["JAVA"]
          }
 ]
