@@ -193,11 +193,21 @@ public class Main {
 }
 ```
 
+### 其它特征采集器
+
+CEDD [颜色和边缘的方向性描述符（Color and Edge Directivity Descriptor，CEDD）](https://blog.csdn.net/leixiaohua1020/article/details/84506285)
+
+CvSiftExtractor  [OpenCV和Python进行SIFT算法](https://blog.csdn.net/qq_43279579/article/details/117687597)
+
+CvSurfExtractor  [SURF算法之Opencv代码详解](https://blog.csdn.net/wd78951632/article/details/122603780)
+
+[LIRE特征提取方法](https://blog.csdn.net/qq_43376347/article/details/108238983)
+
 
 
 ## 扩展阅读
 
-[策略算法工程师之路-基于内容的图像检索(CBIR)]()
+[策略算法工程师之路-基于内容的图像检索(CBIR)](https://zhuanlan.zhihu.com/p/158740736)
 
 [Elasticsearch 8.X “图搜图”实战](https://zhuanlan.zhihu.com/p/666082963)
 
