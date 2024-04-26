@@ -167,6 +167,8 @@ def create_doc():
     decompress_file(input_file, output_dir)
 
     print("文档创建成功！")
+    
+    # TODO:: 将index.js、新文档、doc.db、doc_json_data.json添加到git待提交中(不用做推送，编辑完毕后一起推送)
 
 
 def create_category():
