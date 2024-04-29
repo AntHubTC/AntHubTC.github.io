@@ -28,7 +28,7 @@ v7.0.0       JDK 17+
 
 ## 参考资料
 
-[flowable中文文档](https://tkjohn.github.io/flowable-userguide/#_introduction)
+[flowable中文文档](https://tkjohn.github.io/flowable-userguide/#_introduction)  **-优质文档**
 
 [BILIBILI视频-2024最新Flowable进阶课程](https://www.bilibili.com/cheese/play/ss9979) 没有看它的收费进阶版本
 
