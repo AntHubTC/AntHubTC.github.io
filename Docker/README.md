@@ -10,6 +10,8 @@ bilibili上收藏的docker学习视频。
 
 [一起学习过这个视频的人的笔记](https://blog.csdn.net/qq_39564555/article/details/98189151#8)
 
+[Docker — 从入门到实践](https://docker-practice.github.io/)
+
 ## 什么是容器
 
 ​	容器技术是一种虚拟化的方案，与传统的虚拟机不同。传统的虚拟机是通过中间层，将一台或者多台独立的机器虚拟运行于物理设备之上。而容器是直接运行于操作系统内核之上的用户空间，因此容器虚拟化也被称为操作系统虚拟化，由于依赖操作系统的特性，所以容器只能运行在底层操作系统相同或者相似的操作系统。而Docker的容器技术就是依赖于Linux内核特性：Namespace和Cgroups（Control Group）。所以目前Docker只能运行于linux系统，不能直接运行于windows系统。这也是容器技术相对于虚拟机技术在系统灵活性上的劣势。
