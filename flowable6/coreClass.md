@@ -128,3 +128,6 @@ RepositoryService repositoryService = processEngineConfiguration.getRepositorySe
 identityService.setAuthenticatedUserId(sysUser.getUserId());
 ```
 
+
+
+![[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-VYauDdqm-1662534044454)(img\image-20220324095243595.png)]](img/coreClass/31a28c7579c74286938e98660f2ef39d.png)
