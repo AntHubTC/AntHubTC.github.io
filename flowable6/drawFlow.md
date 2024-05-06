@@ -193,7 +193,7 @@ public class DiagramController {
     }
 ```
 
-
+![img](img/leaveProccesses/image-20240430114644111.png)
 
 ## 通过历史流程实例id获取历史流程图
 
@@ -228,6 +228,8 @@ public class DiagramController {
         generateDiagram(resp, processDefinitionId, activityIds, flows);
     }
 ```
+
+![image-20240506155354176](img/leaveProccesses/image-20240506155354176.png)
 
 ### 画线为什么指定activityId？
 

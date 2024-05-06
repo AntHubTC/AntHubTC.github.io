@@ -413,3 +413,5 @@ public class AskForLeaveFail implements JavaDelegate {
 ![image-20240506112445715](img/leaveProccesses/image-20240506112445715.png)
 
 也就是请假失败会进入到这个方法中，现在我们就可以在这个方法中该干嘛干嘛了。
+
+![image-20240506155354176](img/leaveProccesses/image-20240506155354176.png)
