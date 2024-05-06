@@ -6,9 +6,7 @@ IDEA 插件 **Flowable BPMN visualizer**，说实话，真不好用。
 
 可以就使用Flowable UI来进行设计流程，然后将对应的流程xml导出出来。
 
-![img](img/leaveProccesses/226149d510f0b9341640fe3702f6f158.png)
-
-
+![image-20240506144420925](img/leaveProccesses/image-20240506144420925.png)
 
 员工发起一个请假流程，首先是组长审核，组长审核通过了，就进入到经理审核，经理审核通过了，这个流程就结束了，如果组长审核未通过或者经理审核未通过，则流程给员工发送一个请假失败的通知，流程结束。
 
@@ -426,5 +424,7 @@ public class AskForLeaveFail implements JavaDelegate {
     }
 }
 ```
+
+![image-20240506112445715](img/leaveProccesses/image-20240506112445715.png)
 
 也就是请假失败会进入到这个方法中，现在我们就可以在这个方法中该干嘛干嘛了。
