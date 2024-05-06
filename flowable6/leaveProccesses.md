@@ -302,21 +302,6 @@ public class HelloController {
     }
 ```
 
-**效果：（有乱码）**
-
-![image-20240430114644043](img/leaveProccesses/image-20240430114644043.png)
-
-因为没有配置中文字体导致的乱码，application.yml加配置：
-
-> 注意：如果是线上部署，要注意对应的服务器上是否有对应的字体
-
-```yaml
-flowable:
-  activity-font-name: "宋体"
-  label-font-name: "宋体"
-  annotation-font-name: "宋体"
-```
-
 **效果：**
 
 ![image-20240430162903557](img/leaveProccesses/image-20240430162903557.png)

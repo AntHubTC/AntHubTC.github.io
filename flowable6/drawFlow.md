@@ -42,6 +42,23 @@ generateDiagram参数说明
 
 
 
+## 画图中文乱码处理
+
+![image-20240430114644043](img/leaveProccesses/image-20240430114644043.png)
+
+因为没有配置中文字体导致的乱码，application.yml加配置：
+
+> 注意：如果是线上部署，要注意对应的服务器上是否有对应的字体
+
+```yaml
+flowable:
+  activity-font-name: "宋体"
+  label-font-name: "宋体"
+  annotation-font-name: "宋体"
+```
+
+
+
 ## 根据流程定义key画流程图
 
 ```java
@@ -216,7 +233,7 @@ public class DiagramController {
 
 画线条源码说明：
 
-flowable中线条是由FlowNode表示的，它是通过两个list来表示从哪里来表示哪里去，SequenceFlow是BaseElement的子类，其它flowable也是它的子类。
+flowable中线条是由FlowNode表示的，它是通过两个list来表示从哪里来表示哪里去，SequenceFlow是BaseElement的子类，其它flowable流程节点元素也是它的子类。
 
 FlowNode源码
 
