@@ -12,6 +12,8 @@ https://github.com/miyuesc/bpmn-process-designer?tab=readme-ov-file
 
 https://github.com/moon-studio/vite-vue-bpmn-process
 
+[Flowable集成bpmn.js流程中心开源系统后台](https://blog.csdn.net/liuwenjun05101/article/details/117411712)
+
 ![image-20240506173328534](img/bpmn-js/image-20240506173328534.png)
 
 参考文档：
