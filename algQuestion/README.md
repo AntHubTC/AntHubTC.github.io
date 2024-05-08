@@ -1,5 +1,11 @@
 # 首页
 
+数据结构和算法理论笔记： https://anthubtc.github.io/DataStructureAndAlgorithms/
+
+配套算法刷题工程github： https://github.com/AntHubTC/algQuestion
+
+
+
 ## 深度优先
 
 > 问题：给一个感染矩阵，1代表感染，0代表没感染，求最大感染区的面积
