@@ -1,4 +1,6 @@
-# 深度优先
+# 首页
+
+## 深度优先
 
 > 问题：给一个感染矩阵，1代表感染，0代表没感染，求最大感染区的面积
 
@@ -63,9 +65,13 @@ public class MaxInfectionArea {
 }
 ```
 
+动画版本：algQuestion工程 com.tc.alg.dfs.MaximumInfectionArea
+
+![](img/MaximumInfectionArea.gif)
 
 
-# 动态规划
+
+## 动态规划
 
 > 问题：上台阶可以一步上，也可以两步上，求第N个台阶有几种方法。
 
