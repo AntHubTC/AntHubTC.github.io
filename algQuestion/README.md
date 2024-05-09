@@ -1,6 +1,45 @@
 # 首页
 
+## 递归
+
+### 斐波那契数列
+
+问题：斐波那契数列指的是这样一个数列 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233，377，610，987，1597，2584，4181，6765，10946，17711，28657，46368……
+
+特别指出：第0项是0，第1项是第一个1。
+
+这个数列从第三项开始，每一项都等于前两项之和。
+
+以下实例演示了 Java 斐波那契数列的实现：
+
+```java
+public class MainClass {
+    public static void main(String[] args) {
+        for (int counter = 0; counter <= 10; counter++){
+            System.out.printf("Fibonacci of %d is: %d\n", counter, fibonacci(counter));
+        }
+    }
+ 
+    public static long fibonacci(long number) {
+        if ((number == 0) || (number == 1))
+            return number;
+        else
+            return fibonacci(number - 1) + fibonacci(number - 2);
+    }
+}
+```
+
+动画版本：[algQuestion](https://github.com/AntHubTC/algQuestion)工程 com.tc.alg.recursion.FibonacciIssue
+
+![FibonacciIssue](./img/FibonacciIssue.gif)
+
+**带记忆的优化版本：**
+
+![带记忆的优化版本)](./img/FibonacciIssue_v2.gif)
+
 ## 深度优先
+
+### 求感染面积
 
 > 问题：给一个感染矩阵，1代表感染，0代表没感染，求最大感染区的面积
 
@@ -65,13 +104,15 @@ public class MaxInfectionArea {
 }
 ```
 
-动画版本：algQuestion工程 com.tc.alg.dfs.MaximumInfectionArea
+动画版本：[algQuestion](https://github.com/AntHubTC/algQuestion)工程 com.tc.alg.dfs.MaximumInfectionArea
 
 ![](img/MaximumInfectionArea.gif)
 
 
 
 ## 动态规划
+
+### 上台阶问题
 
 > 问题：上台阶可以一步上，也可以两步上，求第N个台阶有几种方法。
 
@@ -83,21 +124,56 @@ public class MaxInfectionArea {
 - 当i = 2时，有两种方法到达第二个台阶，可以一步一步上或者一次性上两步，即dp[2] = 2；
 - 当i > 2时，到达第i个台阶的方法数为到达第i-1个台阶的方法数加上到达第i-2个台阶的方法数，即dp[i] = dp[i-1] + dp[i-2]。
 
-因此，可以通过填充数组dp来求解第N个台阶的方法数。
+因此，可以通过填充数组dp来求解第N个台阶的方法数。 其实这个问题就是斐波那契数列问题类似。
+
+> 斐波那契数列指的是这样一个数列 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233，377，610，987，1597，2584，4181，6765，10946，17711，28657，46368……
+>
+> 特别指出：第0项是0，第1项是第一个1。
+>
+> **这个数列从第三项开始，每一项都等于前两项之和。**
 
 ```java
-public class Staircase {
-    // 定义一个方法来计算到达第N个台阶的方法数
-    public static int countWaysToNthStair(int n) {
-        // 如果N为1，只有一种方法到达第一个台阶
-        if (n == 1)
-            return 1;
-        // 如果N为2，有两种方法到达第二个台阶
-        else if (n == 2)
-            return 2;
+package com.tc.alg.dfs;
 
-        // 创建一个数组来存储每个台阶的方法数
-        int[] dp = new int[n + 1];
+public class StairAlgIssue {
+
+    public static void main(String[] args) {
+        /**
+         * 问题：上台阶可以一步上，也可以两步上，求第N个台阶有几种方法。
+         *
+         * 拿到问题开始分析：
+         * 要求第N个台阶有几种方法，可以使用动态规划的方法来解决。设dp[i]表示到达第i个台阶的方法数，则有以下递推关系：
+         * 当i = 1时，只有一种方法到达第一个台阶，即dp[1] = 1；
+         * 当i = 2时，有两种方法到达第二个台阶，可以一步一步上或者一次性上两步，即dp[2] = 2；
+         * 当i > 2时，到达第i个台阶的方法数为到达第i-1个台阶的方法数加上到达第i-2个台阶的方法数，即dp[i] = dp[i-1] + dp[i-2]。
+         * 因此，可以通过填充数组dp来求解第N个台阶的方法数。
+         */
+        int targetNth = 10;
+        // long result = countWaysToNthStair1(targetNth);
+        long result = countWaysToNthStair2(targetNth);
+        System.out.printf("到达第%s个台阶有%s种方法%n", targetNth, result);
+    }
+
+
+    // 递归求解(效率不高，会有很多重复计算)
+    public static long countWaysToNthStair1(int n) {
+        // 如果N为1，只有一种方法到达第一个台阶
+        if (n == 1) return 1;
+        // 如果N为2，有两种方法到达第二个台阶
+        if (n == 2) return 2;
+
+        return countWaysToNthStair1(n - 1) + countWaysToNthStair1(n - 2);
+    }
+
+    // 递推求解
+    public static long countWaysToNthStair2(int n) {
+        // 如果N为1，只有一种方法到达第一个台阶
+        if (n == 1) return 1;
+        // 如果N为2，有两种方法到达第二个台阶
+        if (n == 2) return 2;
+
+        // 创建一个数组来存储每个台阶的方法数(最好使用long来进行存储，int很快就要超长)
+        long[] dp = new long[n + 1];
         dp[1] = 1;
         dp[2] = 2;
 
@@ -110,11 +186,9 @@ public class Staircase {
         return dp[n];
     }
 
-    public static void main(String[] args) {
-        // 输入第N个台阶的值
-        int N = 10; // 可以根据需要更改N的值
-        System.out.println("到达第 " + N + " 个台阶的方法数为：" + countWaysToNthStair(N));
-    }
 }
 ```
 
+动画版本：[algQuestion](https://github.com/AntHubTC/algQuestion)工程 com.tc.alg.derivation.StairAlgIssue
+
+![StairAlgIssue](./img/StairAlgIssue.gif)
