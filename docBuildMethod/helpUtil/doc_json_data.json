@@ -431,5 +431,17 @@
             "href": "../algQuestion",
             "is_private": false, 
             "category": ["程序员底蕴"]
+         },{ 
+            "id": 77,
+            "title": "autolt3",
+            "href": "../autolt3",
+            "is_private": false, 
+            "category": ["工作额外技能"]
+         },{ 
+            "id": 78,
+            "title": "python-docx",
+            "href": "../python_docx",
+            "is_private": false, 
+            "category": ["Python"]
          }
 ]

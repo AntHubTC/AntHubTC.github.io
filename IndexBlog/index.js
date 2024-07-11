@@ -439,6 +439,12 @@ let docs = [
             "href": "../autolt3",
             "is_private": false, 
             "category": ["工作额外技能"]
+         },{ 
+            "id": 78,
+            "title": "python-docx",
+            "href": "../python_docx",
+            "is_private": false, 
+            "category": ["Python"]
          }
 ];
 // 所有文档分类
@@ -632,7 +638,7 @@ let docCategory = [
 
 // 特殊定位符，前面是数据，后面是代码，python按最新数据重新拼接
 // >>>>>>>>>!@#$%^&*!<<<<<<<<<
-                                                    
+                                                        
 // 防止抖动函数
 function debounce(func, delay) {
     let timerId;
