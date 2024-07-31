@@ -443,5 +443,11 @@
             "href": "../python_docx",
             "is_private": false, 
             "category": ["Python"]
+         },{ 
+            "id": 79,
+            "title": "Sikuli",
+            "href": "../Sikuli",
+            "is_private": false, 
+            "category": ["开发测试工具", "工作额外技能"]
          }
 ]
