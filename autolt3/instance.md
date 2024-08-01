@@ -139,3 +139,7 @@ EndFunc   ;==>jstm`
 
 
 ![image-20240801102813493](img/instance/image-20240801102813493.png)
+
+更高级一点：
+
+![image-20240801110912566](img/instance/image-20240801110912566.png)
