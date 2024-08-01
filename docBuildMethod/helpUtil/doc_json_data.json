@@ -449,5 +449,11 @@
             "href": "../Sikuli",
             "is_private": false, 
             "category": ["开发测试工具", "工作额外技能"]
+         },{ 
+            "id": 80,
+            "title": "web3",
+            "href": "../web3",
+            "is_private": false, 
+            "category": ["Web3"]
          }
 ]
