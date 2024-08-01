@@ -169,19 +169,60 @@ CPOC（有条件的容量证明机制）
 
 等等，还有其它共识机制。
 
-## 比特币
+## 比特币BTC（Bitcoin）
 
 区块链的第一个应用：比特币
 
+比特币使用点对点技术，在没有中央机构或银行的情况下运作; 管理交易和发行比特币是由网络集体进行的。比特币是开源的，它的设计是公开的，没有人拥有或控制比特币，每个人都可以参与。通过其许多独特的属性，比特币允许令人兴奋的用途，不能涵盖任何以前的支付系统。
+
+比特币官网：https://bitcoin.org/en
+
+比特币的一个交易网络：https://www.blockchain.com/
+
+###  诞生
+
+![image-20240801223946392](F:/2_STUDY/GitHubRepositories/00myGitHubRepository/AntHubTC.github.io/web3/img/README/image-20240801223946392.png)
+
+发过论文：
+
+![image-20240801230442444](F:/2_STUDY/GitHubRepositories/00myGitHubRepository/AntHubTC.github.io/web3/img/README/image-20240801230442444.png)
+
+### 比特币换故事
+
+一万个比特币换披萨。
+
+![image-20240801223143456](F:/2_STUDY/GitHubRepositories/00myGitHubRepository/AntHubTC.github.io/web3/img/README/image-20240801223143456.png)
+
+翻译
+
+![image-20240801223245793](F:/2_STUDY/GitHubRepositories/00myGitHubRepository/AntHubTC.github.io/web3/img/README/image-20240801223524854.png)
+
+![image-20240801223245793](F:/2_STUDY/GitHubRepositories/00myGitHubRepository/AntHubTC.github.io/web3/img/README/image-20240801223245793.png)
+
+https://www.blockchain.com/
+
+![image-20240801225240960](F:/2_STUDY/GitHubRepositories/00myGitHubRepository/AntHubTC.github.io/web3/img/README/image-20240801225240960.png)
+
+中本聪 挖的第一个比特币
+
+![image-20240801225717661](F:/2_STUDY/GitHubRepositories/00myGitHubRepository/AntHubTC.github.io/web3/img/README/image-20240801225717661.png)
 
 
 
+### 信任从何来
+
+- 记账
+- 挖矿
+- 共识
+
+### 比特币所有权
+
+![image-20240801230814456](F:/2_STUDY/GitHubRepositories/00myGitHubRepository/AntHubTC.github.io/web3/img/README/image-20240801230814456.png)
 
 
 
+## 以太坊ETH（Ether）
 
+在不受中心监督管控下创建应用程序，做去中心和的应用。
 
-
-
-
-
+![image-20240801233943224](F:/2_STUDY/GitHubRepositories/00myGitHubRepository/AntHubTC.github.io/web3/img/README/image-20240801233943224.png)
