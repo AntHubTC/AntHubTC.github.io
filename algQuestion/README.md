@@ -1,5 +1,9 @@
 # 首页
 
+数据结构和算法理论笔记： https://anthubtc.github.io/DataStructureAndAlgorithms/
+
+配套算法刷题工程github： https://github.com/AntHubTC/algQuestion
+
 ## 递归
 
 ### 斐波那契数列
@@ -171,6 +175,7 @@ public class ListNumCalcEqTargetVal {
     }
 }
 ```
+>>>>>>> 3b0dae46276429b555b583996e8760ff397a7590
 
 
 

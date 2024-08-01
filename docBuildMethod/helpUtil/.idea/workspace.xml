@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="585b2932-8491-4f03-9f4d-c02cbfdd2f1f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../algQuestion/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../algQuestion/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../性能测试调优/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../性能测试调优/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../性能测试调优/doc1.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../性能测试调优/doc1.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../育儿/test.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../育儿/test.md" afterDir="false" />
@@ -26,7 +26,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../githubRepositoryOther/musicbox" />
   </component>
   <component name="RunManager">
     <configuration name="helper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -66,6 +66,7 @@
       <option name="presentableId" value="Default" />
       <updated>1712625383683</updated>
       <workItem from="1712625385160" duration="9216000" />
+      <workItem from="1715222426109" duration="20000" />
     </task>
     <servers />
   </component>
