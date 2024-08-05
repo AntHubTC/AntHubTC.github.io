@@ -455,5 +455,11 @@
             "href": "../web3",
             "is_private": false, 
             "category": ["Web3"]
+         },{ 
+            "id": 81,
+            "title": "jupyter",
+            "href": "../jupyter",
+            "is_private": false, 
+            "category": ["Python"]
          }
 ]
