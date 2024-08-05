@@ -1,8 +1,10 @@
-# 快捷键
+# 使用技巧
+
+## 快捷键
 
 Jupyter Notebook 有**两种键盘输入模式**。**编辑模式**，允许你往单元中键入代码或文本；这时的单元框线是<font color="green">绿色</font>的。**命令模式**，键盘输入运行程序命令；这时的单元框线是<font color="gray">灰色</font>。
 
-## 命令模式 (按键 Esc 开启)
+### 命令模式 (按键 Esc 开启)
 
 - **Enter** : 转入编辑模式
 - **Shift-Enter** : 运行本单元，选中下个单元
@@ -46,7 +48,7 @@ Jupyter Notebook 有**两种键盘输入模式**。**编辑模式**，允许你�
 - **Shift-Space** : 向上滚动
 - **Space** : 向下滚动
 
-## 编辑模式 ( Enter 键启动)
+### 编辑模式 ( Enter 键启动)
 
 - **Tab** : 代码补全或缩进
 - **Shift-Tab** : 提示
@@ -75,3 +77,25 @@ Jupyter Notebook 有**两种键盘输入模式**。**编辑模式**，允许你�
 - **Shift** : 忽略
 - **Up** : 光标上移或转入上一单元
 - **Down** :光标下移或转入下一单元
+
+## 在VSCode中使用Jupter NoteBook
+
+![image-20240805181938670](img/skill/image-20240805181938670.png)
+
+
+
+
+
+## 如何在markdown中浏览.ipynb文件
+
+需要借助jupyter官方提供的在线浏览工具[入口](https://nbviewer.org/)
+
+![image-20240805182441441](img/skill/image-20240805182441441.png)
+
+如何在我的笔记，markdown中浏览.ipynb文件
+
+```html
+<iframe style="min-height:1999px" width="100%" scrolling="no" title="Zdog trefoil" src="https://nbviewer.org/github/ipython/ipython/blob/6.x/examples/IPython%20Kernel/Index.ipynb" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+</iframe>
+```
+
