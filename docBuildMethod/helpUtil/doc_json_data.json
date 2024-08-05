@@ -461,5 +461,11 @@
             "href": "../jupyter",
             "is_private": false, 
             "category": ["Python"]
+         },{ 
+            "id": 82,
+            "title": "NumPy",
+            "href": "../NumPy",
+            "is_private": false, 
+            "category": ["Python"]
          }
 ]
