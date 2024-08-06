@@ -83,9 +83,6 @@ Jupyter Notebook 有**两种键盘输入模式**。**编辑模式**，允许你�
 ![image-20240805181938670](img/skill/image-20240805181938670.png)
 
 
-
-
-
 ## 如何在markdown中浏览.ipynb文件
 
 需要借助jupyter官方提供的在线浏览工具[入口](https://nbviewer.org/)
@@ -99,3 +96,13 @@ Jupyter Notebook 有**两种键盘输入模式**。**编辑模式**，允许你�
 </iframe>
 ```
 
+## 如何跨Jupter笔记本复制剪切cells
+
+> 说明：此方法实际操作后，发现只在VsCode中有效
+
+在Jupyter Notebook的时候，有时需要从一个文件中拷贝多个cells到另外一个文件。如果只是简单地选中+拷贝的话，是没有用的。
+关键点在于使用 Esc进入command模式。 下面是具体的操作步骤：
+
+1. 在源文件中Shift+鼠标点击或者Shift+上下箭头选中多个cell。
+2. Esc进入command模式，然后Ctrl+C。
+3. 到目标文件中，点击你要复制的位置，然后Esc进入command模式，最后Ctrl+V就可以了。
