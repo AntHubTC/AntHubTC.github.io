@@ -4,4 +4,5 @@
 * [数据结构](datastruct)
 * [通用函数](ufuncs)
 * [索引&切片](indexSlice)
+* [随机数](rndNumber)
 
