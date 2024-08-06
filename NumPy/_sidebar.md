@@ -5,4 +5,5 @@
 * [通用函数](ufuncs)
 * [索引&切片](indexSlice)
 * [随机数](rndNumber)
+* [广播机制](broadcasting)
 
