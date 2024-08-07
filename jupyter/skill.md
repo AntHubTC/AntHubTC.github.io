@@ -106,3 +106,6 @@ Jupyter Notebook 有**两种键盘输入模式**。**编辑模式**，允许你�
 1. 在源文件中Shift+鼠标点击或者Shift+上下箭头选中多个cell。
 2. Esc进入command模式，然后Ctrl+C。
 3. 到目标文件中，点击你要复制的位置，然后Esc进入command模式，最后Ctrl+V就可以了。
+
+## GitHub天然已经自带.ipynb文件的浏览功能
+
