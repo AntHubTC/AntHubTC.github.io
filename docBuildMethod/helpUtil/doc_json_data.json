@@ -467,5 +467,11 @@
             "href": "../NumPy",
             "is_private": false, 
             "category": ["Python"]
+         },{ 
+            "id": 83,
+            "title": "pandas",
+            "href": "../pandas",
+            "is_private": false, 
+            "category": ["Python"]
          }
 ]
