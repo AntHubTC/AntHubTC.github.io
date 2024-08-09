@@ -12,5 +12,13 @@
 <iframe style="min-height:2000px" width="100%" scrolling="auto" title="AntHubTC" src="https://nbviewer.org/github/AntHubTC/AntHubTC.github.io/blob/master/pandas/jupterDoc/dataCleanAndPreprocessing_3.ipynb" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true"></iframe>
 
 
+### 重塑数据
+<iframe style="min-height:2000px" width="100%" scrolling="auto" title="AntHubTC" src="https://nbviewer.org/github/AntHubTC/AntHubTC.github.io/blob/master/pandas/jupterDoc/dataCleanAndPreprocessing_4.ipynb" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true"></iframe>
+
+
+### 数据去重
+<iframe style="min-height:2000px" width="100%" scrolling="auto" title="AntHubTC" src="https://nbviewer.org/github/AntHubTC/AntHubTC.github.io/blob/master/pandas/jupterDoc/dataCleanAndPreprocessing_5.ipynb" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true"></iframe>
+
+
 
 
