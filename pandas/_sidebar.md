@@ -6,3 +6,4 @@
 * [数据操作与分析](dataOpAndAnalysis)
 * [数据透视表与交叉表](dataPivotTableAndCrossTable)
 * [时间序列处理](timeSeries)
+* [Matplotlib数据可视化](matplotlibDataVisualization)
