@@ -7,3 +7,6 @@
 * [数据透视表与交叉表](dataPivotTableAndCrossTable)
 * [时间序列处理](timeSeries)
 * [Matplotlib数据可视化](matplotlibDataVisualization)
+* [高级功能](advanced)
+* [性能优化](performanceOptimization)
+* [参考资源](see)
