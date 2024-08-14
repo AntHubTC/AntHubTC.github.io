@@ -9,4 +9,5 @@
 * [Matplotlib数据可视化](matplotlibDataVisualization)
 * [高级功能](advanced)
 * [性能优化](performanceOptimization)
+* [实战案例1](case1)
 * [参考资源](see)
