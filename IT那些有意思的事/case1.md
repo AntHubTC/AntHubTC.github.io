@@ -10,3 +10,29 @@
 ![img](img/case1/企业微信截图_16487191288628.png)postman返回数据
 
 浏览器返回数据是不对的
+
+
+
+## 解决办法
+
+- 方式一：直接不使用Long返回，使用String
+
+- 方式二：使用Long返回，加注解JsonFormat
+
+  ```java
+  import com.fasterxml.jackson.annotation.JsonFormat;
+  
+  @Data
+  @NoArgsConstructor
+  @AllArgsConstructor
+  public class DismantleResultVo {
+      
+      @JsonFormat(shape = JsonFormat.Shape.STRING)
+      private List<Long> newAdsProgramCodeList;
+      
+      @JsonFormat(shape = JsonFormat.Shape.STRING)
+      private Long id;
+  }
+  ```
+
+  
