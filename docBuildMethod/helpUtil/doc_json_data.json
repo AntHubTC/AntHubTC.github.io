@@ -485,5 +485,11 @@
             "href": "../DrissionPage",
             "is_private": false, 
             "category": ["Python"]
+         },{ 
+            "id": 86,
+            "title": "摆地摊",
+            "href": "../streetVendor",
+            "is_private": false, 
+            "category": ["搞钱", "创业"]
          }
 ]
