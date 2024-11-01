@@ -1,5 +1,29 @@
 # IDEA插件
 
+## idea-sql-generator-tool
+
+一个sql快捷生成的实用插件。
+
+![image-20241101201206289](img/IDEAPlugin/image-20241101201206289.png)
+
+
+
+## PlantUML
+
+PlantUML 是一个画图脚本语言，用它可以快速地画出（有很多工具都有这个插件）：
+
+- 时序图
+- 流程图
+- 用例图
+- 状态图
+- 组件图
+
+简单地讲，我们使用 visio 画图时需要一个一个图去画，但使用 PlantUML 只需要用文字表达出图的内容，然后就可以直接生成图片。
+
+参考资料：
+
+   http://www.jianshu.com/p/e92a52770832
+
 ## 单元测试覆盖率-JaCoCo插件
 
 ### pom配置
