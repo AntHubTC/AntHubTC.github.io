@@ -116,6 +116,13 @@
                 "level": 2,
                 "parent_id": 1,
                 "items": []
+            },
+            {
+                "id": 28,
+                "title": "AI",
+                "level": 2,
+                "parent_id": 1,
+                "items": []
             }
         ]
     },

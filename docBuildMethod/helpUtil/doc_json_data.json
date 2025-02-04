@@ -491,5 +491,11 @@
             "href": "../streetVendor",
             "is_private": false, 
             "category": ["搞钱", "创业"]
+         },{ 
+            "id": 87,
+            "title": "DeepSeek",
+            "href": "../DeepSeek",
+            "is_private": false, 
+            "category": ["AI"]
          }
 ]
