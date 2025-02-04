@@ -1,13 +1,13 @@
 import os
 import sqlite3
 import subprocess
-
+import zipfile
 import getJsonData
 
 
-def check_winrar_installed():
+def check_winrar_installed(cmd):
     # 使用 where 命令（Windows）或 which 命令（Linux/Mac）检查是否安装 WinRAR
-    command = 'where winrar'  # Windows
+    command = 'where ' + cmd  # Windows
     # command = 'which winrar'  # Linux/Mac
 
     try:
@@ -18,16 +18,20 @@ def check_winrar_installed():
 
 
 def decompress_file(input_file, output_dir):
-    if check_winrar_installed():
+    if check_winrar_installed("winrar"):
         # 如果安装了 WinRAR，则使用 WinRAR 解压缩
         winrar_command = ['winrar', 'x', input_file, output_dir]
         subprocess.run(winrar_command, check=True)
         print('使用 WinRAR 解压缩完成')
-    else:
+    elif check_winrar_installed("bz"):
         # 如果未安装 WinRAR，则使用 BandZip 解压缩
         bz_command = ['bz', 'x', input_file, output_dir]
         subprocess.run(bz_command, check=True)
         print('使用 BandZip 解压缩完成')
+    else:
+        with zipfile.ZipFile(input_file, 'r') as zip_ref:
+            zip_ref.extractall(output_dir)
+        print('使用 zipfile 解压缩完成')
 
 
 def addDbDoc(doc_cn_name: str, doc_name: str, category=''):

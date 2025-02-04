@@ -457,6 +457,42 @@ let docs = [
             "href": "../web3",
             "is_private": false, 
             "category": ["Web3"]
+         },{ 
+            "id": 81,
+            "title": "jupyter",
+            "href": "../jupyter",
+            "is_private": false, 
+            "category": ["Python"]
+         },{ 
+            "id": 82,
+            "title": "NumPy",
+            "href": "../NumPy",
+            "is_private": false, 
+            "category": ["Python"]
+         },{ 
+            "id": 83,
+            "title": "pandas",
+            "href": "../pandas",
+            "is_private": false, 
+            "category": ["Python"]
+         },{ 
+            "id": 84,
+            "title": "mitmproxy",
+            "href": "../mitmproxy",
+            "is_private": false, 
+            "category": ["Python"]
+         },{ 
+            "id": 85,
+            "title": "DrissionPage",
+            "href": "../DrissionPage",
+            "is_private": false, 
+            "category": ["Python"]
+         },{ 
+            "id": 86,
+            "title": "摆地摊",
+            "href": "../streetVendor",
+            "is_private": false, 
+            "category": ["搞钱", "创业"]
          }
 ];
 // 所有文档分类
@@ -657,7 +693,7 @@ let docCategory = [
 
 // 特殊定位符，前面是数据，后面是代码，python按最新数据重新拼接
 // >>>>>>>>>!@#$%^&*!<<<<<<<<<
-                                                                
+                                                                                        
 // 防止抖动函数
 function debounce(func, delay) {
     let timerId;
