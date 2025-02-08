@@ -497,5 +497,11 @@
             "href": "../DeepSeek",
             "is_private": false, 
             "category": ["AI"]
+         },{ 
+            "id": 88,
+            "title": "今日头条创作",
+            "href": "../newsToday",
+            "is_private": false, 
+            "category": ["搞钱", "创业"]
          }
 ]
