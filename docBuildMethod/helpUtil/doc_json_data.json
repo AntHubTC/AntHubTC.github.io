@@ -503,5 +503,11 @@
             "href": "../newsToday",
             "is_private": false, 
             "category": ["搞钱", "创业"]
+         },{ 
+            "id": 89,
+            "title": "AI使用技巧",
+            "href": "../AISkill",
+            "is_private": false, 
+            "category": ["AI"]
          }
 ]
