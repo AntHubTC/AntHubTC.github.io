@@ -1,3 +1,3 @@
-* [首页](README)
-* [指南](test)
+* [前期准备工作](README)
+* [注意事项](attention)
 
