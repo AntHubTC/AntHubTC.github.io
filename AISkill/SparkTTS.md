@@ -109,6 +109,30 @@ pip install torch torchvision torchaudio --index-url https://pytorch.org/get-sta
 # pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118  # Older GPUs
 ```
 
+这里要注意一个问题，就是如果显卡可以就到这个网站去安装对应版本的软件，否者上面命令安装后是使用cpu驱动的，会慢的要死，你的GPU更不没有跑起来。
+
+https://pytorch.org/get-started/previous-versions/
+
+```
+# CUDA 11.8
+conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1  pytorch-cuda=11.8 -c pytorch -c nvidia
+# CUDA 12.1
+conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 pytorch-cuda=12.1 -c pytorch -c nvidia
+# CUDA 12.4 《-- 我当时用的这个，说是可以向下兼容，AI一下对应的python版本
+conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 pytorch-cuda=12.4 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 cpuonly -c pytorch
+```
+
+可以用这个代码检测显卡是否用起来没有。
+
+```
+import torch
+print(torch.__version__)          # 查看PyTorch版本
+print(torch.cuda.is_available())  # 应输出 True
+print(torch.cuda.get_device_name(0))  # 应显示显卡型号（如 "GeForce RTX 3080"）
+```
+
 
 
 ### **5.下载模型**
