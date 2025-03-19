@@ -30,11 +30,11 @@
 
 DOT在线渲染：[入口](https://graphviz.christine.website/?engine=dot)
 
-Mermaid在线渲染：[入口](https://mermaid-live.nodejs.cn/edit)
+Mermaid在线渲染：[入口](https://mermaid-live.nodejs.cn/edit) （技巧：可以在图上进行编辑）
 
 plantuml在线渲染：[入口](https://editor.plantuml.com/uml/)
 
-websequencediagrams 时序图在线渲染：[入口](https://www.websequencediagrams.com/)
+websequencediagrams 时序图在线渲染：[入口](https://www.websequencediagrams.com/)  （技巧：点击图上的图像可以定位到uml的代码在哪一行）
 
 ![image-20250305152149198](img/outputFormat/image-20250305152149198.png)
 
