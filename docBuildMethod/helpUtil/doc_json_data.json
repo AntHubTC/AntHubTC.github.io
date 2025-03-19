@@ -509,5 +509,11 @@
             "href": "../AISkill",
             "is_private": false, 
             "category": ["AI"]
+         },{ 
+            "id": 90,
+            "title": "Stable_Diffusion",
+            "href": "../Stable_Diffusion",
+            "is_private": false, 
+            "category": ["AI"]
          }
 ]

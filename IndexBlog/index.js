@@ -505,6 +505,18 @@ let docs = [
             "href": "../newsToday",
             "is_private": false, 
             "category": ["搞钱", "创业"]
+         },{ 
+            "id": 89,
+            "title": "AI使用技巧",
+            "href": "../AISkill",
+            "is_private": false, 
+            "category": ["AI"]
+         },{ 
+            "id": 90,
+            "title": "Stable_Diffusion",
+            "href": "../Stable_Diffusion",
+            "is_private": false, 
+            "category": ["AI"]
          }
 ];
 // 所有文档分类
@@ -712,7 +724,7 @@ let docCategory = [
 
 // 特殊定位符，前面是数据，后面是代码，python按最新数据重新拼接
 // >>>>>>>>>!@#$%^&*!<<<<<<<<<
-                                                                                                
+                                                                                                    
 // 防止抖动函数
 function debounce(func, delay) {
     let timerId;
