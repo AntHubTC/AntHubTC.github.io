@@ -6,6 +6,8 @@ GitHub:https://github.com/SparkAudio/Spark-TTS
 
 论文:https://arxiv.org/pdf/2503.01710
 
+模型：https://huggingface.co/SparkAudio/Spark-TTS-0.5B
+
 ## 简介
 
 在科技飞速发展的今天，人工智能已经渗透到我们生活的方方面面，从智能语音助手到各种自动化服务，AI正在以一种前所未有的方式改变我们的生活。今天，我要给大家介绍一项超级酷炫的技术——Spark-TTS，一个基于Qwen2.5模型的高效文本转语音系统。它不仅能“克隆”你的声音，还能根据你的需求“定制”出全新的声音!是不是听起来很神奇?
