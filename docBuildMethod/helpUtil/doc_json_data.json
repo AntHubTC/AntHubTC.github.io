@@ -515,5 +515,17 @@
             "href": "../Stable_Diffusion",
             "is_private": false, 
             "category": ["AI"]
+         },{ 
+            "id": 91,
+            "title": "如何读书",
+            "href": "../HowRead",
+            "is_private": false, 
+            "category": ["读书"]
+         },{ 
+            "id": 92,
+            "title": "财富的真相",
+            "href": "../TruthOfWealthBook",
+            "is_private": false, 
+            "category": ["读书"]
          }
 ]

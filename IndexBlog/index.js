@@ -1,7 +1,6 @@
 
 // 所有文档列表
-let docs = [
-
+let docs = [
 { 
             "id": 1,
             "title": "ChatGPT",
@@ -518,8 +517,19 @@ let docs = [
             "href": "../Stable_Diffusion",
             "is_private": false, 
             "category": ["AI"]
-         }
-
+         },{ 
+            "id": 91,
+            "title": "如何读书",
+            "href": "../HowRead",
+            "is_private": false, 
+            "category": ["读书"]
+         },{ 
+            "id": 92,
+            "title": "财富的真相",
+            "href": "../TruthOfWealthBook",
+            "is_private": false, 
+            "category": ["读书"]
+         }
 ];
 // 所有文档分类
 let docCategory = [
@@ -697,6 +707,13 @@ let docCategory = [
                 "level": 2,
                 "parent_id": 17,
                 "items": []
+            },
+            {
+                "id": 29,
+                "title": "读书",
+                "level": 2,
+                "parent_id": 17,
+                "items": []
             }
         ]
     },
@@ -726,7 +743,7 @@ let docCategory = [
 
 // 特殊定位符，前面是数据，后面是代码，python按最新数据重新拼接
 // >>>>>>>>>!@#$%^&*!<<<<<<<<<
-                                                                                                    
+                                                                                                            
                                                                                                     
 // 防止抖动函数
 function debounce(func, delay) {
