@@ -1,3 +1,7 @@
+<!-- _coverpage.md -->
+
+
+
 ![logo](img/doc-logo.svg)
 
 # Coze智能体开发
@@ -8,3 +12,8 @@
 * Coze平台学习
 * Coze应用实战
 
+
+
+<!-- background image -->
+
+![](img/_coverpage/bg.jpeg)

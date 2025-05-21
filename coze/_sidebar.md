@@ -3,6 +3,7 @@
 * 应用实战
   * [姓名打分](nameScore)
   * [开发任务拆解](workTaskSplit)
+  * [装修大师](houseDesinger)
   * [爆改头像](headDesign)
   * [数据表设计](dbTableDesign)
   * [使用coze增强我们的Deepseek](cozeDeepSeek)
