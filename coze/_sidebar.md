@@ -8,9 +8,6 @@
   * [数据表设计](dbTableDesign)
   * [使用coze增强我们的Deepseek](cozeDeepSeek)
   * [读书打卡](xcDaKa.md)
-  * https://www.zhihu.com/question/658246489
-  
-  https://www.zhihu.com/question/642487826/answer/3615682445
   
   RAG应用开发
   
@@ -22,4 +19,6 @@
   -  [国家电投发展投资分析报告及网页制作](https://space.coze.cn/share/7494598963371360293?share_id=7494583469914406922&secret=6dX8V6gT&from=landingpage)
   
   - [rpa程序设计](rpa)
+
+[其它](other)
 
