@@ -1,12 +1,19 @@
+<!-- _coverpage.md -->
+
+
+
 ![logo](img/doc-logo.svg)
 
-# 文档的组织方式
+# Coze智能体开发
 
-> 先进的文档组织技术
+> coze 字节跳动推出的智能体开发平台
 
-* 采用docsify来组织文档。
-* 采用gitbook来进行组织文档[https://fallengodcoder.github.io](https://fallengodcoder.github.io)
-* 文档的发布采用github Pages发布到
+* Coze原理学习
+* Coze平台学习
+* Coze应用实战
 
-[GitHub](https://github.com/FallenGodCoder/)
-[Get Started](#quick-start)
+
+
+<!-- background image -->
+
+![](img/_coverpage/bg.jpeg)
