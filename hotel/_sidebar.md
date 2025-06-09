@@ -3,6 +3,7 @@
 * [前期工作](preWork)
 * [酒店基础知识](hotelBasicKnowledge)
 * [酒店建设](hotelBuild)
+* [商业计划书](bussinessPlan)
 * [酒店日常经营](dailyOperations)
 * [酒店运营](operations)
 * [酒店OTA](ota)
