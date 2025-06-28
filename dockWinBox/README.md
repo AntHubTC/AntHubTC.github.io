@@ -23,7 +23,6 @@
 ![image-20250628171904023](img/README/image-20250628171904023.png)
 
 
-
 ## 如何启用AI服务
 
 前往“设置”面板，配置“硅基流动API KEY”。
@@ -53,3 +52,9 @@
 ![image-20250628141902896](img/README/image-20250628141902896.png)
 
 > 默认会查询出硅基流动免费的模型，这些模型通常在使用上也会有一定限制，如果需要更好的AI体验，可以在硅基流动这个平台上的“模型广场”去购买付费模型使用（注意本应用只支持文本对话类型的模型，不支持图像、视频、语音等其他类型）。
+
+# 联系作者
+
+[点击我](https://anthubtc.github.io/AD/contactAuthor.html)
+
+<iframe  src="https://anthubtc.github.io/AD/contactAuthor.html"/>
