@@ -527,5 +527,11 @@
             "href": "../TruthOfWealthBook",
             "is_private": false, 
             "category": ["读书"]
+         },{ 
+            "id": 93,
+            "title": "coze扣子",
+            "href": "../coze",
+            "is_private": false, 
+            "category": ["AI"]
          }
 ]
