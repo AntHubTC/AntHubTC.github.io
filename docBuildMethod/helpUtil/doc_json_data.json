@@ -1,5 +1,4 @@
-[
-
+[
 { 
             "id": 1,
             "title": "ChatGPT",
@@ -540,6 +539,11 @@
             "href": "../dockWinBox",
             "is_private": false, 
             "category": ["创业"]
-         }
-
+         },{ 
+            "id": 95,
+            "title": "coze扣子",
+            "href": "../coze",
+            "is_private": false, 
+            "category": ["AI"]
+         }
 ]
