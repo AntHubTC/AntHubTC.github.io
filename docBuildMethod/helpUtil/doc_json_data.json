@@ -545,5 +545,11 @@
             "href": "../coze",
             "is_private": false, 
             "category": ["AI"]
+         },{ 
+            "id": 96,
+            "title": "农产品",
+            "href": "../agriculturalProducts",
+            "is_private": false, 
+            "category": ["创业"]
          }
 ]

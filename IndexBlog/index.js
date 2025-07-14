@@ -541,6 +541,18 @@ let docs = [
             "href": "../dockWinBox",
             "is_private": false, 
             "category": ["创业"]
+         },{ 
+            "id": 95,
+            "title": "coze扣子",
+            "href": "../coze",
+            "is_private": false, 
+            "category": ["AI"]
+         },{ 
+            "id": 96,
+            "title": "农产品",
+            "href": "../agriculturalProducts",
+            "is_private": false, 
+            "category": ["创业"]
          }
 ];
 // 所有文档分类
@@ -755,7 +767,7 @@ let docCategory = [
 
 // 特殊定位符，前面是数据，后面是代码，python按最新数据重新拼接
 // >>>>>>>>>!@#$%^&*!<<<<<<<<<
-                                                                                                                        
+                                                                                                                                
                                                                                                     
 // 防止抖动函数
 function debounce(func, delay) {
