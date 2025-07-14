@@ -1,4 +1,5 @@
-[
+[
+
 { 
             "id": 1,
             "title": "ChatGPT",
@@ -529,9 +530,16 @@
             "category": ["读书"]
          },{ 
             "id": 93,
-            "title": "coze扣子",
-            "href": "../coze",
+            "title": "张一鸣的231条微博",
+            "href": "../231Blog",
             "is_private": false, 
-            "category": ["AI"]
-         }
+            "category": ["创业"]
+         },{ 
+            "id": 94,
+            "title": "dockWinBox",
+            "href": "../dockWinBox",
+            "is_private": false, 
+            "category": ["创业"]
+         }
+
 ]

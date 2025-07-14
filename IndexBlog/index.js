@@ -531,10 +531,16 @@ let docs = [
             "category": ["读书"]
          },{ 
             "id": 93,
-            "title": "coze扣子",
-            "href": "../coze",
+            "title": "张一鸣的231条微博",
+            "href": "../231Blog",
             "is_private": false, 
-            "category": ["AI"]
+            "category": ["创业"]
+         },{ 
+            "id": 94,
+            "title": "dockWinBox",
+            "href": "../dockWinBox",
+            "is_private": false, 
+            "category": ["创业"]
          }
 ];
 // 所有文档分类
@@ -749,7 +755,7 @@ let docCategory = [
 
 // 特殊定位符，前面是数据，后面是代码，python按最新数据重新拼接
 // >>>>>>>>>!@#$%^&*!<<<<<<<<<
-                                                                                                                
+                                                                                                                        
                                                                                                     
 // 防止抖动函数
 function debounce(func, delay) {
