@@ -553,6 +553,12 @@ let docs = [
             "href": "../agriculturalProducts",
             "is_private": false, 
             "category": ["创业"]
+         },{ 
+            "id": 97,
+            "title": "视频监控",
+            "href": "../videoMonitor",
+            "is_private": false, 
+            "category": ["物联网", "其他技能"]
          }
 ];
 // 所有文档分类
@@ -767,7 +773,7 @@ let docCategory = [
 
 // 特殊定位符，前面是数据，后面是代码，python按最新数据重新拼接
 // >>>>>>>>>!@#$%^&*!<<<<<<<<<
-                                                                                                                                
+                                                                                                                                    
                                                                                                     
 // 防止抖动函数
 function debounce(func, delay) {

@@ -551,5 +551,11 @@
             "href": "../agriculturalProducts",
             "is_private": false, 
             "category": ["创业"]
+         },{ 
+            "id": 97,
+            "title": "视频监控",
+            "href": "../videoMonitor",
+            "is_private": false, 
+            "category": ["物联网", "其他技能"]
          }
 ]
