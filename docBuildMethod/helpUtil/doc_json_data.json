@@ -557,5 +557,11 @@
             "href": "../videoMonitor",
             "is_private": false, 
             "category": ["物联网", "其他技能"]
+         },{ 
+            "id": 98,
+            "title": "Blender",
+            "href": "../Blender",
+            "is_private": false, 
+            "category": ["3D"]
          }
 ]
