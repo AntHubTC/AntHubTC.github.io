@@ -177,7 +177,7 @@
             <!-- 功能一：根据重量计算尺寸 -->
             <div class="function-section">
                 <h2 class="function-title">功能一：根据目标重量计算容器尺寸</h2>
-                <p style="margin-bottom: 20px; color: #666;">输入目标重量，然后输入直径或高度，系统将计算出另一个尺寸</p>
+                <p style="margin-bottom: 20px; color: #666;">输入目标重量，然后输入内径或内深，系统将计算出另一个尺寸</p>
                 
                 <div class="input-group">
                     <label>目标重量：</label>
@@ -185,15 +185,15 @@
                 </div>
                 
                 <div class="input-group">
-                    <label>直径(cm)：</label>
-                    <input type="number" id="diameter1" placeholder="输入直径" step="0.1">
-                    <button class="btn" onclick="calculateHeight()">计算高度</button>
+                    <label>内径(cm)：</label>
+                    <input type="number" id="diameter1" placeholder="输入内径" step="0.1">
+                    <button class="btn" onclick="calculateHeight()">计算内深</button>
                 </div>
                 
                 <div class="input-group">
-                    <label>高度(cm)：</label>
-                    <input type="number" id="height1" placeholder="输入高度" step="0.1">
-                    <button class="btn" onclick="calculateDiameter()">计算直径</button>
+                    <label>内深(cm)：</label>
+                    <input type="number" id="height1" placeholder="输入内深" step="0.1">
+                    <button class="btn" onclick="calculateDiameter()">计算内径</button>
                 </div>
                 
                 <div id="result1" class="result"></div>
@@ -202,16 +202,16 @@
             <!-- 功能二：根据尺寸计算容量 -->
             <div class="function-section">
                 <h2 class="function-title">功能二：根据容器尺寸计算容量</h2>
-                <p style="margin-bottom: 20px; color: #666;">输入容器的直径和高度，系统将计算出能装多少斤板栗</p>
+                <p style="margin-bottom: 20px; color: #666;">输入容器的内径和内深，系统将计算出能装多少斤板栗</p>
                 
                 <div class="input-group">
-                    <label>直径(cm)：</label>
-                    <input type="number" id="diameter2" placeholder="输入直径" step="0.1">
+                    <label>内径(cm)：</label>
+                    <input type="number" id="diameter2" placeholder="输入内径" step="0.1">
                 </div>
                 
                 <div class="input-group">
-                    <label>高度(cm)：</label>
-                    <input type="number" id="height2" placeholder="输入高度" step="0.1">
+                    <label>内深(cm)：</label>
+                    <input type="number" id="height2" placeholder="输入内深" step="0.1">
                 </div>
                 
                 <button class="btn" onclick="calculateCapacity()">计算容量</button>
@@ -223,7 +223,7 @@
             <div class="formula-info">
                 <h4>📐 计算公式说明</h4>
                 <ul>
-                    <li><strong>圆柱体积公式：</strong> V = π × (d/2)² × h (d为直径，d/2为半径)</li>
+                    <li><strong>圆柱体积公式：</strong> V = π × (d/2)² × h (d为内径，d/2为半径)</li>
                     <li><strong>板栗密度：</strong> 0.01058 两/立方厘米 (基于实测数据)</li>
                     <li><strong>重量转换：</strong> 1斤 = 10两</li>
                     <li><strong>生熟比例：</strong> 生板栗:熟板栗 = 1:1.33</li>
@@ -234,16 +234,18 @@
 
     <script>
         // 板栗密度 (两/立方厘米) - 基于您提供的实测数据
-        const CHESTNUT_DENSITY = 0.0105809531087428; // 两/立方厘米
+        // const CHESTNUT_DENSITY = 0.0105809531087428; // 两/立方厘米
+        const CHESTNUT_DENSITY = 0.010458755579064; // 两/立方厘米
+        // const CHESTNUT_DENSITY = 0.01555555555; // 两/立方厘米 （可能不准）
         const JIN_TO_LIANG = 10; // 1斤 = 10两
 
-        // 功能一：根据目标重量和直径计算高度
+        // 功能一：根据目标重量和内径计算内深
         function calculateHeight() {
             const targetWeight = parseFloat(document.getElementById('targetWeight').value);
             const diameter = parseFloat(document.getElementById('diameter1').value);
             
             if (!targetWeight || !diameter) {
-                alert('请输入目标重量和直径');
+                alert('请输入目标重量和内径');
                 return;
             }
             
@@ -252,34 +254,34 @@
                 return;
             }
             
-            // 将直径转换为半径
+            // 将内径转换为半径
             const radius = diameter / 2;
             
             // 计算需要的体积
             const targetVolume = targetWeight * JIN_TO_LIANG / CHESTNUT_DENSITY;
             
-            // 计算高度：h = V / (π × r²)
+            // 计算内深：h = V / (π × r²)
             const height = targetVolume / (Math.PI * radius * radius);
             
             const result = document.getElementById('result1');
             result.innerHTML = `
                 <strong>计算结果：</strong><br>
                 目标重量：${targetWeight} 斤<br>
-                直径：${diameter} cm<br>
+                内径：${diameter} cm<br>
                 半径：${radius.toFixed(2)} cm<br>
-                计算得出高度：<strong style="color: #d32f2f; font-size: 1.2em;">${height.toFixed(2)} cm</strong><br>
+                计算得出内深：<strong style="color: #d32f2f; font-size: 1.2em;">${height.toFixed(2)} cm</strong><br>
                 容器体积：${(Math.PI * radius * radius * height).toFixed(2)} 立方厘米
             `;
             result.style.display = 'block';
         }
 
-        // 功能一：根据目标重量和高度计算直径
+        // 功能一：根据目标重量和内深计算内径
         function calculateDiameter() {
             const targetWeight = parseFloat(document.getElementById('targetWeight').value);
             const height = parseFloat(document.getElementById('height1').value);
             
             if (!targetWeight || !height) {
-                alert('请输入目标重量和高度');
+                alert('请输入目标重量和内深');
                 return;
             }
             
@@ -294,28 +296,28 @@
             // 计算半径：r = √(V / (π × h))
             const radius = Math.sqrt(targetVolume / (Math.PI * height));
             
-            // 计算直径
+            // 计算内径
             const diameter = radius * 2;
             
             const result = document.getElementById('result1');
             result.innerHTML = `
                 <strong>计算结果：</strong><br>
                 目标重量：${targetWeight} 斤<br>
-                高度：${height} cm<br>
-                计算得出直径：<strong style="color: #d32f2f; font-size: 1.2em;">${diameter.toFixed(2)} cm</strong><br>
+                内深：${height} cm<br>
+                计算得出内径：<strong style="color: #d32f2f; font-size: 1.2em;">${diameter.toFixed(2)} cm</strong><br>
                 半径：${radius.toFixed(2)} cm<br>
                 容器体积：${(Math.PI * radius * radius * height).toFixed(2)} 立方厘米
             `;
             result.style.display = 'block';
         }
 
-        // 功能二：根据直径和高度计算容量
+        // 功能二：根据内径和内深计算容量
         function calculateCapacity() {
             const diameter = parseFloat(document.getElementById('diameter2').value);
             const height = parseFloat(document.getElementById('height2').value);
             
             if (!diameter || !height) {
-                alert('请输入直径和高度');
+                alert('请输入内径和内深');
                 return;
             }
             
@@ -324,7 +326,7 @@
                 return;
             }
             
-            // 将直径转换为半径
+            // 将内径转换为半径
             const radius = diameter / 2;
             
             // 计算体积
@@ -340,13 +342,13 @@
             const result = document.getElementById('result2');
             result.innerHTML = `
                 <strong>计算结果：</strong><br>
-                容器直径：${diameter} cm<br>
-                容器半径：${radius.toFixed(2)} cm<br>
-                容器高度：${height} cm<br>
+                容器内径：${diameter} cm<br>
+                容器内半径：${radius.toFixed(2)} cm<br>
+                容器内深：${height} cm<br>
                 容器体积：${volume.toFixed(2)} 立方厘米<br>
                 <hr style="margin: 10px 0;">
                 <strong style="color: #d32f2f; font-size: 1.3em;">能装熟板栗：${weightInJin.toFixed(2)} 斤</strong><br>
-                <strong style="color: #1976d2; font-size: 1.2em;">需要生板栗：${rawWeight.toFixed(2)} 斤</strong><br>
+                <strong style="color: #1976d2; font-size: 1.2em;">需炒生板栗：${rawWeight.toFixed(2)} 斤</strong><br>
                 <small style="color: #666;">(按生熟比例 1:1.33 计算)</small>
             `;
             result.style.display = 'block';
