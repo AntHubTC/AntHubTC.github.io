@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5以内的分解 - 生成器</title>
+    <style>
+        /* 页面基础样式 */
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'PingFang SC', 'Microsoft YaHei', sans-serif; margin: 16px; color: #111; }
+        h1 { text-align: center; margin: 8px 0 16px; font-size: 24px; }
+        .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; margin-bottom: 12px; }
+        .controls label { font-size: 14px; }
+        .controls input { width: 72px; padding: 4px 6px; }
+        .controls button { padding: 6px 12px; cursor: pointer; }
+        .meta { display: flex; justify-content: space-between; gap: 8px; margin: 8px 0 16px; }
+        .meta .line { border-top: 2px solid #000; height: 0; margin-top: 18px; flex: 1; }
+        .meta .label { width: 72px; text-align: right; padding-right: 6px; }
+
+        /* 练习板布局 */
+        .sheet { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; }
+        .cell { display: flex; justify-content: center; }
+
+        /* 树与方框样式（使用SVG渲染） */
+        .tree svg { width: 110px; height: 130px; overflow: visible; }
+        .box { fill: #fff; stroke: #000; stroke-width: 2; rx: 4; ry: 4; }
+        .txt { font-size: 18px; font-weight: 600; dominant-baseline: middle; text-anchor: middle; }
+        .branch { stroke: #000; stroke-width: 2; }
+        .title-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; align-items: center; margin-bottom: 8px; }
+        .title-row span { text-align: center; }
+
+        @media print {
+            .controls { display: none; }
+            body { margin: 8mm; }
+            .sheet { gap: 12px 18px; }
+        }
+    </style>
+</head>
+<body>
+    <h1>5以内的分解</h1>
+
+    <div class="controls">
+        <label>最大数字 <input id="maxNum" type="number" min="2" max="20" value="5"></label>
+        <label>题目数量 <input id="count" type="number" min="3" max="60" value="30"></label>
+        <label>每行列数 <input id="cols" type="number" min="1" max="6" value="3"></label>
+        <button id="genBtn">生成</button>
+        <button id="printBtn">打印</button>
+    </div>
+
+    <div class="title-row">
+        <span>姓名<div class="line"></div></span>
+        <span>日期<div class="line"></div></span>
+        <span>用时<div class="line"></div></span>
+    </div>
+
+    <div id="sheet" class="sheet"></div>
+
+    <script>
+        function randInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function pickDecomposition(total) {
+            // 保证两个加数组成 total，随机决定是否留空哪一边
+            const left = randInt(0, total);
+            const right = total - left;
+            // 0 也允许，符合低年级数学练习
+            const whichBlank = Math.random() < 0.5 ? 'left' : 'right';
+            const fill = whichBlank === 'left' ? { left: '', right } : { left, right: '' };
+            return { total, ...fill };
+        }
+
+        function createTreeNode(data) {
+            // 坐标：父框居中，两个子框在下方左右
+            const W = 110, H = 130;
+            const parent = { x: 32, y: 8, w: 46, h: 30 };
+            const left = { x: 8, y: 56, w: 38, h: 26 };
+            const right = { x: 64, y: 56, w: 38, h: 26 };
+
+            const svgns = 'http://www.w3.org/2000/svg';
+            const svg = document.createElementNS(svgns, 'svg');
+            svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+            // 连接线
+            const l1 = document.createElementNS(svgns, 'line');
+            l1.setAttribute('x1', parent.x + parent.w/2);
+            l1.setAttribute('y1', parent.y + parent.h);
+            l1.setAttribute('x2', left.x + left.w/2);
+            l1.setAttribute('y2', left.y);
+            l1.setAttribute('class', 'branch');
+            svg.appendChild(l1);
+
+            const l2 = document.createElementNS(svgns, 'line');
+            l2.setAttribute('x1', parent.x + parent.w/2);
+            l2.setAttribute('y1', parent.y + parent.h);
+            l2.setAttribute('x2', right.x + right.w/2);
+            l2.setAttribute('y2', right.y);
+            l2.setAttribute('class', 'branch');
+            svg.appendChild(l2);
+
+            // 父框
+            const parentBox = document.createElementNS(svgns, 'rect');
+            parentBox.setAttribute('x', parent.x);
+            parentBox.setAttribute('y', parent.y);
+            parentBox.setAttribute('width', parent.w);
+            parentBox.setAttribute('height', parent.h);
+            parentBox.setAttribute('class', 'box');
+            svg.appendChild(parentBox);
+
+            const parentText = document.createElementNS(svgns, 'text');
+            parentText.setAttribute('x', parent.x + parent.w/2);
+            parentText.setAttribute('y', parent.y + parent.h/2 + 1);
+            parentText.setAttribute('class', 'txt');
+            parentText.textContent = data.total;
+            svg.appendChild(parentText);
+
+            // 左子框
+            const leftBox = document.createElementNS(svgns, 'rect');
+            leftBox.setAttribute('x', left.x);
+            leftBox.setAttribute('y', left.y);
+            leftBox.setAttribute('width', left.w);
+            leftBox.setAttribute('height', left.h);
+            leftBox.setAttribute('class', 'box');
+            svg.appendChild(leftBox);
+
+            const leftText = document.createElementNS(svgns, 'text');
+            leftText.setAttribute('x', left.x + left.w/2);
+            leftText.setAttribute('y', left.y + left.h/2 + 1);
+            leftText.setAttribute('class', 'txt');
+            leftText.textContent = data.left !== '' ? data.left : '';
+            svg.appendChild(leftText);
+
+            // 右子框
+            const rightBox = document.createElementNS(svgns, 'rect');
+            rightBox.setAttribute('x', right.x);
+            rightBox.setAttribute('y', right.y);
+            rightBox.setAttribute('width', right.w);
+            rightBox.setAttribute('height', right.h);
+            rightBox.setAttribute('class', 'box');
+            svg.appendChild(rightBox);
+
+            const rightText = document.createElementNS(svgns, 'text');
+            rightText.setAttribute('x', right.x + right.w/2);
+            rightText.setAttribute('y', right.y + right.h/2 + 1);
+            rightText.setAttribute('class', 'txt');
+            rightText.textContent = data.right !== '' ? data.right : '';
+            svg.appendChild(rightText);
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'tree';
+            wrapper.appendChild(svg);
+            return wrapper;
+        }
+
+        function generate() {
+            const max = Math.max(2, Math.min(20, parseInt(document.getElementById('maxNum').value || '5', 10)));
+            const count = Math.max(1, Math.min(120, parseInt(document.getElementById('count').value || '30', 10)));
+            const cols = Math.max(1, Math.min(6, parseInt(document.getElementById('cols').value || '3', 10)));
+            const sheet = document.getElementById('sheet');
+            sheet.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+            sheet.innerHTML = '';
+
+            for (let i = 0; i < count; i++) {
+                const total = randInt(2, max); // 顶部数字
+                const data = pickDecomposition(total);
+                const cell = document.createElement('div');
+                cell.className = 'cell';
+                cell.appendChild(createTreeNode(data));
+                sheet.appendChild(cell);
+            }
+        }
+
+        document.getElementById('genBtn').addEventListener('click', generate);
+        document.getElementById('printBtn').addEventListener('click', () => window.print());
+
+        // 首次渲染
+        generate();
+    </script>
+</body>
+</html>
