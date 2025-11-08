@@ -1,181 +1,118 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>5以内的分解 - 生成器</title>
-    <style>
-        /* 页面基础样式 */
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'PingFang SC', 'Microsoft YaHei', sans-serif; margin: 16px; color: #111; }
-        h1 { text-align: center; margin: 8px 0 16px; font-size: 24px; }
-        .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; margin-bottom: 12px; }
-        .controls label { font-size: 14px; }
-        .controls input { width: 72px; padding: 4px 6px; }
-        .controls button { padding: 6px 12px; cursor: pointer; }
-        .meta { display: flex; justify-content: space-between; gap: 8px; margin: 8px 0 16px; }
-        .meta .line { border-top: 2px solid #000; height: 0; margin-top: 18px; flex: 1; }
-        .meta .label { width: 72px; text-align: right; padding-right: 6px; }
-
-        /* 练习板布局 */
-        .sheet { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; }
-        .cell { display: flex; justify-content: center; }
-
-        /* 树与方框样式（使用SVG渲染） */
-        .tree svg { width: 110px; height: 130px; overflow: visible; }
-        .box { fill: #fff; stroke: #000; stroke-width: 2; rx: 4; ry: 4; }
-        .txt { font-size: 18px; font-weight: 600; dominant-baseline: middle; text-anchor: middle; }
-        .branch { stroke: #000; stroke-width: 2; }
-        .title-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; align-items: center; margin-bottom: 8px; }
-        .title-row span { text-align: center; }
-
-        @media print {
-            .controls { display: none; }
-            body { margin: 8mm; }
-            .sheet { gap: 12px 18px; }
-        }
-    </style>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="description" content="Description">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<!-- 不同风格样式 -->
+	<link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+	<!-- <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/buble.css"> -->
+	<!-- <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/dark.css"> -->
+	<!-- <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/pure.css"> -->
+	<!-- <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/dolphin.css"> -->
 </head>
+
 <body>
-    <h1><span id="number">5</span>以内的分解</h1>
-
-    <div class="controls">
-        <label>最大数字 <input id="maxNum" type="number" min="2" max="20" value="5"></label>
-        <label>题目数量 <input id="count" type="number" min="3" max="60" value="30"></label>
-        <label>每行列数 <input id="cols" type="number" min="1" max="6" value="3"></label>
-        <button id="genBtn">生成</button>
-        <button id="printBtn">打印</button>
-    </div>
-
-    <div class="title-row">
-        <span>姓名<div class="line"></div></span>
-        <span>日期<div class="line"></div></span>
-        <span>用时<div class="line"></div></span>
-    </div>
-
-    <div id="sheet" class="sheet"></div>
-
+    <div id="app"></div>
     <script>
-        function randInt(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-
-        function pickDecomposition(total) {
-            // 保证两个加数组成 total，随机决定是否留空哪一边
-            const left = randInt(0, total);
-            const right = total - left;
-            // 0 也允许，符合低年级数学练习
-            const whichBlank = Math.random() < 0.5 ? 'left' : 'right';
-            const fill = whichBlank === 'left' ? { left: '', right } : { left, right: '' };
-            return { total, ...fill };
-        }
-
-        function createTreeNode(data) {
-            // 坐标：父框居中，两个子框在下方左右
-            const W = 110, H = 130;
-            const parent = { x: 32, y: 8, w: 46, h: 30 };
-            const left = { x: 8, y: 56, w: 38, h: 26 };
-            const right = { x: 64, y: 56, w: 38, h: 26 };
-
-            const svgns = 'http://www.w3.org/2000/svg';
-            const svg = document.createElementNS(svgns, 'svg');
-            svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-
-            // 连接线
-            const l1 = document.createElementNS(svgns, 'line');
-            l1.setAttribute('x1', parent.x + parent.w/2);
-            l1.setAttribute('y1', parent.y + parent.h);
-            l1.setAttribute('x2', left.x + left.w/2);
-            l1.setAttribute('y2', left.y);
-            l1.setAttribute('class', 'branch');
-            svg.appendChild(l1);
-
-            const l2 = document.createElementNS(svgns, 'line');
-            l2.setAttribute('x1', parent.x + parent.w/2);
-            l2.setAttribute('y1', parent.y + parent.h);
-            l2.setAttribute('x2', right.x + right.w/2);
-            l2.setAttribute('y2', right.y);
-            l2.setAttribute('class', 'branch');
-            svg.appendChild(l2);
-
-            // 父框
-            const parentBox = document.createElementNS(svgns, 'rect');
-            parentBox.setAttribute('x', parent.x);
-            parentBox.setAttribute('y', parent.y);
-            parentBox.setAttribute('width', parent.w);
-            parentBox.setAttribute('height', parent.h);
-            parentBox.setAttribute('class', 'box');
-            svg.appendChild(parentBox);
-
-            const parentText = document.createElementNS(svgns, 'text');
-            parentText.setAttribute('x', parent.x + parent.w/2);
-            parentText.setAttribute('y', parent.y + parent.h/2 + 1);
-            parentText.setAttribute('class', 'txt');
-            parentText.textContent = data.total;
-            svg.appendChild(parentText);
-
-            // 左子框
-            const leftBox = document.createElementNS(svgns, 'rect');
-            leftBox.setAttribute('x', left.x);
-            leftBox.setAttribute('y', left.y);
-            leftBox.setAttribute('width', left.w);
-            leftBox.setAttribute('height', left.h);
-            leftBox.setAttribute('class', 'box');
-            svg.appendChild(leftBox);
-
-            const leftText = document.createElementNS(svgns, 'text');
-            leftText.setAttribute('x', left.x + left.w/2);
-            leftText.setAttribute('y', left.y + left.h/2 + 1);
-            leftText.setAttribute('class', 'txt');
-            leftText.textContent = data.left !== '' ? data.left : '';
-            svg.appendChild(leftText);
-
-            // 右子框
-            const rightBox = document.createElementNS(svgns, 'rect');
-            rightBox.setAttribute('x', right.x);
-            rightBox.setAttribute('y', right.y);
-            rightBox.setAttribute('width', right.w);
-            rightBox.setAttribute('height', right.h);
-            rightBox.setAttribute('class', 'box');
-            svg.appendChild(rightBox);
-
-            const rightText = document.createElementNS(svgns, 'text');
-            rightText.setAttribute('x', right.x + right.w/2);
-            rightText.setAttribute('y', right.y + right.h/2 + 1);
-            rightText.setAttribute('class', 'txt');
-            rightText.textContent = data.right !== '' ? data.right : '';
-            svg.appendChild(rightText);
-
-            const wrapper = document.createElement('div');
-            wrapper.className = 'tree';
-            wrapper.appendChild(svg);
-            return wrapper;
-        }
-
-        function generate() {
-            const max = Math.max(2, Math.min(20, parseInt(document.getElementById('maxNum').value || '5', 10)));
-            const count = Math.max(1, Math.min(120, parseInt(document.getElementById('count').value || '30', 10)));
-            const cols = Math.max(1, Math.min(6, parseInt(document.getElementById('cols').value || '3', 10)));
-            const sheet = document.getElementById('sheet');
-            sheet.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-            sheet.innerHTML = '';
-
-           document.getElementById('number').innerText  = max;
-
-            for (let i = 0; i < count; i++) {
-                const total = randInt(2, max); // 顶部数字
-                const data = pickDecomposition(total);
-                const cell = document.createElement('div');
-                cell.className = 'cell';
-                cell.appendChild(createTreeNode(data));
-                sheet.appendChild(cell);
-            }
-        }
-
-        document.getElementById('genBtn').addEventListener('click', generate);
-        document.getElementById('printBtn').addEventListener('click', () => window.print());
-
-        // 首次渲染
-        generate();
+    	// 使用文档 https://docsify.js.org
+	    window.$docsify = {
+	        // 文档标题，会显示在侧边栏顶部。
+	        name: 'docsify',
+	        // 点击文档标题后跳转的链接地址。
+	        nameLink: '/',
+	        // 在侧边栏中出现的网站图标，你可以使用CSS来更改大小
+	        logo: '/img/doc-logo.svg',
+	        // 配置仓库地址或者 username/repo 的字符串，会在页面右上角渲染一个 GitHub Corner 挂件。
+	        repo: 'https://github.com/FallenGodCoder/FallenGodCoder.github.io',
+	        // 自定义侧边栏
+	        loadSidebar: true,
+	        // 自定义侧边栏同时也可以开启目录功能
+	        subMaxLevel: 4,
+	        // 自定义导航栏 
+	        loadNavbar: false,
+	        // 自定义封面
+	        coverpage: false,
+		    // 用于配置多个封面
+		    // ,coverpage: ['/', '/zh-cn/']
+		    // 切换页面后是否自动跳转到页面顶部
+		    auto2top: true,
+		    // 全文搜素配置
+		    search: {
+		      maxAge: 86400000, // 过期时间，单位毫秒，默认一天
+		      paths: 'auto', // or []
+		      placeholder: 'Type to search',
+		      // 支持本地化
+		      // placeholder: {
+		      //   '/zh-cn/': '搜索',
+		      //   '/': 'Type to search'
+		      // },
+		      noData: 'No Result!',
+		      // 支持本地化
+		      // noData: {
+		      //   '/zh-cn/': '找不到结果',
+		      //   '/': 'No Results'
+		      // },
+		      // 搜索标题的最大程级, 1 - 6
+		      depth: 4
+		    }
+	    }
     </script>
+    <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+    <!--   =====================插件====================== -->
+    <!-- 全文搜素Search -->
+    <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
+    <!-- emoji插件 -->
+    <script src="//unpkg.com/docsify/lib/plugins/emoji.js"></script>
+    <!-- 外链脚本 - External Script -->
+    <!-- <script src="//unpkg.com/docsify/lib/plugins/external-script.js"></script> -->
+    <!-- 图片缩放 - Zoom image -->
+	<!-- 复制到剪贴板  在所有的代码块上添加一个简单的Click to copy按钮来允许用户从你的文档中轻易地复制代码。  -->
+	<script src="//unpkg.com/docsify-copy-code"></script>
+	<!-- Disqus评论系统支持。 -->
+	<!-- <script src="//unpkg.com/docsify/lib/plugins/disqus.min.js"></script> -->
+	<!-- Gitalk Gitalk，一个现代化的，基于Preact和Github Issue的评论系统  使用详情参考文档-->
+	<!-- docsify的分页导航插件 -->
+	<script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+
+	<!-- 代码高亮 -->
+	<!-- 
+		其它代码高亮插件参考： 
+			https://github.com/PrismJS/prism/tree/gh-pages/components
+			https://unpkg.com/browse/prismjs/components/
+	 -->
+ 	<script src="//unpkg.com/prismjs/components/prism-java.js"></script>
+	<script src="//unpkg.com/prismjs/components/prism-bash.js"></script>
+	<script src="//unpkg.com/prismjs/components/prism-sql.js"></script>
+	<!-- <script src="//unpkg.com/prismjs/components/prism-css.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-docker.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-git.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-go.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-groovy.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-haml.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-http.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-ini.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-json.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-javascript.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-json.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-kotlin.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-less.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-nginx.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-python.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-sass.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/componentsprism-stylus.min.js/"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-yaml.min.js"></script> -->
+	<!-- <script src="//unpkg.com/prismjs/components/prism-scala.min.js"></script> -->
+	
+	<script>
+	  // 离线模式
+	  if (typeof navigator.serviceWorker !== 'undefined') {
+	    navigator.serviceWorker.register('sw.js')
+	  }
+	</script>
 </body>
+
 </html>
