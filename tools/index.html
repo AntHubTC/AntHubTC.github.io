@@ -36,7 +36,7 @@
     </style>
 </head>
 <body>
-    <h1>5以内的分解</h1>
+    <h1><span id="number">5</span>以内的分解</h1>
 
     <div class="controls">
         <label>最大数字 <input id="maxNum" type="number" min="2" max="20" value="5"></label>
@@ -158,6 +158,8 @@
             const sheet = document.getElementById('sheet');
             sheet.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
             sheet.innerHTML = '';
+
+           document.getElementById('number').innerText  = max;
 
             for (let i = 0; i < count; i++) {
                 const total = randInt(2, max); // 顶部数字
