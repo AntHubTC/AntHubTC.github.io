@@ -575,5 +575,11 @@
             "href": "../tools",
             "is_private": false, 
             "category": ["小孩教育", "搞钱", "创业"]
+         },{ 
+            "id": 101,
+            "title": "数学邪修",
+            "href": "../mathSkill",
+            "is_private": false, 
+            "category": ["读书", "小孩教育"]
          }
 ]
