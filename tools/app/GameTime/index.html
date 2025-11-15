@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phaser爬山倒计时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- 引入Phaser.js库 -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script> -->
+    <script src="./phaser.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #87CEEB;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #gameContainer {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            position: relative;
+            max-width: 100vw;
+            max-height: 100vh;
+        }
+
+        .controls {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 300px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #startBtn {
+            background-color: #3498db;
+            color: white;
+        }
+        #resetBtn {
+            background-color: #95a5a6;
+            color: white;
+            display: none;
+        }
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .controls {
+                width: 85%;
+                padding: 15px;
+            }
+        }
+        
+        @media (max-height: 480px) {
+            .controls {
+                width: 70%;
+                max-height: 80%;
+                overflow-y: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Phaser游戏容器 -->
+    <div id="gameContainer">
+        <!-- 控制面板 -->
+        <div class="controls">
+            <div class="input-group">
+                <label for="hours">小时</label>
+                <input type="number" id="hours" min="0" max="23" value="0">
+            </div>
+            <div class="input-group">
+                <label for="minutes">分钟</label>
+                <input type="number" id="minutes" min="1" max="59" value="1">
+            </div>
+            <button id="startBtn">开始</button>
+            <button id="resetBtn">重置</button>
+        </div>
+        <!-- 倒计时将通过Phaser直接渲染 -->
+    </div>
+
+    <script>
+        // 全局变量
+        let totalSeconds;     // 总秒数
+        let remainingSeconds; // 剩余秒数
+        let countdownInterval;// 倒计时计时器
+        
+        // DOM元素
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const hoursInput = document.getElementById('hours');
+        const minutesInput = document.getElementById('minutes');
+        
+        // 全局变量 - 存储Phaser倒计时文本对象
+        let timerText = null;
+        
+        // 辅助函数：添加防缓存参数到图片URL
+        function getNoCacheUrl(url) {
+            const timestamp = new Date().getTime();
+            return `${url}?t=${timestamp}`;
+        }
+        
+        // 开始场景
+        class StartScene extends Phaser.Scene {
+            constructor() {
+                super({ key: 'StartScene' });
+            }
+            
+            preload() {
+                // 加载开始场景背景图片 - 使用防缓存URL
+                this.load.image('startBg', getNoCacheUrl('./stage_1_bg.png'));
+                // 加载开始攀爬按钮图片 - 使用防缓存URL
+                this.load.image('startButton', getNoCacheUrl('./stat_btn.png'));
+            }
+            
+            create() {
+                // 获取游戏尺寸
+                const gameWidth = this.sys.game.config.width;
+                const gameHeight = this.sys.game.config.height;
+                
+                // 添加开始背景图片 - 使用响应式定位和缩放
+                const startBg = this.add.image(gameWidth / 2, gameHeight / 2, 'startBg');
+                startBg.setDisplaySize(gameWidth, gameHeight);
+                
+                // 确保HTML控件隐藏
+                document.querySelector('.controls').style.display = 'none';
+                resetBtn.style.display = 'none';
+                
+                // 重置全局timerText
+                timerText = null;
+                
+                // 创建开始攀爬按钮 - 使用图片按钮，响应式大小
+                const maxButtonWidth = gameWidth * 0.5; // 最大宽度为游戏宽度的80%
+                const maxButtonHeight = gameHeight * 0.15; // 最大高度为游戏高度的20%
+                
+                const startClimbButton = this.add.image(gameWidth / 2, gameHeight / 4 * 3, 'startButton');
+                
+                // 确保按钮不会太大
+                startClimbButton.setScale(
+                    Math.min(maxButtonWidth / startClimbButton.width, maxButtonHeight / startClimbButton.height)
+                );
+                startClimbButton.setOrigin(0.5);
+                
+                // 按钮点击事件
+                startClimbButton.setInteractive({
+                    useHandCursor: true // 显示手型光标
+                });
+                
+                startClimbButton.on('pointerup', () => {
+                    // 显示控制面板
+                    document.querySelector('.controls').style.display = 'block';
+                });
+                
+                // 鼠标悬停效果 - 稍微放大按钮
+                startClimbButton.on('pointerover', () => {
+                    startClimbButton.setScale(
+                        Math.min(maxButtonWidth / startClimbButton.width, maxButtonHeight / startClimbButton.height) * 1.05
+                    );
+                });
+                
+                // 鼠标离开效果 - 恢复原始大小
+                startClimbButton.on('pointerout', () => {
+                    startClimbButton.setScale(
+                        Math.min(maxButtonWidth / startClimbButton.width, maxButtonHeight / startClimbButton.height)
+                    );
+                });
+            }
+        }
+        
+        // 攀爬场景
+        class ClimbScene extends Phaser.Scene {
+            constructor() {
+                super({ key: 'ClimbScene' });
+                this.climber = null;
+                // this.rope = null;
+                // this.mountainTop = null;
+                this.currentClimbFrame = 0; // 当前攀爬动作帧
+                this.climbFrames = ['climber1', 'climber2']; // 攀爬动作帧列表
+                this.background = null;
+                this.victoryTimer = null; // 胜利后倒计时
+            }
+            
+            preload() {
+                // 加载游戏资源 - 使用防缓存URL
+                // this.load.image('rope', getNoCacheUrl('./透明背景的绳子.png'));
+                this.load.image('stage_2_1_bg', getNoCacheUrl('./stage_2_1.png'));
+                this.load.image('stage_2_2_bg', getNoCacheUrl('./stage_2_2.png'));
+                // 加载两个攀爬动作的图片
+                this.load.image('climber1', getNoCacheUrl('./sprite_1.png')); // 第一个动作
+                this.load.image('climber2', getNoCacheUrl('./sprite_2.png')); // 第二个动作
+            }
+            
+            create() {
+                // 隐藏HTML控制面板
+                document.querySelector('.controls').style.display = 'none';
+                resetBtn.style.display = 'block';
+                
+                // 获取游戏尺寸
+                const gameWidth = this.sys.game.config.width;
+                const gameHeight = this.sys.game.config.height;
+                
+                // 添加背景图片 - 响应式缩放
+                this.background = this.add.image(gameWidth / 2, gameHeight / 2, 'stage_2_1_bg');
+                this.background.setDisplaySize(gameWidth, gameHeight);
+                this.background.setDepth(-10);
+                
+                // 创建Phaser倒计时文本
+                const fontSize = Math.min(gameWidth * 0.05, 44);
+                timerText = this.add.text(gameWidth * 0.97, gameHeight * 0.105, '00:00:00', {
+                    fontSize: fontSize + 'px',
+                    fontWeight: '900',
+                    fill: '#005500',
+                    padding: {
+                        left: 20,
+                        right: 20,
+                        top: 10,
+                        bottom: 10
+                    },
+                    borderRadius: 10,
+                    stroke: '#005500',
+                    strokeThickness: 3
+                }).setOrigin(1, 0.5);
+                timerText.setDepth(50);
+                
+                // 计算响应式元素尺寸
+                const baseScale = Math.min(gameWidth / 1200, gameHeight / 675);
+                
+                // 使用图片作为爬山者 - 响应式位置和大小
+                const climberScale = 444/601;
+                this.climber = this.add.image(gameWidth * 0.555, gameHeight, 'climber1'); // 初始使用第一个动作
+                this.climber.displayWidth = gameWidth * 0.223;
+                this.climber.displayHeight = this.climber.displayWidth / climberScale;
+                this.climber.setOrigin(0.5);
+                this.climber.step = 1;
+
+                console.info(this.climber);
+                
+                // 初始化爬山者位置
+                this.updateClimberPosition();
+                
+                // 初始化倒计时显示
+                if (remainingSeconds > 0) {
+                    updateTimerDisplay();
+                }
+                
+                // 重置胜利计时器
+                if (this.victoryTimer) {
+                    this.victoryTimer.remove();
+                    this.victoryTimer = null;
+                }
+            }
+            
+            updateClimberPosition() {
+                // 计算攀爬进度（0-100%）
+                const progress = 100 - (remainingSeconds / totalSeconds * 100);
+                const gameHeight = this.sys.game.config.height;
+                // 计算当前位置（Y坐标，Phaser中Y向下增长）
+                const startY = gameHeight * 0.693; // 起始位置
+                const endY = gameHeight * 0.167; // 终点位置
+                const currentY = startY - (progress / 100) * (startY - endY);
+                
+                // 更新爬山者位置
+                if (this.climber) {
+                    this.climber.y = currentY;
+                    
+                    // 切换攀爬动作图片
+                    const newFrame = ++this.climber.step % 2; // 0或1，用于切换两个动作
+                    
+                    // 如果帧发生变化，切换图片
+                    if (newFrame !== this.currentClimbFrame) {
+                        this.currentClimbFrame = newFrame;
+                        this.climber.setTexture(this.climbFrames[newFrame]);
+                    }
+
+                    // 进入100%
+                if (remainingSeconds == 0) {
+                    clearInterval(countdownInterval);
+                    this.background.setTexture('stage_2_2_bg');
+                    this.climber.alpha = 0;
+                    // 这里攀爬者拿到了奖杯
+                    
+                    // 设置3秒后进入第三个场景
+                    if (!this.victoryTimer) {
+                        this.victoryTimer = this.time.addEvent({
+                            delay: 5000,
+                            callback: () => {
+                                // 切换到第三个场景
+                                this.scene.start('FinishScene');
+                            },
+                            callbackScope: this
+                        });
+                    }
+                }
+                }
+            }
+            
+            completeClimb() {
+                // 确保到达山顶 - 响应式位置
+                const gameHeight = this.sys.game.config.height;
+                if (this.climber) {
+                    this.climber.y = gameHeight * 0.167;
+                }
+            }
+            
+            // 场景关闭时清理
+            shutdown() {
+                if (this.victoryTimer) {
+                    this.victoryTimer.remove();
+                    this.victoryTimer = null;
+                }
+            }
+        }
+        
+        // 第三个场景 - 结束场景
+        class FinishScene extends Phaser.Scene {
+            constructor() {
+                super({ key: 'FinishScene' });
+            }
+            
+            preload() {
+                // 加载结束场景背景图片
+                this.load.image('finishBg', getNoCacheUrl('./stage3_1.png'));
+                // 加载按钮图片
+                this.load.image('restart_btn', getNoCacheUrl('./restart_btn.png'));
+            }
+            
+            create() {
+                // 获取游戏尺寸
+                const gameWidth = this.sys.game.config.width;
+                const gameHeight = this.sys.game.config.height;
+                
+                // 添加结束场景背景图片 - 使用响应式定位和缩放
+                const finishBg = this.add.image(gameWidth / 2, gameHeight / 2, 'finishBg');
+                finishBg.setDisplaySize(gameWidth, gameHeight);
+                
+                // 确保HTML控件隐藏
+                document.querySelector('.controls').style.display = 'none';
+                resetBtn.style.display = 'none';
+                
+                // 重置全局timerText
+                timerText = null;
+                
+                // 创建"再来"按钮 - 使用响应式大小
+                const maxButtonWidth = gameWidth * 0.5; // 最大宽度为游戏宽度的50%
+                const maxButtonHeight = gameHeight * 0.15; // 最大高度为游戏高度的15%
+                
+                const restartButton = this.add.image(gameWidth / 2, gameHeight / 10 * 9, 'restart_btn');
+                
+                // 确保按钮不会太大
+                restartButton.setScale(
+                    Math.min(maxButtonWidth / restartButton.width, maxButtonHeight / restartButton.height)
+                );
+                restartButton.setOrigin(0.5);
+                
+                // 按钮点击事件
+                restartButton.setInteractive({
+                    useHandCursor: true // 显示手型光标
+                });
+                
+                restartButton.on('pointerup', () => {
+                    // 重置游戏状态
+                    remainingSeconds = 0;
+                    clearInterval(countdownInterval);
+                    
+                    // 切换回第一个场景
+                    this.scene.start('StartScene');
+                });
+                
+                // 鼠标悬停效果 - 稍微放大按钮
+                restartButton.on('pointerover', () => {
+                    restartButton.setScale(
+                        Math.min(maxButtonWidth / restartButton.width, maxButtonHeight / restartButton.height) * 1.05
+                    );
+                });
+                
+                // 鼠标离开效果 - 恢复原始大小
+                restartButton.on('pointerout', () => {
+                    restartButton.setScale(
+                        Math.min(maxButtonWidth / restartButton.width, maxButtonHeight / restartButton.height)
+                    );
+                });
+            }
+        }
+        
+        // 游戏配置 - 响应式设计
+        const config = {
+            type: Phaser.AUTO,
+            width: window.innerWidth,
+            height: window.innerHeight,
+            parent: 'gameContainer',
+            scene: [StartScene, ClimbScene, FinishScene],
+            scale: {
+                mode: Phaser.Scale.RESIZE,
+                min: {
+                    width: 675,
+                    height: 1200
+                },
+                max: {
+                    width: 1920,
+                    height: 1080
+                }
+            }
+        };
+        
+        // 初始化游戏
+        let game;
+        
+        // 窗口大小变化时重新调整游戏
+        function resizeGame() {
+            if (game && !game.isBooted) return;
+            
+            if (game) {
+                game.scale.resize(window.innerWidth, window.innerHeight);
+            } else {
+                // 首次创建游戏
+                game = new Phaser.Game(config);
+            }
+        }
+        
+        // 监听窗口大小变化
+        window.addEventListener('resize', resizeGame);
+        
+        // 初始化游戏
+        resizeGame();
+        
+        // 开始倒计时
+        startBtn.addEventListener('click', () => {
+            const hours = parseInt(hoursInput.value) || 0;
+            const minutes = parseInt(minutesInput.value) || 0;
+            
+            // 验证输入
+            if (minutes === 0 && hours === 0) {
+                alert('请至少设置1分钟');
+                return;
+            }
+            
+            // 计算总秒数
+            totalSeconds = (hours * 3600) + (minutes * 60);
+            remainingSeconds = totalSeconds;
+            
+            // 隐藏控制面板
+            document.querySelector('.controls').style.display = 'none';
+            
+            // 切换到攀爬场景
+            game.scene.start('ClimbScene');
+            
+            // 开始倒计时
+            countdownInterval = setInterval(updateCountdown, 1000);
+        });
+        
+        // 重置倒计时
+        resetBtn.addEventListener('click', () => {
+            clearInterval(countdownInterval);
+            remainingSeconds = 0;
+            resetBtn.style.display = 'none';
+            hoursInput.value = 0;
+            minutesInput.value = 1;
+            document.querySelector('.controls').style.display = 'none';
+            
+            // 切换回开始场景
+            game.scene.start('StartScene');
+        });
+        
+        // 更新倒计时
+        function updateCountdown() {
+            if (remainingSeconds <= 0) {
+                clearInterval(countdownInterval);
+                
+                // 调用攀爬场景的完成方法
+                const climbScene = game.scene.getScene('ClimbScene');
+                if (climbScene) {
+                    climbScene.completeClimb();
+                }
+                
+                // 更新倒计时显示为00:00:00
+                updateTimerDisplay();
+                
+                // 显示完成提示
+                setTimeout(() => {
+                    alert('恭喜！已成功到达山顶！');
+                    resetBtn.click();
+                }, 500);
+                return;
+            }
+            
+            remainingSeconds--;
+            updateTimerDisplay();
+            
+            // 更新攀爬场景中的爬山者位置
+            const climbScene = game.scene.getScene('ClimbScene');
+            if (climbScene) {
+                climbScene.updateClimberPosition();
+            }
+        }
+        
+        // 更新时间显示 - 使用Phaser文本对象
+        function updateTimerDisplay() {
+            if (!timerText) return; // 如果timerText未初始化则返回
+            
+            const hours = Math.floor(remainingSeconds / 3600);
+            const minutes = Math.floor((remainingSeconds % 3600) / 60);
+            const seconds = remainingSeconds % 60;
+            
+            timerText.setText(`${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`);
+        }
+        
+        // 格式化时间为两位数
+        function formatTime(time) {
+            return time.toString().padStart(2, '0');
+        }
+        
+        // 限制输入范围
+        hoursInput.addEventListener('input', () => {
+            if (hoursInput.value > 23) hoursInput.value = 23;
+            if (hoursInput.value < 0) hoursInput.value = 0;
+        });
+        
+        minutesInput.addEventListener('input', () => {
+            if (minutesInput.value > 59) minutesInput.value = 59;
+            if (minutesInput.value < 0) minutesInput.value = 0;
+        });
+    </script>
+</body>
+</html>
