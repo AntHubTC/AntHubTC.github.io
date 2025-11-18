@@ -4,7 +4,7 @@
 
 ## 习惯养成
 
-[倒计时内完成某项事情](https://anthubtc.github.io/tools/app/TimeGame/index.html)
+[倒计时内完成某项事情](https://anthubtc.github.io/tools/app/GameTime/index.html)
 
 
 
