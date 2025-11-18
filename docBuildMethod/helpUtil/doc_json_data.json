@@ -581,5 +581,11 @@
             "href": "../mathSkill",
             "is_private": false, 
             "category": ["读书", "小孩教育"]
+         },{ 
+            "id": 102,
+            "title": "phaser.js",
+            "href": "../phaser",
+            "is_private": false, 
+            "category": ["JAVASCRIPT"]
          }
 ]
