@@ -34,3 +34,4 @@ Phaser is a fast, free, and fun open source HTML5 game framework that offers Web
 
 官方学习文档：[入口](https://docs.phaser.io/phaser/getting-started/what-is-phaser) 在豆包浏览器中打开浏览非常好，自动带上对应翻译，方便阅读。
 
+phaser小站：[入口](https://www.phaser-china.com/tutorial-detail-8.html)
