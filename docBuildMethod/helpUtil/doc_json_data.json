@@ -593,5 +593,11 @@
             "href": "../skateboard",
             "is_private": false, 
             "category": ["小孩教育", "健康生活"]
+         },{ 
+            "id": 104,
+            "title": "家规",
+            "href": "../homerule",
+            "is_private": false, 
+            "category": ["小孩教育"]
          }
 ]
