@@ -599,5 +599,11 @@
             "href": "../homerule",
             "is_private": false, 
             "category": ["小孩教育"]
+         },{ 
+            "id": 105,
+            "title": "ClaudeCode",
+            "href": "../ClaudeCode",
+            "is_private": false, 
+            "category": ["AI"]
          }
 ]

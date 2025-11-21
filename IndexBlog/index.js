@@ -601,6 +601,12 @@ let docs = [
             "href": "../homerule",
             "is_private": false, 
             "category": ["小孩教育"]
+         },{ 
+            "id": 105,
+            "title": "ClaudeCode",
+            "href": "../ClaudeCode",
+            "is_private": false, 
+            "category": ["AI"]
          }
 ];
 // 所有文档分类
@@ -822,7 +828,7 @@ let docCategory = [
 
 // 特殊定位符，前面是数据，后面是代码，python按最新数据重新拼接
 // >>>>>>>>>!@#$%^&*!<<<<<<<<<
-                                                                                                                                                                
+                                                                                                                                                                    
                                                                                                     
 // 防止抖动函数
 function debounce(func, delay) {
