@@ -5,5 +5,6 @@
 * [OfficeAI](OfficeAI)
 * [Ollama](ollama)
 * [SparkTTS](SparkTTS)
+* [其他技巧](otherSkills)
 * [相关GITHUB](github)
 
