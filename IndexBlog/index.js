@@ -607,6 +607,12 @@ let docs = [
             "href": "../ClaudeCode",
             "is_private": false, 
             "category": ["AI"]
+         },{ 
+            "id": 106,
+            "title": "3D打印",
+            "href": "../3dPrint",
+            "is_private": false, 
+            "category": ["3D", "创业", "搞钱"]
          }
 ];
 // 所有文档分类
@@ -828,7 +834,7 @@ let docCategory = [
 
 // 特殊定位符，前面是数据，后面是代码，python按最新数据重新拼接
 // >>>>>>>>>!@#$%^&*!<<<<<<<<<
-                                                                                                                                                                    
+                                                                                                                                                                        
                                                                                                     
 // 防止抖动函数
 function debounce(func, delay) {

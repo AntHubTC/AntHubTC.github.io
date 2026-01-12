@@ -605,5 +605,11 @@
             "href": "../ClaudeCode",
             "is_private": false, 
             "category": ["AI"]
+         },{ 
+            "id": 106,
+            "title": "3D打印",
+            "href": "../3dPrint",
+            "is_private": false, 
+            "category": ["3D", "创业", "搞钱"]
          }
 ]
