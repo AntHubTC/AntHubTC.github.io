@@ -32,6 +32,7 @@ npm --version
 
 用户目录 或者 项目目录中，有一个.claude的目录，下面是比较完整的目录结构（刚学习的时候，了解即可）。
 
+```txt
 .claude/
 ├── config.json
 │   # CLI 启动级配置（入口）
@@ -172,6 +173,7 @@ npm --version
 │       # 延迟 / 性能测试
 │
 └── state.json
+```
 
 
 
