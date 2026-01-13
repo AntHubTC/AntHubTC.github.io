@@ -173,9 +173,6 @@ npm --version
 │
 └── state.json
 
-    # CLI 全局运行状态
-    # 当前 profile、最近 session
-
 
 
 ## 配置代理网络和API方式
