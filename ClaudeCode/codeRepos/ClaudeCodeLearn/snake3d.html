@@ -37,7 +37,7 @@
             pointer-events: none;
         }
 
-        /* 分数显示 */
+        /* 分数显示 - 玻璃拟态效果 */
         #score-panel {
             position: absolute;
             top: 20px;
@@ -46,6 +46,13 @@
             font-size: 24px;
             text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
             z-index: 100;
+            background: rgba(0, 20, 40, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 255, 255, 0.2);
         }
 
         #score-panel .label {
@@ -69,7 +76,7 @@
             text-align: center;
         }
 
-        /* 游戏开始/结束界面 */
+        /* 游戏开始/结束界面 - 玻璃拟态效果 */
         #game-menu {
             position: absolute;
             top: 50%;
@@ -78,6 +85,13 @@
             text-align: center;
             pointer-events: auto;
             z-index: 200;
+            background: rgba(0, 20, 40, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 0, 255, 0.4);
+            border-radius: 30px;
+            padding: 60px 80px;
+            box-shadow: 0 8px 32px 0 rgba(255, 0, 255, 0.3), inset 0 0 60px rgba(255, 0, 255, 0.1);
         }
 
         #game-menu h1 {
@@ -104,7 +118,7 @@
         }
 
         .btn {
-            background: transparent;
+            background: rgba(0, 255, 255, 0.1);
             border: 2px solid #0ff;
             color: #0ff;
             padding: 15px 50px;
@@ -113,12 +127,33 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 3px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:hover {
-            background: #0ff;
+            background: rgba(0, 255, 255, 0.3);
             color: #000;
-            box-shadow: 0 0 30px #0ff;
+            box-shadow: 0 0 30px #0ff, inset 0 0 20px rgba(0, 255, 255, 0.3);
+            transform: translateY(-2px);
         }
 
         #final-score {
@@ -128,7 +163,7 @@
             margin: 20px 0;
         }
 
-        /* 能力提示 */
+        /* 能力提示 - 玻璃拟态效果 */
         #power-up-indicator {
             position: absolute;
             top: 100px;
@@ -137,6 +172,13 @@
             font-size: 16px;
             opacity: 0;
             transition: opacity 0.3s;
+            background: rgba(255, 200, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 0, 0.3);
+            border-radius: 10px;
+            padding: 10px 20px;
+            box-shadow: 0 4px 16px 0 rgba(255, 255, 0, 0.2);
         }
 
         #power-up-indicator.active {
@@ -158,9 +200,16 @@
             font-size: 80px;
             font-weight: bold;
             color: #f0f;
-            text-shadow: 0 0 30px #f0f;
+            text-shadow: 0 0 30px #f0f, 0 0 60px #f0f, 0 0 90px #f0f;
             opacity: 0;
             transition: all 0.3s;
+            background: rgba(255, 0, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 0, 255, 0.4);
+            border-radius: 20px;
+            padding: 20px 40px;
+            box-shadow: 0 8px 32px 0 rgba(255, 0, 255, 0.3);
         }
 
         #combo-display.show {
@@ -169,9 +218,21 @@
         }
 
         @keyframes comboAnim {
-            0% { transform: translateY(-50%) scale(0.5); }
-            50% { transform: translateY(-50%) scale(1.2); }
-            100% { transform: translateY(-50%) scale(1); }
+            0% { transform: translateY(-50%) scale(0.5); opacity: 0; }
+            50% { transform: translateY(-50%) scale(1.3); opacity: 1; }
+            70% { transform: translateY(-50%) scale(0.9); }
+            100% { transform: translateY(-50%) scale(1); opacity: 1; }
+        }
+
+        /* 分数滚动动画 */
+        @keyframes scorePopup {
+            0% { transform: scale(1); color: #0ff; }
+            50% { transform: scale(1.5); color: #ff0; }
+            100% { transform: scale(1); color: #0ff; }
+        }
+
+        .score-animate {
+            animation: scorePopup 0.3s ease-out;
         }
 
         .hidden {
@@ -328,12 +389,28 @@
 
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setClearColor(0x000000);
+        renderer.setClearColor(0x000510);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         document.getElementById('game-container').insertBefore(renderer.domElement, document.getElementById('ui-overlay'));
+
+        // 添加雾效增强深度感
+        scene.fog = new THREE.FogExp2(0x000510, 0.008);
 
         // 相机位置
         camera.position.set(0, 25, 25);
         camera.lookAt(0, 0, 0);
+
+        // 全局效果变量
+        let starField = null;
+        let ambientParticles = [];
+        let explosionParticles = [];
+        let speedLines = [];
+        let cameraShake = { intensity: 0, duration: 0 };
+        let walls = [];
+        let gridHelper = null;
+        let ground = null;
+        let targetCameraPosition = new THREE.Vector3(0, 25, 25);
 
         // ==================== 灯光设置 ====================
         const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
@@ -361,54 +438,190 @@
         // 跟随蛇头的聚光灯（用于照亮前方）
         const headLight = new THREE.SpotLight(0xffffff, 1.5, 30, Math.PI / 4, 0.5);
         headLight.position.set(0, 5, 0);
+        headLight.castShadow = true;
+        headLight.shadow.mapSize.width = 1024;
+        headLight.shadow.mapSize.height = 1024;
         scene.add(headLight);
         scene.add(headLight.target);
 
+        // ==================== 星空背景 ====================
+        function createStarField() {
+            const starGeometry = new THREE.BufferGeometry();
+            const starCount = 2000;
+            const positions = new Float32Array(starCount * 3);
+            const colors = new Float32Array(starCount * 3);
+            const sizes = new Float32Array(starCount);
+
+            for (let i = 0; i < starCount; i++) {
+                const i3 = i * 3;
+                positions[i3] = (Math.random() - 0.5) * 200;
+                positions[i3 + 1] = Math.random() * 100 + 20;
+                positions[i3 + 2] = (Math.random() - 0.5) * 200;
+
+                const color = new THREE.Color();
+                color.setHSL(Math.random() * 0.2 + 0.5, 0.8, 0.8);
+                colors[i3] = color.r;
+                colors[i3 + 1] = color.g;
+                colors[i3 + 2] = color.b;
+
+                sizes[i] = Math.random() * 2 + 0.5;
+            }
+
+            starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            starGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            starGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+            const starMaterial = new THREE.PointsMaterial({
+                size: 0.5,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8,
+                sizeAttenuation: true
+            });
+
+            starField = new THREE.Points(starGeometry, starMaterial);
+            scene.add(starField);
+        }
+
+        // ==================== 环境漂浮粒子 ====================
+        function createAmbientParticles() {
+            const particleCount = 100;
+            for (let i = 0; i < particleCount; i++) {
+                const geometry = new THREE.SphereGeometry(0.05, 8, 8);
+                const material = new THREE.MeshBasicMaterial({
+                    color: new THREE.Color().setHSL(Math.random(), 1, 0.7),
+                    transparent: true,
+                    opacity: 0.6
+                });
+                const particle = new THREE.Mesh(geometry, material);
+                particle.position.set(
+                    (Math.random() - 0.5) * CONFIG.gridSize,
+                    Math.random() * CONFIG.wallHeight,
+                    (Math.random() - 0.5) * CONFIG.gridSize
+                );
+                particle.userData = {
+                    velocity: new THREE.Vector3(
+                        (Math.random() - 0.5) * 0.02,
+                        (Math.random() - 0.5) * 0.02,
+                        (Math.random() - 0.5) * 0.02
+                    ),
+                    originalY: particle.position.y
+                };
+                scene.add(particle);
+                ambientParticles.push(particle);
+            }
+        }
+
+        // ==================== 爆炸粒子效果 ====================
+        function createExplosion(position, color, count = 30) {
+            for (let i = 0; i < count; i++) {
+                const geometry = new THREE.SphereGeometry(0.08, 8, 8);
+                const material = new THREE.MeshBasicMaterial({
+                    color: color,
+                    transparent: true,
+                    opacity: 1
+                });
+                const particle = new THREE.Mesh(geometry, material);
+                particle.position.copy(position);
+                particle.userData = {
+                    velocity: new THREE.Vector3(
+                        (Math.random() - 0.5) * 0.5,
+                        (Math.random() - 0.5) * 0.5,
+                        (Math.random() - 0.5) * 0.5
+                    ),
+                    life: 1.0,
+                    decay: Math.random() * 0.02 + 0.02
+                };
+                scene.add(particle);
+                explosionParticles.push(particle);
+            }
+        }
+
+        // ==================== 速度线效果 ====================
+        function createSpeedLines() {
+            const lineCount = 50;
+            for (let i = 0; i < lineCount; i++) {
+                const geometry = new THREE.BufferGeometry();
+                const positions = new Float32Array(6);
+                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                const material = new THREE.LineBasicMaterial({
+                    color: 0x00ffff,
+                    transparent: true,
+                    opacity: 0
+                });
+                const line = new THREE.Line(geometry, material);
+                line.userData = {
+                    speed: Math.random() * 0.3 + 0.2,
+                    offset: Math.random() * Math.PI * 2
+                };
+                scene.add(line);
+                speedLines.push(line);
+            }
+        }
+
+        // ==================== 相机震动效果 ====================
+        function triggerCameraShake(intensity, duration) {
+            cameraShake.intensity = intensity;
+            cameraShake.duration = duration;
+        }
+
         // ==================== 创建游戏场地 ====================
         function createArena() {
-            // 地面网格
-            const gridHelper = new THREE.GridHelper(CONFIG.gridSize, CONFIG.gridSize, 0x444444, 0x222222);
+            // 地面网格 - 动态颜色效果
+            gridHelper = new THREE.GridHelper(CONFIG.gridSize, CONFIG.gridSize, 0x4444ff, 0x222266);
+            gridHelper.position.y = 0;
             scene.add(gridHelper);
 
-            // 发光地面
+            // 反射地面
             const groundGeo = new THREE.PlaneGeometry(CONFIG.gridSize, CONFIG.gridSize);
-            const groundMat = new THREE.MeshBasicMaterial({
-                color: 0x111122,
+            const groundMat = new THREE.MeshPhongMaterial({
+                color: 0x1a1a3a,
                 transparent: true,
-                opacity: 0.8
+                opacity: 0.95,
+                shininess: 100,
+                specular: 0x6666ff,
+                reflectivity: 1
             });
-            const ground = new THREE.Mesh(groundGeo, groundMat);
+            ground = new THREE.Mesh(groundGeo, groundMat);
             ground.rotation.x = -Math.PI / 2;
             ground.position.y = -0.01;
+            ground.receiveShadow = true;
             scene.add(ground);
 
-            // 边界墙（发光效果）
-            const wallMaterial = new THREE.MeshBasicMaterial({
+            // 边界墙（发光效果 + 脉冲动画）
+            const wallMaterial = new THREE.MeshPhongMaterial({
                 color: 0x0066ff,
+                emissive: 0x0033aa,
+                emissiveIntensity: 0.5,
                 transparent: true,
-                opacity: 0.3
+                opacity: 0.4,
+                shininess: 100
             });
 
             const halfSize = CONFIG.gridSize / 2;
 
             // 四面墙
-            const walls = [
+            walls = [];
+            const wallConfigs = [
                 { pos: [halfSize, CONFIG.wallHeight/2, 0], rot: [0, 0, 0], scale: [0.1, CONFIG.wallHeight, CONFIG.gridSize] },
                 { pos: [-halfSize, CONFIG.wallHeight/2, 0], rot: [0, 0, 0], scale: [0.1, CONFIG.wallHeight, CONFIG.gridSize] },
                 { pos: [0, CONFIG.wallHeight/2, halfSize], rot: [0, 0, 0], scale: [CONFIG.gridSize, CONFIG.wallHeight, 0.1] },
                 { pos: [0, CONFIG.wallHeight/2, -halfSize], rot: [0, 0, 0], scale: [CONFIG.gridSize, CONFIG.wallHeight, 0.1] }
             ];
 
-            walls.forEach(w => {
+            wallConfigs.forEach(w => {
                 const geo = new THREE.BoxGeometry(1, 1, 1);
                 const wall = new THREE.Mesh(geo, wallMaterial);
                 wall.position.set(...w.pos);
                 wall.scale.set(...w.scale);
+                wall.castShadow = true;
+                wall.receiveShadow = true;
                 scene.add(wall);
+                walls.push(wall);
             });
 
             // 天花板网格
-            const ceilingGrid = new THREE.GridHelper(CONFIG.gridSize, CONFIG.gridSize, 0x222244, 0x111122);
+            const ceilingGrid = new THREE.GridHelper(CONFIG.gridSize, CONFIG.gridSize, 0x2222ff, 0x111133);
             ceilingGrid.position.y = CONFIG.wallHeight;
             scene.add(ceilingGrid);
         }
@@ -423,6 +636,7 @@
                 this.meshes = [];
                 this.trailParticles = [];
                 this.headGlow = null;
+                this.eyes = [];
                 this.pathHistory = []; // 路径历史，用于蛇身跟随
                 this.segmentCount = 3;
             }
@@ -436,6 +650,8 @@
                 this.trailParticles.forEach(p => scene.remove(p));
                 this.trailParticles = [];
                 if (this.headGlow) scene.remove(this.headGlow);
+                this.eyes.forEach(e => scene.remove(e));
+                this.eyes = [];
 
                 // 初始化蛇头位置
                 this.positions.push(new THREE.Vector3(0, 0.5, 0));
@@ -462,41 +678,79 @@
                 this.meshes.forEach(m => scene.remove(m));
                 this.meshes = [];
                 if (this.headGlow) scene.remove(this.headGlow);
+                this.eyes.forEach(e => scene.remove(e));
+                this.eyes = [];
 
                 for (let i = 0; i < this.positions.length; i++) {
                     const isHead = i === 0;
                     const size = isHead ? 0.9 : Math.max(0.7 - i * 0.03, 0.3);
                     const geo = isHead
-                        ? new THREE.SphereGeometry(size / 2, 16, 16)
-                        : new THREE.SphereGeometry(size / 2, 12, 12);
+                        ? new THREE.SphereGeometry(size / 2, 32, 32)
+                        : new THREE.SphereGeometry(size / 2, 24, 24);
 
                     const hue = (i / Math.max(this.positions.length, 1)) * 0.3;
                     const color = new THREE.Color().setHSL(0.8 - hue, 1, 0.5);
 
-                    const mat = new THREE.MeshPhongMaterial({
+                    // 改进的材质 - 金属/玻璃质感
+                    const mat = new THREE.MeshPhysicalMaterial({
                         color: color,
                         emissive: color,
-                        emissiveIntensity: isHead ? 0.5 : 0.2,
-                        shininess: 100
+                        emissiveIntensity: isHead ? 0.8 : 0.3,
+                        metalness: 0.8,
+                        roughness: 0.2,
+                        clearcoat: 1.0,
+                        clearcoatRoughness: 0.1,
+                        reflectivity: 1.0
                     });
 
                     const mesh = new THREE.Mesh(geo, mat);
                     mesh.position.copy(this.positions[i]);
+                    mesh.castShadow = true;
+                    mesh.receiveShadow = true;
                     scene.add(mesh);
                     this.meshes.push(mesh);
 
                     if (isHead) {
-                        const glowGeo = new THREE.SphereGeometry(0.6, 16, 16);
+                        // 蛇头发光效果
+                        const glowGeo = new THREE.SphereGeometry(0.7, 32, 32);
                         const glowMat = new THREE.MeshBasicMaterial({
                             color: 0xff00ff,
                             transparent: true,
-                            opacity: 0.3
+                            opacity: 0.2
                         });
                         this.headGlow = new THREE.Mesh(glowGeo, glowMat);
                         this.headGlow.position.copy(this.positions[i]);
                         scene.add(this.headGlow);
+
+                        // 添加眼睛
+                        this.createEyes(this.positions[i]);
                     }
                 }
+            }
+
+            createEyes(headPosition) {
+                const eyeGeo = new THREE.SphereGeometry(0.08, 16, 16);
+                const eyeMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+                const pupilGeo = new THREE.SphereGeometry(0.04, 16, 16);
+                const pupilMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
+
+                // 左眼
+                const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
+                const leftPupil = new THREE.Mesh(pupilGeo, pupilMat);
+                leftPupil.position.z = 0.06;
+                leftEye.add(leftPupil);
+                leftEye.position.set(0.15, 0.1, 0.3);
+                scene.add(leftEye);
+                this.eyes.push(leftEye);
+
+                // 右眼
+                const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
+                const rightPupil = new THREE.Mesh(pupilGeo, pupilMat);
+                rightPupil.position.z = 0.06;
+                rightEye.add(rightPupil);
+                rightEye.position.set(-0.15, 0.1, 0.3);
+                scene.add(rightEye);
+                this.eyes.push(rightEye);
             }
 
             // 相对方向转向
@@ -569,7 +823,104 @@
                     }
                 }
 
-                this.updateMeshes();
+                // 更新mesh位置
+                for (let i = 0; i < this.positions.length; i++) {
+                    this.meshes[i].position.copy(this.positions[i]);
+
+                    // 添加波动效果
+                    if (i > 0) {
+                        const wave = Math.sin(Date.now() * 0.003 + i * 0.5) * 0.015;
+                        this.meshes[i].position.y += wave;
+                    }
+                }
+
+                // 更新发光效果
+                if (this.headGlow) {
+                    this.headGlow.position.copy(this.positions[0]);
+                    const pulse = 1 + Math.sin(Date.now() * 0.005) * 0.1;
+                    this.headGlow.scale.setScalar(pulse);
+                }
+
+                // 更新眼睛位置和朝向
+                this.updateEyes();
+
+                // 生成拖尾粒子
+                if (gameState.boosting || Math.random() < 0.3) {
+                    this.spawnTrailParticle();
+                }
+
+                // 更新拖尾粒子
+                this.updateTrailParticles(deltaTime);
+            }
+
+            updateEyes() {
+                if (this.eyes.length === 0) return;
+
+                const headPos = this.positions[0];
+                const eyeOffset = 0.3;
+
+                // 计算眼睛位置
+                const rightDir = new THREE.Vector3();
+                rightDir.crossVectors(this.direction, new THREE.Vector3(0, 1, 0)).normalize();
+
+                const leftEyePos = headPos.clone().add(rightDir.clone().multiplyScalar(eyeOffset));
+                const rightEyePos = headPos.clone().add(rightDir.clone().multiplyScalar(-eyeOffset));
+
+                this.eyes[0].position.copy(leftEyePos);
+                this.eyes[1].position.copy(rightEyePos);
+
+                // 让眼睛看向移动方向
+                this.eyes.forEach(eye => {
+                    eye.lookAt(headPos.clone().add(this.direction));
+                });
+            }
+
+            spawnTrailParticle() {
+                // 从多个蛇身段生成粒子，从头到尾都有
+                const segmentCount = Math.min(this.positions.length, 10);
+                for (let i = 0; i < segmentCount; i++) {
+                    const pos = this.positions[i];
+                    const geo = new THREE.SphereGeometry(0.05, 8, 8);
+                    const hue = (i / this.positions.length) * 0.3 + 0.7;
+                    const color = new THREE.Color().setHSL(hue, 1, 0.6);
+                    const mat = new THREE.MeshBasicMaterial({
+                        color: color,
+                        transparent: true,
+                        opacity: 0.6
+                    });
+                    const particle = new THREE.Mesh(geo, mat);
+                    particle.position.copy(pos);
+                    // 稍微随机偏移
+                    particle.position.x += (Math.random() - 0.5) * 0.1;
+                    particle.position.y += (Math.random() - 0.5) * 0.1;
+                    particle.position.z += (Math.random() - 0.5) * 0.1;
+                    particle.userData = {
+                        velocity: new THREE.Vector3(
+                            (Math.random() - 0.5) * 0.05,
+                            (Math.random() - 0.5) * 0.05,
+                            (Math.random() - 0.5) * 0.05
+                        ),
+                        life: 1.0,
+                        decay: 0.02 + Math.random() * 0.02
+                    };
+                    scene.add(particle);
+                    this.trailParticles.push(particle);
+                }
+            }
+
+            updateTrailParticles(deltaTime) {
+                for (let i = this.trailParticles.length - 1; i >= 0; i--) {
+                    const p = this.trailParticles[i];
+                    p.position.add(p.userData.velocity);
+                    p.userData.life -= p.userData.decay;
+                    p.material.opacity = p.userData.life * 0.8;
+                    p.scale.setScalar(p.userData.life);
+
+                    if (p.userData.life <= 0) {
+                        scene.remove(p);
+                        this.trailParticles.splice(i, 1);
+                    }
+                }
             }
 
             updateMeshes() {
@@ -590,25 +941,32 @@
             }
 
             grow() {
-                // 添加新的身体段
-                const lastPos = this.positions[this.positions.length - 1].clone();
+                // 从路径历史中获取一个更早的位置作为新身体段
+                const pathIndex = Math.floor(CONFIG.bodySegmentDistance * 2);
+                const lastPos = this.pathHistory[Math.min(pathIndex, this.pathHistory.length - 1)].clone();
                 this.positions.push(lastPos);
                 this.segmentCount++;
 
-                // 创建新的mesh
+                // 创建新的mesh - 使用物理材质
                 const index = this.positions.length - 1;
                 const size = Math.max(0.7 - index * 0.03, 0.3);
-                const geo = new THREE.SphereGeometry(size / 2, 12, 12);
+                const geo = new THREE.SphereGeometry(size / 2, 24, 24);
                 const hue = (index / this.positions.length) * 0.3;
                 const color = new THREE.Color().setHSL(0.8 - hue, 1, 0.5);
-                const mat = new THREE.MeshPhongMaterial({
+                const mat = new THREE.MeshPhysicalMaterial({
                     color: color,
                     emissive: color,
-                    emissiveIntensity: 0.2,
-                    shininess: 100
+                    emissiveIntensity: 0.3,
+                    metalness: 0.8,
+                    roughness: 0.2,
+                    clearcoat: 1.0,
+                    clearcoatRoughness: 0.1,
+                    reflectivity: 1.0
                 });
                 const mesh = new THREE.Mesh(geo, mat);
                 mesh.position.copy(lastPos);
+                mesh.castShadow = true;
+                mesh.receiveShadow = true;
                 scene.add(mesh);
                 this.meshes.push(mesh);
             }
@@ -797,28 +1155,44 @@
 
                 // 立方体造型
                 const geo = new THREE.BoxGeometry(0.6, 0.6, 0.6);
-                const mat = new THREE.MeshPhongMaterial({
+                const mat = new THREE.MeshPhysicalMaterial({
                     color: config.color,
                     emissive: config.color,
                     emissiveIntensity: config.glow,
-                    shininess: 100
+                    metalness: 0.9,
+                    roughness: 0.1,
+                    clearcoat: 1.0
                 });
                 const mesh = new THREE.Mesh(geo, mat);
                 mesh.position.copy(pos);
+                mesh.castShadow = true;
                 scene.add(mesh);
 
-                // 外发光
-                const glowGeo = new THREE.SphereGeometry(0.8, 8, 8);
+                // 外发光 - 光环效果
+                const glowGeo = new THREE.SphereGeometry(0.8, 16, 16);
                 const glowMat = new THREE.MeshBasicMaterial({
                     color: config.color,
                     transparent: true,
-                    opacity: 0.2
+                    opacity: 0.3
                 });
                 const glow = new THREE.Mesh(glowGeo, glowMat);
                 glow.position.copy(pos);
                 scene.add(glow);
 
-                const powerUp = { mesh, glow, type, config, position: pos, spawnTime: Date.now() };
+                // 脉冲环
+                const ringGeo = new THREE.RingGeometry(0.9, 1.0, 32);
+                const ringMat = new THREE.MeshBasicMaterial({
+                    color: config.color,
+                    transparent: true,
+                    opacity: 0.5,
+                    side: THREE.DoubleSide
+                });
+                const ring = new THREE.Mesh(ringGeo, ringMat);
+                ring.position.copy(pos);
+                ring.rotation.x = Math.PI / 2;
+                scene.add(ring);
+
+                const powerUp = { mesh, glow, ring, type, config, position: pos, spawnTime: Date.now() };
                 this.items.push(powerUp);
                 return powerUp;
             }
@@ -829,8 +1203,17 @@
                     pu.mesh.rotation.y += 0.03;
                     pu.mesh.position.y = pu.position.y + Math.sin(Date.now() * 0.003) * 0.3;
                     pu.glow.position.y = pu.mesh.position.y;
+                    pu.ring.position.y = pu.mesh.position.y;
+
+                    // 脉冲效果
                     const pulse = 1 + Math.sin(Date.now() * 0.005) * 0.3;
                     pu.glow.scale.setScalar(pulse);
+                    pu.ring.scale.setScalar(pulse);
+                    pu.ring.rotation.z += 0.02;
+
+                    // 环的缩放动画
+                    const ringPulse = 1 + Math.sin(Date.now() * 0.003) * 0.2;
+                    pu.ring.scale.setScalar(ringPulse);
                 });
             }
 
@@ -879,6 +1262,7 @@
             remove(pu) {
                 scene.remove(pu.mesh);
                 scene.remove(pu.glow);
+                if (pu.ring) scene.remove(pu.ring);
             }
 
             clear() {
@@ -1072,6 +1456,10 @@
 
             // 生成初始障碍物
             obstacle.initializeGame();
+
+            // 启动相机过渡到蛇视角
+            cameraTransition.active = true;
+            cameraTransition.progress = 0;
         }
 
         function gameOver() {
@@ -1191,8 +1579,12 @@
             }
             gameState.score += points;
 
-            // 更新UI
-            document.getElementById('score').textContent = gameState.score;
+            // 更新UI - 添加分数动画
+            const scoreElement = document.getElementById('score');
+            scoreElement.textContent = gameState.score;
+            scoreElement.classList.remove('score-animate');
+            void scoreElement.offsetWidth; // 触发重绘
+            scoreElement.classList.add('score-animate');
 
             // 显示连击
             if (gameState.combo > 1) {
@@ -1203,8 +1595,12 @@
                 }, 500);
             }
 
-            // 粒子效果
+            // 粒子效果 - 爆炸
+            createExplosion(eaten.position, eaten.config.color, 40);
             particles.explode(eaten.position, eaten.config.color, 30);
+
+            // 相机震动
+            triggerCameraShake(0.3, 0.3);
 
             // 特殊效果
             if (eaten.config.special === 'shrink') {
@@ -1323,11 +1719,12 @@
 
         // ==================== 动画循环 ====================
         // 相机跟随参数（近距离跟随，只看到蛇头）
-        const cameraOffset = new THREE.Vector3(0, 1.5, 3); // 更近的相机偏移
+        const cameraOffset = new THREE.Vector3(0, 2, 5); // 更远的相机偏移
         const cameraLookAhead = 8; // 相机看向蛇头前方的距离
         let currentCameraPos = new THREE.Vector3(0, 25, 25);
         let currentLookAt = new THREE.Vector3(0, 0, 0);
         let lastFrameTime = performance.now();
+        let cameraTransition = { active: false, progress: 0, duration: 2.0 }; // 相机过渡状态
 
         function animate() {
             requestAnimationFrame(animate);
@@ -1340,6 +1737,95 @@
             // 更新游戏逻辑
             if (gameState.running) {
                 gameUpdate(deltaTime);
+            }
+
+            // ==================== 视觉效果更新 ====================
+
+            // 相机过渡效果
+            if (cameraTransition.active) {
+                cameraTransition.progress += deltaTime / cameraTransition.duration;
+                if (cameraTransition.progress >= 1) {
+                    cameraTransition.progress = 1;
+                    cameraTransition.active = false;
+                }
+            }
+
+            // 星空背景旋转
+            if (starField) {
+                starField.rotation.y += 0.0001;
+                starField.rotation.x += 0.00005;
+            }
+
+            // 环境粒子更新
+            ambientParticles.forEach(p => {
+                p.position.add(p.userData.velocity);
+                p.position.y = p.userData.originalY + Math.sin(Date.now() * 0.001 + p.position.x) * 0.5;
+
+                // 边界检测
+                const half = CONFIG.gridSize / 2;
+                if (Math.abs(p.position.x) > half) p.userData.velocity.x *= -1;
+                if (Math.abs(p.position.z) > half) p.userData.velocity.z *= -1;
+            });
+
+            // 爆炸粒子更新
+            for (let i = explosionParticles.length - 1; i >= 0; i--) {
+                const p = explosionParticles[i];
+                p.position.add(p.userData.velocity);
+                p.userData.velocity.y -= 0.01; // 重力
+                p.userData.life -= p.userData.decay;
+                p.material.opacity = p.userData.life;
+                p.scale.setScalar(p.userData.life);
+
+                if (p.userData.life <= 0) {
+                    scene.remove(p);
+                    explosionParticles.splice(i, 1);
+                }
+            }
+
+            // 速度线效果
+            if (gameState.boosting) {
+                speedLines.forEach(line => {
+                    line.material.opacity = Math.min(line.material.opacity + 0.02, 0.6);
+                    const speed = line.userData.speed;
+                    const offset = line.userData.offset;
+                    const time = Date.now() * 0.001;
+
+                    const positions = line.geometry.attributes.position.array;
+                    positions[0] = (Math.random() - 0.5) * 50;
+                    positions[1] = Math.random() * 30;
+                    positions[2] = (Math.random() - 0.5) * 50;
+                    positions[3] = positions[0] + Math.sin(time + offset) * 10;
+                    positions[4] = positions[1] - speed * 20;
+                    positions[5] = positions[2] + Math.cos(time + offset) * 10;
+
+                    line.geometry.attributes.position.needsUpdate = true;
+                });
+            } else {
+                speedLines.forEach(line => {
+                    line.material.opacity = Math.max(line.material.opacity - 0.02, 0);
+                });
+            }
+
+            // 边界墙脉冲效果
+            walls.forEach((wall, i) => {
+                const pulse = 0.5 + Math.sin(Date.now() * 0.003 + i * 0.5) * 0.3;
+                wall.material.emissiveIntensity = pulse;
+            });
+
+            // 地面网格动态颜色
+            if (gridHelper) {
+                const time = Date.now() * 0.0005;
+                const hue = (Math.sin(time) * 0.1 + 0.6) % 1;
+                gridHelper.material.color.setHSL(hue, 0.8, 0.5);
+            }
+
+            // 相机震动
+            if (cameraShake.duration > 0) {
+                cameraShake.duration -= deltaTime;
+                const shakeIntensity = cameraShake.intensity * (cameraShake.duration / 0.5);
+                camera.position.x += (Math.random() - 0.5) * shakeIntensity;
+                camera.position.y += (Math.random() - 0.5) * shakeIntensity;
+                camera.position.z += (Math.random() - 0.5) * shakeIntensity;
             }
 
             // 第二人称跟随相机
@@ -1373,9 +1859,14 @@
                     );
                 }
 
-                // 平滑插值相机位置和朝向（更快响应）
-                currentCameraPos.lerp(targetCameraPos, 0.15);
-                currentLookAt.lerp(lookAtTarget, 0.2);
+                // 相机过渡期间使用缓动效果
+                const lerpFactor = cameraTransition.active ? 
+                    0.02 * (1 - cameraTransition.progress) + 0.15 * cameraTransition.progress : 
+                    0.15;
+
+                // 平滑插值相机位置和朝向
+                currentCameraPos.lerp(targetCameraPos, lerpFactor);
+                currentLookAt.lerp(lookAtTarget, lerpFactor);
 
                 camera.position.copy(currentCameraPos);
                 camera.lookAt(currentLookAt);
@@ -1416,6 +1907,9 @@
 
         // ==================== 初始化 ====================
         createArena();
+        createStarField();
+        createAmbientParticles();
+        createSpeedLines();
         document.getElementById('high-score').textContent = gameState.highScore;
         animate();
 
