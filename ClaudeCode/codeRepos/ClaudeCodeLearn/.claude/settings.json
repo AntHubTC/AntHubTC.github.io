@@ -1,8 +1,4 @@
 {
-    "env": {
-        "ANTHROPIC_BASE_URL": "https://api.code-relay.com/",
-        "ANTHROPIC_AUTH_TOKEN": "sk-VnQsySMzD4NQ1D8spuykS4FfoGVcBw0ZnR634iV7G56uHDc5"
-    },
     "mcpServers": {
     }
 }
