@@ -10,6 +10,8 @@
 npx zcf -- 运行zcf，如果没有会进行安装。
 ```
 
+### 配置API或CCR代理
+
 ![image-20260113172851034](./quickConfig.assets/image-20260113172851034.png)
 
 输入选项 3，接着回车
@@ -25,6 +27,35 @@ npx zcf -- 运行zcf，如果没有会进行安装。
 ![img](./quickConfig.assets/2499677a7638307d9b8747862075e354.png)
 
 看到以上信息，代表配置没问题了。
+
+### 导入工作流
+
+**可以配置输出风格**
+
+1. 工程师专业版
+2. 猫娘工程师
+3. 老王暴躁技术流
+4. 傲娇大小姐工程师
+
+选择后，这些输出风格会输出到C:\Users\Administrator\\.claude\output-styles文件夹中。
+
+![image-20260114111329235](./quickConfig.assets/image-20260114111329235.png)
+
+可以选择导入工作流：
+
+![image-20260114111425588](./quickConfig.assets/image-20260114111425588.png)
+
+### 配置 MCP
+
+​	一用就明白
+
+### 配置默认模型
+
+​	一用就明白
+
+### 配置 Claude 全局记忆
+
+​	一用就明白
 
 
 
