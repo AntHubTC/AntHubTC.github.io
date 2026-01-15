@@ -104,7 +104,7 @@
 
 ### 生成3D模型
 
-可以选择[腾讯混元3D](https://3d.hunyuan.tencent.com/)或者[tripo3d](https://studio.tripo3d.ai/)，这里是用的腾讯的。
+可以选择[腾讯混元3D](https://3d.hunyuan.tencent.com/)或者[tripo3d](https://studio.tripo3d.ai/)，或者Meshy，这里是用的腾讯的。
 
 ![image-20260115171002455](./3dModel.assets/image-20260115171002455.png)
 
