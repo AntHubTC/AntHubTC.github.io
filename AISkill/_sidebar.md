@@ -5,6 +5,7 @@
 * [OfficeAI](OfficeAI)
 * [Ollama](ollama)
 * [SparkTTS](SparkTTS)
+* [3D模型](3dModel)
 * [其他技巧](otherSkills)
 * [相关GITHUB](github)
 
