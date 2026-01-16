@@ -1,6 +1,6 @@
 
 
-# 集中管理编码智能体MCP配置的设置快速配置工具
+# 快速配置工具
 
 
 
@@ -67,6 +67,55 @@ CC-Switch 本质上就是一个 终端智能体的配置文件管理工具。可
 
 
 
+## ClaudeCodeRouter
+
+ClaudeCodeRouter是一个开源项目，他可以把任意大模型API接入到ClaudeCode中。
+
+因此我们可以通过该开源项目，将任意大模型API配合ClaudeCode免费去使用。 *官方地址：[ClaudeCodeRouter-github](https://github.com/musistudio/claude-code-router/blob/main/README_zh.md)*
+
+npm安装： npm install -g @musistudio/claude-code-router
+
+***\*创建&编辑配置文件\****
+
+```
+// 访问家目录（C:\Users\你自己\），创建如下目录和文件
+~/.claude-code-router/config.json
+```
+
+配置提供商
+
+```json
+{
+  "Providers": [
+    {
+      "name": "modelscope",
+      "api_base_url": "https://api-inference.modelscope.cn/v1/chat/completions",
+      "api_key": "去ModelScode中获取密钥",
+      "models": ["Qwen/Qwen3-Coder-480B-A35B-Instruct", "Qwen/Qwen3-235B-A22B-Thinking-2507"],
+      "transformer": {
+        "use": [
+          [
+            "maxtoken",
+            {
+              "max_tokens": 65536
+            }
+          ],
+          "enhancetool"
+        ],
+        "Qwen/Qwen3-235B-A22B-Thinking-2507": {
+          "use": ["reasoning"]
+        }
+      }
+    }
+  ],
+  "Router": {
+    "default": "modelscope,Qwen/Qwen3-Coder-480B-A35B-Instruct",
+  }
+}
+```
+
+
+
 ## Antigravity-Manager
 
 GitHub地址：[地址](https://github.com/lbjlaq/Antigravity-Manager)
@@ -113,6 +162,24 @@ Vibe Coding（氛围编程）是由 OpenAI 联合创始人 Andrej Karpathy 于 2
 https://vibecoding.cn/
 
 [哔哩哔哩上学习](https://search.bilibili.com/all?keyword=Vibe%20Coding&from_source=webtop_search&spm_id_from=333.1007&search_source=5)
+
+
+
+## Claudia
+
+Claude Code 是基于命令行操作的工具，基本操作就是面对终端敲命令。
+
+有一款 Claude Code 可视化开源项目：Claudia 桌面可视化应用。
+
+Claudia 能可视化的管理 项目/会话，MCP服务，时间线和检查点等功能。
+
+![image-20260116151116798](./quickConfig.assets/image-20260116151116798.png)
+
+运行效果：
+
+![image-20260116151157551](./quickConfig.assets/image-20260116151157551.png)
+
+
 
 
 

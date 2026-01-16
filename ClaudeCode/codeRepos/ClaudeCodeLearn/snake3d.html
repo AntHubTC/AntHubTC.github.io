@@ -1905,30 +1905,19 @@
                 const dir = snake.direction.clone();
                 const horizDir = snake.lastHorizontalDir.clone();
 
-                // 计算相机目标位置（始终基于水平方向，在蛇头后方）
+                // 计算相机目标位置（始终在蛇头上后方）
                 const targetCameraPos = new THREE.Vector3(
                     head.x - horizDir.x * cameraOffset.z,
                     head.y + cameraOffset.y,
                     head.z - horizDir.z * cameraOffset.z
                 );
 
-                // 计算相机看向的目标点（蛇头前方）
-                let lookAtTarget;
-                if (Math.abs(dir.y) > 0.5) {
-                    // 垂直移动时，看向蛇头位置稍前方
-                    lookAtTarget = new THREE.Vector3(
-                        head.x + horizDir.x * 2,
-                        head.y + dir.y * 3,
-                        head.z + horizDir.z * 2
-                    );
-                } else {
-                    // 水平移动时，看向前方
-                    lookAtTarget = new THREE.Vector3(
-                        head.x + dir.x * cameraLookAhead,
-                        head.y,
-                        head.z + dir.z * cameraLookAhead
-                    );
-                }
+                // 计算相机看向的目标点（蛇头前方，包括垂直方向）
+                const lookAtTarget = new THREE.Vector3(
+                    head.x + dir.x * cameraLookAhead,
+                    head.y + dir.y * 3,
+                    head.z + dir.z * cameraLookAhead
+                );
 
                 // 相机过渡期间使用缓动效果
                 const lerpFactor = cameraTransition.active ? 

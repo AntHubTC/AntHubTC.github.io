@@ -20,10 +20,23 @@ Skills 的核心是一个 Markdown 文件。Skill = Skill + MCP + Command + SubA
 
 
 
-https://github.com/anthropics/skills
+**重点参考官方文档：**
 
-https://github.com/travisvn/awesome-claude-skills
+示例源代码： https://github.com/tech-shrimp/agent-skills-examples 
 
-https://github.com/ComposioHQ/awesome-claude-skills
+Skills开放标准：https://agentskills.io/specification
+
+Awesome Claude Skills: https://github.com/ComposioHQ/awesome-claude-skills
+
+Anthropic官方Skills仓库: https://github.com/anthropics/skills 有很多官方的skill例子，写的很好，可以直接拿来使用
 
 https://www.skillsmp.com
+
+
+
+
+
+**按需加载，渐进式披露**
+
+![image-20260116153511138](./skills.assets/image-20260116153511138.png)
+

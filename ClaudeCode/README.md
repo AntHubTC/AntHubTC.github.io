@@ -209,6 +209,40 @@ npm --version
 
 
 
+## 跳过官方登录
+
+可能出现这种情况：
+
+![img](./README.assets/5fb460f565b54fa7a19c70b450586260.png)
+
+找到用户目录（C:\Users\用户名\）下的**.claude.json**文件，添加配置项：
+
+```
+"hasCompletedOnboarding": true
+```
+
+> **报错的原因：**网络限制**，当首次启动Claude Code 时需要连接官网Anthropic 服务进行初始化引导，因为Anthropic 服务对国内并不支持，因此我们配置**hasCompletedOnboarding**为**true** 代表我们已经完成了初始化，无需连接Anthropic 服务进行初始化，直接使用。
+
+
+
+## 连接vscode
+
+安装插件。
+
+安装后在vscode中选择代码，claude可以感知到。
+
+![img](./README.assets/81106769cd7849b89c8eabf006731d5f.png)
+
+进入到vscode中打开的项目目录命令行，执行ccr code 后 输入***\*/ide\****
+
+![img](./README.assets/472e7c80fba34581880770d255c401b0.png)
+
+选择Visual Studui Code回车即可，当有代码需要调试修改时会调起vscode进行调试。
+
+在vscode中也
+
+
+
 ## cc镜像中转站
 
 ### Code Router
