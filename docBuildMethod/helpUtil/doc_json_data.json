@@ -611,5 +611,11 @@
             "href": "../3dPrint",
             "is_private": false, 
             "category": ["3D", "创业", "搞钱"]
+         },{ 
+            "id": 107,
+            "title": "OpenCode",
+            "href": "../OpenCode",
+            "is_private": false, 
+            "category": ["AI"]
          }
 ]

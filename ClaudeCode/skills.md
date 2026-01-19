@@ -1,5 +1,7 @@
 # Skills
 
+## 基本介绍
+
 Skills (技能): 这是 自动SOP，Claude会根据场景自动触发的标准作业流程。
 
 对应目录：~/.claude/skills/
@@ -20,7 +22,12 @@ Skills 的核心是一个 Markdown 文件。Skill = Skill + MCP + Command + SubA
 
 
 
-**重点参考官方文档：**
+**按需加载，渐进式披露**
+
+![image-20260116153511138](./skills.assets/image-20260116153511138.png)
+
+
+## **重点参考官方文档**
 
 示例源代码： https://github.com/tech-shrimp/agent-skills-examples 
 
@@ -30,13 +37,12 @@ Awesome Claude Skills: https://github.com/ComposioHQ/awesome-claude-skills
 
 Anthropic官方Skills仓库: https://github.com/anthropics/skills 有很多官方的skill例子，写的很好，可以直接拿来使用
 
+
+
+
+## Skills商店
+
 https://www.skillsmp.com
 
-
-
-
-
-**按需加载，渐进式披露**
-
-![image-20260116153511138](./skills.assets/image-20260116153511138.png)
+https://skillmaps.net/market
 
