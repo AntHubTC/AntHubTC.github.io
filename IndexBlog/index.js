@@ -619,6 +619,12 @@ let docs = [
             "href": "../OpenCode",
             "is_private": false, 
             "category": ["AI"]
+         },{ 
+            "id": 108,
+            "title": "财商",
+            "href": "../FQ",
+            "is_private": false, 
+            "category": ["小孩教育", "搞钱", "人生感悟"]
          }
 ];
 // 所有文档分类
@@ -840,7 +846,7 @@ let docCategory = [
 
 // 特殊定位符，前面是数据，后面是代码，python按最新数据重新拼接
 // >>>>>>>>>!@#$%^&*!<<<<<<<<<
-                                                                                                                                                                            
+                                                                                                                                                                                
                                                                                                     
 // 防止抖动函数
 function debounce(func, delay) {

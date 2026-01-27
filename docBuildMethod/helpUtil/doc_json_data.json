@@ -617,5 +617,11 @@
             "href": "../OpenCode",
             "is_private": false, 
             "category": ["AI"]
+         },{ 
+            "id": 108,
+            "title": "财商",
+            "href": "../FQ",
+            "is_private": false, 
+            "category": ["小孩教育", "搞钱", "人生感悟"]
          }
 ]
