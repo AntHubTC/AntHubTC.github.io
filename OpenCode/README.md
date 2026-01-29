@@ -2,7 +2,7 @@
 
 [OpenCode官方仓库](https://github.com/anomalyco/opencode)
 
-[OpenCode中文实战课-非常全的文档](https://learnopencode.com/) [GitHub](https://github.com/vbgate/learn-opencode)
+[OpenCode中文实战课-非常全的文档](https://learnopencode.com/) [GitHub](https://learnopencode.com/)
 
 [OpenCode官方文档](https://opencode.ai/docs)
 
