@@ -623,5 +623,11 @@
             "href": "../FQ",
             "is_private": false, 
             "category": ["小孩教育", "搞钱", "人生感悟"]
+         },{ 
+            "id": 109,
+            "title": "成事法则",
+            "href": "../TheLawOfAchievement",
+            "is_private": false, 
+            "category": ["读书"]
          }
 ]
