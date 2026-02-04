@@ -8,7 +8,7 @@ ISBN：9787505749948
 
 ## 思维导图
 
-```xmind
+```xmind preview
 ./《成事法则》.xmind
 ```
 
