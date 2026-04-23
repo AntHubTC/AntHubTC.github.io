@@ -629,5 +629,11 @@
             "href": "../TheLawOfAchievement",
             "is_private": false, 
             "category": ["读书"]
+         },{ 
+            "id": 110,
+            "title": "AI照相馆",
+            "href": "../aiPhotoTips",
+            "is_private": false, 
+            "category": ["AI", "搞钱"]
          }
 ]
