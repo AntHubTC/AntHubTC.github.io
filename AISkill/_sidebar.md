@@ -7,5 +7,6 @@
 * [SparkTTS](SparkTTS)
 * [3D模型](3dModel)
 * [其他技巧](otherSkills)
+* [个人常用智能体](personalAgent)
 * [相关GITHUB](github)
 
