@@ -635,5 +635,11 @@
             "href": "../aiPhotoTips",
             "is_private": false, 
             "category": ["AI", "搞钱"]
+         },{ 
+            "id": 111,
+            "title": "AI工程师能力",
+            "href": "../AiEngineer",
+            "is_private": false, 
+            "category": ["JAVA", "AI"]
          }
 ]
