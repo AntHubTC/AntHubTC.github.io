@@ -1,16 +1,10 @@
-# 一级标题
-
-> An awesome project.
-
-## 二级标题1
-
-山东分公司的
+# Ai工程师能力
 
 
 
-## 二级标题2 {docsify-ignore}
+## 思维导图
 
-
-
-## 二级标题3
+```xmind preview
+./AiEngineerAbility.xmind
+```
 
