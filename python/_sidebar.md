@@ -2,4 +2,7 @@
 * [廖雪锋的python教材](https://www.liaoxuefeng.com/wiki/1016959663602400)
 * [菜鸟教程-python教材](https://www.runoob.com/python3/python3-tutorial.html)
 * [python-包管理](pkgMgr)
+* [Jupyter notebook代码笔记本](jupyter)
+* [python基础](base)
+* [python函数](function)
 
