@@ -40,3 +40,17 @@ Y：切换到 Code
 ## 在Pycharm中使用
 
 ![image-20260522182844122](./jupyter.assets/image-20260522182844122.png)
+
+
+
+## 在Visual Code中使用
+
+Visual Code以及在此上衍生出来的编辑器Cursor、Trae等等。
+
+ctrl+shift+p，输入：“new jupter...”，来创建一个Jupter Notebook。
+
+![image-20260525151650457](./jupyter.assets/image-20260525151650457.png)
+
+使用Jupter Notebook的场景，注意初次使用需要安装内核，根据提示安装就行（如果安装报错找豆包帮忙，出过一次包版本问题导致的报错）。
+
+![image-20260525151421457](./jupyter.assets/image-20260525151421457.png)

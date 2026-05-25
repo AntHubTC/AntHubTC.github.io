@@ -9,3 +9,5 @@
 * [函数式编程](HighOrderFunction)
 * [模块](module)
 * [面向对象的编程](oop)
+* [面向对象高级编程](oopSuper)
+* [错误、调试和测试](debugTest)
