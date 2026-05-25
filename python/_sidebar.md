@@ -4,5 +4,8 @@
 * [python-包管理](pkgMgr)
 * [Jupyter notebook代码笔记本](jupyter)
 * [python基础](base)
-* [python函数](function)
-
+* [函数](function)
+* [高级特性](advancedFeatures)
+* [函数式编程](HighOrderFunction)
+* [模块](module)
+* [面向对象的编程](oop)
