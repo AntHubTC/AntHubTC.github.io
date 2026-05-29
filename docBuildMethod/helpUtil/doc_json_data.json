@@ -641,5 +641,11 @@
             "href": "../AiEngineer",
             "is_private": false, 
             "category": ["JAVA", "AI"]
+         },{ 
+            "id": 112,
+            "title": "养龙虾",
+            "href": "../openclaw",
+            "is_private": false, 
+            "category": ["AI"]
          }
 ]
