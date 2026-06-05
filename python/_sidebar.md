@@ -13,3 +13,5 @@
 * [错误、调试和测试](debugTest)
 * [IO编程](io)
 * [进程和线程](processThread)
+* [正则表达式](regex)
+* [常用内建模块](builtinModules)
