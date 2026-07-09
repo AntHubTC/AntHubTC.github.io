@@ -647,5 +647,11 @@
             "href": "../openclaw",
             "is_private": false, 
             "category": ["AI"]
+         },{ 
+            "id": 113,
+            "title": "自媒体",
+            "href": "../selfMedia",
+            "is_private": false, 
+            "category": ["其他技能", "创业"]
          }
 ]
