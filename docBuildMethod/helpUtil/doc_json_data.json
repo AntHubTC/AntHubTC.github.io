@@ -653,5 +653,11 @@
             "href": "../selfMedia",
             "is_private": false, 
             "category": ["其他技能", "创业"]
+         },{ 
+            "id": 114,
+            "title": "HermesAgent",
+            "href": "../HermesAgent",
+            "is_private": false, 
+            "category": ["AI"]
          }
 ]
