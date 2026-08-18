@@ -659,5 +659,11 @@
             "href": "../HermesAgent",
             "is_private": false, 
             "category": ["AI"]
+         },{ 
+            "id": 115,
+            "title": "ComfyUI",
+            "href": "../ComfyUI",
+            "is_private": false, 
+            "category": ["AI"]
          }
 ]
